@@ -15,5 +15,8 @@ public class GameFrame extends JFrame {
 
         pack();
         setLocationRelativeTo(null);
+
+        // START THE GAME THREAD FOR SCREEN FRESH
+        gamePanel.startGameThread();
     }
 }
