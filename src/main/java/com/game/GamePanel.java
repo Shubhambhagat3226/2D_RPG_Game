@@ -33,14 +33,30 @@ public class GamePanel extends JPanel implements Runnable{
         gameThread.start();
     }
 
+    // DELTA LOOP
     @Override
     public void run() {
-        while (gameThread != null) {
-            // UPDATE INFORMATION SUCH AS CHARACTER POSITION
-            update();
+        double drawIntervals = (double) 1000000000 / CommonConstant.FPS; // 0.0166's
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currentTime;
 
-            // DRAW THE SCREEN WITH THE UPDATED INFORMATION
-            repaint();
+        while (gameThread != null) {
+
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime) / drawIntervals;
+            lastTime = currentTime;
+
+            if (delta >= 1) {
+                // UPDATE INFORMATION SUCH AS CHARACTER POSITION
+                update();
+
+                // DRAW THE SCREEN WITH THE UPDATED INFORMATION
+                repaint();
+
+                delta--;
+            }
+
         }
     }
 
