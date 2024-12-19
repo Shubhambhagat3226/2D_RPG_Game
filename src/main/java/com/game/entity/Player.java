@@ -2,9 +2,12 @@ package com.game.entity;
 
 import com.game.GamePanel;
 import com.game.constants.CommonConstant;
+import com.game.constants.Direction;
+import com.game.constants.ImageUtility;
 import com.game.event_handler.KeyHandler;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends Entity{
     final private GamePanel gp;
@@ -15,34 +18,58 @@ public class Player extends Entity{
         this.keyH = keyH;
 
         setDefaultValues();
+        loadImage();
     }
 
     public void setDefaultValues() {
         x = 100;
         y = 100;
         speed = 4;
+        direction = Direction.EAST;
+    }
+
+    private void loadImage() {
+        up_1 = ImageUtility.PLAYER_UP_1;
+        up_2 = ImageUtility.PLAYER_UP_2;
+        down_1 = ImageUtility.PLAYER_DOWN_1;
+        down_2 = ImageUtility.PLAYER_DOWN_2;
+        left_1 = ImageUtility.PLAYER_LEFT_1;
+        left_2 = ImageUtility.PLAYER_LEFT_2;
+        right_1 = ImageUtility.PLAYER_RIGHT_1;
+        right_2 = ImageUtility.PLAYER_RIGHT_2;
     }
 
     public void update() {
 
         if (keyH.isUpPressed()) {
+            direction = Direction.NORTH;
             y -= speed;
         }
         if (keyH.isDownPressed()) {
+            direction = Direction.SOUTH;
             y += speed;
         }
         if (keyH.isLeftPressed()) {
+            direction = Direction.WEST;
             x -= speed;
         }
         if (keyH.isRightPressed()) {
+            direction = Direction.EAST;
             x += speed;
         }
     }
 
     public void draw(Graphics2D g2) {
 
-        g2.setColor(Color.WHITE);
-        g2.fillRect(x,y, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        BufferedImage image  = switch (direction) {
+            case NORTH -> up_1;
+            case SOUTH -> down_1;
+            case WEST -> left_1;
+            case EAST -> right_1;
+            default -> null;
+        };
+
+        g2.drawImage(image, x, y, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
 
     }
 }
