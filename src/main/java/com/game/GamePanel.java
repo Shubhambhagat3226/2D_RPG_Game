@@ -1,6 +1,7 @@
 package com.game;
 
 import com.game.constants.CommonConstant;
+import com.game.entity.Player;
 import com.game.event_handler.KeyHandler;
 
 import javax.swing.*;
@@ -10,11 +11,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     private Thread gameThread;
     private KeyHandler keyH;
-
-    // PLAYER DEFAULT POSITION
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
+    private Player player;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
@@ -25,6 +22,9 @@ public class GamePanel extends JPanel implements Runnable{
         keyH = new KeyHandler();
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        // PLAYER SET-UP
+        player = new Player(this, keyH);
     }
 
     // DO FPS
@@ -61,18 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update() {
-        if (keyH.isUpPressed()) {
-            playerY -= playerSpeed;
-        }
-        if (keyH.isDownPressed()) {
-            playerY += playerSpeed;
-        }
-        if (keyH.isLeftPressed()) {
-            playerX -= playerSpeed;
-        }
-        if (keyH.isRightPressed()) {
-            playerX += playerSpeed;
-        }
+        player.update();
     }
 
     @Override
@@ -80,8 +69,7 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.WHITE);
-        g2.fillRect(playerX,playerY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        player.draw(g2);
         g2.dispose();
     }
 }
