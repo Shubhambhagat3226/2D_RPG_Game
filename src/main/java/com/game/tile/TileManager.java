@@ -31,10 +31,18 @@ public class TileManager {
             tiles[i] = new Tile();
         }
         tiles[0].image = ImageUtility.GRASS;
+
         tiles[1].image = ImageUtility.WALL;
+        tiles[1].collision = true;
+
         tiles[2].image = ImageUtility.WATER;
+        tiles[2].collision = true;
+
         tiles[3].image = ImageUtility.EARTH;
+
         tiles[4].image = ImageUtility.TREE;
+        tiles[4].collision = true;
+
         tiles[5].image = ImageUtility.SAND;
     }
 
@@ -98,4 +106,9 @@ public class TileManager {
             e.printStackTrace();
         }
     }
+
+
+    // GETTER METHODS
+    public int[][] getMap() {  return map;  }
+    public Tile[] getTiles() {  return tiles;  }
 }

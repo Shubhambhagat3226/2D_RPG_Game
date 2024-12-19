@@ -11,9 +11,10 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
 
     private Thread gameThread;
-    private KeyHandler keyH;
-    private Player player;
-    private TileManager tileM= new TileManager(this);;
+    private final KeyHandler keyH;
+    private final Player player;
+    private final TileManager tileM;
+    private final CollisionChecker checker;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
@@ -28,8 +29,11 @@ public class GamePanel extends JPanel implements Runnable{
         // PLAYER SET-UP
         player = new Player(this, keyH);
 
-        // TILE SET-UP
-//        tileM
+        // TILE-MANAGER SET
+        tileM = new TileManager(this);
+
+        // COLLISION-CHECKER OBJECT
+        checker = new CollisionChecker(this);
 
     }
 
@@ -82,5 +86,8 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
 
+    // GETTER METHOD
     public Player getPlayer() { return player; }
+    public CollisionChecker getChecker() { return checker; }
+    public TileManager getTileM() {  return tileM;  }
 }

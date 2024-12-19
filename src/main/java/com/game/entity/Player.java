@@ -23,6 +23,12 @@ public class Player extends Entity{
         screenX = CommonConstant.SCREEN_WIDTH / 2 - (CommonConstant.TILE_SIZE / 2);
         screenY = CommonConstant.SCREEN_HEIGHT / 2 - (CommonConstant.TILE_SIZE / 2);
 
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 31;
+        solidArea.height = 31;
+
         setDefaultValues();
         loadImage();
     }
@@ -51,20 +57,43 @@ public class Player extends Entity{
 
             if (keyH.isUpPressed()) {
                 direction = Direction.NORTH;
-                worldY -= speed;
             }
             if (keyH.isDownPressed()) {
                 direction = Direction.SOUTH;
-                worldY += speed;
             }
             if (keyH.isLeftPressed()) {
                 direction = Direction.WEST;
-                worldX -= speed;
             }
             if (keyH.isRightPressed()) {
                 direction = Direction.EAST;
-                worldX += speed;
             }
+
+            // CHECK TILE COLLISION
+            collisionOn = false;
+            gp.getChecker().checkTile(this);
+
+            // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
+            if (!collisionOn) {
+                switch (direction) {
+                    case NORTH : {
+                        worldY -= speed;
+                        break;
+                    }
+                    case SOUTH : {
+                        worldY += speed;
+                        break;
+                    }
+                    case WEST : {
+                        worldX -= speed;
+                        break;
+                    }
+                    case EAST : {
+                        worldX += speed;
+                        break;
+                    }
+                }
+            }
+
 
             // TO CHANGE FROM OTHER IMAGE
             spiritCounter++;
