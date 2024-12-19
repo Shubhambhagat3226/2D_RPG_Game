@@ -10,20 +10,26 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity{
-    final private GamePanel gp;
-    final private KeyHandler keyH;
+    private final GamePanel gp;
+    private final KeyHandler keyH;
+
+    private final int screenX;
+    private final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = CommonConstant.SCREEN_WIDTH / 2 - (CommonConstant.TILE_SIZE / 2);
+        screenY = CommonConstant.SCREEN_HEIGHT / 2 - (CommonConstant.TILE_SIZE / 2);
 
         setDefaultValues();
         loadImage();
     }
 
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
+        worldX = CommonConstant.TILE_SIZE * 23;
+        worldY = CommonConstant.TILE_SIZE * 21;
         speed = 4;
         direction = Direction.SOUTH;
     }
@@ -45,19 +51,19 @@ public class Player extends Entity{
 
             if (keyH.isUpPressed()) {
                 direction = Direction.NORTH;
-                y -= speed;
+                worldY -= speed;
             }
             if (keyH.isDownPressed()) {
                 direction = Direction.SOUTH;
-                y += speed;
+                worldY += speed;
             }
             if (keyH.isLeftPressed()) {
                 direction = Direction.WEST;
-                x -= speed;
+                worldX -= speed;
             }
             if (keyH.isRightPressed()) {
                 direction = Direction.EAST;
-                x += speed;
+                worldX += speed;
             }
 
             // TO CHANGE FROM OTHER IMAGE
@@ -111,7 +117,11 @@ public class Player extends Entity{
             default -> null;
         };
 
-        g2.drawImage(image, x, y, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
+        g2.drawImage(image, screenX, screenY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
 
     }
+
+    public int getScreenX() {  return screenX;  }
+
+    public int getScreenY() {  return screenY;  }
 }

@@ -19,44 +19,53 @@ public class TileManager {
         this.gp = gp;
 
         tiles = new Tile[10];
-        map = new int[CommonConstant.MAX_SCREEN_ROW][CommonConstant.MAX_SCREEN_COL];
+        map = new int[CommonConstant.MAX_WORLD_ROW][CommonConstant.MAX_WORLD_COL];
 
        loadTileImages();
-       loadMap("/maps/maps.map0.txt");
+       loadMap("/maps/Map/world01.txt");
     }
 
     // LOAD THE TILES
     public void loadTileImages() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6; i++) {
             tiles[i] = new Tile();
         }
         tiles[0].image = ImageUtility.GRASS;
         tiles[1].image = ImageUtility.WALL;
         tiles[2].image = ImageUtility.WATER;
+        tiles[3].image = ImageUtility.EARTH;
+        tiles[4].image = ImageUtility.TREE;
+        tiles[5].image = ImageUtility.SAND;
     }
 
     // DRAW TILES
     public void draw(Graphics2D g2) {
 
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
-        while (col < CommonConstant.MAX_SCREEN_COL && row < CommonConstant.MAX_SCREEN_ROW) {
+        while (worldCol < CommonConstant.MAX_WORLD_COL && worldRow < CommonConstant.MAX_WORLD_ROW) {
 
-            int tileNum = map[row][col];
+            int tileNum = map[worldRow][worldCol];
 
-            BufferedImage image = tiles[tileNum].image;
-            g2.drawImage(image, x, y, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
+            int worldX = worldCol * CommonConstant.TILE_SIZE;
+            int worldY = worldRow * CommonConstant.TILE_SIZE;
+            int screenX = worldX - gp.getPlayer().getWorldX() + gp.getPlayer().getScreenX();
+            int screenY = worldY - gp.getPlayer().getWorldY() + gp.getPlayer().getScreenY();
 
-            col++;
-            x += CommonConstant.TILE_SIZE;
-            if (col == CommonConstant.MAX_SCREEN_COL) {
-                col = 0;
-                x = 0;
-                row++;
-                y += CommonConstant.TILE_SIZE;
+            if (worldX + CommonConstant.TILE_SIZE > gp.getPlayer().getWorldX() - gp.getPlayer().getScreenX() &&
+                    worldX - CommonConstant.TILE_SIZE < gp.getPlayer().getWorldX() + gp.getPlayer().getScreenX() &&
+                    worldY + CommonConstant.TILE_SIZE > gp.getPlayer().getWorldY() - gp.getPlayer().getScreenY() &&
+                    worldY - CommonConstant.TILE_SIZE < gp.getPlayer().getWorldY() + gp.getPlayer().getScreenY() ) {
+
+                BufferedImage image = tiles[tileNum].image;
+                g2.drawImage(image, screenX, screenY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
+            }
+            worldCol++;
+
+            if (worldCol == CommonConstant.MAX_WORLD_COL) {
+                worldCol = 0;
+                worldRow++;
             }
         }
     }
@@ -70,15 +79,15 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            while (col < CommonConstant.MAX_SCREEN_COL && row < CommonConstant.MAX_SCREEN_ROW) {
+            while (col < CommonConstant.MAX_WORLD_COL && row < CommonConstant.MAX_WORLD_ROW) {
                 String line = br.readLine();
-                while (col < CommonConstant.MAX_SCREEN_COL) {
+                while (col < CommonConstant.MAX_WORLD_COL) {
                     String numbers[] = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     map[row][col] = num;
                     col++;
                 }
-                if (col == CommonConstant.MAX_SCREEN_COL) {
+                if (col == CommonConstant.MAX_WORLD_COL) {
                     col = 0;
                     row++;
                 }

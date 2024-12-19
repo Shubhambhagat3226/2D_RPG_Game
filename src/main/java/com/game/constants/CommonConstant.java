@@ -10,6 +10,12 @@ public class CommonConstant {
     final public static int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL; // 768 PX
     final public static int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; // 576 PX
 
+    // WORLD SETTING
+    public static final int MAX_WORLD_COL = 50;
+    public static final int MAX_WORLD_ROW = 50;
+    public static final int WORLD_WIDTH = MAX_WORLD_COL * TILE_SIZE; // 2400 PX
+    public static final int WORLD_HEIGHT = MAX_WORLD_ROW * TILE_SIZE; // 2400 PX
+
     final public static int FPS = 60;
 
 }
