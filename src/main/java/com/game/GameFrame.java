@@ -16,6 +16,9 @@ public class GameFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
+        // SETUP OBJECTS IN FRAME
+        gamePanel.setupObject();
+
         // START THE GAME THREAD FOR SCREEN FRESH
         gamePanel.startGameThread();
     }

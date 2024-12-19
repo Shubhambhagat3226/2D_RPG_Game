@@ -23,6 +23,14 @@ public class ImageUtility {
     public static final BufferedImage TREE = setImage("/Tiles/New version/tree.png");
     public static final BufferedImage EARTH = setImage("/Tiles/New version/earth.png");
 
+    // OBJECTS IMAGES
+    public static final BufferedImage KEY = setImage("/Object/key.png");
+    public static final BufferedImage CHEST = setImage("/Object/chest.png");
+    public static final BufferedImage WOODEN_DOOR = setImage("/Object/door.png");
+    public static final BufferedImage BOOTS = setImage("/Object/boots.png");
+    public static final BufferedImage IRON_DOOR = setImage("/Object/door_iron.png");
+
+
 
     // SET-UP IMAGE FROM PATH
     private static BufferedImage setImage(String imagePath) {

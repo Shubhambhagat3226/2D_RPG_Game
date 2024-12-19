@@ -3,6 +3,7 @@ package com.game;
 import com.game.constants.CommonConstant;
 import com.game.entity.Player;
 import com.game.event_handler.KeyHandler;
+import com.game.object.SuperObject;
 import com.game.tile.TileManager;
 
 import javax.swing.*;
@@ -15,6 +16,8 @@ public class GamePanel extends JPanel implements Runnable{
     private final Player player;
     private final TileManager tileM;
     private final CollisionChecker checker;
+    private SuperObject objects[];
+    private AssetSetter aSetter;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
@@ -35,6 +38,16 @@ public class GamePanel extends JPanel implements Runnable{
         // COLLISION-CHECKER OBJECT
         checker = new CollisionChecker(this);
 
+        // OBJECT ELEMENT
+        objects = new SuperObject[10];
+
+        // ASSET-SETTER
+        aSetter = new AssetSetter(this);
+
+    }
+
+    public void setupObject() {
+        aSetter.setObject();
     }
 
     // DO FPS
@@ -80,7 +93,17 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D) g;
 
+        // TILE
         tileM.draw(g2);
+
+        // OBJECT ITEMS
+        for (SuperObject obj : objects) {
+            if (obj != null) {
+                obj.draw(g2, this);
+            }
+        }
+
+        // PLAYER
         player.draw(g2);
 
         g2.dispose();
@@ -90,4 +113,5 @@ public class GamePanel extends JPanel implements Runnable{
     public Player getPlayer() { return player; }
     public CollisionChecker getChecker() { return checker; }
     public TileManager getTileM() {  return tileM;  }
+    public SuperObject[] getObjects() {  return objects;  }
 }
