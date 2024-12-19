@@ -3,6 +3,7 @@ package com.game;
 import com.game.constants.CommonConstant;
 import com.game.entity.Player;
 import com.game.event_handler.KeyHandler;
+import com.game.tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ public class GamePanel extends JPanel implements Runnable{
     private Thread gameThread;
     private KeyHandler keyH;
     private Player player;
+    private TileManager tileM= new TileManager(this);;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
@@ -25,6 +27,10 @@ public class GamePanel extends JPanel implements Runnable{
 
         // PLAYER SET-UP
         player = new Player(this, keyH);
+
+        // TILE SET-UP
+//        tileM
+
     }
 
     // DO FPS
@@ -69,7 +75,10 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
+        tileM.draw(g2);
         player.draw(g2);
+
         g2.dispose();
     }
 }

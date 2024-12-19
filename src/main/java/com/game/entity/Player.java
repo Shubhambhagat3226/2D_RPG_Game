@@ -25,7 +25,7 @@ public class Player extends Entity{
         x = 100;
         y = 100;
         speed = 4;
-        direction = Direction.EAST;
+        direction = Direction.SOUTH;
     }
 
     private void loadImage() {
@@ -41,31 +41,73 @@ public class Player extends Entity{
 
     public void update() {
 
-        if (keyH.isUpPressed()) {
-            direction = Direction.NORTH;
-            y -= speed;
+        if (keyH.isUpPressed() || keyH.isDownPressed() || keyH.isLeftPressed() || keyH.isRightPressed()) {
+
+            if (keyH.isUpPressed()) {
+                direction = Direction.NORTH;
+                y -= speed;
+            }
+            if (keyH.isDownPressed()) {
+                direction = Direction.SOUTH;
+                y += speed;
+            }
+            if (keyH.isLeftPressed()) {
+                direction = Direction.WEST;
+                x -= speed;
+            }
+            if (keyH.isRightPressed()) {
+                direction = Direction.EAST;
+                x += speed;
+            }
+
+            // TO CHANGE FROM OTHER IMAGE
+            spiritCounter++;
+            if (spiritCounter > 12) {
+                if (spiritNum == 1) {
+                    spiritNum = 2;
+                } else {
+                    spiritNum = 1;
+                }
+                spiritCounter = 0;
+            }
         }
-        if (keyH.isDownPressed()) {
-            direction = Direction.SOUTH;
-            y += speed;
-        }
-        if (keyH.isLeftPressed()) {
-            direction = Direction.WEST;
-            x -= speed;
-        }
-        if (keyH.isRightPressed()) {
-            direction = Direction.EAST;
-            x += speed;
-        }
+
     }
 
     public void draw(Graphics2D g2) {
 
         BufferedImage image  = switch (direction) {
-            case NORTH -> up_1;
-            case SOUTH -> down_1;
-            case WEST -> left_1;
-            case EAST -> right_1;
+            case NORTH -> {
+                if (spiritNum == 1) {
+                    yield  up_1;
+                } else if (spiritNum == 2) {
+                    yield  up_2;
+                }  else yield null; // or some default value
+            }
+            case SOUTH -> {
+                if (spiritNum == 1) {
+                    yield  down_1;
+                }
+                if (spiritNum == 2) {
+                    yield  down_2;
+                } else yield null; // or some default value
+            }
+            case WEST -> {
+                if (spiritNum == 1) {
+                    yield  left_1;
+                }
+                if (spiritNum == 2) {
+                    yield  left_2;
+                } else yield null; // or some default value
+            }
+            case EAST -> {
+                if (spiritNum == 1) {
+                    yield  right_1;
+                }
+                if (spiritNum == 2) {
+                    yield  right_2;
+                } else yield null; // or some default value
+            }
             default -> null;
         };
 
