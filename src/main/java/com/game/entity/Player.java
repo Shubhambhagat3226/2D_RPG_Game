@@ -4,6 +4,7 @@ import com.game.GamePanel;
 import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ImageUtility;
+import com.game.constants.ObjectName;
 import com.game.event_handler.KeyHandler;
 
 import java.awt.*;
@@ -31,7 +32,7 @@ public class Player extends Entity{
         solidArea_Default_X = solidArea.x;
         solidArea_Default_Y = solidArea.y;
         solidArea.width = 31;
-        solidArea.height = 31;
+        solidArea.height = 32;
 
         setDefaultValues();
         loadImage();
@@ -123,18 +124,19 @@ public class Player extends Entity{
 
     }
 
+    // WHAT TO DO WHEN OBJECT COLLIED
     public void pickUpObject(int i) {
         if (i != 999) {
             System.out.println(i);
-            String objName = gp.getObjects()[i].getName();
+            ObjectName objName = gp.getObjects()[i].getName();
             switch (objName) {
-                case "Key": {
+                case KEY: {
                     hasKey++;
                     gp.getObjects()[i] = null;
                     System.out.println("Key: "+hasKey);
                     break;
                 }
-                case "Door": {
+                case DOOR: {
                     if (hasKey > 0) {
                         gp.getObjects()[i] = null;
                         hasKey--;
@@ -142,10 +144,16 @@ public class Player extends Entity{
                     }
                     break;
                 }
+                case BOOTS: {
+                    speed += 1;
+                    gp.getObjects()[i] = null;
+                    break;
+                }
             }
         }
     }
 
+    // DRAW PLAYER IMAGE
     public void draw(Graphics2D g2) {
 
         BufferedImage image  = switch (direction) {
@@ -187,7 +195,7 @@ public class Player extends Entity{
 
     }
 
+    // GETTER METHODS
     public int getScreenX() {  return screenX;  }
-
     public int getScreenY() {  return screenY;  }
 }

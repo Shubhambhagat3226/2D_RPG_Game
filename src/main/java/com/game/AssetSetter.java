@@ -1,10 +1,7 @@
 package com.game;
 
 import com.game.constants.CommonConstant;
-import com.game.object.Obj_Chest;
-import com.game.object.Obj_Door;
-import com.game.object.Obj_Key;
-import com.game.object.SuperObject;
+import com.game.object.*;
 
 public class AssetSetter {
     private final GamePanel gp;
@@ -16,7 +13,7 @@ public class AssetSetter {
 
         // KEYS
         for (int i = 0; i < 3; i++) {
-            obj[i] = new Obj_Key();
+            obj[i] = new OBJ_KEY();
         }
         obj[0].setWorldX(CommonConstant.TILE_SIZE * 23);
         obj[0].setWorldY(CommonConstant.TILE_SIZE * 7);
@@ -29,7 +26,7 @@ public class AssetSetter {
 
         // DOORS
         for (int i = 3; i < 6; i++) {
-            obj[i] = new Obj_Door();
+            obj[i] = new OBJ_DOOR();
         }
         obj[3].setWorldX(CommonConstant.TILE_SIZE * 10);
         obj[3].setWorldY(CommonConstant.TILE_SIZE * 11);
@@ -41,8 +38,13 @@ public class AssetSetter {
         obj[5].setWorldY(CommonConstant.TILE_SIZE * 22);
 
         // CHEST
-        obj[6] = new Obj_Chest();
+        obj[6] = new OBJ_CHEST();
         obj[6].setWorldX(CommonConstant.TILE_SIZE * 10);
         obj[6].setWorldY(CommonConstant.TILE_SIZE * 7);
+
+        // BOOTS
+        obj[7] = new OBJ_BOOTS();
+        obj[7].setWorldX(CommonConstant.TILE_SIZE * 37);
+        obj[7].setWorldY(CommonConstant.TILE_SIZE * 42);
     }
 }
