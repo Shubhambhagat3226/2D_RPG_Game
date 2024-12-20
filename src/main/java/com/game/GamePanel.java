@@ -18,7 +18,8 @@ public class GamePanel extends JPanel implements Runnable{
     private final TileManager tileM;
     private final CollisionChecker checker;
     private AssetSetter aSetter;
-    private final Sound sound;
+    private final Sound music;
+    private final Sound se;
 
     // ENTITY AND OBJECTS
     private final Player player;
@@ -35,7 +36,8 @@ public class GamePanel extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
         // SOUND
-        sound = new Sound();
+        music = new Sound();
+        se = new Sound();
         // TILE-MANAGER SET
         tileM = new TileManager(this);
         // COLLISION-CHECKER OBJECT
@@ -115,16 +117,16 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
     public void playSoundEffect(int i) {
-        sound.setFile(i);
-        sound.play();
+        se.setFile(i);
+        se.play();
     }
 
     // GETTER METHOD
@@ -132,5 +134,5 @@ public class GamePanel extends JPanel implements Runnable{
     public CollisionChecker getChecker() { return checker; }
     public TileManager getTileM() {  return tileM;  }
     public SuperObject[] getObjects() {  return objects;  }
-    public Sound getSound() {return sound;}
+    public Sound getMusic() {return music;}
 }
