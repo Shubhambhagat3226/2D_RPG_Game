@@ -1,6 +1,7 @@
 package com.game.constants;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -30,13 +31,15 @@ public class ImageUtility {
     public static final BufferedImage BOOTS = setImage("/Object/boots.png");
     public static final BufferedImage IRON_DOOR = setImage("/Object/door_iron.png");
 
-
-
     // SET-UP IMAGE FROM PATH
     private static BufferedImage setImage(String imagePath) {
         try {
-            BufferedImage image = ImageIO.read(ImageUtility.class.getResource(imagePath));
-            return image;
+            BufferedImage original = ImageIO.read(ImageUtility.class.getResource(imagePath));
+            BufferedImage scaledImage = new BufferedImage(CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, original.getType());
+            Graphics2D g2 = scaledImage.createGraphics();
+            g2.drawImage(original, 0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
+            g2.dispose();
+            return scaledImage;
         } catch (IOException e) {
             e.printStackTrace();
         }

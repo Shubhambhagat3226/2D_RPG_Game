@@ -27,24 +27,21 @@ public class TileManager {
 
     // LOAD THE TILES
     public void loadTileImages() {
-        for (int i = 0; i < 6; i++) {
-            tiles[i] = new Tile();
-        }
-        tiles[0].image = ImageUtility.GRASS;
 
-        tiles[1].image = ImageUtility.WALL;
-        tiles[1].collision = true;
+        setUp(0, ImageUtility.GRASS, false);
+        setUp(1, ImageUtility.WALL, true);
+        setUp(2, ImageUtility.WATER, true);
+        setUp(3, ImageUtility.EARTH, false);
+        setUp(4, ImageUtility.TREE, true);
+        setUp(5, ImageUtility.SAND, false);
 
-        tiles[2].image = ImageUtility.WATER;
-        tiles[2].collision = true;
-
-        tiles[3].image = ImageUtility.EARTH;
-
-        tiles[4].image = ImageUtility.TREE;
-        tiles[4].collision = true;
-
-        tiles[5].image = ImageUtility.SAND;
     }
+    public void setUp(int index, BufferedImage image, boolean collision) {
+        tiles[index] = new Tile();
+        tiles[index].image = image;
+        tiles[index].collision = collision;
+    }
+
 
     // DRAW TILES
     public void draw(Graphics2D g2) {
@@ -67,7 +64,7 @@ public class TileManager {
                     worldY - CommonConstant.TILE_SIZE < gp.getPlayer().getWorldY() + gp.getPlayer().getScreenY() ) {
 
                 BufferedImage image = tiles[tileNum].image;
-                g2.drawImage(image, screenX, screenY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
+                g2.drawImage(image, screenX, screenY, null);
             }
             worldCol++;
 

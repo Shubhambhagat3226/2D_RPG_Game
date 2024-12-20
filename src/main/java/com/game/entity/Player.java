@@ -221,7 +221,7 @@ public class Player extends Entity{
             default -> null;
         };
 
-        g2.drawImage(image, screenX, screenY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
+        g2.drawImage(image, screenX, screenY, null);
 
     }
 
