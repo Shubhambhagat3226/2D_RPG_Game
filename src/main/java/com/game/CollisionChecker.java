@@ -72,9 +72,9 @@ public class CollisionChecker {
     }
 
     // CHECK OBJECT COLLISION
-    public int checkObject(Entity entity, boolean player) {
+    public int checkObject(Entity entity, boolean isPlayer) {
         int index = 999;
-
+        int i=0;
         for (SuperObject obj : gp.getObjects()) {
             if (obj != null) {
                 // GET ENTITY'S SOLID AREA POSITION
@@ -88,28 +88,48 @@ public class CollisionChecker {
                     case NORTH: {
                         entity.getSolidArea().y -= entity.getSpeed();
                         if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            System.out.println("up collision");
+                            if (obj.isCollision()) {
+                                entity.setCollisionOn(true);
+                            }
+                            if (isPlayer){
+                                index = i;
+                            }
                         }
                         break;
                     }
                     case SOUTH: {
                         entity.getSolidArea().y += entity.getSpeed();
                         if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            System.out.println("down collision");
+                            if (obj.isCollision()) {
+                                entity.setCollisionOn(true);
+                            }
+                            if (isPlayer){
+                                index = i;
+                            }
                         }
                         break;
                     }
                     case WEST: {
                         entity.getSolidArea().x -= entity.getSpeed();
                         if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            System.out.println("left collision");
+                            if (obj.isCollision()) {
+                                entity.setCollisionOn(true);
+                            }
+                            if (isPlayer){
+                                index = i;
+                            }
                         }
                         break;
                     }
                     case EAST: {
                         entity.getSolidArea().x += entity.getSpeed();
                         if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            System.out.println("right collision");
+                            if (obj.isCollision()) {
+                                entity.setCollisionOn(true);
+                            }
+                            if (isPlayer){
+                                index = i;
+                            }
                         }
                         break;
                     }
@@ -122,6 +142,7 @@ public class CollisionChecker {
                 obj.getSolidArea().x = obj.getSolidArea_Default_X();
                 obj.getSolidArea().y = obj.getSolidArea_Default_Y();
             }
+            i++;
         }
 
         return index;

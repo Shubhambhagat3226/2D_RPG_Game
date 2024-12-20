@@ -16,6 +16,8 @@ public class Player extends Entity{
     private final int screenX;
     private final int screenY;
 
+    private int hasKey;
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
@@ -81,7 +83,8 @@ public class Player extends Entity{
             gp.getChecker().checkTile(this);
 
             // CHECK OBJECT COLLISION
-            int index = gp.getChecker().checkObject(this, true);
+            int objIndex = gp.getChecker().checkObject(this, true);
+            pickUpObject(objIndex);
 
             // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
             if (!collisionOn) {
@@ -118,6 +121,29 @@ public class Player extends Entity{
             }
         }
 
+    }
+
+    public void pickUpObject(int i) {
+        if (i != 999) {
+            System.out.println(i);
+            String objName = gp.getObjects()[i].getName();
+            switch (objName) {
+                case "Key": {
+                    hasKey++;
+                    gp.getObjects()[i] = null;
+                    System.out.println("Key: "+hasKey);
+                    break;
+                }
+                case "Door": {
+                    if (hasKey > 0) {
+                        gp.getObjects()[i] = null;
+                        hasKey--;
+                        System.out.println("Key: " + hasKey);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     public void draw(Graphics2D g2) {
