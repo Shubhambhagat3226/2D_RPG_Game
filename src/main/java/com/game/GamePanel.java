@@ -4,6 +4,7 @@ import com.game.constants.CommonConstant;
 import com.game.entity.Player;
 import com.game.event_handler.KeyHandler;
 import com.game.object.SuperObject;
+import com.game.sound.Sound;
 import com.game.tile.TileManager;
 
 import javax.swing.*;
@@ -11,43 +12,47 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable{
 
+    // SYSTEM
     private Thread gameThread;
     private final KeyHandler keyH;
-    private final Player player;
     private final TileManager tileM;
     private final CollisionChecker checker;
-    private SuperObject objects[];
     private AssetSetter aSetter;
+    private final Sound sound;
+
+    // ENTITY AND OBJECTS
+    private final Player player;
+    private SuperObject objects[];
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true); // FOR BETTER RENDERING PERFORMANCE
 
+        // SYSTEM INITIALIZE
         // KEY LISTENER
         keyH = new KeyHandler();
         this.addKeyListener(keyH);
         this.setFocusable(true);
-
-        // PLAYER SET-UP
-        player = new Player(this, keyH);
-
+        // SOUND
+        sound = new Sound();
         // TILE-MANAGER SET
         tileM = new TileManager(this);
-
         // COLLISION-CHECKER OBJECT
         checker = new CollisionChecker(this);
-
-        // OBJECT ELEMENT
-        objects = new SuperObject[10];
-
         // ASSET-SETTER
         aSetter = new AssetSetter(this);
 
+        // ENTITY AND OBJECT INITIALIZE--
+        // PLAYER SET-UP
+        player = new Player(this, keyH);
+        // OBJECT ELEMENT
+        objects = new SuperObject[10];
     }
 
     public void setupObject() {
         aSetter.setObject();
+        playMusic(0);
     }
 
     // DO FPS
@@ -109,9 +114,23 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
 
+    public void playMusic(int i) {
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+    public void stopMusic() {
+        sound.stop();
+    }
+    public void playSoundEffect(int i) {
+        sound.setFile(i);
+        sound.play();
+    }
+
     // GETTER METHOD
     public Player getPlayer() { return player; }
     public CollisionChecker getChecker() { return checker; }
     public TileManager getTileM() {  return tileM;  }
     public SuperObject[] getObjects() {  return objects;  }
+    public Sound getSound() {return sound;}
 }

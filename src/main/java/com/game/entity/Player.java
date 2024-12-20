@@ -32,7 +32,7 @@ public class Player extends Entity{
         solidArea_Default_X = solidArea.x;
         solidArea_Default_Y = solidArea.y;
         solidArea.width = 31;
-        solidArea.height = 32;
+        solidArea.height = 31;
 
         setDefaultValues();
         loadImage();
@@ -131,6 +131,7 @@ public class Player extends Entity{
             ObjectName objName = gp.getObjects()[i].getName();
             switch (objName) {
                 case KEY: {
+                    gp.playSoundEffect(1);
                     hasKey++;
                     gp.getObjects()[i] = null;
                     System.out.println("Key: "+hasKey);
@@ -138,6 +139,7 @@ public class Player extends Entity{
                 }
                 case DOOR: {
                     if (hasKey > 0) {
+                        gp.playSoundEffect(3);
                         gp.getObjects()[i] = null;
                         hasKey--;
                         System.out.println("Key: " + hasKey);
@@ -145,6 +147,7 @@ public class Player extends Entity{
                     break;
                 }
                 case BOOTS: {
+                    gp.playSoundEffect(2);
                     speed += 1;
                     gp.getObjects()[i] = null;
                     break;
