@@ -18,6 +18,7 @@ public class Player extends Entity{
     private final int screenY;
 
     private int hasKey;
+    private int standCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -119,6 +120,12 @@ public class Player extends Entity{
                     spiritNum = 1;
                 }
                 spiritCounter = 0;
+            }
+        } else {
+            standCounter++;
+            if (standCounter == 20) {
+                spiritNum = 1;
+                standCounter = 0;
             }
         }
 
