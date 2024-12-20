@@ -154,6 +154,12 @@ public class Player extends Entity{
                     gp.getUi().showMessage("Speed up!");
                     break;
                 }
+                case CHEST: {
+                    gp.getUi().setGameFinished(true);
+                    gp.stopMusic();
+                    gp.playSoundEffect(4);
+                    break;
+                }
             }
         }
     }

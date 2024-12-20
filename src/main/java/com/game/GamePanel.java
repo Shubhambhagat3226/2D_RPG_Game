@@ -142,4 +142,7 @@ public class GamePanel extends JPanel implements Runnable{
     public SuperObject[] getObjects() {  return objects;  }
     public Sound getMusic() {return music;}
     public UI getUi() {return ui;}
+
+    // SETTER METHODS
+    public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
 }
