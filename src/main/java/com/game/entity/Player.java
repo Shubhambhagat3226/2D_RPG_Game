@@ -127,14 +127,13 @@ public class Player extends Entity{
     // WHAT TO DO WHEN OBJECT COLLIED
     public void pickUpObject(int i) {
         if (i != 999) {
-            System.out.println(i);
             ObjectName objName = gp.getObjects()[i].getName();
             switch (objName) {
                 case KEY: {
                     gp.playSoundEffect(1);
                     hasKey++;
                     gp.getObjects()[i] = null;
-                    System.out.println("Key: "+hasKey);
+                    gp.getUi().showMessage("You got a Key!");
                     break;
                 }
                 case DOOR: {
@@ -142,7 +141,9 @@ public class Player extends Entity{
                         gp.playSoundEffect(3);
                         gp.getObjects()[i] = null;
                         hasKey--;
-                        System.out.println("Key: " + hasKey);
+                        gp.getUi().showMessage("You opened the door!");
+                    } else {
+                        gp.getUi().showMessage("You need a key!");
                     }
                     break;
                 }
@@ -150,6 +151,7 @@ public class Player extends Entity{
                     gp.playSoundEffect(2);
                     speed += 1;
                     gp.getObjects()[i] = null;
+                    gp.getUi().showMessage("Speed up!");
                     break;
                 }
             }
@@ -201,4 +203,5 @@ public class Player extends Entity{
     // GETTER METHODS
     public int getScreenX() {  return screenX;  }
     public int getScreenY() {  return screenY;  }
+    public int getHasKey() {  return hasKey;  }
 }

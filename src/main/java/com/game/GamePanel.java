@@ -20,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable{
     private AssetSetter aSetter;
     private final Sound music;
     private final Sound se;
+    private final UI ui;
 
     // ENTITY AND OBJECTS
     private final Player player;
@@ -44,6 +45,8 @@ public class GamePanel extends JPanel implements Runnable{
         checker = new CollisionChecker(this);
         // ASSET-SETTER
         aSetter = new AssetSetter(this);
+        // UI
+        ui = new UI(this);
 
         // ENTITY AND OBJECT INITIALIZE--
         // PLAYER SET-UP
@@ -113,6 +116,9 @@ public class GamePanel extends JPanel implements Runnable{
         // PLAYER
         player.draw(g2);
 
+        // DRAW UI
+        ui.draw(g2);
+
         g2.dispose();
     }
 
@@ -135,4 +141,5 @@ public class GamePanel extends JPanel implements Runnable{
     public TileManager getTileM() {  return tileM;  }
     public SuperObject[] getObjects() {  return objects;  }
     public Sound getMusic() {return music;}
+    public UI getUi() {return ui;}
 }
