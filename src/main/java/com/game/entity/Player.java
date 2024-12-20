@@ -19,6 +19,8 @@ public class Player extends Entity{
 
     private int hasKey;
     private int standCounter = 0;
+    private boolean moving;
+    private int pixelCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -28,12 +30,12 @@ public class Player extends Entity{
         screenY = CommonConstant.SCREEN_HEIGHT / 2 - (CommonConstant.TILE_SIZE / 2);
 
         solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
+        solidArea.x = 1;
+        solidArea.y = 1;
         solidArea_Default_X = solidArea.x;
         solidArea_Default_Y = solidArea.y;
-        solidArea.width = 31;
-        solidArea.height = 31;
+        solidArea.width = 46;
+        solidArea.height = 46;
 
         setDefaultValues();
         loadImage();
@@ -65,51 +67,60 @@ public class Player extends Entity{
     // IMAGES UPDATION
     public void update() {
 
-        if (keyH.isUpPressed() || keyH.isDownPressed() || keyH.isLeftPressed() || keyH.isRightPressed()) {
+        if (!moving) {
+            if (keyH.isUpPressed() || keyH.isDownPressed() || keyH.isLeftPressed() || keyH.isRightPressed()) {
 
-            if (keyH.isUpPressed()) {
-                direction = Direction.NORTH;
-            }
-            if (keyH.isDownPressed()) {
-                direction = Direction.SOUTH;
-            }
-            if (keyH.isLeftPressed()) {
-                direction = Direction.WEST;
-            }
-            if (keyH.isRightPressed()) {
-                direction = Direction.EAST;
-            }
+                if (keyH.isUpPressed()) {
+                    direction = Direction.NORTH;
+                }
+                if (keyH.isDownPressed()) {
+                    direction = Direction.SOUTH;
+                }
+                if (keyH.isLeftPressed()) {
+                    direction = Direction.WEST;
+                }
+                if (keyH.isRightPressed()) {
+                    direction = Direction.EAST;
+                }
 
-            // CHECK TILE COLLISION
-            collisionOn = false;
-            gp.getChecker().checkTile(this);
+                moving = true;
 
-            // CHECK OBJECT COLLISION
-            int objIndex = gp.getChecker().checkObject(this, true);
-            pickUpObject(objIndex);
+                // CHECK TILE COLLISION
+                collisionOn = false;
+                gp.getChecker().checkTile(this);
 
+                // CHECK OBJECT COLLISION
+                int objIndex = gp.getChecker().checkObject(this, true);
+                pickUpObject(objIndex);
+            }else {
+                standCounter++;
+                if (standCounter == 20) {
+                    spiritNum = 1;
+                    standCounter = 0;
+                }
+            }
+        } else {
             // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
             if (!collisionOn) {
                 switch (direction) {
-                    case NORTH : {
+                    case NORTH: {
                         worldY -= speed;
                         break;
                     }
-                    case SOUTH : {
+                    case SOUTH: {
                         worldY += speed;
                         break;
                     }
-                    case WEST : {
+                    case WEST: {
                         worldX -= speed;
                         break;
                     }
-                    case EAST : {
+                    case EAST: {
                         worldX += speed;
                         break;
                     }
                 }
             }
-
 
             // TO CHANGE FROM OTHER IMAGE
             spiritCounter++;
@@ -121,14 +132,15 @@ public class Player extends Entity{
                 }
                 spiritCounter = 0;
             }
-        } else {
-            standCounter++;
-            if (standCounter == 20) {
-                spiritNum = 1;
-                standCounter = 0;
-            }
-        }
 
+            pixelCounter += speed;
+
+            if (pixelCounter == CommonConstant.TILE_SIZE) {
+                moving = false;
+                pixelCounter = 0;
+            }
+
+        }
     }
 
     // WHAT TO DO WHEN OBJECT COLLIED
@@ -156,7 +168,7 @@ public class Player extends Entity{
                 }
                 case BOOTS: {
                     gp.playSoundEffect(2);
-                    speed += 1;
+                    speed += 2;
                     gp.getObjects()[i] = null;
                     gp.getUi().showMessage("Speed up!");
                     break;
