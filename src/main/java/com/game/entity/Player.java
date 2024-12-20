@@ -26,6 +26,8 @@ public class Player extends Entity{
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
+        solidArea_Default_X = solidArea.x;
+        solidArea_Default_Y = solidArea.y;
         solidArea.width = 31;
         solidArea.height = 31;
 
@@ -40,6 +42,7 @@ public class Player extends Entity{
         direction = Direction.SOUTH;
     }
 
+    // LOAD PLAYERS IMAGES
     private void loadImage() {
         up_1 = ImageUtility.PLAYER_UP_1;
         up_2 = ImageUtility.PLAYER_UP_2;
@@ -51,6 +54,11 @@ public class Player extends Entity{
         right_2 = ImageUtility.PLAYER_RIGHT_2;
     }
 
+    // UPDATE ALL SETTING FOR PLAYER LIKE --
+    // DIRECTION
+    // TILE COLLISION HAPPEN
+    // OBJECT COLLISION HAPPEN
+    // IMAGES UPDATION
     public void update() {
 
         if (keyH.isUpPressed() || keyH.isDownPressed() || keyH.isLeftPressed() || keyH.isRightPressed()) {
@@ -71,6 +79,9 @@ public class Player extends Entity{
             // CHECK TILE COLLISION
             collisionOn = false;
             gp.getChecker().checkTile(this);
+
+            // CHECK OBJECT COLLISION
+            int index = gp.getChecker().checkObject(this, true);
 
             // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
             if (!collisionOn) {

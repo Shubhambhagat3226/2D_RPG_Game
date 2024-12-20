@@ -17,6 +17,7 @@ public class Entity {
 
     // INVISIBLE AREA FOR CHECK COLLISION
     protected Rectangle solidArea;
+    protected int solidArea_Default_X, solidArea_Default_Y;
     protected boolean collisionOn;
 
 
@@ -25,6 +26,8 @@ public class Entity {
     public int getWorldY() {  return worldY;  }
     public Direction getDirection() {  return direction;  }
     public int getSpeed() {  return speed;  }
+    public int getSolidArea_Default_X() {  return solidArea_Default_X;  }
+    public int getSolidArea_Default_Y() {  return solidArea_Default_Y;  }
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}

@@ -2,6 +2,7 @@ package com.game;
 
 import com.game.constants.CommonConstant;
 import com.game.entity.Entity;
+import com.game.object.SuperObject;
 
 public class CollisionChecker {
     private final GamePanel gp;
@@ -68,5 +69,61 @@ public class CollisionChecker {
                 break;
             }
         }
+    }
+
+    // CHECK OBJECT COLLISION
+    public int checkObject(Entity entity, boolean player) {
+        int index = 999;
+
+        for (SuperObject obj : gp.getObjects()) {
+            if (obj != null) {
+                // GET ENTITY'S SOLID AREA POSITION
+                entity.getSolidArea().x += entity.getWorldX();
+                entity.getSolidArea().y += entity.getWorldY();
+                // GET THE OBJECT'S SOLID AREA POSITION
+                obj.getSolidArea().x += obj.getWorldX();
+                obj.getSolidArea().y += obj.getWorldY();
+
+                switch (entity.getDirection()) {
+                    case NORTH: {
+                        entity.getSolidArea().y -= entity.getSpeed();
+                        if (entity.getSolidArea().intersects(obj.getSolidArea())) {
+                            System.out.println("up collision");
+                        }
+                        break;
+                    }
+                    case SOUTH: {
+                        entity.getSolidArea().y += entity.getSpeed();
+                        if (entity.getSolidArea().intersects(obj.getSolidArea())) {
+                            System.out.println("down collision");
+                        }
+                        break;
+                    }
+                    case WEST: {
+                        entity.getSolidArea().x -= entity.getSpeed();
+                        if (entity.getSolidArea().intersects(obj.getSolidArea())) {
+                            System.out.println("left collision");
+                        }
+                        break;
+                    }
+                    case EAST: {
+                        entity.getSolidArea().x += entity.getSpeed();
+                        if (entity.getSolidArea().intersects(obj.getSolidArea())) {
+                            System.out.println("right collision");
+                        }
+                        break;
+                    }
+                }
+                // RESTART THE DEFAULT SOLID AREA
+                // FOR ENTITY
+                entity.getSolidArea().x = entity.getSolidArea_Default_X();
+                entity.getSolidArea().y = entity.getSolidArea_Default_Y();
+                // FOR OBJECTS
+                obj.getSolidArea().x = obj.getSolidArea_Default_X();
+                obj.getSolidArea().y = obj.getSolidArea_Default_Y();
+            }
+        }
+
+        return index;
     }
 }

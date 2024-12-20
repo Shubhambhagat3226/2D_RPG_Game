@@ -11,6 +11,9 @@ public class SuperObject {
     protected String name;
     protected boolean collision;
     protected int worldX, worldY;
+    protected Rectangle solidArea = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+    protected int solidArea_Default_X = 0;
+    protected int solidArea_Default_Y = 0;
 
     // DRAW OBJECT ITEMS
     public void draw(Graphics2D g2, GamePanel gp) {
@@ -32,6 +35,9 @@ public class SuperObject {
     public boolean isCollision() {return collision;}
     public String getName() {return name;}
     public BufferedImage getImage() {return image;}
+    public int getSolidArea_Default_X() {return solidArea_Default_X;}
+    public int getSolidArea_Default_Y() {return solidArea_Default_Y;}
+    public Rectangle getSolidArea() {return solidArea;}
 
     // SETTER METHODS
     public void setWorldX(int worldX) {this.worldX = worldX;}
