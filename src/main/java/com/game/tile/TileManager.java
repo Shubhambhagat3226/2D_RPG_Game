@@ -18,7 +18,7 @@ public class TileManager {
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
-        tiles = new Tile[10];
+        tiles = new Tile[50];
         map = new int[CommonConstant.MAX_WORLD_ROW][CommonConstant.MAX_WORLD_COL];
 
        loadTileImages();
@@ -28,12 +28,51 @@ public class TileManager {
     // LOAD THE TILES
     public void loadTileImages() {
 
-        setUp(0, ImageUtility.GRASS, false);
-        setUp(1, ImageUtility.WALL, true);
-        setUp(2, ImageUtility.WATER, true);
+        // PLACEHOLDER
+        setUp(0, ImageUtility.GRASS_0, false);
+        setUp(1, ImageUtility.WALL, false);
+        setUp(2, ImageUtility.WATER_1, false);
         setUp(3, ImageUtility.EARTH, false);
-        setUp(4, ImageUtility.TREE, true);
+        setUp(4, ImageUtility.TREE, false);
         setUp(5, ImageUtility.SAND, false);
+        setUp(6, ImageUtility.GRASS_0, false);
+        setUp(7, ImageUtility.GRASS_0, false);
+        setUp(8, ImageUtility.GRASS_0, false);
+        setUp(9, ImageUtility.GRASS_0, false);
+
+        // USING TILES
+        setUp(10, ImageUtility.GRASS_0, false);
+        setUp(11, ImageUtility.GRASS_1, false);
+        setUp(12, ImageUtility.WATER_0, true);
+        setUp(13, ImageUtility.WATER_1, true);
+        setUp(14, ImageUtility.WATER_2, true);
+        setUp(15, ImageUtility.WATER_3, true);
+        setUp(16, ImageUtility.WATER_4, true);
+        setUp(17, ImageUtility.WATER_5, true);
+        setUp(18, ImageUtility.WATER_6, true);
+        setUp(19, ImageUtility.WATER_7, true);
+        setUp(20, ImageUtility.WATER_8, true);
+        setUp(21, ImageUtility.WATER_9, true);
+        setUp(22, ImageUtility.WATER_10, true);
+        setUp(23, ImageUtility.WATER_11, true);
+        setUp(24, ImageUtility.WATER_12, true);
+        setUp(25, ImageUtility.WATER_13, true);
+        setUp(26, ImageUtility.ROAD_0, false);
+        setUp(27, ImageUtility.ROAD_1, false);
+        setUp(28, ImageUtility.ROAD_2, false);
+        setUp(29, ImageUtility.ROAD_3, false);
+        setUp(30, ImageUtility.ROAD_4, false);
+        setUp(31, ImageUtility.ROAD_5, false);
+        setUp(32, ImageUtility.ROAD_6, false);
+        setUp(33, ImageUtility.ROAD_7, false);
+        setUp(34, ImageUtility.ROAD_8, false);
+        setUp(35, ImageUtility.ROAD_9, false);
+        setUp(36, ImageUtility.ROAD_10, false);
+        setUp(37, ImageUtility.ROAD_11, false);
+        setUp(38, ImageUtility.ROAD_12, false);
+        setUp(39, ImageUtility.EARTH, false);
+        setUp(40, ImageUtility.WALL, true);
+        setUp(41, ImageUtility.TREE, true);
 
     }
     public void setUp(int index, BufferedImage image, boolean collision) {
