@@ -11,14 +11,13 @@ import com.game.event_handler.KeyHandler;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Player extends Entity{
+public class Player extends Entity {
     private final GamePanel gp;
     private final KeyHandler keyH;
 
     private final int screenX;
     private final int screenY;
 
-    private int hasKey;
     private int standCounter = 0;
     private boolean moving;
     private int pixelCounter = 0;
@@ -149,40 +148,7 @@ public class Player extends Entity{
     // WHAT TO DO WHEN OBJECT COLLIED
     public void pickUpObject(int i) {
         if (i != 999) {
-            ObjectName objName = gp.getObjects()[i].getName();
-            switch (objName) {
-                case KEY: {
-                    gp.playSoundEffect(1);
-                    hasKey++;
-                    gp.getObjects()[i] = null;
-                    gp.getUi().showMessage("You got a Key!");
-                    break;
-                }
-                case DOOR: {
-                    if (hasKey > 0) {
-                        gp.playSoundEffect(3);
-                        gp.getObjects()[i] = null;
-                        hasKey--;
-                        gp.getUi().showMessage("You opened the door!");
-                    } else {
-                        gp.getUi().showMessage("You need a key!");
-                    }
-                    break;
-                }
-                case BOOTS: {
-                    gp.playSoundEffect(2);
-                    speed += 2;
-                    gp.getObjects()[i] = null;
-                    gp.getUi().showMessage("Speed up!");
-                    break;
-                }
-                case CHEST: {
-                    gp.getUi().setGameFinished(true);
-                    gp.stopMusic();
-                    gp.playSoundEffect(4);
-                    break;
-                }
-            }
+
         }
     }
 
@@ -231,5 +197,4 @@ public class Player extends Entity{
     // GETTER METHODS
     public int getScreenX() {  return screenX;  }
     public int getScreenY() {  return screenY;  }
-    public int getHasKey() {  return hasKey;  }
 }
