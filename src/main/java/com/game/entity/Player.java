@@ -17,8 +17,6 @@ public class Player extends Entity {
     private final int screenY;
 
     private int standCounter = 0;
-    private boolean moving;
-    private int pixelCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -28,12 +26,12 @@ public class Player extends Entity {
         screenY = CommonConstant.SCREEN_HEIGHT / 2 - (CommonConstant.TILE_SIZE / 2);
 
         solidArea = new Rectangle();
-        solidArea.x = 1;
-        solidArea.y = 1;
+        solidArea.x = 8;
+        solidArea.y = 16;
         solidArea_Default_X = solidArea.x;
         solidArea_Default_Y = solidArea.y;
-        solidArea.width = 46;
-        solidArea.height = 46;
+        solidArea.width = 32;
+        solidArea.height = 32;
 
         setDefaultValues();
         loadImage();
@@ -65,7 +63,6 @@ public class Player extends Entity {
     // IMAGES UPDATION
     public void update() {
 
-        if (!moving) {
             if (keyH.isUpPressed() || keyH.isDownPressed() || keyH.isLeftPressed() || keyH.isRightPressed()) {
 
                 if (keyH.isUpPressed()) {
@@ -81,8 +78,6 @@ public class Player extends Entity {
                     direction = Direction.EAST;
                 }
 
-                moving = true;
-
                 // CHECK TILE COLLISION
                 collisionOn = false;
                 gp.getChecker().checkTile(this);
@@ -95,43 +90,37 @@ public class Player extends Entity {
                 int npcIndex = gp.getChecker().checkEntity(this, gp.getNpc());
                 interactNPC(npcIndex);
 
+                // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
+                if (!collisionOn) {
+                    switch (direction) {
+                        case NORTH -> worldY -= speed;
+                        case SOUTH -> worldY += speed;
+                        case WEST -> worldX -= speed;
+                        case EAST -> worldX += speed;
+                    }
+                }
+                // TO CHANGE FROM OTHER IMAGE
+                spiritCounter++;
+                if (spiritCounter > 10) {
+                    if (spiritNum == 1) {
+                        spiritNum = 2;
+                    } else {
+                        spiritNum = 1;
+                    }
+                    spiritCounter = 0;
+                }
             } else {
                 standCounter++;
-                if (standCounter == 20) {
+
+                if (standCounter == 14) {
                     spiritNum = 1;
-                    standCounter = 0;
+                    standCounter=0;
                 }
-            }
-        } else {
-            // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
-            if (!collisionOn) {
-                switch (direction) {
-                    case NORTH -> worldY -= speed;
-                    case SOUTH -> worldY += speed;
-                    case WEST  -> worldX -= speed;
-                    case EAST  -> worldX += speed;
-                }
+
             }
 
-            // TO CHANGE FROM OTHER IMAGE
-            spiritCounter++;
-            if (spiritCounter > 12) {
-                if (spiritNum == 1) {
-                    spiritNum = 2;
-                } else {
-                    spiritNum = 1;
-                }
-                spiritCounter = 0;
-            }
 
-            pixelCounter += speed;
 
-            if (pixelCounter == CommonConstant.TILE_SIZE) {
-                moving = false;
-                pixelCounter = 0;
-            }
-
-        }
     }
 
     // WHAT TO DO WHEN OBJECT COLLIED
