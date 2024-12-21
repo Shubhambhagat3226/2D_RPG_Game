@@ -1,6 +1,7 @@
 package com.game;
 
 import com.game.constants.CommonConstant;
+import com.game.constants.GameState;
 import com.game.entity.Player;
 import com.game.event_handler.KeyHandler;
 import com.game.object.SuperObject;
@@ -24,7 +25,10 @@ public class GamePanel extends JPanel implements Runnable{
 
     // ENTITY AND OBJECTS
     private final Player player;
-    private SuperObject objects[];
+    private SuperObject[] objects;
+
+    // GAME STATE
+    private GameState gameState;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
@@ -33,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         // SYSTEM INITIALIZE
         // KEY LISTENER
-        keyH = new KeyHandler();
+        keyH = new KeyHandler(this);
         this.addKeyListener(keyH);
         this.setFocusable(true);
         // SOUND
@@ -58,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupObject() {
         aSetter.setObject();
         playMusic(0);
+        gameState = GameState.PLAY;
     }
 
     // DO FPS
@@ -94,7 +99,12 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update() {
-        player.update();
+
+        switch (gameState) {
+            case PLAY -> player.update();
+            case PAUSE -> { }
+        }
+
     }
 
     @Override
@@ -156,7 +166,9 @@ public class GamePanel extends JPanel implements Runnable{
     public SuperObject[] getObjects() {  return objects;  }
     public Sound getMusic() {return music;}
     public UI getUi() {return ui;}
+    public GameState getGameState() {return gameState;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
+    public void setGameState(GameState gameState) { this.gameState = gameState; }
 }

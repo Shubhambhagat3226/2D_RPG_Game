@@ -1,12 +1,20 @@
 package com.game.event_handler;
 
+import com.game.GamePanel;
+import com.game.constants.GameState;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
+    private final GamePanel gp;
     private boolean upPressed, downPressed , leftPressed, rightPressed;
     // DEBUG
     private boolean checkDrawTime;
+
+    public KeyHandler(GamePanel gp) {
+        this.gp = gp;
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -27,6 +35,13 @@ public class KeyHandler implements KeyListener {
         // RIGHT MOVEMENT
         if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
             rightPressed = true;
+        }
+        // PAUSE SCREEN
+        if (KeyEvent.VK_P == code) {
+            switch (gp.getGameState()) {
+                case PLAY -> gp.setGameState(GameState.PAUSE);
+                case PAUSE -> gp.setGameState(GameState.PLAY);
+            }
         }
 
         // DEBUG
