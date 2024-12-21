@@ -60,8 +60,16 @@ public class NPC_OldMan extends Entity{
 
     @Override
     public void speak() {
-        if (dialogueIndex == dialogue.length - 1) dialogueIndex=0;
+        if (dialogue[dialogueIndex] == null) dialogueIndex=0;
         gp.getUi().setCurrentDialogue(dialogue[dialogueIndex]);
         dialogueIndex++;
+
+        switch (gp.getPlayer().direction) {
+            case NORTH -> direction = Direction.SOUTH;
+            case SOUTH -> direction = Direction.NORTH;
+            case WEST  -> direction = Direction.EAST;
+            case EAST  -> direction = Direction.WEST;
+        }
+
     }
 }

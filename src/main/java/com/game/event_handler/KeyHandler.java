@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     private final GamePanel gp;
-    private boolean upPressed, downPressed , leftPressed, rightPressed;
+    private boolean upPressed, downPressed , leftPressed, rightPressed, enteredPressed;
     // DEBUG
     private boolean checkDrawTime;
 
@@ -41,6 +41,10 @@ public class KeyHandler implements KeyListener {
             // PAUSE SCREEN
             if (KeyEvent.VK_P == code) {
                 gp.setGameState(GameState.PAUSE);
+            }
+            // TALK WITH NPC
+            if (KeyEvent.VK_ENTER == code) {
+                enteredPressed = true;
             }
 
             // DEBUG
@@ -99,4 +103,7 @@ public class KeyHandler implements KeyListener {
     public boolean isLeftPressed() { return leftPressed; }
     public boolean isRightPressed() { return rightPressed; }
     public boolean isCheckDrawTime() { return checkDrawTime; }
+    public boolean isEnteredPressed() {return enteredPressed;}
+    // SETTER METHODS
+    public void setEnteredPressed(boolean enteredPressed) {this.enteredPressed = enteredPressed;}
 }

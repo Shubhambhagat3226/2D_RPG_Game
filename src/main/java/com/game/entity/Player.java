@@ -129,10 +129,12 @@ public class Player extends Entity {
     // INTERACTION WITH NPC
     public void interactNPC(int i) {
         if (i != 999) {
-            gp.setGameState(GameState.DIALOGUE);
-            gp.getNpc()[i].speak();
-            System.out.println("You are hitting the npc!");
+            if (keyH.isEnteredPressed()) {
+                gp.setGameState(GameState.DIALOGUE);
+                gp.getNpc()[i].speak();
+            }
         }
+        keyH.setEnteredPressed(false);
     }
 
     // DRAW PLAYER IMAGE
