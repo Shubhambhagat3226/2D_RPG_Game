@@ -35,7 +35,18 @@ public class Entity {
     }
 
     // SPEAK
-    public void speak() {}
+    public void speak() {
+        if (dialogueIndex == dialogue.length-1 || dialogue[dialogueIndex] == null) dialogueIndex=0;
+        gp.getUi().setCurrentDialogue(dialogue[dialogueIndex]);
+        dialogueIndex++;
+
+        switch (gp.getPlayer().direction) {
+            case NORTH -> direction = Direction.SOUTH;
+            case SOUTH -> direction = Direction.NORTH;
+            case WEST  -> direction = Direction.EAST;
+            case EAST  -> direction = Direction.WEST;
+        }
+    }
 
     // SET-ACTION DEFINE IN SUN-CLASS
     public void setAction() {}

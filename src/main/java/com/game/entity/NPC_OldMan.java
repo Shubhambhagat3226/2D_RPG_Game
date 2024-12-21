@@ -31,8 +31,8 @@ public class NPC_OldMan extends Entity{
         dialogue = new String[4];
 
         dialogue[0] = "Hello, lad!";
-        dialogue[1] = "So you,ve come to this island to find the treasure?";
-        dialogue[2] = "I used to be a great wizard but now... I'm a bit too old for taking an adventure.";
+        dialogue[1] = "So you,ve come to this island to \nfind the treasure?";
+        dialogue[2] = "I used to be a great wizard but now... \nI'm a bit too old for taking an adventure.";
         dialogue[3] = "Well, good luck on you.";
     }
 
@@ -60,16 +60,7 @@ public class NPC_OldMan extends Entity{
 
     @Override
     public void speak() {
-        if (dialogue[dialogueIndex] == null) dialogueIndex=0;
-        gp.getUi().setCurrentDialogue(dialogue[dialogueIndex]);
-        dialogueIndex++;
-
-        switch (gp.getPlayer().direction) {
-            case NORTH -> direction = Direction.SOUTH;
-            case SOUTH -> direction = Direction.NORTH;
-            case WEST  -> direction = Direction.EAST;
-            case EAST  -> direction = Direction.WEST;
-        }
-
+        // DO THIS CHARACTER SPECIFIC STUFF
+        super.speak();
     }
 }
