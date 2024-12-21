@@ -205,4 +205,47 @@ public class CollisionChecker {
         return index;
     }
 
+    public void checkPlayer(Entity entity) {
+
+        // GET ENTITY'S SOLID AREA POSITION
+        entity.getSolidArea().x += entity.getWorldX();
+        entity.getSolidArea().y += entity.getWorldY();
+        // GET THE OBJECT'S SOLID AREA POSITION
+        gp.getPlayer().getSolidArea().x += gp.getPlayer().getWorldX();
+        gp.getPlayer().getSolidArea().y += gp.getPlayer().getWorldY();
+
+        switch (entity.getDirection()) {
+            case NORTH -> {
+                entity.getSolidArea().y -= entity.getSpeed();
+                if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
+                    entity.setCollisionOn(true);
+                }
+            }
+            case SOUTH -> {
+                entity.getSolidArea().y += entity.getSpeed();
+                if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
+                    entity.setCollisionOn(true);
+                }
+            }
+            case WEST -> {
+                entity.getSolidArea().x -= entity.getSpeed();
+                if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
+                    entity.setCollisionOn(true);
+                }
+            }
+            case EAST -> {
+                entity.getSolidArea().x += entity.getSpeed();
+                if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
+                    entity.setCollisionOn(true);
+                }
+            }
+        }
+        // RESTART THE DEFAULT SOLID AREA
+        // FOR ENTITY
+        entity.getSolidArea().x = entity.getSolidArea_Default_X();
+        entity.getSolidArea().y = entity.getSolidArea_Default_Y();
+        // FOR OBJECTS
+        gp.getPlayer().getSolidArea().x = gp.getPlayer().getSolidArea_Default_X();
+        gp.getPlayer().getSolidArea().y = gp.getPlayer().getSolidArea_Default_Y();
+    }
 }
