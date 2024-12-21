@@ -20,38 +20,52 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        // UP MOVEMENT
-        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
-            upPressed = true;
+        // PLAY STATE
+        if (gp.getGameState() == GameState.PLAY) {
+            // UP MOVEMENT
+            if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
+                upPressed = true;
+            }
+            // DOWN MOVEMENT
+            if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+                downPressed = true;
+            }
+            // LEFT MOVEMENT
+            if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
+                leftPressed = true;
+            }
+            // RIGHT MOVEMENT
+            if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
+                rightPressed = true;
+            }
+            // PAUSE SCREEN
+            if (KeyEvent.VK_P == code) {
+                gp.setGameState(GameState.PAUSE);
+            }
+
+            // DEBUG
+            if (KeyEvent.VK_T == code) {
+                if (!checkDrawTime) {
+                    checkDrawTime = true;
+                } else {
+                    checkDrawTime = false;
+                }
+            }
         }
-        // DOWN MOVEMENT
-        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
-            downPressed = true;
+        // PAUSE STATE
+        else if (gp.getGameState() == GameState.PAUSE) {
+            if (KeyEvent.VK_P == code) {
+                gp.setGameState(GameState.PLAY);
+            }
         }
-        // LEFT MOVEMENT
-        if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
-            leftPressed = true;
-        }
-        // RIGHT MOVEMENT
-        if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
-            rightPressed = true;
-        }
-        // PAUSE SCREEN
-        if (KeyEvent.VK_P == code) {
-            switch (gp.getGameState()) {
-                case PLAY -> gp.setGameState(GameState.PAUSE);
-                case PAUSE -> gp.setGameState(GameState.PLAY);
+        // DIALOGUE STATE
+        else if (gp.getGameState() == GameState.DIALOGUE) {
+            if (KeyEvent.VK_ENTER == code) {
+                gp.setGameState(GameState.PLAY);
             }
         }
 
-        // DEBUG
-        if (KeyEvent.VK_T == code) {
-            if (!checkDrawTime) {
-                checkDrawTime = true;
-            } else {
-                checkDrawTime = false;
-            }
-        }
+
     }
 
     @Override
