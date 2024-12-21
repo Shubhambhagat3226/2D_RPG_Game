@@ -1,7 +1,6 @@
 package com.game.entity;
 
 import com.game.GamePanel;
-import com.game.UtilityTool;
 import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ImageUtility;
@@ -12,7 +11,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
-    private final GamePanel gp;
     private final KeyHandler keyH;
 
     private final int screenX;
@@ -23,7 +21,7 @@ public class Player extends Entity {
     private int pixelCounter = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         screenX = CommonConstant.SCREEN_WIDTH / 2 - (CommonConstant.TILE_SIZE / 2);
@@ -50,16 +48,14 @@ public class Player extends Entity {
 
     // LOAD PLAYERS IMAGES
     private void loadImage() {
-        int width = CommonConstant.TILE_SIZE;
-        int height = CommonConstant.TILE_SIZE;
-        up_1 = UtilityTool.setImage(ImageUtility.PLAYER_UP_1, width, height);
-        up_2 = UtilityTool.setImage(ImageUtility.PLAYER_UP_2, width, height);
-        down_1 = UtilityTool.setImage(ImageUtility.PLAYER_DOWN_1, width, height);
-        down_2 = UtilityTool.setImage(ImageUtility.PLAYER_DOWN_2, width, height);
-        left_1 = UtilityTool.setImage(ImageUtility.PLAYER_LEFT_1, width, height);
-        left_2 = UtilityTool.setImage(ImageUtility.PLAYER_LEFT_2, width, height);
-        right_1 = UtilityTool.setImage(ImageUtility.PLAYER_RIGHT_1, width, height);
-        right_2 = UtilityTool.setImage(ImageUtility.PLAYER_RIGHT_2, width, height);
+        up_1       = setImage(ImageUtility.PLAYER_UP_1);
+        up_2       = setImage(ImageUtility.PLAYER_UP_2);
+        down_1     = setImage(ImageUtility.PLAYER_DOWN_1);
+        down_2     = setImage(ImageUtility.PLAYER_DOWN_2);
+        left_1     = setImage(ImageUtility.PLAYER_LEFT_1);
+        left_2     = setImage(ImageUtility.PLAYER_LEFT_2);
+        right_1    = setImage(ImageUtility.PLAYER_RIGHT_1);
+        right_2    = setImage(ImageUtility.PLAYER_RIGHT_2);
     }
 
     // UPDATE ALL SETTING FOR PLAYER LIKE --

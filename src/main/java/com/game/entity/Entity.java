@@ -1,11 +1,16 @@
 package com.game.entity;
 
+import com.game.GamePanel;
+import com.game.UtilityTool;
+import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
+import com.game.constants.ImageUtility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
+    protected final GamePanel gp;
     protected int worldX, worldY;
     protected int speed;
 
@@ -20,6 +25,14 @@ public class Entity {
     protected int solidArea_Default_X, solidArea_Default_Y;
     protected boolean collisionOn;
 
+    public Entity(GamePanel gp) {
+        this.gp = gp;
+        solidArea = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+    }
+
+    public BufferedImage setImage(String imagePath) {
+        return UtilityTool.setImage(imagePath, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+    }
 
     // GETTER METHOD ONLY
     public int getWorldX() {  return worldX;  }
