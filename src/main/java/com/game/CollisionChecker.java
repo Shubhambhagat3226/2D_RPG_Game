@@ -147,4 +147,62 @@ public class CollisionChecker {
 
         return index;
     }
+
+    // NPC AND MONSTER COLLISION
+    public int checkEntity(Entity entity, Entity[] targets) {
+        int index = 999;
+        int i=0;
+        for (Entity target : targets) {
+            if (target != null) {
+                // GET ENTITY'S SOLID AREA POSITION
+                entity.getSolidArea().x += entity.getWorldX();
+                entity.getSolidArea().y += entity.getWorldY();
+                // GET THE OBJECT'S SOLID AREA POSITION
+                target.getSolidArea().x += target.getWorldX();
+                target.getSolidArea().y += target.getWorldY();
+
+                switch (entity.getDirection()) {
+                    case NORTH -> {
+                        entity.getSolidArea().y -= entity.getSpeed();
+                        if (entity.getSolidArea().intersects(target.getSolidArea())) {
+                            entity.setCollisionOn(true);
+                            index = i;
+                        }
+                    }
+                    case SOUTH -> {
+                        entity.getSolidArea().y += entity.getSpeed();
+                        if (entity.getSolidArea().intersects(target.getSolidArea())) {
+                            entity.setCollisionOn(true);
+                            index = i;
+                        }
+                    }
+                    case WEST -> {
+                        entity.getSolidArea().x -= entity.getSpeed();
+                        if (entity.getSolidArea().intersects(target.getSolidArea())) {
+                            entity.setCollisionOn(true);
+                            index = i;
+                        }
+                    }
+                    case EAST -> {
+                        entity.getSolidArea().x += entity.getSpeed();
+                        if (entity.getSolidArea().intersects(target.getSolidArea())) {
+                            entity.setCollisionOn(true);
+                            index = i;
+                        }
+                    }
+                }
+                // RESTART THE DEFAULT SOLID AREA
+                // FOR ENTITY
+                entity.getSolidArea().x = entity.getSolidArea_Default_X();
+                entity.getSolidArea().y = entity.getSolidArea_Default_Y();
+                // FOR OBJECTS
+                target.getSolidArea().x = target.getSolidArea_Default_X();
+                target.getSolidArea().y = target.getSolidArea_Default_Y();
+            }
+            i++;
+        }
+
+        return index;
+    }
+
 }

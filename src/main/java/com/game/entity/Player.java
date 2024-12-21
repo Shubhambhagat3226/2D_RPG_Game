@@ -90,7 +90,12 @@ public class Player extends Entity {
                 // CHECK OBJECT COLLISION
                 int objIndex = gp.getChecker().checkObject(this, true);
                 pickUpObject(objIndex);
-            }else {
+
+                // CHECK NPC COLLISION
+                int npcIndex = gp.getChecker().checkEntity(this, gp.getNpc());
+                interactNPC(npcIndex);
+
+            } else {
                 standCounter++;
                 if (standCounter == 20) {
                     spiritNum = 1;
@@ -133,6 +138,12 @@ public class Player extends Entity {
     public void pickUpObject(int i) {
         if (i != 999) {
 
+        }
+    }
+    // INTERACTION WITH NPC
+    public void interactNPC(int i) {
+        if (i != 999) {
+            System.out.println("You are hitting the npc!");
         }
     }
 
