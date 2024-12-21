@@ -19,6 +19,7 @@ public class Entity {
 
     protected int spiritCounter = 0;
     protected int spiritNum = 1;
+    protected int actionCounter = 0;
 
     // INVISIBLE AREA FOR CHECK COLLISION
     protected Rectangle solidArea;
@@ -28,6 +29,84 @@ public class Entity {
     public Entity(GamePanel gp) {
         this.gp = gp;
         solidArea = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+    }
+
+    // SET-ACTION DEFINE IN SUN-CLASS
+    public void setAction() {}
+
+    // UPDATE METHOD DEFAULT FOR ENTITY
+    public void update() {
+        setAction();
+
+        collisionOn = false;
+        gp.getChecker().checkTile(this);
+        // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
+        if (!collisionOn) {
+            switch (direction) {
+                case NORTH -> worldY -= speed;
+                case SOUTH -> worldY += speed;
+                case WEST  -> worldX -= speed;
+                case EAST  -> worldX += speed;
+            }
+        }
+
+        // TO CHANGE FROM OTHER IMAGE
+        spiritCounter++;
+        if (spiritCounter > 12) {
+            if (spiritNum == 1) {
+                spiritNum = 2;
+            } else {
+                spiritNum = 1;
+            }
+            spiritCounter = 0;
+        }
+    }
+    // DRAW METHOD BY DEFAULT
+    public void draw(Graphics2D g2) {
+        int screenX = worldX - gp.getPlayer().getWorldX() + gp.getPlayer().getScreenX();
+        int screenY = worldY - gp.getPlayer().getWorldY() + gp.getPlayer().getScreenY();
+
+        if (worldX + CommonConstant.TILE_SIZE > gp.getPlayer().getWorldX() - gp.getPlayer().getScreenX() &&
+                worldX - CommonConstant.TILE_SIZE < gp.getPlayer().getWorldX() + gp.getPlayer().getScreenX() &&
+                worldY + CommonConstant.TILE_SIZE > gp.getPlayer().getWorldY() - gp.getPlayer().getScreenY() &&
+                worldY - CommonConstant.TILE_SIZE < gp.getPlayer().getWorldY() + gp.getPlayer().getScreenY() ) {
+
+            BufferedImage image  = switch (direction) {
+                case NORTH -> {
+                    if (spiritNum == 1) {
+                        yield  up_1;
+                    } else if (spiritNum == 2) {
+                        yield  up_2;
+                    }  else yield null; // or some default value
+                }
+                case SOUTH -> {
+                    if (spiritNum == 1) {
+                        yield  down_1;
+                    }
+                    if (spiritNum == 2) {
+                        yield  down_2;
+                    } else yield null; // or some default value
+                }
+                case WEST -> {
+                    if (spiritNum == 1) {
+                        yield  left_1;
+                    }
+                    if (spiritNum == 2) {
+                        yield  left_2;
+                    } else yield null; // or some default value
+                }
+                case EAST -> {
+                    if (spiritNum == 1) {
+                        yield  right_1;
+                    }
+                    if (spiritNum == 2) {
+                        yield  right_2;
+                    } else yield null; // or some default value
+                }
+                default -> null;
+            };
+            g2.drawImage(image, screenX, screenY, null);
+        }
     }
 
     public BufferedImage setImage(String imagePath) {
@@ -48,4 +127,7 @@ public class Entity {
 
     public boolean isCollisionOn() {return collisionOn;}
     public void setCollisionOn(boolean collisionOn) {this.collisionOn = collisionOn;}
+
+    public void setWorldX(int worldX) {this.worldX = worldX;}
+    public void setWorldY(int worldY) {this.worldY = worldY;}
 }

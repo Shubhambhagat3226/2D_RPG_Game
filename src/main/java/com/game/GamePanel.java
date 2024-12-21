@@ -2,6 +2,7 @@ package com.game;
 
 import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
+import com.game.entity.Entity;
 import com.game.entity.Player;
 import com.game.event_handler.KeyHandler;
 import com.game.object.SuperObject;
@@ -26,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
     // ENTITY AND OBJECTS
     private final Player player;
     private SuperObject[] objects;
+    private Entity[] npc;
 
     // GAME STATE
     private GameState gameState;
@@ -57,10 +59,13 @@ public class GamePanel extends JPanel implements Runnable{
         player = new Player(this, keyH);
         // OBJECT ELEMENT
         objects = new SuperObject[10];
+        // NPC
+        npc = new Entity[10];
     }
 
     public void setupObject() {
         aSetter.setObject();
+        aSetter.setNPC();
         playMusic(0);
         gameState = GameState.PLAY;
     }
@@ -101,7 +106,16 @@ public class GamePanel extends JPanel implements Runnable{
     public void update() {
 
         switch (gameState) {
-            case PLAY -> player.update();
+            case PLAY -> {
+                // PLAYER
+                player.update();
+                // NPC
+                for (Entity entity: npc) {
+                    if (entity != null) {
+                        entity.update();
+                    }
+                }
+            }
             case PAUSE -> { }
         }
 
@@ -125,6 +139,13 @@ public class GamePanel extends JPanel implements Runnable{
         for (SuperObject obj : objects) {
             if (obj != null) {
                 obj.draw(g2, this);
+            }
+        }
+
+        // NPC
+        for (Entity npc : npc) {
+            if (npc != null) {
+                npc.draw(g2);
             }
         }
 
@@ -167,6 +188,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Sound getMusic() {return music;}
     public UI getUi() {return ui;}
     public GameState getGameState() {return gameState;}
+    public Entity[] getNpc() {return npc;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }

@@ -23,7 +23,7 @@ public class TileManager {
         map = new int[CommonConstant.MAX_WORLD_ROW][CommonConstant.MAX_WORLD_COL];
 
        loadTileImages();
-       loadMap("/maps/Map/world01.txt");
+       loadMap("/maps/Map/worldV2.txt");
     }
 
     // LOAD THE TILES
