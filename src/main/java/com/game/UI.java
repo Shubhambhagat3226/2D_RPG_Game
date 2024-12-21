@@ -14,14 +14,13 @@ public class UI {
     private String message = "";
     private int messageCounter = 0;
     private boolean gameFinished;
-    private double playTime;
-    private DecimalFormat dFormat;
+    private String currentDialogue = "";
+
 
     public UI(GamePanel gp) {
         this.gp = gp;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
-        dFormat = new DecimalFormat("#0.00");
     }
 
     // SET MESSAGE THAT WE HAVE TO SHOW
@@ -44,6 +43,9 @@ public class UI {
             case PAUSE -> {
                 drawPauseScreen();
             }
+            case DIALOGUE -> {
+                drawDialogueScreen();
+            }
         }
     }
     // DRAW PAUSE SCREEN
@@ -58,6 +60,27 @@ public class UI {
     private int getX_For_CenteredText(String text) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return CommonConstant.SCREEN_WIDTH/2 - length/2;
+    }
+
+    // DRAW DIALOGUE STATE
+    public void drawDialogueScreen() {
+        // WINDOW
+        int x      = CommonConstant.TILE_SIZE*2;
+        int y      = CommonConstant.TILE_SIZE/2;
+        int width  = CommonConstant.SCREEN_WIDTH - (CommonConstant.TILE_SIZE*4);
+        int height = CommonConstant.TILE_SIZE*4;
+
+        drawSubWindow(x, y, width, height);
+    }
+    public void drawSubWindow(int x, int y, int width, int height) {
+        Color c = new Color(0,0,0, 210);
+        g2.setColor(c);
+        g2.fillRoundRect(x, y, width, height, 35, 35);
+
+        c = new Color(225, 255, 255);
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
 
     // SETTER METHODS

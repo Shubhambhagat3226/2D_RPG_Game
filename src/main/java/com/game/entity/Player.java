@@ -1,10 +1,7 @@
 package com.game.entity;
 
 import com.game.GamePanel;
-import com.game.constants.CommonConstant;
-import com.game.constants.Direction;
-import com.game.constants.ImageUtility;
-import com.game.constants.ObjectName;
+import com.game.constants.*;
 import com.game.event_handler.KeyHandler;
 
 import java.awt.*;
@@ -132,6 +129,7 @@ public class Player extends Entity {
     // INTERACTION WITH NPC
     public void interactNPC(int i) {
         if (i != 999) {
+            gp.setGameState(GameState.DIALOGUE);
             System.out.println("You are hitting the npc!");
         }
     }
