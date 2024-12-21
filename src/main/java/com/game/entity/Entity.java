@@ -22,6 +22,7 @@ public class Entity {
     protected int actionCounter = 0;
 
     protected String[] dialogue;
+    protected int dialogueIndex = 0;
 
     // INVISIBLE AREA FOR CHECK COLLISION
     protected Rectangle solidArea;
