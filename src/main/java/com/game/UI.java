@@ -69,8 +69,12 @@ public class UI {
         int y      = CommonConstant.TILE_SIZE/2;
         int width  = CommonConstant.SCREEN_WIDTH - (CommonConstant.TILE_SIZE*4);
         int height = CommonConstant.TILE_SIZE*4;
-
         drawSubWindow(x, y, width, height);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32));
+        x += CommonConstant.TILE_SIZE;
+        y += CommonConstant.TILE_SIZE;
+        g2.drawString(currentDialogue, x, y);
     }
     public void drawSubWindow(int x, int y, int width, int height) {
         Color c = new Color(0,0,0, 210);
@@ -85,4 +89,5 @@ public class UI {
 
     // SETTER METHODS
     public void setGameFinished(boolean gameFinished) {this.gameFinished = gameFinished;}
+    public void setCurrentDialogue(String currentDialogue) {this.currentDialogue = currentDialogue;}
 }

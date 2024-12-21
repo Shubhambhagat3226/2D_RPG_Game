@@ -21,6 +21,8 @@ public class Entity {
     protected int spiritNum = 1;
     protected int actionCounter = 0;
 
+    protected String[] dialogue;
+
     // INVISIBLE AREA FOR CHECK COLLISION
     protected Rectangle solidArea;
     protected int solidArea_Default_X, solidArea_Default_Y;
@@ -30,6 +32,9 @@ public class Entity {
         this.gp = gp;
         solidArea = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
     }
+
+    // SPEAK
+    public void speak() {}
 
     // SET-ACTION DEFINE IN SUN-CLASS
     public void setAction() {}

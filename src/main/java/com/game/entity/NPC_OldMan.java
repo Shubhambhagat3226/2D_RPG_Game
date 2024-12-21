@@ -13,6 +13,7 @@ public class NPC_OldMan extends Entity{
         speed     = 1;
 
         loadImage();
+        setDialogue();
     }
 
     private void loadImage() {
@@ -24,6 +25,12 @@ public class NPC_OldMan extends Entity{
         left_2     = setImage(ImageUtility.OLD_MAN_LEFT_2);
         right_1    = setImage(ImageUtility.OLD_MAN_RIGHT_1);
         right_2    = setImage(ImageUtility.OLD_MAN_RIGHT_2);
+    }
+
+    private void setDialogue() {
+        dialogue = new String[5];
+
+        dialogue[0] = "Hello, lad!";
     }
 
     @Override
@@ -46,5 +53,10 @@ public class NPC_OldMan extends Entity{
 
             actionCounter=0;
         }
+    }
+
+    @Override
+    public void speak() {
+        gp.getUi().setCurrentDialogue(dialogue[0]);
     }
 }
