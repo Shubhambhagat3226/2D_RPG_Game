@@ -1,6 +1,7 @@
 package com.game;
 
 import com.game.constants.CommonConstant;
+import com.game.constants.Direction;
 import com.game.entity.Entity;
 import com.game.object.SuperObject;
 
@@ -28,7 +29,6 @@ public class CollisionChecker {
                 entity_Top_Row = (entity_Top_WorldY - entity.getSpeed()) / CommonConstant.TILE_SIZE;
                 tile1 = gp.getTileM().getMap()[entity_Top_Row][entity_Left_Col];
                 tile2 = gp.getTileM().getMap()[entity_Top_Row][entity_Right_Col];
-
                 if (gp.getTileM().getTiles()[tile1].isCollision()
                         || gp.getTileM().getTiles()[tile2].isCollision()) {
                     entity.setCollisionOn(true);

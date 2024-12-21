@@ -1,6 +1,7 @@
 package com.game.tile;
 
 import com.game.GamePanel;
+import com.game.UtilityTool;
 import com.game.constants.CommonConstant;
 import com.game.constants.ImageUtility;
 
@@ -12,8 +13,8 @@ import java.io.InputStreamReader;
 
 public class TileManager {
     private final GamePanel gp;
-    private Tile[] tiles;
-    private int map[][];
+    private final Tile[] tiles;
+    private final int[][] map;
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
@@ -30,10 +31,10 @@ public class TileManager {
 
         // PLACEHOLDER
         setUp(0, ImageUtility.GRASS_0, false);
-        setUp(1, ImageUtility.WALL, false);
-        setUp(2, ImageUtility.WATER_1, false);
+        setUp(1, ImageUtility.WALL, true);
+        setUp(2, ImageUtility.WATER_1, true);
         setUp(3, ImageUtility.EARTH, false);
-        setUp(4, ImageUtility.TREE, false);
+        setUp(4, ImageUtility.TREE, true);
         setUp(5, ImageUtility.SAND, false);
         setUp(6, ImageUtility.GRASS_0, false);
         setUp(7, ImageUtility.GRASS_0, false);
@@ -75,10 +76,11 @@ public class TileManager {
         setUp(41, ImageUtility.TREE, true);
 
     }
-    public void setUp(int index, BufferedImage image, boolean collision) {
+    public void setUp(int index, String imagePath, boolean collision) {
         tiles[index] = new Tile();
-        tiles[index].image = image;
         tiles[index].collision = collision;
+        tiles[index].image = UtilityTool.setImage(imagePath, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+
     }
 
 

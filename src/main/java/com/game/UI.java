@@ -23,7 +23,7 @@ public class UI {
         this.gp = gp;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80B = new Font("Arial", Font.BOLD, 80);
-        keyImage = ImageUtility.KEY;
+        keyImage = UtilityTool.setImage(ImageUtility.KEY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
         dFormat = new DecimalFormat("#0.00");
     }
 
@@ -68,8 +68,7 @@ public class UI {
         } else {
             g2.setFont(arial_40);
             g2.setColor(Color.WHITE);
-            g2.drawImage(keyImage, CommonConstant.TILE_SIZE / 2, CommonConstant.TILE_SIZE / 2,
-                    CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, null);
+            g2.drawImage(keyImage, CommonConstant.TILE_SIZE / 2, CommonConstant.TILE_SIZE / 2, null);
             g2.drawString("x " + gp.getPlayer().getHasKey(), 74, 65);
 
             // TIMER

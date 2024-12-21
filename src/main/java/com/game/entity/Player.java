@@ -1,6 +1,7 @@
 package com.game.entity;
 
 import com.game.GamePanel;
+import com.game.UtilityTool;
 import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ImageUtility;
@@ -50,14 +51,16 @@ public class Player extends Entity{
 
     // LOAD PLAYERS IMAGES
     private void loadImage() {
-        up_1 = ImageUtility.PLAYER_UP_1;
-        up_2 = ImageUtility.PLAYER_UP_2;
-        down_1 = ImageUtility.PLAYER_DOWN_1;
-        down_2 = ImageUtility.PLAYER_DOWN_2;
-        left_1 = ImageUtility.PLAYER_LEFT_1;
-        left_2 = ImageUtility.PLAYER_LEFT_2;
-        right_1 = ImageUtility.PLAYER_RIGHT_1;
-        right_2 = ImageUtility.PLAYER_RIGHT_2;
+        int width = CommonConstant.TILE_SIZE;
+        int height = CommonConstant.TILE_SIZE;
+        up_1 = UtilityTool.setImage(ImageUtility.PLAYER_UP_1, width, height);
+        up_2 = UtilityTool.setImage(ImageUtility.PLAYER_UP_2, width, height);
+        down_1 = UtilityTool.setImage(ImageUtility.PLAYER_DOWN_1, width, height);
+        down_2 = UtilityTool.setImage(ImageUtility.PLAYER_DOWN_2, width, height);
+        left_1 = UtilityTool.setImage(ImageUtility.PLAYER_LEFT_1, width, height);
+        left_2 = UtilityTool.setImage(ImageUtility.PLAYER_LEFT_2, width, height);
+        right_1 = UtilityTool.setImage(ImageUtility.PLAYER_RIGHT_1, width, height);
+        right_2 = UtilityTool.setImage(ImageUtility.PLAYER_RIGHT_2, width, height);
     }
 
     // UPDATE ALL SETTING FOR PLAYER LIKE --
