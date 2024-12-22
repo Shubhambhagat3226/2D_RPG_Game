@@ -1,6 +1,7 @@
 package com.game;
 
 import com.game.constants.CommonConstant;
+import com.game.constants.ImageUtility;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -15,6 +16,7 @@ public class UI {
     private int messageCounter = 0;
     private boolean gameFinished;
     private String currentDialogue = "";
+    private int commandNum=0;
 
 
     public UI(GamePanel gp) {
@@ -38,6 +40,9 @@ public class UI {
         g2.setColor(Color.WHITE);
 
         switch (gp.getGameState()) {
+            case TITLE -> {
+                drawTitleScreen();
+            }
             case PLAY -> {
                 // DO PLAY-STATE STUFF
             }
@@ -48,6 +53,58 @@ public class UI {
                 drawDialogueScreen();
             }
         }
+    }
+    //DRAW TITLE-SCREEN
+    private void drawTitleScreen() {
+        // BACKGROUND COLOR
+        g2.setColor(new Color(0, 0, 0));
+        g2.fillRect(0, 0, CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT);
+        // TITLE NAME
+        g2.setFont(ancientFont.deriveFont(Font.BOLD, 96F));
+        String text = "Blue-Boy Adventure";
+        int x = getX_For_CenteredText(text);
+        int y = CommonConstant.TILE_SIZE*3;
+        // SHADOW TEXT
+        g2.setColor(Color.DARK_GRAY);
+        g2.drawString(text, x+5, y+5);
+        // MAIN TEXT
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x, y);
+
+        // BLUE-BOY IMAGE
+        x = CommonConstant.SCREEN_WIDTH/2 - CommonConstant.TILE_SIZE;
+        y += CommonConstant.TILE_SIZE*2;
+        g2.drawImage(UtilityTool.setImage(ImageUtility.PLAYER_DOWN_1,
+                        CommonConstant.TILE_SIZE*2,
+                        CommonConstant.TILE_SIZE*2),
+                     x, y, null);
+
+        // MENU
+        g2.setFont(maruMonica.deriveFont(Font.BOLD, 42F));
+        text = "NEW GAME";
+        x = getX_For_CenteredText(text);
+        y += (int) (CommonConstant.TILE_SIZE*3.5);
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x-CommonConstant.TILE_SIZE, y);
+        }
+
+        text = "LOAD GAME";
+        x = getX_For_CenteredText(text);
+        y += CommonConstant.TILE_SIZE;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x-CommonConstant.TILE_SIZE, y);
+        }
+
+        text = "QUIT";
+        x = getX_For_CenteredText(text);
+        y += CommonConstant.TILE_SIZE;
+        g2.drawString(text, x, y);
+        if (commandNum == 2) {
+            g2.drawString(">", x-CommonConstant.TILE_SIZE, y);
+        }
+
     }
     // DRAW PAUSE SCREEN
     private void drawPauseScreen() {

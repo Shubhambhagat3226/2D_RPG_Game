@@ -67,7 +67,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setObject();
         aSetter.setNPC();
         playMusic(0);
-        gameState = GameState.PLAY;
+        gameState = GameState.TITLE;
     }
 
     // DO FPS
@@ -132,28 +132,37 @@ public class GamePanel extends JPanel implements Runnable{
             drawStart = System.nanoTime();
         }
 
-        // TILE
-        tileM.draw(g2);
-
-        // OBJECT ITEMS
-        for (SuperObject obj : objects) {
-            if (obj != null) {
-                obj.draw(g2, this);
-            }
+        // TITLE
+        if (gameState == GameState.TITLE) {
+            ui.draw(g2);
         }
+        // OTHER
+        else {
 
-        // NPC
-        for (Entity npc : npc) {
-            if (npc != null) {
-                npc.draw(g2);
+            // TILE
+            tileM.draw(g2);
+
+            // OBJECT ITEMS
+            for (SuperObject obj : objects) {
+                if (obj != null) {
+                    obj.draw(g2, this);
+                }
             }
+
+            // NPC
+            for (Entity npc : npc) {
+                if (npc != null) {
+                    npc.draw(g2);
+                }
+            }
+
+            // PLAYER
+            player.draw(g2);
+
+            // DRAW UI
+            ui.draw(g2);
+
         }
-
-        // PLAYER
-        player.draw(g2);
-
-        // DRAW UI
-        ui.draw(g2);
 
         // DEBUG
         if (keyH.isCheckDrawTime()) {
