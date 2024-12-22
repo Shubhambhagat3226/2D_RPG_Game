@@ -4,6 +4,7 @@ import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
 import com.game.entity.Entity;
 import com.game.entity.Player;
+import com.game.event_handler.EventHandler;
 import com.game.event_handler.KeyHandler;
 import com.game.object.SuperObject;
 import com.game.sound.Sound;
@@ -23,6 +24,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final Sound music;
     private final Sound se;
     private final UI ui;
+    private final EventHandler eHandler;
 
     // ENTITY AND OBJECTS
     private final Player player;
@@ -53,6 +55,8 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter = new AssetSetter(this);
         // UI
         ui = new UI(this);
+        // EVENT-HANDLER
+        eHandler = new EventHandler(this);
 
         // ENTITY AND OBJECT INITIALIZE--
         // PLAYER SET-UP
@@ -66,7 +70,6 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupObject() {
         aSetter.setObject();
         aSetter.setNPC();
-//        playMusic(0);
         gameState = GameState.TITLE;
     }
 
@@ -198,6 +201,7 @@ public class GamePanel extends JPanel implements Runnable{
     public UI getUi() {return ui;}
     public GameState getGameState() {return gameState;}
     public Entity[] getNpc() {return npc;}
+    public EventHandler geteHandler() {return eHandler;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
