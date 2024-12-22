@@ -20,8 +20,8 @@ public class EventHandler {
     }
 
     public void checkEvent() {
-        if (hit(26, 16, Direction.EAST)) {damagePit(GameState.DIALOGUE);}
-
+        if (hit(26, 16, Direction.EAST))  {damagePit(GameState.DIALOGUE);}
+        if (hit(23, 12, Direction.NORTH)) {healingPool(GameState.DIALOGUE);}
     }
     // CHECK IF PLAYER HIT THE EVENT
     public boolean hit(int eventCol, int eventRow, Direction reqDirection) {
@@ -52,5 +52,14 @@ public class EventHandler {
         gp.getUi().setCurrentDialogue("You fall into a pit!");
         gp.getPlayer().setLife(gp.getPlayer().getLife() - 1);
     }
+    // HEALING OCCUR IF HIT
+    public void healingPool(GameState gameState) {
+        if (gp.getKeyH().isEnteredPressed()) {
+            gp.setGameState(gameState);
+            gp.getUi().setCurrentDialogue("You drink the water.\nYour life has been recovered.");
+            gp.getPlayer().setLife(gp.getPlayer().getMaxLife());
+        }
+    }
+
 
 }

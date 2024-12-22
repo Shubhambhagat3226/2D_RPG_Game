@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final Sound music;
     private final Sound se;
     private final UI ui;
-    private final EventHandler eHandler;
+    private final EventHandler eventH;
 
     // ENTITY AND OBJECTS
     private final Player player;
@@ -56,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable{
         // UI
         ui = new UI(this);
         // EVENT-HANDLER
-        eHandler = new EventHandler(this);
+        eventH = new EventHandler(this);
 
         // ENTITY AND OBJECT INITIALIZE--
         // PLAYER SET-UP
@@ -201,7 +201,8 @@ public class GamePanel extends JPanel implements Runnable{
     public UI getUi() {return ui;}
     public GameState getGameState() {return gameState;}
     public Entity[] getNpc() {return npc;}
-    public EventHandler geteHandler() {return eHandler;}
+    public EventHandler getEventH() {return eventH;}
+    public KeyHandler getKeyH() {return keyH;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }

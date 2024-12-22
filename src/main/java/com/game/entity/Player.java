@@ -92,7 +92,9 @@ public class Player extends Entity {
                 interactNPC(npcIndex);
 
                 // CHECK EVENT
-                gp.geteHandler().checkEvent();
+                gp.getEventH().checkEvent();
+
+                keyH.setEnteredPressed(false);
 
                 // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
                 if (!collisionOn) {
@@ -141,7 +143,7 @@ public class Player extends Entity {
                 gp.getNpc()[i].speak();
             }
         }
-        keyH.setEnteredPressed(false);
+
     }
 
     // DRAW PLAYER IMAGE
