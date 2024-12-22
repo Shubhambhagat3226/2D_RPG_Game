@@ -8,6 +8,6 @@ import com.game.constants.ObjectName;
 public class OBJ_BOOTS extends SuperObject{
     public OBJ_BOOTS() {
         name = ObjectName.BOOTS;
-        image = UtilityTool.setImage(ImageUtility.BOOTS, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        image = getImage(ImageUtility.BOOTS);
     }
 }

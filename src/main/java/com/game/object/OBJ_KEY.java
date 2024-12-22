@@ -8,6 +8,6 @@ import com.game.constants.ObjectName;
 public class OBJ_KEY extends SuperObject{
     public OBJ_KEY() {
         name = ObjectName.KEY;
-        image = UtilityTool.setImage(ImageUtility.KEY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        image = getImage(ImageUtility.KEY);
     }
 }

@@ -8,7 +8,7 @@ import com.game.constants.ObjectName;
 public class OBJ_CHEST extends SuperObject{
     public OBJ_CHEST() {
         name = ObjectName.CHEST;
-        image = UtilityTool.setImage(ImageUtility.CHEST, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        image = getImage(ImageUtility.CHEST);
         collision = true;
     }
 }

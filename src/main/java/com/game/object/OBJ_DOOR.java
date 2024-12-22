@@ -8,7 +8,7 @@ import com.game.constants.ObjectName;
 public class OBJ_DOOR extends SuperObject{
     public OBJ_DOOR() {
         name = ObjectName.DOOR;
-        image = UtilityTool.setImage(ImageUtility.WOODEN_DOOR, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        image = getImage(ImageUtility.WOODEN_DOOR);
         collision = true;
     }
 }

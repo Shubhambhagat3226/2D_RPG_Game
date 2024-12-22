@@ -2,7 +2,7 @@ package com.game.constants;
 
 public class ImageUtility {
     // PLAYER IMAGES
-    public static final String  PLAYER_UP_1   = "/Player/Walking sprites/boy_up_1.png";
+    public static final String PLAYER_UP_1    = "/Player/Walking sprites/boy_up_1.png";
     public static final String PLAYER_UP_2    = "/Player/Walking sprites/boy_up_2.png";
     public static final String PLAYER_DOWN_1  = "/Player/Walking sprites/boy_down_1.png";
     public static final String PLAYER_DOWN_2  = "/Player/Walking sprites/boy_down_2.png";
@@ -10,6 +10,12 @@ public class ImageUtility {
     public static final String PLAYER_LEFT_2  = "/Player/Walking sprites/boy_left_2.png";
     public static final String PLAYER_RIGHT_1 = "/Player/Walking sprites/boy_right_1.png";
     public static final String PLAYER_RIGHT_2 = "/Player/Walking sprites/boy_right_2.png";
+
+    // HEART
+    public static final String HEART_BLANK = "Object/heart_blank.png";
+    public static final String HEART_FULL  = "Object/heart_full.png";
+    public static final String HEART_HALF  = "Object/heart_half.png";
+
 
     // NPC
     public static final String OLD_MAN_UP_1    = "/NPC/oldman_up_1.png";
