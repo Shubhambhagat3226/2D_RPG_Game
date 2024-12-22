@@ -20,7 +20,8 @@ public class EventHandler {
     }
 
     public void checkEvent() {
-        if (hit(26, 16, Direction.EAST))  {damagePit(GameState.DIALOGUE);}
+//        if (hit(26, 16, Direction.EAST))  {damagePit(GameState.DIALOGUE);}
+        if (hit(26, 16, Direction.EAST))  {teleport(GameState.DIALOGUE);}
         if (hit(23, 12, Direction.NORTH)) {healingPool(GameState.DIALOGUE);}
     }
     // CHECK IF PLAYER HIT THE EVENT
@@ -60,6 +61,12 @@ public class EventHandler {
             gp.getPlayer().setLife(gp.getPlayer().getMaxLife());
         }
     }
-
+    // TELEPORT OCCUR
+    public void teleport(GameState gameState) {
+        gp.setGameState(gameState);
+        gp.getUi().setCurrentDialogue("Teleport!");
+        gp.getPlayer().setWorldX(CommonConstant.TILE_SIZE * 37);
+        gp.getPlayer().setWorldY(CommonConstant.TILE_SIZE * 10);
+    }
 
 }
