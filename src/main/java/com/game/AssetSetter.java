@@ -13,14 +13,24 @@ public class AssetSetter {
     public void setObject() {
         Entity[] obj = gp.getObjects();
 
+        obj[0] = setEntity(new OBJ_DOOR(gp), 21, 22);
+        obj[1] = setEntity(new OBJ_DOOR(gp), 23, 25);
+    }
+
+    private Entity setEntity(Entity e, int x, int y) {
+        e.setWorldX(CommonConstant.TILE_SIZE * x);
+        e.setWorldY(CommonConstant.TILE_SIZE * y);
+        return e;
     }
 
     public void setNPC() {
         Entity[] npc = gp.getNpc();
-        int point = CommonConstant.TILE_SIZE;
 
-        npc[0] = new NPC_OldMan(gp);
-        npc[0].setWorldX(point * 21);
-        npc[0].setWorldY(point * 21);
+        npc[0] = setEntity(new NPC_OldMan(gp), 21, 21);
+        npc[1] = setEntity(new NPC_OldMan(gp), 11, 21);
+        npc[2] = setEntity(new NPC_OldMan(gp), 31, 21);
+        npc[3] = setEntity(new NPC_OldMan(gp), 21, 11);
+        npc[4] = setEntity(new NPC_OldMan(gp), 21, 31);
+
     }
 }

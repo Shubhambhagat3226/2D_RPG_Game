@@ -36,7 +36,6 @@ public class Entity {
     // OBJECT THING
     protected ObjectName name;
 
-    public Entity() {}
     public Entity(GamePanel gp) {
         this.gp = gp;
         solidArea = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);

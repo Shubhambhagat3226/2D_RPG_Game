@@ -12,6 +12,8 @@ import com.game.tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -148,22 +150,36 @@ public class GamePanel extends JPanel implements Runnable{
             // TILE
             tileM.draw(g2);
 
-            // OBJECT ITEMS
-            for (Entity obj : objects) {
-                if (obj != null) {
-                    obj.draw(g2);
+            // ADD ALL ENTITIES IN LIST
+            // ADD PLAYER
+            entities.add(player);
+            // ADD NPC
+            for (int i = 0; i < npc.length; i++) {
+                if (npc[i] != null) {
+                    entities.add(npc[i]);
                 }
             }
-
-            // NPC
-            for (Entity npc : npc) {
-                if (npc != null) {
-                    npc.draw(g2);
+            // ADD OBJECTS
+            for (int i = 0; i < objects.length; i++) {
+                if (objects[i] != null) {
+                    entities.add(objects[i]);
                 }
             }
-
-            // PLAYER
-            player.draw(g2);
+            // SORT
+            Collections.sort(entities, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity o1, Entity o2) {
+                    return Integer.compare(o1.getWorldY(), o2.getWorldY());
+                }
+            });
+            // DRAW ENTITIES
+            for (int i = 0; i < entities.size(); i++) {
+                entities.get(i).draw(g2);
+            }
+            System.out.println(entities.size());
+            // EMPTY THE LIST
+            entities.clear();
+            System.out.println(entities.size());
 
             // DRAW UI
             ui.draw(g2);
