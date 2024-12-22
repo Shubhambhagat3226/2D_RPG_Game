@@ -149,7 +149,11 @@ public class UI {
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
 
+    // GETTER METHODS
+    public int getCommandNum() {return commandNum;}
+
     // SETTER METHODS
     public void setGameFinished(boolean gameFinished) {this.gameFinished = gameFinished;}
     public void setCurrentDialogue(String currentDialogue) {this.currentDialogue = currentDialogue;}
+    public void setCommandNum(int commandNum) {this.commandNum = commandNum;}
 }
