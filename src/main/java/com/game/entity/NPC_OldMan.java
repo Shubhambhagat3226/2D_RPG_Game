@@ -1,6 +1,7 @@
 package com.game.entity;
 
 import com.game.GamePanel;
+import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ImageUtility;
 
@@ -40,7 +41,7 @@ public class NPC_OldMan extends Entity{
     public void setAction() {
         actionCounter++;
 
-        if (actionCounter == 120) {
+        if (actionCounter == CommonConstant.FPS*3) {
             Random random = new Random();
             int i = random.nextInt(100); // pick up a number from 1 to 100
 
