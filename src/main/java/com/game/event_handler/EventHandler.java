@@ -9,14 +9,28 @@ import java.awt.*;
 
 public class EventHandler {
     private final GamePanel gp;
-    private Rectangle eventRect;
-    private int eventRectDefaultX, eventRectDefaultY;
+    private EventRect[][] eventRect;
 
     public EventHandler(GamePanel gp) {
         this.gp           = gp;
-        eventRect         = new Rectangle(23, 23, 2, 2);
-        eventRectDefaultX = eventRect.x;
-        eventRectDefaultY = eventRect.y;
+        eventRect = new EventRect[CommonConstant.MAX_WORLD_ROW][CommonConstant.MAX_WORLD_COL];
+
+        int col = 0;
+        int row = 0;
+        while (col < CommonConstant.MAX_WORLD_COL && row < CommonConstant.MAX_WORLD_ROW) {
+            eventRect[col][row]                   = new EventRect(23, 23, 2, 2);
+            eventRect[col][row].x           += CommonConstant.TILE_SIZE * col;
+            eventRect[col][row].y           += CommonConstant.TILE_SIZE * row;
+//            eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
+//            eventRect[col][row].eventRectDefaultY = eventRect[col][row].y;
+
+            col++;
+            if (col == CommonConstant.MAX_WORLD_COL) {
+                row++;
+                col = 0;
+            }
+        }
+
     }
 
     public void checkEvent() {
@@ -25,15 +39,13 @@ public class EventHandler {
         if (hit(23, 12, Direction.NORTH)) {healingPool(GameState.DIALOGUE);}
     }
     // CHECK IF PLAYER HIT THE EVENT
-    public boolean hit(int eventCol, int eventRow, Direction reqDirection) {
+    public boolean hit(int col, int row, Direction reqDirection) {
         boolean hit                      = false;
 
         gp.getPlayer().getSolidArea().x += gp.getPlayer().getWorldX();
         gp.getPlayer().getSolidArea().y += gp.getPlayer().getWorldY();
-        eventRect.x                     += CommonConstant.TILE_SIZE * eventCol;
-        eventRect.y                     += CommonConstant.TILE_SIZE * eventRow;
 
-        if (gp.getPlayer().getSolidArea().intersects(eventRect)) {
+        if (gp.getPlayer().getSolidArea().intersects(eventRect[col][row])) {
             if (gp.getPlayer().getDirection().equals(reqDirection)
                     || reqDirection.equals(Direction.ANY)) {
                 hit = true;
@@ -42,8 +54,8 @@ public class EventHandler {
 
         gp.getPlayer().getSolidArea().x = gp.getPlayer().getSolidArea_Default_X();
         gp.getPlayer().getSolidArea().y = gp.getPlayer().getSolidArea_Default_Y();
-        eventRect.x                     = eventRectDefaultX;
-        eventRect.y                     = eventRectDefaultY;
+//        eventRect[col][row].x           = eventRect[col][row].eventRectDefaultX;
+//        eventRect[col][row].y           = eventRect[col][row].eventRectDefaultY;
 
         return hit;
     }
