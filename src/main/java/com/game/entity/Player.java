@@ -47,14 +47,14 @@ public class Player extends Entity {
 
     // LOAD PLAYERS IMAGES
     private void loadImage() {
-        up_1       = setImage(ImageUtility.PLAYER_UP_1);
-        up_2       = setImage(ImageUtility.PLAYER_UP_2);
-        down_1     = setImage(ImageUtility.PLAYER_DOWN_1);
-        down_2     = setImage(ImageUtility.PLAYER_DOWN_2);
-        left_1     = setImage(ImageUtility.PLAYER_LEFT_1);
-        left_2     = setImage(ImageUtility.PLAYER_LEFT_2);
-        right_1    = setImage(ImageUtility.PLAYER_RIGHT_1);
-        right_2    = setImage(ImageUtility.PLAYER_RIGHT_2);
+        up_1       = getImage(ImageUtility.PLAYER_UP_1);
+        up_2       = getImage(ImageUtility.PLAYER_UP_2);
+        down_1     = getImage(ImageUtility.PLAYER_DOWN_1);
+        down_2     = getImage(ImageUtility.PLAYER_DOWN_2);
+        left_1     = getImage(ImageUtility.PLAYER_LEFT_1);
+        left_2     = getImage(ImageUtility.PLAYER_LEFT_2);
+        right_1    = getImage(ImageUtility.PLAYER_RIGHT_1);
+        right_2    = getImage(ImageUtility.PLAYER_RIGHT_2);
     }
 
     // UPDATE ALL SETTING FOR PLAYER LIKE --

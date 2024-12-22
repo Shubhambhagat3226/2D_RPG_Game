@@ -18,14 +18,14 @@ public class NPC_OldMan extends Entity{
     }
 
     private void loadImage() {
-        up_1       = setImage(ImageUtility.OLD_MAN_UP_1);
-        up_2       = setImage(ImageUtility.OLD_MAN_UP_2);
-        down_1     = setImage(ImageUtility.OLD_MAN_DOWN_1);
-        down_2     = setImage(ImageUtility.OLD_MAN_DOWN_2);
-        left_1     = setImage(ImageUtility.OLD_MAN_LEFT_1);
-        left_2     = setImage(ImageUtility.OLD_MAN_LEFT_2);
-        right_1    = setImage(ImageUtility.OLD_MAN_RIGHT_1);
-        right_2    = setImage(ImageUtility.OLD_MAN_RIGHT_2);
+        up_1       = getImage(ImageUtility.OLD_MAN_UP_1);
+        up_2       = getImage(ImageUtility.OLD_MAN_UP_2);
+        down_1     = getImage(ImageUtility.OLD_MAN_DOWN_1);
+        down_2     = getImage(ImageUtility.OLD_MAN_DOWN_2);
+        left_1     = getImage(ImageUtility.OLD_MAN_LEFT_1);
+        left_2     = getImage(ImageUtility.OLD_MAN_LEFT_2);
+        right_1    = getImage(ImageUtility.OLD_MAN_RIGHT_1);
+        right_2    = getImage(ImageUtility.OLD_MAN_RIGHT_2);
     }
 
     private void setDialogue() {

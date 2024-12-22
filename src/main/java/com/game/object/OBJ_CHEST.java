@@ -1,14 +1,13 @@
 package com.game.object;
 
-import com.game.UtilityTool;
-import com.game.constants.CommonConstant;
 import com.game.constants.ImageUtility;
 import com.game.constants.ObjectName;
+import com.game.entity.Entity;
 
-public class OBJ_CHEST extends SuperObject{
+public class OBJ_CHEST extends Entity {
     public OBJ_CHEST() {
         name = ObjectName.CHEST;
-        image = getImage(ImageUtility.CHEST);
-        collision = true;
+        down_1 = getImage(ImageUtility.CHEST);
+        collisionOn = true;
     }
 }

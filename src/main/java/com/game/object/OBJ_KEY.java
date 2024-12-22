@@ -1,13 +1,12 @@
 package com.game.object;
 
-import com.game.UtilityTool;
-import com.game.constants.CommonConstant;
 import com.game.constants.ImageUtility;
 import com.game.constants.ObjectName;
+import com.game.entity.Entity;
 
-public class OBJ_KEY extends SuperObject{
+public class OBJ_KEY extends Entity {
     public OBJ_KEY() {
         name = ObjectName.KEY;
-        image = getImage(ImageUtility.KEY);
+        down_1 = getImage(ImageUtility.KEY);
     }
 }

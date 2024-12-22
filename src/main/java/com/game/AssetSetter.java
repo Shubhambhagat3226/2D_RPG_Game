@@ -11,7 +11,7 @@ public class AssetSetter {
     public AssetSetter(GamePanel gp) {  this.gp = gp;  }
 
     public void setObject() {
-        SuperObject[] obj = gp.getObjects();
+        Entity[] obj = gp.getObjects();
 
     }
 

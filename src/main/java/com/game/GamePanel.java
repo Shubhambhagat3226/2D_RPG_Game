@@ -6,12 +6,12 @@ import com.game.entity.Entity;
 import com.game.entity.Player;
 import com.game.event_handler.EventHandler;
 import com.game.event_handler.KeyHandler;
-import com.game.object.SuperObject;
 import com.game.sound.Sound;
 import com.game.tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -28,8 +28,9 @@ public class GamePanel extends JPanel implements Runnable{
 
     // ENTITY AND OBJECTS
     private final Player player;
-    private SuperObject[] objects;
+    private Entity[] objects;
     private Entity[] npc;
+    ArrayList<Entity> entities;
 
     // GAME STATE
     private GameState gameState;
@@ -62,9 +63,11 @@ public class GamePanel extends JPanel implements Runnable{
         // PLAYER SET-UP
         player = new Player(this, keyH);
         // OBJECT ELEMENT
-        objects = new SuperObject[10];
+        objects = new Entity[10];
         // NPC
         npc = new Entity[10];
+        // ALL ENTITIES
+        entities = new ArrayList<>();
     }
 
     public void setupObject() {
@@ -146,9 +149,9 @@ public class GamePanel extends JPanel implements Runnable{
             tileM.draw(g2);
 
             // OBJECT ITEMS
-            for (SuperObject obj : objects) {
+            for (Entity obj : objects) {
                 if (obj != null) {
-                    obj.draw(g2, this);
+                    obj.draw(g2);
                 }
             }
 
@@ -196,7 +199,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Player getPlayer() { return player; }
     public CollisionChecker getChecker() { return checker; }
     public TileManager getTileM() {  return tileM;  }
-    public SuperObject[] getObjects() {  return objects;  }
+    public Entity[] getObjects() {  return objects;  }
     public Sound getMusic() {return music;}
     public UI getUi() {return ui;}
     public GameState getGameState() {return gameState;}

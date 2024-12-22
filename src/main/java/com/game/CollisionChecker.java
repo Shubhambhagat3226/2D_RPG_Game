@@ -1,9 +1,7 @@
 package com.game;
 
 import com.game.constants.CommonConstant;
-import com.game.constants.Direction;
 import com.game.entity.Entity;
-import com.game.object.SuperObject;
 
 public class CollisionChecker {
     private final GamePanel gp;
@@ -75,7 +73,7 @@ public class CollisionChecker {
     public int checkObject(Entity entity, boolean isPlayer) {
         int index = 999;
         int i=0;
-        for (SuperObject obj : gp.getObjects()) {
+        for (Entity obj : gp.getObjects()) {
             if (obj != null) {
                 // GET ENTITY'S SOLID AREA POSITION
                 entity.getSolidArea().x += entity.getWorldX();
@@ -88,7 +86,7 @@ public class CollisionChecker {
                     case NORTH: {
                         entity.getSolidArea().y -= entity.getSpeed();
                         if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            if (obj.isCollision()) {
+                            if (obj.isCollisionOn()) {
                                 entity.setCollisionOn(true);
                             }
                             if (isPlayer){
@@ -100,7 +98,7 @@ public class CollisionChecker {
                     case SOUTH: {
                         entity.getSolidArea().y += entity.getSpeed();
                         if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            if (obj.isCollision()) {
+                            if (obj.isCollisionOn()) {
                                 entity.setCollisionOn(true);
                             }
                             if (isPlayer){
@@ -112,7 +110,7 @@ public class CollisionChecker {
                     case WEST: {
                         entity.getSolidArea().x -= entity.getSpeed();
                         if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            if (obj.isCollision()) {
+                            if (obj.isCollisionOn()) {
                                 entity.setCollisionOn(true);
                             }
                             if (isPlayer){
@@ -124,7 +122,7 @@ public class CollisionChecker {
                     case EAST: {
                         entity.getSolidArea().x += entity.getSpeed();
                         if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            if (obj.isCollision()) {
+                            if (obj.isCollisionOn()) {
                                 entity.setCollisionOn(true);
                             }
                             if (isPlayer){
