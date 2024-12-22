@@ -12,9 +12,9 @@ public class ImageUtility {
     public static final String PLAYER_RIGHT_2 = "/Player/Walking sprites/boy_right_2.png";
 
     // HEART
-    public static final String HEART_BLANK = "Object/heart_blank.png";
-    public static final String HEART_FULL  = "Object/heart_full.png";
-    public static final String HEART_HALF  = "Object/heart_half.png";
+    public static final String HEART_BLANK = "/Object/heart_blank.png";
+    public static final String HEART_FULL  = "/Object/heart_full.png";
+    public static final String HEART_HALF  = "/Object/heart_half.png";
 
 
     // NPC

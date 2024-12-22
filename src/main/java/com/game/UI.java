@@ -2,14 +2,17 @@ package com.game;
 
 import com.game.constants.CommonConstant;
 import com.game.constants.ImageUtility;
+import com.game.object.OBJ_HEART;
+import com.game.object.SuperObject;
 
 import java.awt.*;
-import java.text.DecimalFormat;
+import java.awt.image.BufferedImage;
 
 public class UI {
 
     private final GamePanel gp;
     private Graphics2D g2;
+    private BufferedImage heartFull, heartHalf, heartBlank;
     private final Font maruMonica, ancientFont;
     private boolean messageOn;
     private String message = "";
@@ -20,9 +23,14 @@ public class UI {
 
 
     public UI(GamePanel gp) {
-        this.gp = gp;
-        maruMonica = UtilityTool.getFont("/font/x12y16pxMaruMonica.ttf");
+        this.gp     = gp;
+        maruMonica  = UtilityTool.getFont("/font/x12y16pxMaruMonica.ttf");
         ancientFont = UtilityTool.getFont("/font/AncientModernTales-a7Po.ttf");
+
+        heartFull   = UtilityTool.setImage(ImageUtility.HEART_FULL, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        heartHalf   = UtilityTool.setImage(ImageUtility.HEART_HALF, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        heartBlank  = UtilityTool.setImage(ImageUtility.HEART_BLANK, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+
     }
 
     // SET MESSAGE THAT WE HAVE TO SHOW
@@ -44,14 +52,28 @@ public class UI {
                 drawTitleScreen();
             }
             case PLAY -> {
-                // DO PLAY-STATE STUFF
+                drawPlayerLife();
             }
             case PAUSE -> {
+                drawPlayerLife();
                 drawPauseScreen();
             }
             case DIALOGUE -> {
+                drawPlayerLife();
                 drawDialogueScreen();
             }
+        }
+    }
+    // PLAYER LIFE
+    private void drawPlayerLife() {
+        int x = CommonConstant.TILE_SIZE/2;
+        int y = CommonConstant.TILE_SIZE/2;
+        int i = 0;
+
+        while (i < gp.getPlayer().getMaxLife()/2) {
+            g2.drawImage(heartBlank, x, y, null);
+            i++;
+            x += CommonConstant.TILE_SIZE;
         }
     }
     //DRAW TITLE-SCREEN
