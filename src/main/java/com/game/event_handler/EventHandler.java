@@ -8,7 +8,6 @@ import com.game.constants.GameState;
 public class EventHandler {
     private final GamePanel gp;
     private EventRect[][] eventRect;
-    private int previousX, previousY;
 
     public EventHandler(GamePanel gp) {
         this.gp   = gp;
@@ -34,6 +33,7 @@ public class EventHandler {
 
     public void checkEvent() {
         if (hit(26, 16, Direction.EAST))  {damagePit(26, 16, GameState.DIALOGUE);}
+        if (hit(23, 12, Direction.ANY))  {damagePit(23, 12, GameState.DIALOGUE);}
 //        if (hit(26, 16, Direction.EAST))  {teleport(GameState.DIALOGUE);}
         if (hit(23, 12, Direction.NORTH)) {healingPool(23, 12, GameState.DIALOGUE);}
     }
@@ -49,14 +49,15 @@ public class EventHandler {
     // CHECK IF PLAYER HIT THE EVENT
     public boolean hit(int col, int row, Direction reqDirection) {
         boolean hit                      = false;
-        eventDone(col,row);
+
         gp.getPlayer().getSolidArea().x += gp.getPlayer().getWorldX();
         gp.getPlayer().getSolidArea().y += gp.getPlayer().getWorldY();
-
+//            eventRect[col][row].x           += CommonConstant.TILE_SIZE * col;
+//            eventRect[col][row].y           += CommonConstant.TILE_SIZE * row;
+        eventDone(col,row);
         if (gp.getPlayer().getSolidArea().intersects(eventRect[col][row]) &&
             !eventRect[col][row].eventDone) {
-            if (gp.getPlayer().getDirection().equals(reqDirection)
-                    || reqDirection.equals(Direction.ANY)) {
+            if (reqDirection.equals(Direction.ANY) || gp.getPlayer().getDirection().equals(reqDirection)) {
                 hit = true;
             }
         }
