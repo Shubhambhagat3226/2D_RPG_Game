@@ -9,7 +9,7 @@ public class UI {
 
     private final GamePanel gp;
     private Graphics2D g2;
-    private final Font arial_40, arial_80B;
+    private final Font maruMonica, ancientFont;
     private boolean messageOn;
     private String message = "";
     private int messageCounter = 0;
@@ -19,8 +19,8 @@ public class UI {
 
     public UI(GamePanel gp) {
         this.gp = gp;
-        arial_40 = new Font("Arial", Font.PLAIN, 40);
-        arial_80B = new Font("Arial", Font.BOLD, 80);
+        maruMonica = UtilityTool.getFont("/font/x12y16pxMaruMonica.ttf");
+        ancientFont = UtilityTool.getFont("/font/AncientModernTales-a7Po.ttf");
     }
 
     // SET MESSAGE THAT WE HAVE TO SHOW
@@ -33,7 +33,7 @@ public class UI {
     public void draw(Graphics2D g2) {
         this.g2 = g2;
 
-        g2.setFont(arial_40);
+        g2.setFont(maruMonica);
         g2.setColor(Color.WHITE);
 
         switch (gp.getGameState()) {
@@ -71,7 +71,7 @@ public class UI {
         int height = CommonConstant.TILE_SIZE*4;
         drawSubWindow(x, y, width, height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 28));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         x += CommonConstant.TILE_SIZE;
         y += CommonConstant.TILE_SIZE;
 
