@@ -2,8 +2,6 @@ package com.game;
 
 import com.game.constants.CommonConstant;
 import com.game.constants.ImageUtility;
-import com.game.object.OBJ_HEART;
-import com.game.object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -69,9 +67,25 @@ public class UI {
         int x = CommonConstant.TILE_SIZE/2;
         int y = CommonConstant.TILE_SIZE/2;
         int i = 0;
-
+        gp.getPlayer().setLife(1);
+        // DRAW MAX LIFE
         while (i < gp.getPlayer().getMaxLife()/2) {
             g2.drawImage(heartBlank, x, y, null);
+            i++;
+            x += CommonConstant.TILE_SIZE;
+        }
+        // RESET
+        x = CommonConstant.TILE_SIZE/2;
+        y = CommonConstant.TILE_SIZE/2;
+        i = 0;
+        // DRAW CURRENT LIFE
+        while (i < gp.getPlayer().getLife()) {
+            if (i%2 == 1) {
+                g2.drawImage(heartFull, x, y, null);
+                i++;
+            } else {
+                g2.drawImage(heartHalf, x,  y, null);
+            }
             i++;
             x += CommonConstant.TILE_SIZE;
         }

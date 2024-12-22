@@ -3,14 +3,13 @@ package com.game.object;
 import com.game.GamePanel;
 import com.game.UtilityTool;
 import com.game.constants.CommonConstant;
-import com.game.constants.ImageUtility;
 import com.game.constants.ObjectName;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class SuperObject {
-    protected BufferedImage image, image2, image3;
+    protected BufferedImage image;
     protected ObjectName name;
     protected boolean collision;
     protected int worldX, worldY;
