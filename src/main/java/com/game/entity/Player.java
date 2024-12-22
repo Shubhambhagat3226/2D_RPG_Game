@@ -39,6 +39,10 @@ public class Player extends Entity {
         worldY = CommonConstant.TILE_SIZE * 21;
         speed = 4;
         direction = Direction.SOUTH;
+
+        // PLAYER STATUS
+        maxLife = 6;
+        life = maxLife;
     }
 
     // LOAD PLAYERS IMAGES

@@ -29,6 +29,10 @@ public class Entity {
     protected int solidArea_Default_X, solidArea_Default_Y;
     protected boolean collisionOn;
 
+    // CHARACTER STATUS
+    protected int maxLife;
+    protected int life;
+
     public Entity(GamePanel gp) {
         this.gp = gp;
         solidArea = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
@@ -146,6 +150,12 @@ public class Entity {
 
     public boolean isCollisionOn() {return collisionOn;}
     public void setCollisionOn(boolean collisionOn) {this.collisionOn = collisionOn;}
+
+    public int getMaxLife() {return maxLife;}
+    public void setMaxLife(int maxLife) {this.maxLife = maxLife;}
+
+    public int getLife() {return life;}
+    public void setLife(int life) {this.life = life;}
 
     public void setWorldX(int worldX) {this.worldX = worldX;}
     public void setWorldY(int worldY) {this.worldY = worldY;}
