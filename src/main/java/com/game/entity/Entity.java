@@ -19,8 +19,11 @@ public class Entity {
     protected Direction direction = Direction.SOUTH;
 
     protected int spiritCounter = 0;
-    protected int spiritNum = 1;
+    protected int spiritNum     = 1;
     protected int actionCounter = 0;
+
+    protected boolean invincible;
+    protected int invincibleCounter = 0;
 
     protected String[] dialogue;
     protected int dialogueIndex = 0;

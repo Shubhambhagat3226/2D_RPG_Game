@@ -64,7 +64,7 @@ public class Player extends Entity {
     // IMAGES UPDATION
     public void update() {
 
-            if (keyH.isUpPressed() || keyH.isDownPressed() || keyH.isLeftPressed() || keyH.isRightPressed()) {
+        if (keyH.isUpPressed() || keyH.isDownPressed() || keyH.isLeftPressed() || keyH.isRightPressed()) {
 
                 if (keyH.isUpPressed()) {
                     direction = Direction.NORTH;
@@ -93,6 +93,7 @@ public class Player extends Entity {
 
                 // CHECK MONSTER COLLISION
                 int monsterIndex = gp.getChecker().checkEntity(this, gp.getMonster());
+                contactMonster(monsterIndex);
 
                 // CHECK EVENT
                 gp.getEventH().checkEvent();
@@ -119,16 +120,23 @@ public class Player extends Entity {
                     spiritCounter = 0;
                 }
             } else {
-                standCounter++;
+            standCounter++;
 
-                if (standCounter == 14) {
-                    spiritNum = 1;
-                    standCounter=0;
-                }
-
+            if (standCounter == 14) {
+                spiritNum = 1;
+                standCounter=0;
             }
 
+        }
 
+            //  THIS NEEDS TO BE OUTSIDE OF KEY IF STATEMENT
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > CommonConstant.FPS) {
+                invincible        = false;
+                invincibleCounter = 0;
+            }
+        }
 
     }
 
@@ -147,6 +155,15 @@ public class Player extends Entity {
             }
         }
 
+    }
+    // CONTACT MONSTER
+    public void contactMonster(int i) {
+        if (i != 999) {
+            if (!invincible) {
+                this.life -= 1;
+                invincible = true;
+            }
+        }
     }
 
     // DRAW PLAYER IMAGE
@@ -189,6 +206,10 @@ public class Player extends Entity {
 
         g2.drawImage(image, screenX, screenY, null);
 
+        // DEBUG
+        g2.setFont(new Font("Arial", Font.PLAIN, 26));
+        g2.setColor(Color.WHITE);
+        g2.drawString("Invincible: " + invincibleCounter, 10, 400);
     }
 
     // GETTER METHODS
