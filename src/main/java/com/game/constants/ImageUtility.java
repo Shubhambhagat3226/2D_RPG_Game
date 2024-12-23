@@ -72,4 +72,10 @@ public class ImageUtility {
     public static final String BOOTS       = "/Object/boots.png";
     public static final String IRON_DOOR   = "/Object/door_iron.png";
 
+    // MONSTER
+    public static final String GREEN_SLIME_1       = "/Monster/greenslime_down_1.png";
+    public static final String GREEN_SLIME_2       = "/Monster/greenslime_down_2.png";
+    public static final String RED_SLIME_1       = "/Monster/redslime_down_1.png";
+    public static final String RED_SLIME_2       = "/Monster/redslime_down_2.png";
+
 }

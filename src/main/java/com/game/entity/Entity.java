@@ -14,6 +14,7 @@ public class Entity {
     protected int worldX, worldY;
     protected int speed;
 
+    protected int width, height;
     protected BufferedImage up_1, up_2, down_1, down_2, left_1, left_2, right_1, right_2;
     protected Direction direction = Direction.SOUTH;
 
@@ -37,8 +38,10 @@ public class Entity {
     protected ObjectName name;
 
     public Entity(GamePanel gp) {
-        this.gp = gp;
+        this.gp   = gp;
         solidArea = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        width     = CommonConstant.TILE_SIZE;
+        height    = CommonConstant.TILE_SIZE;
     }
 
     // SPEAK
@@ -136,7 +139,7 @@ public class Entity {
     }
 
     public BufferedImage getImage(String imagePath) {
-        return UtilityTool.setImage(imagePath, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        return UtilityTool.setImage(imagePath, width, height);
     }
 
     // GETTER METHOD ONLY

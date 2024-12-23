@@ -6,4 +6,5 @@ public enum ObjectName {
     CHEST,
     BOOTS,
     HEART,
+    GREEN_SLIME,
 }
