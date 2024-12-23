@@ -91,6 +91,9 @@ public class Player extends Entity {
                 int npcIndex = gp.getChecker().checkEntity(this, gp.getNpc());
                 interactNPC(npcIndex);
 
+                // CHECK MONSTER COLLISION
+                int monsterIndex = gp.getChecker().checkEntity(this, gp.getMonster());
+
                 // CHECK EVENT
                 gp.getEventH().checkEvent();
 

@@ -83,53 +83,18 @@ public class CollisionChecker {
                 obj.getSolidArea().y += obj.getWorldY();
 
                 switch (entity.getDirection()) {
-                    case NORTH: {
-                        entity.getSolidArea().y -= entity.getSpeed();
-                        if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            if (obj.isCollisionOn()) {
-                                entity.setCollisionOn(true);
-                            }
-                            if (isPlayer){
-                                index = i;
-                            }
-                        }
-                        break;
+                    case NORTH -> entity.getSolidArea().y -= entity.getSpeed();
+                    case SOUTH -> entity.getSolidArea().y += entity.getSpeed();
+                    case WEST  -> entity.getSolidArea().x -= entity.getSpeed();
+                    case EAST  -> entity.getSolidArea().x += entity.getSpeed();
+                }
+                // COLLIDE
+                if (entity.getSolidArea().intersects(obj.getSolidArea())) {
+                    if (obj.isCollisionOn()) {
+                        entity.setCollisionOn(true);
                     }
-                    case SOUTH: {
-                        entity.getSolidArea().y += entity.getSpeed();
-                        if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            if (obj.isCollisionOn()) {
-                                entity.setCollisionOn(true);
-                            }
-                            if (isPlayer){
-                                index = i;
-                            }
-                        }
-                        break;
-                    }
-                    case WEST: {
-                        entity.getSolidArea().x -= entity.getSpeed();
-                        if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            if (obj.isCollisionOn()) {
-                                entity.setCollisionOn(true);
-                            }
-                            if (isPlayer){
-                                index = i;
-                            }
-                        }
-                        break;
-                    }
-                    case EAST: {
-                        entity.getSolidArea().x += entity.getSpeed();
-                        if (entity.getSolidArea().intersects(obj.getSolidArea())) {
-                            if (obj.isCollisionOn()) {
-                                entity.setCollisionOn(true);
-                            }
-                            if (isPlayer){
-                                index = i;
-                            }
-                        }
-                        break;
+                    if (isPlayer){
+                        index = i;
                     }
                 }
                 // RESTART THE DEFAULT SOLID AREA
@@ -160,33 +125,16 @@ public class CollisionChecker {
                 target.getSolidArea().y += target.getWorldY();
 
                 switch (entity.getDirection()) {
-                    case NORTH -> {
-                        entity.getSolidArea().y -= entity.getSpeed();
-                        if (entity.getSolidArea().intersects(target.getSolidArea())) {
-                            entity.setCollisionOn(true);
-                            index = i;
-                        }
-                    }
-                    case SOUTH -> {
-                        entity.getSolidArea().y += entity.getSpeed();
-                        if (entity.getSolidArea().intersects(target.getSolidArea())) {
-                            entity.setCollisionOn(true);
-                            index = i;
-                        }
-                    }
-                    case WEST -> {
-                        entity.getSolidArea().x -= entity.getSpeed();
-                        if (entity.getSolidArea().intersects(target.getSolidArea())) {
-                            entity.setCollisionOn(true);
-                            index = i;
-                        }
-                    }
-                    case EAST -> {
-                        entity.getSolidArea().x += entity.getSpeed();
-                        if (entity.getSolidArea().intersects(target.getSolidArea())) {
-                            entity.setCollisionOn(true);
-                            index = i;
-                        }
+                    case NORTH -> entity.getSolidArea().y -= entity.getSpeed();
+                    case SOUTH -> entity.getSolidArea().y += entity.getSpeed();
+                    case WEST -> entity.getSolidArea().x -= entity.getSpeed();
+                    case EAST -> entity.getSolidArea().x += entity.getSpeed();
+                }
+                // COLLIDE
+                if (entity.getSolidArea().intersects(target.getSolidArea())) {
+                    if (target != entity) {
+                        entity.setCollisionOn(true);
+                        index = i;
                     }
                 }
                 // RESTART THE DEFAULT SOLID AREA
