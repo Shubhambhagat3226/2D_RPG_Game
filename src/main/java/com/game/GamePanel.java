@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final Player player;
     private Entity[] objects;
     private Entity[] npc;
+    private Entity[] monster;
     ArrayList<Entity> entities;
 
     // GAME STATE
@@ -68,6 +69,8 @@ public class GamePanel extends JPanel implements Runnable{
         objects = new Entity[10];
         // NPC
         npc = new Entity[10];
+        // MONSTER
+        monster = new Entity[20];
         // ALL ENTITIES
         entities = new ArrayList<>();
     }
@@ -75,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
     public void setupObject() {
         aSetter.setObject();
         aSetter.setNPC();
+        aSetter.setMonster();
         gameState = GameState.TITLE;
     }
 
@@ -123,6 +127,12 @@ public class GamePanel extends JPanel implements Runnable{
                         entity.update();
                     }
                 }
+                // MONSTER
+                for (Entity entity: monster) {
+                    if (entity != null) {
+                        entity.update();
+                    }
+                }
             }
             case PAUSE -> { }
         }
@@ -159,6 +169,14 @@ public class GamePanel extends JPanel implements Runnable{
                     entities.add(npc[i]);
                 }
             }
+            // ADD MONSTER
+            for (int i = 0; i < monster.length; i++) {
+                if (monster[i] != null) {
+                    entities.add(monster[i]);
+                }
+
+            }
+
             // ADD OBJECTS
             for (int i = 0; i < objects.length; i++) {
                 if (objects[i] != null) {
@@ -222,6 +240,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity[] getNpc() {return npc;}
     public EventHandler getEventH() {return eventH;}
     public KeyHandler getKeyH() {return keyH;}
+    public Entity[] getMonster() {return monster;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
