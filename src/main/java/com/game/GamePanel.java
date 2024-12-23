@@ -194,10 +194,8 @@ public class GamePanel extends JPanel implements Runnable{
             for (int i = 0; i < entities.size(); i++) {
                 entities.get(i).draw(g2);
             }
-            System.out.println(entities.size());
             // EMPTY THE LIST
             entities.clear();
-            System.out.println(entities.size());
 
             // DRAW UI
             ui.draw(g2);
@@ -210,7 +208,7 @@ public class GamePanel extends JPanel implements Runnable{
             long passed = drawEnd - drawStart;
             g2.setColor(Color.WHITE);
             g2.drawString("Draw Time: " + passed, 10, 400);
-            System.out.println("Draw Time: " + passed);
+            System.out.println("Draw Time: " + (double)passed/100000000);
         }
 
         g2.dispose();
