@@ -19,6 +19,7 @@ public class MON_GreenSlime extends Entity {
         speed   = 1;
         maxLife = 4;
         life    = maxLife;
+        type    = 2;
 
         solidArea           = new Rectangle(3, 18, 42, 30);
         solidArea_Default_X = solidArea.x;

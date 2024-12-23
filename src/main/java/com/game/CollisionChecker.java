@@ -151,7 +151,8 @@ public class CollisionChecker {
         return index;
     }
 
-    public void checkPlayer(Entity entity) {
+    public boolean checkPlayer(Entity entity) {
+        boolean contactPlayer = false;
 
         // GET ENTITY'S SOLID AREA POSITION
         entity.getSolidArea().x += entity.getWorldX();
@@ -161,30 +162,15 @@ public class CollisionChecker {
         gp.getPlayer().getSolidArea().y += gp.getPlayer().getWorldY();
 
         switch (entity.getDirection()) {
-            case NORTH -> {
-                entity.getSolidArea().y -= entity.getSpeed();
-                if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
-                    entity.setCollisionOn(true);
-                }
-            }
-            case SOUTH -> {
-                entity.getSolidArea().y += entity.getSpeed();
-                if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
-                    entity.setCollisionOn(true);
-                }
-            }
-            case WEST -> {
-                entity.getSolidArea().x -= entity.getSpeed();
-                if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
-                    entity.setCollisionOn(true);
-                }
-            }
-            case EAST -> {
-                entity.getSolidArea().x += entity.getSpeed();
-                if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
-                    entity.setCollisionOn(true);
-                }
-            }
+            case NORTH -> entity.getSolidArea().y -= entity.getSpeed();
+            case SOUTH -> entity.getSolidArea().y += entity.getSpeed();
+            case WEST  -> entity.getSolidArea().x -= entity.getSpeed();
+            case EAST  -> entity.getSolidArea().x += entity.getSpeed();
+        }
+        // COLLIDE
+        if (entity.getSolidArea().intersects(gp.getPlayer().getSolidArea())) {
+            entity.setCollisionOn(true);
+            contactPlayer = true;
         }
         // RESTART THE DEFAULT SOLID AREA
         // FOR ENTITY
@@ -193,5 +179,7 @@ public class CollisionChecker {
         // FOR OBJECTS
         gp.getPlayer().getSolidArea().x = gp.getPlayer().getSolidArea_Default_X();
         gp.getPlayer().getSolidArea().y = gp.getPlayer().getSolidArea_Default_Y();
+
+        return contactPlayer;
     }
 }

@@ -36,6 +36,7 @@ public class Entity {
     // CHARACTER STATUS
     protected int maxLife;
     protected int life;
+    protected int type; // 0-player 1-npc 2-monster
 
     // OBJECT THING
     protected ObjectName name;
@@ -73,7 +74,15 @@ public class Entity {
         gp.getChecker().checkObject(this, false);
         gp.getChecker().checkEntity(this, gp.getNpc());
         gp.getChecker().checkEntity(this, gp.getMonster());
-        gp.getChecker().checkPlayer(this);
+        boolean contactPlayer = gp.getChecker().checkPlayer(this);
+
+        if (this.type == 2 && contactPlayer) {
+           if (!gp.getPlayer().invincible) {
+               // GIVE DAMAGE
+               gp.getPlayer().life      -= 1;
+               gp.getPlayer().invincible = true;
+           }
+        }
         // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
         if (!collisionOn) {
             switch (direction) {
