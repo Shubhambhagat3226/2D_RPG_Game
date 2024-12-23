@@ -203,9 +203,15 @@ public class Player extends Entity {
             }
             default -> null;
         };
+        // FLINCH THE PLAYER AT INVINCIBLE
+        if (invincible) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
 
         g2.drawImage(image, screenX, screenY, null);
 
+        // RESET ALPHA
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         // DEBUG
         g2.setFont(new Font("Arial", Font.PLAIN, 26));
         g2.setColor(Color.WHITE);
