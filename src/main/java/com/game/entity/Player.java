@@ -170,10 +170,10 @@ public class Player extends Entity {
     // ATTACKING
     public void attacking() {
         spiritCounter++;
-        if (spiritCounter <= 8) {
+        if (spiritCounter <= 5) {
             spiritNum     = 1;
 
-        } else if (spiritCounter <= 25) {
+        } else if (spiritCounter <= 14) {
             spiritNum     = 2;
 
             // SAVE CURRENT WORLD-X,Y AND SOLID-AREA
@@ -312,9 +312,9 @@ public class Player extends Entity {
         // RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         // DEBUG
-        g2.setFont(new Font("Arial", Font.PLAIN, 26));
-        g2.setColor(Color.WHITE);
-        g2.drawString("Invincible: " + invincibleCounter, 10, 400);
+//        g2.setFont(new Font("Arial", Font.PLAIN, 26));
+//        g2.setColor(Color.WHITE);
+//        g2.drawString("Invincible: " + invincibleCounter, 10, 400);
     }
 
     // GETTER METHODS
