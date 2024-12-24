@@ -11,35 +11,33 @@ import java.awt.image.BufferedImage;
 
 public class Entity {
     protected GamePanel gp;
-    protected int worldX, worldY;
-    protected int speed;
-
-    protected int width, height;
     protected BufferedImage up_1, up_2, down_1, down_2, left_1, left_2, right_1, right_2;
-    protected Direction direction = Direction.SOUTH;
-
-    protected int spiritCounter = 0;
-    protected int spiritNum     = 1;
-    protected int actionCounter = 0;
-
-    protected boolean invincible;
-    protected int invincibleCounter = 0;
-
-    protected String[] dialogue;
-    protected int dialogueIndex = 0;
-
-    // INVISIBLE AREA FOR CHECK COLLISION
+    protected BufferedImage attackUp_1, attackUp_2, attackDown_1, attackDown_2,
+            attackLeft_1, attackLeft_2, attackRight_1, attackRight_2;
     protected Rectangle solidArea;
     protected int solidArea_Default_X, solidArea_Default_Y;
+    protected String[] dialogue;
+
+    // STATE
+    protected int worldX, worldY;
+    protected int width, height;
+    protected Direction direction = Direction.SOUTH;
+    protected int spiritNum       = 1;
+    protected int dialogueIndex   = 0;
     protected boolean collisionOn;
+    protected boolean invincible;
+
+    // COUNTER
+    protected int spiritCounter = 0;
+    protected int actionCounter = 0;
+    protected int invincibleCounter = 0;
 
     // CHARACTER STATUS
+    protected int type; // 0-player 1-npc 2-monster
+    protected ObjectName name;
     protected int maxLife;
     protected int life;
-    protected int type; // 0-player 1-npc 2-monster
-
-    // OBJECT THING
-    protected ObjectName name;
+    protected int speed;
 
     public Entity(GamePanel gp) {
         this.gp   = gp;
