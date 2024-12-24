@@ -72,6 +72,7 @@ public class EventHandler {
     // DAMAGE OCCUR IF HIT
     public void damagePit(int col, int row, GameState gameState) {
         gp.setGameState(gameState);
+        gp.playSoundEffect(6);
         gp.getUi().setCurrentDialogue("You fall into a pit!");
         gp.getPlayer().setLife(gp.getPlayer().getLife() - 1);
         eventRect[col][row].eventDone = true;
@@ -81,6 +82,7 @@ public class EventHandler {
 
         if (gp.getPlayer().getLife() < gp.getPlayer().getMaxLife()
                 && gp.getKeyH().isEnteredPressed()) {
+            gp.playSoundEffect(2);
             gp.setGameState(gameState);
             gp.getUi().setCurrentDialogue("You drink the water.\nYour life has been recovered.");
             gp.getPlayer().setLife(gp.getPlayer().getMaxLife());
