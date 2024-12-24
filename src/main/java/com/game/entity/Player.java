@@ -64,62 +64,63 @@ public class Player extends Entity {
     // IMAGES UPDATION
     public void update() {
 
-        if (keyH.isUpPressed() || keyH.isDownPressed() || keyH.isLeftPressed() || keyH.isRightPressed()) {
+        if (keyH.isUpPressed() || keyH.isDownPressed()
+                || keyH.isLeftPressed() || keyH.isRightPressed()
+                || keyH.isEnteredPressed()) {
 
-                if (keyH.isUpPressed()) {
-                    direction = Direction.NORTH;
+            if (keyH.isUpPressed()) {
+                direction = Direction.NORTH;
+            }
+            if (keyH.isDownPressed()) {
+                direction = Direction.SOUTH;
+            }
+            if (keyH.isLeftPressed()) {
+                direction = Direction.WEST;
+            }
+            if (keyH.isRightPressed()) {
+                direction = Direction.EAST;
+            }
+
+            // CHECK TILE COLLISION
+            collisionOn = false;
+            gp.getChecker().checkTile(this);
+
+            // CHECK OBJECT COLLISION
+            int objIndex = gp.getChecker().checkObject(this, true);
+            pickUpObject(objIndex);
+
+            // CHECK NPC COLLISION
+            int npcIndex = gp.getChecker().checkEntity(this, gp.getNpc());
+            interactNPC(npcIndex);
+
+            // CHECK MONSTER COLLISION
+            int monsterIndex = gp.getChecker().checkEntity(this, gp.getMonster());
+            contactMonster(monsterIndex);
+
+            // CHECK EVENT
+            gp.getEventH().checkEvent();
+
+            // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
+            if (!collisionOn && !keyH.isEnteredPressed()) {
+                switch (direction) {
+                    case NORTH -> worldY -= speed;
+                    case SOUTH -> worldY += speed;
+                    case WEST -> worldX -= speed;
+                    case EAST -> worldX += speed;
                 }
-                if (keyH.isDownPressed()) {
-                    direction = Direction.SOUTH;
+            }
+            keyH.setEnteredPressed(false);
+            // TO CHANGE FROM OTHER IMAGE
+            spiritCounter++;
+            if (spiritCounter > 10) {
+                if (spiritNum == 1) {
+                    spiritNum = 2;
+                } else {
+                    spiritNum = 1;
                 }
-                if (keyH.isLeftPressed()) {
-                    direction = Direction.WEST;
-                }
-                if (keyH.isRightPressed()) {
-                    direction = Direction.EAST;
-                }
-
-                // CHECK TILE COLLISION
-                collisionOn = false;
-                gp.getChecker().checkTile(this);
-
-                // CHECK OBJECT COLLISION
-                int objIndex = gp.getChecker().checkObject(this, true);
-                pickUpObject(objIndex);
-
-                // CHECK NPC COLLISION
-                int npcIndex = gp.getChecker().checkEntity(this, gp.getNpc());
-                interactNPC(npcIndex);
-
-                // CHECK MONSTER COLLISION
-                int monsterIndex = gp.getChecker().checkEntity(this, gp.getMonster());
-                contactMonster(monsterIndex);
-
-                // CHECK EVENT
-                gp.getEventH().checkEvent();
-
-                keyH.setEnteredPressed(false);
-
-                // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
-                if (!collisionOn) {
-                    switch (direction) {
-                        case NORTH -> worldY -= speed;
-                        case SOUTH -> worldY += speed;
-                        case WEST -> worldX -= speed;
-                        case EAST -> worldX += speed;
-                    }
-                }
-                // TO CHANGE FROM OTHER IMAGE
-                spiritCounter++;
-                if (spiritCounter > 10) {
-                    if (spiritNum == 1) {
-                        spiritNum = 2;
-                    } else {
-                        spiritNum = 1;
-                    }
-                    spiritCounter = 0;
-                }
-            } else {
+                spiritCounter = 0;
+            }
+        } else {
             standCounter++;
 
             if (standCounter == 14) {

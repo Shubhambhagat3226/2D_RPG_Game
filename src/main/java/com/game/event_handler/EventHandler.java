@@ -33,7 +33,7 @@ public class EventHandler {
 
     public void checkEvent() {
         if (hit(26, 16, Direction.EAST))  {damagePit(26, 16, GameState.DIALOGUE);}
-        if (hit(23, 12, Direction.ANY))  {damagePit(23, 12, GameState.DIALOGUE);}
+//        if (hit(23, 12, Direction.ANY))  {damagePit(23, 12, GameState.DIALOGUE);}
 //        if (hit(26, 16, Direction.EAST))  {teleport(GameState.DIALOGUE);}
         if (hit(23, 12, Direction.NORTH)) {healingPool(23, 12, GameState.DIALOGUE);}
     }
