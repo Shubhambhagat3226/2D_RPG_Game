@@ -22,13 +22,17 @@ public class Player extends Entity {
         screenX = CommonConstant.SCREEN_WIDTH / 2 - (CommonConstant.TILE_SIZE / 2);
         screenY = CommonConstant.SCREEN_HEIGHT / 2 - (CommonConstant.TILE_SIZE / 2);
 
-        solidArea = new Rectangle();
-        solidArea.x = 8;
-        solidArea.y = 16;
+        // DEFINE SOLID AREA FOR PLAYER
+        solidArea.x         = 8;
+        solidArea.y         = 16;
         solidArea_Default_X = solidArea.x;
         solidArea_Default_Y = solidArea.y;
-        solidArea.width = 32;
-        solidArea.height = 32;
+        solidArea.width     = 32;
+        solidArea.height    = 32;
+
+        // ATTACK WIDTH AND HEIGHT
+        attackArea.width  = 36;
+        attackArea.height = 36;
 
         setDefaultValues();
         loadImage();
@@ -169,8 +173,33 @@ public class Player extends Entity {
         if (spiritCounter <= 8) {
             spiritNum     = 1;
 
-        } if (spiritCounter <= 25) {
+        } else if (spiritCounter <= 25) {
             spiritNum     = 2;
+
+            // SAVE CURRENT WORLD-X,Y AND SOLID-AREA
+            int currentWorldX   = worldX;
+            int currentWorldY   = worldY;
+            int solidAreaWidth  = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            // ADJUST PLAYER'S WORLD-X,Y FOR THE ATTACK-AREA
+            switch (direction) {
+                case NORTH -> worldY -= attackArea.height;
+                case SOUTH -> worldY += attackArea.height;
+                case WEST  -> worldX -= attackArea.width;
+                case EAST  -> worldX += attackArea.width;
+            }
+            // ATTACK SOLID AREA
+            solidArea.width   = attackArea.width;
+            solidArea.height  = attackArea.height;
+            // CHECK MONSTER COLLIDE WITH UPDATED WORLD-X,Y AND SOLID-AREA
+            int monsterIndex  = gp.getChecker().checkEntity(this, gp.getMonster());
+            damageMonster(monsterIndex);
+            // RESET THE VALUE
+            worldX           = currentWorldX;
+            worldY           =  currentWorldY;
+            solidArea.width  = solidAreaWidth;
+            solidArea.height =  solidAreaHeight;
 
         } else {
             spiritNum     = 1;
@@ -205,6 +234,15 @@ public class Player extends Entity {
                 this.life -= 1;
                 invincible = true;
             }
+        }
+    }
+    // DAMAGE TO MONSTER
+    public void damageMonster(int i) {
+
+        if (i != 999 ) {
+            System.out.println("hit");
+        } else {
+            System.out.println("miss");
         }
     }
 

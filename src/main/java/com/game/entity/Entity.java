@@ -15,6 +15,7 @@ public class Entity {
     protected BufferedImage attackUp_1, attackUp_2, attackDown_1, attackDown_2,
             attackLeft_1, attackLeft_2, attackRight_1, attackRight_2;
     protected Rectangle solidArea;
+    protected Rectangle attackArea;
     protected int solidArea_Default_X, solidArea_Default_Y;
     protected String[] dialogue;
 
@@ -41,10 +42,11 @@ public class Entity {
     protected int speed;
 
     public Entity(GamePanel gp) {
-        this.gp   = gp;
-        solidArea = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
-        width     = CommonConstant.TILE_SIZE;
-        height    = CommonConstant.TILE_SIZE;
+        this.gp    = gp;
+        solidArea  = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        attackArea = new Rectangle(0, 0, 0, 0);
+        width      = CommonConstant.TILE_SIZE;
+        height     = CommonConstant.TILE_SIZE;
     }
 
     // SPEAK
