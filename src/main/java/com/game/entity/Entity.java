@@ -6,6 +6,7 @@ import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ObjectName;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -30,12 +31,14 @@ public class Entity {
     protected boolean attacking;
     protected boolean alive;
     protected boolean dying;
+    protected boolean hpBarOn;
 
     // COUNTER
     protected int spiritCounter     = 0;
     protected int actionCounter     = 0;
     protected int invincibleCounter = 0;
     protected int dyingCounter      = 0;
+    protected int hpBarCounter      = 0;
 
     // CHARACTER STATUS
     protected int type; // 0-player 1-npc 2-monster
@@ -152,9 +155,30 @@ public class Entity {
                 }
                 default -> null;
             };
+            // MONSTER HP BAR
+            if (type == 2 && hpBarOn) {
+                double oneScale   = (double) width/maxLife;
+                double hpBarValue = oneScale*life;
+
+                g2.setColor(new Color(35, 35, 35));
+                g2.fillRect(screenX - 1, screenY - 16, width + 2, 12);
+
+                g2.setColor(new Color(255, 0, 30));
+                g2.fillRect(screenX, screenY - 15, (int) hpBarValue, 10);
+
+                hpBarCounter++;
+
+                if (hpBarCounter > CommonConstant.FPS*10) {
+                    hpBarCounter = 0;
+                    hpBarOn      = false;
+                }
+            }
+
             // FLINCH THE PLAYER AT INVINCIBLE
             if (invincible) {
-                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+                hpBarCounter = 0;
+                hpBarOn      = true;
+                changeAlpha(g2, 0.4f);
             }
             if (dying) {
                 dyingAnimation(g2);
@@ -162,8 +186,7 @@ public class Entity {
 
             g2.drawImage(image, screenX, screenY, null);
 
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-
+            changeAlpha(g2, 1);
         }
     }
     public void dyingAnimation(Graphics2D g2) {
