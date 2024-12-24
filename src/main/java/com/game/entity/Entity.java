@@ -28,11 +28,14 @@ public class Entity {
     protected boolean collisionOn;
     protected boolean invincible;
     protected boolean attacking;
+    protected boolean alive;
+    protected boolean dying;
 
     // COUNTER
-    protected int spiritCounter = 0;
-    protected int actionCounter = 0;
+    protected int spiritCounter     = 0;
+    protected int actionCounter     = 0;
     protected int invincibleCounter = 0;
+    protected int dyingCounter      = 0;
 
     // CHARACTER STATUS
     protected int type; // 0-player 1-npc 2-monster
@@ -47,6 +50,7 @@ public class Entity {
         attackArea = new Rectangle(0, 0, 0, 0);
         width      = CommonConstant.TILE_SIZE;
         height     = CommonConstant.TILE_SIZE;
+        alive      = true;
     }
 
     // SPEAK
@@ -108,7 +112,7 @@ public class Entity {
         //  THIS NEEDS TO BE OUTSIDE OF KEY IF STATEMENT
         if (invincible) {
             invincibleCounter++;
-            if (invincibleCounter > 40) {
+            if (invincibleCounter > 10) {
                 invincible        = false;
                 invincibleCounter = 0;
             }
@@ -151,12 +155,37 @@ public class Entity {
             if (invincible) {
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
             }
+            if (dying) {
+                dyingAnimation(g2);
+            }
 
             g2.drawImage(image, screenX, screenY, null);
 
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
         }
+    }
+    public void dyingAnimation(Graphics2D g2) {
+        dyingCounter++;
+
+        int i = 10;
+        if (dyingCounter <= i) changeAlpha(g2, 0);
+        else if (dyingCounter <= i * 2) changeAlpha(g2, 1);
+        else if (dyingCounter <= i * 3) changeAlpha(g2, 0);
+        else if (dyingCounter <= i * 4) changeAlpha(g2, 1);
+        else if (dyingCounter <= i * 5) changeAlpha(g2, 0);
+        else if (dyingCounter <= i * 6) changeAlpha(g2, 1);
+        else if (dyingCounter <= i * 7) changeAlpha(g2, 0);
+        else if (dyingCounter <= i * 8) changeAlpha(g2, 1);
+        else {
+            dying = false;
+            alive = false;
+        }
+
+    }
+
+    public void changeAlpha(Graphics2D g2, float f) {
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, f));
     }
 
     public BufferedImage getImage(String imagePath) {
@@ -171,6 +200,8 @@ public class Entity {
     public int getSolidArea_Default_X() {  return solidArea_Default_X;  }
     public int getSolidArea_Default_Y() {  return solidArea_Default_Y;  }
     public ObjectName getName() {return name;}
+    public boolean isAlive() {return alive;}
+    public boolean isDying() {return dying;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}

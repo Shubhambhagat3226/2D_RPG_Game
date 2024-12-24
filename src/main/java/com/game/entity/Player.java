@@ -150,7 +150,7 @@ public class Player extends Entity {
         } else {
             standCounter++;
 
-            if (standCounter == 30) {
+            if (standCounter == 18) {
                 spiritNum = 1;
                 standCounter=0;
             }
@@ -245,7 +245,8 @@ public class Player extends Entity {
                gp.getMonster()[i].invincible = true;
 
                if (gp.getMonster()[i].life <= 0) {
-                   gp.getMonster()[i] = null;
+                   gp.getMonster()[i].invincible = false;
+                   gp.getMonster()[i].dying = true;
                }
            }
         }
