@@ -157,7 +157,7 @@ public class Player extends Entity {
 
         }
 
-            //  THIS NEEDS TO BE OUTSIDE OF KEY IF STATEMENT
+        //  THIS NEEDS TO BE OUTSIDE OF KEY IF STATEMENT
         if (invincible) {
             invincibleCounter++;
             if (invincibleCounter > CommonConstant.FPS) {
@@ -240,9 +240,14 @@ public class Player extends Entity {
     public void damageMonster(int i) {
 
         if (i != 999 ) {
-            System.out.println("hit");
-        } else {
-            System.out.println("miss");
+           if (!gp.getMonster()[i].invincible) {
+               gp.getMonster()[i].life -= 1;
+               gp.getMonster()[i].invincible = true;
+
+               if (gp.getMonster()[i].life <= 0) {
+                   gp.getMonster()[i] = null;
+               }
+           }
         }
     }
 

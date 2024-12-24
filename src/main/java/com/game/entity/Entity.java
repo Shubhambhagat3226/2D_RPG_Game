@@ -104,6 +104,15 @@ public class Entity {
             }
             spiritCounter = 0;
         }
+
+        //  THIS NEEDS TO BE OUTSIDE OF KEY IF STATEMENT
+        if (invincible) {
+            invincibleCounter++;
+            if (invincibleCounter > 40) {
+                invincible        = false;
+                invincibleCounter = 0;
+            }
+        }
     }
     // DRAW METHOD BY DEFAULT
     public void draw(Graphics2D g2) {
@@ -117,39 +126,36 @@ public class Entity {
 
             BufferedImage image  = switch (direction) {
                 case NORTH -> {
-                    if (spiritNum == 1) {
-                        yield  up_1;
-                    } else if (spiritNum == 2) {
-                        yield  up_2;
-                    }  else yield null; // or some default value
+                    if (spiritNum == 1) yield  up_1;
+                    else if (spiritNum == 2) yield  up_2;
+                    yield null; // or some default value
                 }
                 case SOUTH -> {
-                    if (spiritNum == 1) {
-                        yield  down_1;
-                    }
-                    if (spiritNum == 2) {
-                        yield  down_2;
-                    } else yield null; // or some default value
+                    if (spiritNum == 1) yield  down_1;
+                    else if (spiritNum == 2) yield  down_2;
+                    yield null; // or some default value
                 }
                 case WEST -> {
-                    if (spiritNum == 1) {
-                        yield  left_1;
-                    }
-                    if (spiritNum == 2) {
-                        yield  left_2;
-                    } else yield null; // or some default value
+                    if (spiritNum == 1) yield  left_1;
+                    else if (spiritNum == 2) yield  left_2;
+                    yield null; // or some default value
                 }
                 case EAST -> {
-                    if (spiritNum == 1) {
-                        yield  right_1;
-                    }
-                    if (spiritNum == 2) {
-                        yield  right_2;
-                    } else yield null; // or some default value
+                    if (spiritNum == 1) yield  right_1;
+                    else if (spiritNum == 2) yield  right_2;
+                    yield null; // or some default value
                 }
                 default -> null;
             };
+            // FLINCH THE PLAYER AT INVINCIBLE
+            if (invincible) {
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+            }
+
             g2.drawImage(image, screenX, screenY, null);
+
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
         }
     }
 
