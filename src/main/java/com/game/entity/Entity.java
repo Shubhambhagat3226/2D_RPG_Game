@@ -46,6 +46,16 @@ public class Entity {
     protected int maxLife;
     protected int life;
     protected int speed;
+    protected int level;
+    protected int strength;
+    protected int dexterity;
+    protected int attack;
+    protected int defence;
+    protected int exp;
+    protected int nextLevelExp;
+    protected int coin;
+    protected Entity currentWeapon;
+    protected Entity currentShield;
 
     public Entity(GamePanel gp) {
         this.gp    = gp;
