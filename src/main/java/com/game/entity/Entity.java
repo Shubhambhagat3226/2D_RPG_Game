@@ -26,6 +26,7 @@ public class Entity {
     protected int dialogueIndex   = 0;
     protected boolean collisionOn;
     protected boolean invincible;
+    protected boolean attacking;
 
     // COUNTER
     protected int spiritCounter = 0;

@@ -19,7 +19,7 @@ public class ImageUtility {
     public static final String PLAYER_SWORD_LEFT_1  = "/Player/Attacking sprites/boy_attack_left_1.png";
     public static final String PLAYER_SWORD_LEFT_2  = "/Player/Attacking sprites/boy_attack_left_2.png";
     public static final String PLAYER_SWORD_RIGHT_1 = "/Player/Attacking sprites/boy_attack_right_1.png";
-    public static final String PLAYER_SWORD_RIGHT_2 = "/Player/Attacking sprites/boy_attack_right_1.png";
+    public static final String PLAYER_SWORD_RIGHT_2 = "/Player/Attacking sprites/boy_attack_right_2.png";
 
     // HEART
     public static final String HEART_BLANK = "/Object/heart_blank.png";

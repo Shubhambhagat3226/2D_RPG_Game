@@ -32,6 +32,7 @@ public class Player extends Entity {
 
         setDefaultValues();
         loadImage();
+        getPlayerAttackImage();
     }
 
     public void setDefaultValues() {
@@ -82,6 +83,9 @@ public class Player extends Entity {
     // OBJECT COLLISION HAPPEN
     // IMAGES UPDATION
     public void update() {
+        if (attacking) {
+            attacking();
+        }
 
         if (keyH.isUpPressed() || keyH.isDownPressed()
                 || keyH.isLeftPressed() || keyH.isRightPressed()
@@ -142,7 +146,7 @@ public class Player extends Entity {
         } else {
             standCounter++;
 
-            if (standCounter == 14) {
+            if (standCounter == 30) {
                 spiritNum = 1;
                 standCounter=0;
             }
@@ -159,6 +163,21 @@ public class Player extends Entity {
         }
 
     }
+    // ATTACKING
+    public void attacking() {
+        spiritCounter++;
+        if (spiritCounter <= 8) {
+            spiritNum     = 1;
+
+        } if (spiritCounter <= 25) {
+            spiritNum     = 2;
+
+        } else {
+            spiritNum     = 1;
+            spiritCounter = 0;
+            attacking     = false;
+        }
+    }
 
     // WHAT TO DO WHEN OBJECT COLLIED
     public void pickUpObject(int i) {
@@ -168,10 +187,13 @@ public class Player extends Entity {
     }
     // INTERACTION WITH NPC
     public void interactNPC(int i) {
-        if (i != 999) {
-            if (keyH.isEnteredPressed()) {
+        if (keyH.isEnteredPressed()) {
+            if (i != 999) {
                 gp.setGameState(GameState.DIALOGUE);
                 gp.getNpc()[i].speak();
+
+            } else {
+                attacking = true;
             }
         }
 
@@ -188,38 +210,51 @@ public class Player extends Entity {
 
     // DRAW PLAYER IMAGE
     public void draw(Graphics2D g2) {
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
 
         BufferedImage image  = switch (direction) {
             case NORTH -> {
-                if (spiritNum == 1) {
-                    yield  up_1;
-                } else if (spiritNum == 2) {
-                    yield  up_2;
-                }  else yield null; // or some default value
+                if (!attacking) {
+                    if (spiritNum == 1) yield up_1;
+                    else if (spiritNum == 2) yield up_2;
+                } else {
+                    tempScreenY -= CommonConstant.TILE_SIZE;
+                    if (spiritNum == 1) yield attackUp_1;
+                    else if (spiritNum == 2) yield attackUp_2;
+                }
+                yield null; // or some default value
             }
             case SOUTH -> {
-                if (spiritNum == 1) {
-                    yield  down_1;
+                if (!attacking) {
+                    if (spiritNum == 1) yield down_1;
+                    else if (spiritNum == 2) yield down_2;
+                } else {
+                    if (spiritNum == 1) yield attackDown_1;
+                    else if (spiritNum == 2) yield attackDown_2;
                 }
-                if (spiritNum == 2) {
-                    yield  down_2;
-                } else yield null; // or some default value
+                yield null; // or some default value
             }
             case WEST -> {
-                if (spiritNum == 1) {
-                    yield  left_1;
+                if (!attacking) {
+                    if (spiritNum == 1) yield left_1;
+                    else if (spiritNum == 2) yield left_2;
+                } else {
+                    tempScreenX -= CommonConstant.TILE_SIZE;
+                    if (spiritNum == 1) yield attackLeft_1;
+                    else if (spiritNum == 2) yield attackLeft_2;
                 }
-                if (spiritNum == 2) {
-                    yield  left_2;
-                } else yield null; // or some default value
+                yield null; // or some default value
             }
             case EAST -> {
-                if (spiritNum == 1) {
-                    yield  right_1;
+                if (!attacking) {
+                    if (spiritNum == 1) yield right_1;
+                    else if (spiritNum == 2) yield right_2;
+                } else {
+                    if (spiritNum == 1) yield attackRight_1;
+                    else if (spiritNum == 2) yield attackRight_2;
                 }
-                if (spiritNum == 2) {
-                    yield  right_2;
-                } else yield null; // or some default value
+                yield null; // or some default value
             }
             default -> null;
         };
@@ -228,7 +263,7 @@ public class Player extends Entity {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
         }
 
-        g2.drawImage(image, screenX, screenY, null);
+        g2.drawImage(image, tempScreenX, tempScreenY, null);
 
         // RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
