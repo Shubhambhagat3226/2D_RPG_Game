@@ -150,7 +150,7 @@ public class Player extends Entity {
         } else {
             standCounter++;
 
-            if (standCounter == 18) {
+            if (standCounter == 16) {
                 spiritNum = 1;
                 standCounter=0;
             }
@@ -169,7 +169,9 @@ public class Player extends Entity {
     }
     // ATTACKING
     public void attacking() {
+        standCounter = 0;
         spiritCounter++;
+        System.out.println(spiritNum + " " + spiritCounter);
         if (spiritCounter <= 5) {
             spiritNum     = 1;
 
