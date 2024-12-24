@@ -11,6 +11,16 @@ public class ImageUtility {
     public static final String PLAYER_RIGHT_1 = "/Player/Walking sprites/boy_right_1.png";
     public static final String PLAYER_RIGHT_2 = "/Player/Walking sprites/boy_right_2.png";
 
+    // PLAYER ATTACK
+    public static final String PLAYER_SWORD_UP_1    = "/Player/Attacking sprites/boy_attack_up_1.png";
+    public static final String PLAYER_SWORD_UP_2    = "/Player/Attacking sprites/boy_attack_up_2.png";
+    public static final String PLAYER_SWORD_DOWN_1  = "/Player/Attacking sprites/boy_attack_down_1.png";
+    public static final String PLAYER_SWORD_DOWN_2  = "/Player/Attacking sprites/boy_attack_down_2.png";
+    public static final String PLAYER_SWORD_LEFT_1  = "/Player/Attacking sprites/boy_attack_left_1.png";
+    public static final String PLAYER_SWORD_LEFT_2  = "/Player/Attacking sprites/boy_attack_left_2.png";
+    public static final String PLAYER_SWORD_RIGHT_1 = "/Player/Attacking sprites/boy_attack_right_1.png";
+    public static final String PLAYER_SWORD_RIGHT_2 = "/Player/Attacking sprites/boy_attack_right_1.png";
+
     // HEART
     public static final String HEART_BLANK = "/Object/heart_blank.png";
     public static final String HEART_FULL  = "/Object/heart_full.png";
