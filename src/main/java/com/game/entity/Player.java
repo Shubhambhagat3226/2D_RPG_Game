@@ -224,6 +224,7 @@ public class Player extends Entity {
                 gp.getNpc()[i].speak();
 
             } else {
+                gp.playSoundEffect(7);
                 attacking = true;
             }
         }
@@ -233,6 +234,7 @@ public class Player extends Entity {
     public void contactMonster(int i) {
         if (i != 999) {
             if (!invincible) {
+                gp.playSoundEffect(6);
                 this.life -= 1;
                 invincible = true;
             }
@@ -243,6 +245,9 @@ public class Player extends Entity {
 
         if (i != 999 ) {
            if (!gp.getMonster()[i].invincible) {
+
+               gp.playSoundEffect(5);
+               gp.playSoundEffect(7);
                gp.getMonster()[i].life -= 1;
                gp.getMonster()[i].invincible = true;
 

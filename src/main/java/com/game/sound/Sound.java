@@ -15,6 +15,9 @@ public class Sound {
         soundURL[2] = SoundUtility.POWER_UP;
         soundURL[3] = SoundUtility.UNLOCK;
         soundURL[4] = SoundUtility.FANFARE;
+        soundURL[5] = SoundUtility.HIT_MONSTER;
+        soundURL[6] = SoundUtility.DAMAGE_RECEIVE;
+        soundURL[7] = SoundUtility.SWING;
     }
 
     public void setFile(int i) {

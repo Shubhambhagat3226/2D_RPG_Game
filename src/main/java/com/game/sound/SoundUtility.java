@@ -8,6 +8,9 @@ public class SoundUtility {
     public static final URL  FANFARE = setSound("/Sound/fanfare.wav");
     public static final URL  POWER_UP = setSound("/Sound/powerup.wav");
     public static final URL  UNLOCK = setSound("/Sound/unlock.wav");
+    public static final URL  HIT_MONSTER = setSound("/Sound/hitmonster.wav");
+    public static final URL  DAMAGE_RECEIVE = setSound("/Sound/receivedamage.wav");
+    public static final URL  SWING = setSound("/Sound/parry.wav");
 
     public static URL setSound(String soundPath) {
         return SoundUtility.class.getResource(soundPath);

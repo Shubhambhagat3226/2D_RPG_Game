@@ -84,6 +84,7 @@ public class Entity {
         if (this.type == 2 && contactPlayer) {
            if (!gp.getPlayer().invincible) {
                // GIVE DAMAGE
+               gp.playSoundEffect(6);
                gp.getPlayer().life      -= 1;
                gp.getPlayer().invincible = true;
            }
