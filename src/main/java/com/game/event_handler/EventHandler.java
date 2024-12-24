@@ -82,6 +82,7 @@ public class EventHandler {
 
         if (gp.getPlayer().getLife() < gp.getPlayer().getMaxLife()
                 && gp.getKeyH().isEnteredPressed()) {
+            gp.getPlayer().attackCanceled = true;
             gp.playSoundEffect(2);
             gp.setGameState(gameState);
             gp.getUi().setCurrentDialogue("You drink the water.\nYour life has been recovered.");

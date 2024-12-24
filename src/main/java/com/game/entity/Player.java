@@ -14,6 +14,7 @@ public class Player extends Entity {
     private final int screenY;
 
     private int standCounter = 0;
+    public boolean attackCanceled;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -136,6 +137,13 @@ public class Player extends Entity {
                     case EAST -> worldX += speed;
                 }
             }
+            // CHECK ATTACK CANCELLED OR NOT
+            if (keyH.isEnteredPressed() && !attackCanceled) {
+                gp.playSoundEffect(7);
+                attacking     = true;
+                spiritCounter = 0;
+            }
+            attacking = false;
             keyH.setEnteredPressed(false);
             // TO CHANGE FROM OTHER IMAGE
             spiritCounter++;
@@ -220,12 +228,9 @@ public class Player extends Entity {
     public void interactNPC(int i) {
         if (keyH.isEnteredPressed()) {
             if (i != 999) {
+                attackCanceled = true;
                 gp.setGameState(GameState.DIALOGUE);
                 gp.getNpc()[i].speak();
-
-            } else {
-                gp.playSoundEffect(7);
-                attacking = true;
             }
         }
 
