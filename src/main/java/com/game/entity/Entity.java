@@ -72,7 +72,8 @@ public class Entity {
 
     // SET-ACTION DEFINE IN SUN-CLASS
     public void setAction() {}
-
+    // DAMAGE REACTION
+    public void damageReaction() {}
     // UPDATE METHOD DEFAULT FOR ENTITY
     public void update() {
         setAction();

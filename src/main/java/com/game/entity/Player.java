@@ -250,6 +250,7 @@ public class Player extends Entity {
                gp.playSoundEffect(7);
                gp.getMonster()[i].life -= 1;
                gp.getMonster()[i].invincible = true;
+               gp.getMonster()[i].damageReaction();
 
                if (gp.getMonster()[i].life <= 0) {
                    gp.getMonster()[i].invincible = false;

@@ -60,4 +60,11 @@ public class MON_GreenSlime extends Entity {
             actionCounter=0;
         }
     }
+
+    @Override
+    public void damageReaction() {
+
+        actionCounter = 0;
+        direction     = gp.getPlayer().getDirection();
+    }
 }
