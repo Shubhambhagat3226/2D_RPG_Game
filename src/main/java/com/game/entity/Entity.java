@@ -100,7 +100,12 @@ public class Entity {
            if (!gp.getPlayer().invincible) {
                // GIVE DAMAGE
                gp.playSoundEffect(6);
-               gp.getPlayer().life      -= 1;
+
+               int damage  = attack - gp.getPlayer().defence;
+               if (damage < 0) {
+                   damage  = 0;
+               }
+               gp.getPlayer().life      -= damage;
                gp.getPlayer().invincible = true;
            }
         }

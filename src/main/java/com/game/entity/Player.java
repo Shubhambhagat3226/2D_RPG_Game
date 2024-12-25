@@ -258,7 +258,12 @@ public class Player extends Entity {
         if (i != 999) {
             if (!invincible) {
                 gp.playSoundEffect(6);
-                this.life -= 1;
+
+                int damage  = gp.getMonster()[i].attack - defence;
+                if (damage < 0) {
+                    damage  = 0;
+                }
+                this.life -= damage;
                 invincible = true;
             }
         }
@@ -270,8 +275,12 @@ public class Player extends Entity {
            if (!gp.getMonster()[i].invincible) {
 
                gp.playSoundEffect(5);
-               gp.playSoundEffect(7);
-               gp.getMonster()[i].life -= 1;
+
+               int damage  = attack - gp.getMonster()[i].defence;
+               if (damage < 0) {
+                   damage  = 0;
+               }
+               gp.getMonster()[i].life -= damage;
                gp.getMonster()[i].invincible = true;
                gp.getMonster()[i].damageReaction();
 
