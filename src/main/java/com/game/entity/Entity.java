@@ -238,6 +238,14 @@ public class Entity {
     public ObjectName getName() {return name;}
     public boolean isAlive() {return alive;}
     public boolean isDying() {return dying;}
+    public int getLevel() {return level;}
+    public int getStrength() {return strength;}
+    public int getDexterity() {return dexterity;}
+    public int getExp() {return exp;}
+    public int getNextLevelExp() {return nextLevelExp;}
+    public int getCoin() {return coin;}
+    public SuperItem getCurrentWeapon() {return currentWeapon;}
+    public SuperItem getCurrentShield() {return currentShield;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}

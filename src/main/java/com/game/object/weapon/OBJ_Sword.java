@@ -10,6 +10,6 @@ public class OBJ_Sword extends SuperItem{
 
         name        = ObjectName.NORMAL_SWORD;
         down_1      = getImage(ImageUtility.SWORD);
-        attackValue = 1;
+        attackValue = 4;
     }
 }

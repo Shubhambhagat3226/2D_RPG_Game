@@ -3,6 +3,8 @@ package com.game.object.weapon;
 import com.game.GamePanel;
 import com.game.entity.Entity;
 
+import java.awt.image.BufferedImage;
+
 public class SuperItem extends Entity {
     // ITEMS ATTRIBUTE
     protected int attackValue;
@@ -17,4 +19,8 @@ public class SuperItem extends Entity {
 
     public int getDefenseValue() {return defenseValue;}
     public void setDefenseValue(int defenseValue) {this.defenseValue = defenseValue;}
+
+    public BufferedImage getImage() {
+        return down_1;
+    }
 }

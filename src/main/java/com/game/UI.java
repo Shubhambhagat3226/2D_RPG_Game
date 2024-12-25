@@ -60,6 +60,9 @@ public class UI {
                 drawPlayerLife();
                 drawDialogueScreen();
             }
+            case CHARACTER_STATUS -> {
+                drawCharacterScreen();
+            }
         }
     }
     // PLAYER LIFE
@@ -183,6 +186,102 @@ public class UI {
         g2.setStroke(new BasicStroke(5));
         g2.drawRoundRect(x+5, y+5, width-10, height-10, 25, 25);
     }
+
+    // DRAW CHARACTER-SCREEN
+    public void drawCharacterScreen() {
+
+        // CREATE FRAME FOR STATUS
+        final int frameX      = CommonConstant.TILE_SIZE*2;
+        final int frameY      = CommonConstant.TILE_SIZE;
+        final int frameWidth  = CommonConstant.TILE_SIZE*5;
+        final int frameHeight = CommonConstant.TILE_SIZE*10;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        // TEXT
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(32f));
+
+        int textX = frameX + 20;
+        int textY = frameY + CommonConstant.TILE_SIZE;
+        final int lineHeight = 35;
+
+        // NAME
+        String[] attribute = {"Level", "Life", "Strength", "Dexterity", "Attack",
+                "Defence", "Exp", "Next Level", "Coin", "Weapon", "Shield"};
+        for (String s : attribute) {
+            if (s.compareTo("Weapon") == 0) {
+                textY += 20;
+            } else if (s.compareTo("Shield") == 0) {
+                textY += 15;
+            }
+
+            g2.drawString(s, textX, textY);
+                textY += lineHeight;
+
+        }
+
+        // VALUES
+        int tailX = (frameX + frameWidth) - 30;
+        // RESET Y
+        textY = frameY + CommonConstant.TILE_SIZE;
+        String value;
+
+        // LEVEL
+        value = String.valueOf(gp.getPlayer().getLevel());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getLife() + "/" + gp.getPlayer().getMaxLife());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getStrength());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getDexterity());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getAttack());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getDefense());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getExp());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getNextLevelExp());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getCoin());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        g2.drawImage(gp.getPlayer().getCurrentWeapon().getImage(), tailX - CommonConstant.TILE_SIZE, textY-14, null);
+        textY += CommonConstant.TILE_SIZE;
+        g2.drawImage(gp.getPlayer().getCurrentShield().getImage(), tailX - CommonConstant.TILE_SIZE, textY-14, null);
+
+    }
+    private int getX_For_AlignToRightText(String text, int tailX) {
+        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        return tailX - length;
+    }
+
 
     // GETTER METHODS
     public int getCommandNum() {return commandNum;}
