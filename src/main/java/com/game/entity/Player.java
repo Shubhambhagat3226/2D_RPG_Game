@@ -143,7 +143,7 @@ public class Player extends Entity {
                 attacking     = true;
                 spiritCounter = 0;
             }
-            attacking = false;
+            attackCanceled = false;
             keyH.setEnteredPressed(false);
             // TO CHANGE FROM OTHER IMAGE
             spiritCounter++;
