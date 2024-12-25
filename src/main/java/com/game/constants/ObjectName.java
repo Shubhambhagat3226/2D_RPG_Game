@@ -7,4 +7,6 @@ public enum ObjectName {
     BOOTS,
     HEART,
     GREEN_SLIME,
+    NORMAL_SWORD,
+    WOODEN_SHIELD,
 }

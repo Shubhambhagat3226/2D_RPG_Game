@@ -76,11 +76,13 @@ public class ImageUtility {
     public static final String  EARTH = "/Tiles/New version/earth.png";
 
     // OBJECTS IMAGES
-    public static final String KEY         = "/Object/key.png";
-    public static final String CHEST       = "/Object/chest.png";
-    public static final String WOODEN_DOOR = "/Object/door.png";
-    public static final String BOOTS       = "/Object/boots.png";
-    public static final String IRON_DOOR   = "/Object/door_iron.png";
+    public static final String KEY           = "/Object/key.png";
+    public static final String CHEST         = "/Object/chest.png";
+    public static final String WOODEN_DOOR   = "/Object/door.png";
+    public static final String BOOTS         = "/Object/boots.png";
+    public static final String IRON_DOOR     = "/Object/door_iron.png";
+    public static final String WOODEN_SHIELD = "/Object/shield_wood.png";
+    public static final String SWORD         = "/Object/sword_normal.png";
 
     // MONSTER
     public static final String GREEN_SLIME_1       = "/Monster/greenslime_down_1.png";

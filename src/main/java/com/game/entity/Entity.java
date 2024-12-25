@@ -5,6 +5,7 @@ import com.game.UtilityTool;
 import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ObjectName;
+import com.game.object.weapon.SuperItem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,8 +55,8 @@ public class Entity {
     protected int exp;
     protected int nextLevelExp;
     protected int coin;
-    protected Entity currentWeapon;
-    protected Entity currentShield;
+    protected SuperItem currentWeapon;
+    protected SuperItem currentShield;
 
     public Entity(GamePanel gp) {
         this.gp    = gp;

@@ -3,6 +3,8 @@ package com.game.entity;
 import com.game.GamePanel;
 import com.game.constants.*;
 import com.game.event_handler.KeyHandler;
+import com.game.object.weapon.OBJ_Sword;
+import com.game.object.weapon.OBJ_Wooden_Shield;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -47,8 +49,24 @@ public class Player extends Entity {
         direction = Direction.SOUTH;
 
         // PLAYER STATUS
-        maxLife = 6;
-        life = maxLife;
+        level         = 1;
+        maxLife       = 6;
+        life          = maxLife;
+        strength      = 1;   // MORE STRENGTH, MORE DAMAGE
+        dexterity     = 1;   // MORE DEX, MORE DEFENCE
+        exp           = 0;
+        nextLevelExp  = 5;
+        coin          = 0;
+        currentWeapon = new OBJ_Sword(gp);
+        currentShield = new OBJ_Wooden_Shield(gp);
+        attack        = getAttack();  // TOTAL ATTACK CALCULATE BY STRENGTH AND WEAPON ATTACK-VALUE
+        defence       = getDefense(); // TOTAL DEFENCE CALCULATE BY DEX AND WEAPON DEFENCE-VALUE
+    }
+    public int getAttack() {
+        return attack = strength * currentWeapon.getAttackValue();
+    }
+    public int getDefense() {
+        return defence = dexterity * currentShield.getDefenseValue();
     }
 
     // LOAD PLAYERS IMAGES
