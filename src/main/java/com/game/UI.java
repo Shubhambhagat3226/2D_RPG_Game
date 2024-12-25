@@ -5,6 +5,7 @@ import com.game.constants.ImageUtility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class UI {
 
@@ -13,8 +14,10 @@ public class UI {
     private BufferedImage heartFull, heartHalf, heartBlank;
     private final Font maruMonica, ancientFont;
     private boolean messageOn;
-    private String message = "";
-    private int messageCounter = 0;
+//    private String message = "";
+//    private int messageCounter = 0;
+    ArrayList<String> message         = new ArrayList<>();
+    ArrayList<Integer> messageCounter = new ArrayList<>();
     private boolean gameFinished;
     private String currentDialogue = "";
     private int commandNum=0;
@@ -32,9 +35,12 @@ public class UI {
     }
 
     // SET MESSAGE THAT WE HAVE TO SHOW
-    public void showMessage(String text) {
-        message = text;
-        messageOn = true;
+    public void addMessage(String text) {
+//        message = text;
+//        messageOn = true;
+
+        message.add(text);
+        messageCounter.add(0);
     }
 
     // DRAW THE UI CONTENT TO PANEL
@@ -51,6 +57,7 @@ public class UI {
             }
             case PLAY -> {
                 drawPlayerLife();
+                drawMessage();
             }
             case PAUSE -> {
                 drawPlayerLife();
@@ -64,6 +71,29 @@ public class UI {
                 drawCharacterScreen();
             }
         }
+    }
+    // DRAW MESSAGE
+    private void drawMessage() {
+        int messageX = CommonConstant.TILE_SIZE;
+        int messageY = CommonConstant.TILE_SIZE * 4;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32f));
+
+        for (int i = 0; i < message.size(); i++) {
+            if (message.get(i) != null) {
+                g2.setColor(Color.WHITE);
+                g2.drawString(message.get(i), messageX, messageY);
+
+                int counter = messageCounter.get(i) + 1;
+                messageCounter.set(i, counter);
+                messageY += 50;
+
+                if (messageCounter.get(i) > 180) {
+                    message.remove(i);
+                    messageCounter.remove(i);
+                }
+            }
+        }
+
     }
     // PLAYER LIFE
     private void drawPlayerLife() {

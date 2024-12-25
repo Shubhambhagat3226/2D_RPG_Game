@@ -1,12 +1,20 @@
 package com.game.constants;
 
 public enum ObjectName {
-    KEY,
-    DOOR,
-    CHEST,
-    BOOTS,
-    HEART,
-    GREEN_SLIME,
-    NORMAL_SWORD,
-    WOODEN_SHIELD,
+    KEY("key"),
+    DOOR("door"),
+    CHEST("chest"),
+    BOOTS("boot"),
+    HEART("life"),
+    GREEN_SLIME("green-slime"),
+    NORMAL_SWORD("sword"),
+    WOODEN_SHIELD("shield");
+
+    private ObjectName(final String name) {
+        this.name = name;
+    }
+
+    private String name;
+
+    public String getName() {  return name;  }
 }
