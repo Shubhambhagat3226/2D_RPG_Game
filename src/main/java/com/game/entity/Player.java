@@ -301,7 +301,7 @@ public class Player extends Entity {
         }
     }
     public void checkLevelUp() {
-        if (exp >= nextLevelExp) {
+        while (exp >= nextLevelExp) {
             level++;
             strength++;
             dexterity++;
