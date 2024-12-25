@@ -32,8 +32,17 @@ public class AssetSetter {
     public void setMonster() {
         Entity[] monster = gp.getMonster();
 
-        monster[0] = setEntity(new MON_GreenSlime(gp), 23, 36);
-        monster[1] = setEntity(new MON_GreenSlime(gp), 23, 37);
+        int i      = 0;
+        monster[i] = setEntity(new MON_GreenSlime(gp), 23, 36);
+        i++;
+        monster[i] = setEntity(new MON_GreenSlime(gp), 23, 37);
+        i++;
+        monster[i] = setEntity(new MON_GreenSlime(gp), 24, 37);
+        i++;
+        monster[i] = setEntity(new MON_GreenSlime(gp), 34, 42);
+        i++;
+        monster[i] = setEntity(new MON_GreenSlime(gp), 38, 42);
+
     }
 
 

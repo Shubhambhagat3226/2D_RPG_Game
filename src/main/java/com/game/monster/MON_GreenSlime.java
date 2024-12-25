@@ -22,6 +22,7 @@ public class MON_GreenSlime extends Entity {
         type    = 2;
         attack  = 4;
         defence = 0;
+        exp     = 2;
 
         solidArea           = new Rectangle(3, 18, 42, 30);
         solidArea_Default_X = solidArea.x;

@@ -277,20 +277,43 @@ public class Player extends Entity {
                gp.playSoundEffect(5);
 
                int damage  = attack - gp.getMonster()[i].defence;
-               if (damage < 0) {
+               if (damage <= 0) {
                    damage  = 0;
                }
-               gp.getMonster()[i].life -= damage;
-               gp.getUi().addMessage(damage + " damage!");
-
+               if (gp.getMonster()[i].alive) {
+                   gp.getMonster()[i].life -= damage;
+                   gp.getUi().addMessage(damage + " damage!");
+               }
                gp.getMonster()[i].invincible = true;
                gp.getMonster()[i].damageReaction();
 
                if (gp.getMonster()[i].life <= 0) {
                    gp.getMonster()[i].dying = true;
-                   gp.getUi().addMessage("Killed the " + gp.getMonster()[i].name.getName() + "!");
+                   if (gp.getMonster()[i].alive) {
+                       gp.getUi().addMessage("Killed the " + gp.getMonster()[i].name.getName() + "!");
+                       gp.getUi().addMessage("Exp + " + gp.getMonster()[i].exp);
+                       exp += gp.getMonster()[i].exp;
+                       checkLevelUp();
+                       gp.getMonster()[i].alive = false;
+                   }
                }
            }
+        }
+    }
+    public void checkLevelUp() {
+        if (exp >= nextLevelExp) {
+            level++;
+            strength++;
+            dexterity++;
+            nextLevelExp *= 2;
+            maxLife      += 2;
+            attack        = getAttack();
+            defence       = getDefense();
+
+            gp.playSoundEffect(8);
+            gp.setGameState(GameState.DIALOGUE);
+            gp.getUi().setCurrentDialogue("You are level " + level + "now\n" +
+                    "You feel stronger!" );
         }
     }
 

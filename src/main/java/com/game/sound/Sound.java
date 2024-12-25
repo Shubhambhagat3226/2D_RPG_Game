@@ -18,6 +18,7 @@ public class Sound {
         soundURL[5] = SoundUtility.HIT_MONSTER;
         soundURL[6] = SoundUtility.DAMAGE_RECEIVE;
         soundURL[7] = SoundUtility.SWING;
+        soundURL[8] = SoundUtility.LEVEL_UP;
     }
 
     public void setFile(int i) {

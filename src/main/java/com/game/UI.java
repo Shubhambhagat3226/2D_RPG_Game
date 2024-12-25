@@ -80,6 +80,9 @@ public class UI {
 
         for (int i = 0; i < message.size(); i++) {
             if (message.get(i) != null) {
+                g2.setColor(Color.DARK_GRAY);
+                g2.drawString(message.get(i), messageX+2, messageY);
+
                 g2.setColor(Color.WHITE);
                 g2.drawString(message.get(i), messageX, messageY);
 
