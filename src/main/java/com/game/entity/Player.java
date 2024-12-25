@@ -197,7 +197,7 @@ public class Player extends Entity {
     public void attacking() {
         standCounter = 0;
         spiritCounter++;
-        System.out.println(spiritNum + " " + spiritCounter);
+
         if (spiritCounter <= 5) {
             spiritNum     = 1;
 
@@ -312,7 +312,7 @@ public class Player extends Entity {
 
             gp.playSoundEffect(8);
             gp.setGameState(GameState.DIALOGUE);
-            gp.getUi().setCurrentDialogue("You are level " + level + "now\n" +
+            gp.getUi().setCurrentDialogue("You are level " + level + " now\n" +
                     "You feel stronger!" );
         }
     }

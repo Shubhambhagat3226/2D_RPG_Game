@@ -6,7 +6,7 @@ public enum ObjectName {
     CHEST("chest"),
     BOOTS("boot"),
     HEART("life"),
-    GREEN_SLIME("green-slime"),
+    GREEN_SLIME("Green Slime"),
     NORMAL_SWORD("sword"),
     WOODEN_SHIELD("shield");
 

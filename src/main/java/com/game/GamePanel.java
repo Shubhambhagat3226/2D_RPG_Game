@@ -245,6 +245,7 @@ public class GamePanel extends JPanel implements Runnable{
     public EventHandler getEventH() {return eventH;}
     public KeyHandler getKeyH() {return keyH;}
     public Entity[] getMonster() {return monster;}
+    public AssetSetter getaSetter() {return aSetter;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }

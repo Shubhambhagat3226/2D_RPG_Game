@@ -87,7 +87,7 @@ public class EventHandler {
             gp.setGameState(gameState);
             gp.getUi().setCurrentDialogue("You drink the water.\nYour life has been recovered.");
             gp.getPlayer().setLife(gp.getPlayer().getMaxLife());
-            gp.
+            gp.getaSetter().setMonster();
         }
     }
     // TELEPORT OCCUR
