@@ -20,88 +20,103 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
-        // TITLE STATE
-        if (gp.getGameState() == GameState.TITLE) {
-            // UP MOVEMENT
-            if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
-                gp.getUi().setCommandNum(gp.getUi().getCommandNum()-1);
-                if (gp.getUi().getCommandNum() < 0) {
-                    gp.getUi().setCommandNum(2);
-                }
-            }
-            // DOWN MOVEMENT
-            if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
-                gp.getUi().setCommandNum(gp.getUi().getCommandNum()+1);
-                if (gp.getUi().getCommandNum() > 2) {
-                    gp.getUi().setCommandNum(0);
-                }
-            }
-            // EVENT ON OPTION
-            if (KeyEvent.VK_ENTER == code) {
-                if (gp.getUi().getCommandNum() == 0) {
-                    gp.setGameState(GameState.PLAY);
-                    gp.playMusic(0);
-                }
-                else if (gp.getUi().getCommandNum() == 1) {
-
-                }
-                else if (gp.getUi().getCommandNum() == 2) {
-                    System.exit(0);
-                }
-            }
+        switch (gp.getGameState()) {
+            case TITLE -> titleState(code);
+            case PLAY -> playState(code);
+            case PAUSE -> pauseState(code);
+            case DIALOGUE -> dialogueState(code);
+            case CHARACTER_STATUS -> characterState(code);
         }
-        // PLAY STATE
-        else if (gp.getGameState() == GameState.PLAY) {
-            // UP MOVEMENT
-            if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
-                upPressed = true;
-            }
-            // DOWN MOVEMENT
-            if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
-                downPressed = true;
-            }
-            // LEFT MOVEMENT
-            if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
-                leftPressed = true;
-            }
-            // RIGHT MOVEMENT
-            if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
-                rightPressed = true;
-            }
-            // PAUSE SCREEN
-            if (KeyEvent.VK_P == code) {
-                gp.setGameState(GameState.PAUSE);
-            }
-            // TALK WITH NPC
-            if (KeyEvent.VK_ENTER == code) {
-                enteredPressed = true;
-            }
-
-            // DEBUG
-            if (KeyEvent.VK_T == code) {
-                if (!checkDrawTime) {
-                    checkDrawTime = true;
-                } else {
-                    checkDrawTime = false;
-                }
-            }
-        }
-        // PAUSE STATE
-        else if (gp.getGameState() == GameState.PAUSE) {
-            if (KeyEvent.VK_P == code) {
-                gp.setGameState(GameState.PLAY);
-            }
-        }
-        // DIALOGUE STATE
-        else if (gp.getGameState() == GameState.DIALOGUE) {
-            if (KeyEvent.VK_ENTER == code) {
-                gp.setGameState(GameState.PLAY);
-            }
-        }
-
 
     }
+    // IN TITLE STATE
+    private void titleState(int code) {
+        // UP MOVEMENT
+        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
+            gp.getUi().setCommandNum(gp.getUi().getCommandNum()-1);
+            if (gp.getUi().getCommandNum() < 0) {
+                gp.getUi().setCommandNum(2);
+            }
+        }
+        // DOWN MOVEMENT
+        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+            gp.getUi().setCommandNum(gp.getUi().getCommandNum()+1);
+            if (gp.getUi().getCommandNum() > 2) {
+                gp.getUi().setCommandNum(0);
+            }
+        }
+        // EVENT ON OPTION
+        if (KeyEvent.VK_ENTER == code) {
+            if (gp.getUi().getCommandNum() == 0) {
+                gp.setGameState(GameState.PLAY);
+                gp.playMusic(0);
+            }
+            else if (gp.getUi().getCommandNum() == 1) {
 
+            }
+            else if (gp.getUi().getCommandNum() == 2) {
+                System.exit(0);
+            }
+        }
+    }
+    // IN PLAY STATE
+    private void playState(int code) {
+        // UP MOVEMENT
+        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
+            upPressed = true;
+        }
+        // DOWN MOVEMENT
+        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+            downPressed = true;
+        }
+        // LEFT MOVEMENT
+        if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
+            leftPressed = true;
+        }
+        // RIGHT MOVEMENT
+        if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
+            rightPressed = true;
+        }
+        // PAUSE SCREEN
+        if (KeyEvent.VK_P == code) {
+            gp.setGameState(GameState.PAUSE);
+        }
+        // TALK WITH NPC
+        if (KeyEvent.VK_ENTER == code) {
+            enteredPressed = true;
+        }
+        // TALK WITH NPC
+        if (KeyEvent.VK_C == code) {
+            gp.setGameState(GameState.CHARACTER_STATUS);
+        }
+
+        // DEBUG
+        if (KeyEvent.VK_T == code) {
+            if (!checkDrawTime) {
+                checkDrawTime = true;
+            } else {
+                checkDrawTime = false;
+            }
+        }
+    }
+    // IN PAUSE STATE
+    private void pauseState(int code) {
+        if (KeyEvent.VK_P == code) {
+            gp.setGameState(GameState.PLAY);
+        }
+    }
+    // IN DIALOGUE STATE
+    private void dialogueState(int code) {
+        if (KeyEvent.VK_ENTER == code) {
+            gp.setGameState(GameState.PLAY);
+        }
+    }
+    // IN CHARACTER STATE
+    private void characterState(int code) {
+        if (KeyEvent.VK_C == code) {
+            gp.setGameState(GameState.PLAY);
+        }
+    }
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();

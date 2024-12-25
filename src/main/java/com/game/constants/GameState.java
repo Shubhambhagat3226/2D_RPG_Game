@@ -5,4 +5,5 @@ public enum GameState {
     PAUSE,
     DIALOGUE,
     TITLE,
+    CHARACTER_STATUS,
 }
