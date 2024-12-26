@@ -211,9 +211,6 @@ public class GamePanel extends JPanel implements Runnable{
         if (keyH.isShowDebugTest()) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
-            System.out.println(drawStart);
-            System.out.println(drawEnd);
-            System.out.println("pss:"+passed);
 
             g2.setFont(new Font("Arial", Font.PLAIN, 20));
             g2.setColor(Color.WHITE);

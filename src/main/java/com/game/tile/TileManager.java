@@ -128,7 +128,7 @@ public class TileManager {
             while (col < CommonConstant.MAX_WORLD_COL && row < CommonConstant.MAX_WORLD_ROW) {
                 String line = br.readLine();
                 while (col < CommonConstant.MAX_WORLD_COL) {
-                    String numbers[] = line.split(" ");
+                    String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     map[row][col] = num;
                     col++;
