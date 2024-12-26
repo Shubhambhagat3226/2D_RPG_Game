@@ -12,7 +12,6 @@ import com.game.tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -152,7 +151,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         // DEBUG
         long drawStart = 0;
-        if (keyH.isCheckDrawTime()) {
+        if (keyH.isShowDebugTest()) {
             drawStart = System.nanoTime();
         }
 
@@ -209,12 +208,24 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         // DEBUG
-        if (keyH.isCheckDrawTime()) {
+        if (keyH.isShowDebugTest()) {
             long drawEnd = System.nanoTime();
             long passed = drawEnd - drawStart;
+            System.out.println(drawStart);
+            System.out.println(drawEnd);
+            System.out.println("pss:"+passed);
+
+            g2.setFont(new Font("Arial", Font.PLAIN, 20));
             g2.setColor(Color.WHITE);
-            g2.drawString("Draw Time: " + passed, 10, 400);
-            System.out.println("Draw Time: " + (double)passed/100000000);
+            int x          = 10;
+            int y          = 400;
+            int lineHeight = 20;
+
+            g2.drawString("WorldX: " + player.getWorldX(), x, y); y += lineHeight;
+            g2.drawString("WorldY: " + player.getWorldY(), x, y); y += lineHeight;
+            g2.drawString("Col: " + (player.getWorldX() + player.getSolidArea().x)/CommonConstant.TILE_SIZE, x, y); y += lineHeight;
+            g2.drawString("Row: " + (player.getWorldY() + player.getSolidArea().y)/CommonConstant.TILE_SIZE, x, y); y += lineHeight;
+            g2.drawString("Draw Time: " + passed, x, y);
         }
 
         g2.dispose();

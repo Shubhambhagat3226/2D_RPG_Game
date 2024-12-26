@@ -10,7 +10,7 @@ public class KeyHandler implements KeyListener {
     private final GamePanel gp;
     private boolean upPressed, downPressed , leftPressed, rightPressed, enteredPressed;
     // DEBUG
-    private boolean checkDrawTime;
+    private boolean showDebugTest;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -92,10 +92,10 @@ public class KeyHandler implements KeyListener {
 
         // DEBUG
         if (KeyEvent.VK_T == code) {
-            if (!checkDrawTime) {
-                checkDrawTime = true;
+            if (!showDebugTest) {
+                showDebugTest = true;
             } else {
-                checkDrawTime = false;
+                showDebugTest = false;
             }
         }
     }
@@ -147,7 +147,7 @@ public class KeyHandler implements KeyListener {
     public boolean isDownPressed() { return downPressed; }
     public boolean isLeftPressed() { return leftPressed; }
     public boolean isRightPressed() { return rightPressed; }
-    public boolean isCheckDrawTime() { return checkDrawTime; }
+    public boolean isShowDebugTest() { return showDebugTest; }
     public boolean isEnteredPressed() {return enteredPressed;}
     // SETTER METHODS
     public void setEnteredPressed(boolean enteredPressed) {this.enteredPressed = enteredPressed;}
