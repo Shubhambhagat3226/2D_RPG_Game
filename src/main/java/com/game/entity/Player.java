@@ -3,12 +3,14 @@ package com.game.entity;
 import com.game.GamePanel;
 import com.game.constants.*;
 import com.game.event_handler.KeyHandler;
+import com.game.object.OBJ_KEY;
 import com.game.object.weapon.OBJ_Sword;
 import com.game.object.weapon.OBJ_Wooden_Shield;
 import com.game.sound.SoundUtility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Player extends Entity {
     private final KeyHandler keyH;
@@ -18,6 +20,9 @@ public class Player extends Entity {
 
     private int standCounter = 0;
     public boolean attackCanceled;
+
+    private ArrayList<Entity> inventory = new ArrayList<>();
+    private final int maxInventorySize = 20;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -41,6 +46,7 @@ public class Player extends Entity {
         setDefaultValues();
         loadImage();
         getPlayerAttackImage();
+        setItems();
     }
 
     public void setDefaultValues() {
@@ -62,6 +68,22 @@ public class Player extends Entity {
         currentShield = new OBJ_Wooden_Shield(gp);
         attack        = getAttack();  // TOTAL ATTACK CALCULATE BY STRENGTH AND WEAPON ATTACK-VALUE
         defence       = getDefense(); // TOTAL DEFENCE CALCULATE BY DEX AND WEAPON DEFENCE-VALUE
+    }
+    // SET ITEMS
+    public void setItems() {
+        inventory.add(currentWeapon);
+        inventory.add(currentShield);
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
+        inventory.add(new OBJ_KEY(gp));
     }
     public int getAttack() {
         return attack = strength * currentWeapon.getAttackValue();
@@ -386,4 +408,5 @@ public class Player extends Entity {
     // GETTER METHODS
     public int getScreenX() {  return screenX;  }
     public int getScreenY() {  return screenY;  }
+    public ArrayList<Entity> getInventory() {return inventory;}
 }

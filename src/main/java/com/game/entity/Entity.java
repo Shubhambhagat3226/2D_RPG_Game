@@ -252,6 +252,7 @@ public class Entity {
     public int getCoin() {return coin;}
     public SuperItem getCurrentWeapon() {return currentWeapon;}
     public SuperItem getCurrentShield() {return currentShield;}
+    public BufferedImage getDown_1(){return down_1;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}

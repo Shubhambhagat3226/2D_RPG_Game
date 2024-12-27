@@ -2,6 +2,7 @@ package com.game;
 
 import com.game.constants.CommonConstant;
 import com.game.constants.ImageUtility;
+import com.game.entity.Entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -330,10 +331,22 @@ public class UI {
         final int slotY_start = frameY + 20;
         int slotX             = slotX_start;
         int slotY             = slotY_start;
+        int slotSize          = CommonConstant.TILE_SIZE + 3;
+
+        // DRAW PLAYER'S ITEMS
+        for (int i = 0; i < gp.getPlayer().getInventory().size(); i++) {
+            g2.drawImage(gp.getPlayer().getInventory().get(i).down_1, slotX, slotY, null);
+            slotX += slotSize;
+            if (i%5 == 4) {
+                slotX  = slotX_start;
+                slotY += slotSize;
+            }
+        }
+
 
         // CURSOR
-        int cursorX      = slotX_start + (CommonConstant.TILE_SIZE * slotCol);
-        int cursorY      = slotY_start + (CommonConstant.TILE_SIZE * slotRow);
+        int cursorX      = slotX_start + (slotSize * slotCol);
+        int cursorY      = slotY_start + (slotSize * slotRow);
         int cursorWidth  = CommonConstant.TILE_SIZE;
         int cursorHeight = CommonConstant.TILE_SIZE;
         // DRAW CURSOR
