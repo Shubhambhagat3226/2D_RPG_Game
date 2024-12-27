@@ -119,6 +119,23 @@ public class KeyHandler implements KeyListener {
         if (KeyEvent.VK_C == code) {
             gp.setGameState(GameState.PLAY);
         }
+        // UP SIDE
+        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
+            gp.getUi().setSlotRow(gp.getUi().getSlotRow() - 1);
+        }
+        // DOWN SIDE
+        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+            gp.getUi().setSlotRow(gp.getUi().getSlotRow() + 1);
+        }
+        // LEFT SIDE
+        if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
+            gp.getUi().setSlotCol(gp.getUi().getSlotCol() - 1);
+        }
+        // RIGHT SIDE
+        if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
+            gp.getUi().setSlotCol(gp.getUi().getSlotCol() + 1);
+        }
+
     }
     @Override
     public void keyReleased(KeyEvent e) {

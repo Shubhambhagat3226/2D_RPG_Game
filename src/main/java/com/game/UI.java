@@ -21,7 +21,8 @@ public class UI {
     private boolean gameFinished;
     private String currentDialogue = "";
     private int commandNum=0;
-
+    private int slotCol = 0;
+    private int slotRow = 0;
 
     public UI(GamePanel gp) {
         this.gp     = gp;
@@ -69,6 +70,7 @@ public class UI {
             }
             case CHARACTER_STATUS -> {
                 drawCharacterScreen();
+                drawInventory();
             }
         }
     }
@@ -314,13 +316,42 @@ public class UI {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return tailX - length;
     }
+    // DRAW INVENTORY
+    public void drawInventory() {
+        // FRAME
+        int frameX      = CommonConstant.TILE_SIZE * 9;
+        int frameY      = CommonConstant.TILE_SIZE;
+        int frameWidth  = CommonConstant.TILE_SIZE * 6;
+        int frameHeight = CommonConstant.TILE_SIZE * 5;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        // SLOT
+        final int slotX_start = frameX + 20;
+        final int slotY_start = frameY + 20;
+        int slotX             = slotX_start;
+        int slotY             = slotY_start;
+
+        // CURSOR
+        int cursorX      = slotX_start + (CommonConstant.TILE_SIZE * slotCol);
+        int cursorY      = slotY_start + (CommonConstant.TILE_SIZE * slotRow);
+        int cursorWidth  = CommonConstant.TILE_SIZE;
+        int cursorHeight = CommonConstant.TILE_SIZE;
+        // DRAW CURSOR
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight,10, 10);
+    }
 
 
     // GETTER METHODS
     public int getCommandNum() {return commandNum;}
+    public int getSlotCol() {return slotCol;}
+    public int getSlotRow() {return slotRow;}
 
     // SETTER METHODS
     public void setGameFinished(boolean gameFinished) {this.gameFinished = gameFinished;}
     public void setCurrentDialogue(String currentDialogue) {this.currentDialogue = currentDialogue;}
     public void setCommandNum(int commandNum) {this.commandNum = commandNum;}
+    public void setSlotCol(int slotCol) {this.slotCol = slotCol;}
+    public void setSlotRow(int slotRow) {this.slotRow = slotRow;}
 }
