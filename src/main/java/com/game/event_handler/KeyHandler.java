@@ -122,19 +122,31 @@ public class KeyHandler implements KeyListener {
         }
         // UP SIDE
         if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
-            gp.getUi().setSlotRow(gp.getUi().getSlotRow() - 1);
+            if (gp.getUi().getSlotRow() != 0) {
+                gp.getUi().setSlotRow(gp.getUi().getSlotRow() - 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
         }
         // DOWN SIDE
         if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
-            gp.getUi().setSlotRow(gp.getUi().getSlotRow() + 1);
+            if (gp.getUi().getSlotRow() < 3) {
+                gp.getUi().setSlotRow(gp.getUi().getSlotRow() + 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
         }
         // LEFT SIDE
         if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
-            gp.getUi().setSlotCol(gp.getUi().getSlotCol() - 1);
+            if (gp.getUi().getSlotCol() != 0) {
+                gp.getUi().setSlotCol(gp.getUi().getSlotCol() - 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
         }
         // RIGHT SIDE
         if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
-            gp.getUi().setSlotCol(gp.getUi().getSlotCol() + 1);
+            if (gp.getUi().getSlotCol() < 4) {
+                gp.getUi().setSlotCol(gp.getUi().getSlotCol() + 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
         }
 
     }
