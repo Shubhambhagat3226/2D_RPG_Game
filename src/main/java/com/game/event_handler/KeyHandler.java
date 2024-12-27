@@ -2,6 +2,7 @@ package com.game.event_handler;
 
 import com.game.GamePanel;
 import com.game.constants.GameState;
+import com.game.sound.SoundUtility;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -49,7 +50,7 @@ public class KeyHandler implements KeyListener {
         if (KeyEvent.VK_ENTER == code) {
             if (gp.getUi().getCommandNum() == 0) {
                 gp.setGameState(GameState.PLAY);
-                gp.playMusic(0);
+                gp.playMusic(SoundUtility.BLUE_BOY_ADVENTURE);
             }
             else if (gp.getUi().getCommandNum() == 1) {
 

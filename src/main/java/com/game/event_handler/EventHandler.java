@@ -4,6 +4,7 @@ import com.game.GamePanel;
 import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.GameState;
+import com.game.sound.SoundUtility;
 
 public class EventHandler {
     private final GamePanel gp;
@@ -72,7 +73,7 @@ public class EventHandler {
     // DAMAGE OCCUR IF HIT
     public void damagePit(int col, int row, GameState gameState) {
         gp.setGameState(gameState);
-        gp.playSoundEffect(6);
+        gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
         gp.getUi().setCurrentDialogue("You fall into a pit!");
         gp.getPlayer().setLife(gp.getPlayer().getLife() - 1);
         eventRect[col][row].eventDone = true;
@@ -83,7 +84,7 @@ public class EventHandler {
         if (gp.getPlayer().getLife() < gp.getPlayer().getMaxLife()
                 && gp.getKeyH().isEnteredPressed()) {
             gp.getPlayer().attackCanceled = true;
-            gp.playSoundEffect(2);
+            gp.playSoundEffect(SoundUtility.POWER_UP);
             gp.setGameState(gameState);
             gp.getUi().setCurrentDialogue("You drink the water.\nYour life has been recovered.");
             gp.getPlayer().setLife(gp.getPlayer().getMaxLife());

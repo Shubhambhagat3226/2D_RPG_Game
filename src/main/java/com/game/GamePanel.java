@@ -11,6 +11,7 @@ import com.game.tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -228,16 +229,16 @@ public class GamePanel extends JPanel implements Runnable{
         g2.dispose();
     }
 
-    public void playMusic(int i) {
-        music.setFile(i);
+    public void playMusic(URL sound) {
+        music.setFile(sound);
         music.play();
         music.loop();
     }
     public void stopMusic() {
         music.stop();
     }
-    public void playSoundEffect(int i) {
-        se.setFile(i);
+    public void playSoundEffect(URL soundUrl) {
+        se.setFile(soundUrl);
         se.play();
     }
 

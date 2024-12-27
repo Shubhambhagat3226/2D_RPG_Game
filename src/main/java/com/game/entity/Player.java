@@ -5,6 +5,7 @@ import com.game.constants.*;
 import com.game.event_handler.KeyHandler;
 import com.game.object.weapon.OBJ_Sword;
 import com.game.object.weapon.OBJ_Wooden_Shield;
+import com.game.sound.SoundUtility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -157,7 +158,7 @@ public class Player extends Entity {
             }
             // CHECK ATTACK CANCELLED OR NOT
             if (keyH.isEnteredPressed() && !attackCanceled) {
-                gp.playSoundEffect(7);
+                gp.playSoundEffect(SoundUtility.SWING);
                 attacking     = true;
                 spiritCounter = 0;
             }
@@ -257,7 +258,7 @@ public class Player extends Entity {
     public void contactMonster(int i) {
         if (i != 999) {
             if (!invincible) {
-                gp.playSoundEffect(6);
+                gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
 
                 int damage  = gp.getMonster()[i].attack - defence;
                 if (damage < 0) {
@@ -274,7 +275,7 @@ public class Player extends Entity {
         if (i != 999 ) {
            if (!gp.getMonster()[i].invincible) {
 
-               gp.playSoundEffect(5);
+               gp.playSoundEffect(SoundUtility.HIT_MONSTER);
 
                int damage  = attack - gp.getMonster()[i].defence;
                if (damage <= 0) {
@@ -310,7 +311,7 @@ public class Player extends Entity {
             attack        = getAttack();
             defence       = getDefense();
 
-            gp.playSoundEffect(8);
+            gp.playSoundEffect(SoundUtility.LEVEL_UP);
             gp.setGameState(GameState.DIALOGUE);
             gp.getUi().setCurrentDialogue("You are level " + level + " now\n" +
                     "You feel stronger!" );

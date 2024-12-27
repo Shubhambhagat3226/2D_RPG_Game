@@ -6,6 +6,7 @@ import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ObjectName;
 import com.game.object.weapon.SuperItem;
+import com.game.sound.SoundUtility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,7 +100,7 @@ public class Entity {
         if (this.type == 2 && contactPlayer) {
            if (!gp.getPlayer().invincible) {
                // GIVE DAMAGE
-               gp.playSoundEffect(6);
+               gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
 
                int damage  = attack - gp.getPlayer().defence;
                if (damage < 0) {

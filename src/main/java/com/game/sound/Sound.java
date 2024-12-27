@@ -9,21 +9,9 @@ public class Sound {
     Clip clip;
     URL[] soundURL = new URL[30];
 
-    public Sound() {
-        soundURL[0] = SoundUtility.BLUE_BOY_ADVENTURE;
-        soundURL[1] = SoundUtility.COIN;
-        soundURL[2] = SoundUtility.POWER_UP;
-        soundURL[3] = SoundUtility.UNLOCK;
-        soundURL[4] = SoundUtility.FANFARE;
-        soundURL[5] = SoundUtility.HIT_MONSTER;
-        soundURL[6] = SoundUtility.DAMAGE_RECEIVE;
-        soundURL[7] = SoundUtility.SWING;
-        soundURL[8] = SoundUtility.LEVEL_UP;
-    }
-
-    public void setFile(int i) {
+    public void setFile(URL soundUrl) {
         try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+            AudioInputStream ais = AudioSystem.getAudioInputStream(soundUrl);
             clip = AudioSystem.getClip();
             clip.open(ais);
 
