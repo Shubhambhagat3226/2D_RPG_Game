@@ -73,7 +73,6 @@ public class Player extends Entity {
     public void setItems() {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new OBJ_KEY(gp));
     }
     public int getAttack() {
         return attack = strength * currentWeapon.getAttackValue();
@@ -252,6 +251,18 @@ public class Player extends Entity {
     // WHAT TO DO WHEN OBJECT COLLIED
     public void pickUpObject(int i) {
         if (i != 999) {
+            String text;
+
+            if (inventory.size() != maxInventorySize) {
+                inventory.add(gp.getObjects()[i]);
+                gp.playSoundEffect(SoundUtility.COIN);
+                text = "Got a " + gp.getObjects()[i].name.getName() + "!";
+
+            } else {
+                text = "Your inventory is full!";
+            }
+            gp.getUi().addMessage(text);
+            gp.getObjects()[i] = null;
 
         }
     }
