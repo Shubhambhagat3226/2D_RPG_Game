@@ -335,6 +335,14 @@ public class UI {
 
         // DRAW PLAYER'S ITEMS
         for (int i = 0; i < gp.getPlayer().getInventory().size(); i++) {
+
+            // EQUIP CURSOR
+            if (gp.getPlayer().getInventory().get(i) == gp.getPlayer().getCurrentWeapon() ||
+                    gp.getPlayer().getInventory().get(i) == gp.getPlayer().getCurrentShield()) {
+                g2.setColor(new Color(240, 190, 90));
+                g2.fillRoundRect(slotX, slotY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, 10, 10);
+            }
+
             g2.drawImage(gp.getPlayer().getInventory().get(i).getDown_1(), slotX, slotY, null);
             slotX += slotSize;
             if (i%5 == 4) {
