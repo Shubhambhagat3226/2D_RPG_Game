@@ -225,7 +225,7 @@ public class Entity {
         else if (dyingCounter <= i * 7) changeAlpha(g2, 0);
         else if (dyingCounter <= i * 8) changeAlpha(g2, 1);
         else {
-            dying = false;
+//            dying = false;
             alive = false;
         }
 

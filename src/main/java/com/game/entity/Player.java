@@ -297,7 +297,7 @@ public class Player extends Entity {
     // CONTACT MONSTER
     public void contactMonster(int i) {
         if (i != 999) {
-            if (!invincible) {
+            if (!invincible && !gp.getMonster()[i].dying) {
                 gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
 
                 int damage  = gp.getMonster()[i].attack - defence;
@@ -329,14 +329,14 @@ public class Player extends Entity {
                gp.getMonster()[i].damageReaction();
 
                if (gp.getMonster()[i].life <= 0) {
-                   gp.getMonster()[i].dying = true;
-                   if (gp.getMonster()[i].alive) {
+                   if (gp.getMonster()[i].alive && !gp.getMonster()[i].dying) {
                        gp.getUi().addMessage("Killed the " + gp.getMonster()[i].name.getName() + "!");
                        gp.getUi().addMessage("Exp + " + gp.getMonster()[i].exp);
                        exp += gp.getMonster()[i].exp;
                        checkLevelUp();
-                       gp.getMonster()[i].alive = false;
+//                       gp.getMonster()[i].alive = false;
                    }
+                   gp.getMonster()[i].dying = true;
                }
            }
         }
