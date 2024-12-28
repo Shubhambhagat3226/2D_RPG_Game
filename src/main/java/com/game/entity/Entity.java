@@ -63,6 +63,7 @@ public class Entity {
 
     // DESCRIPTION
     protected String description;
+    protected int useCost;
 
     public Entity(GamePanel gp) {
         this.gp    = gp;

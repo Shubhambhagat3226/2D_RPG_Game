@@ -195,6 +195,8 @@ public class KeyHandler implements KeyListener {
     public boolean isRightPressed() { return rightPressed; }
     public boolean isShowDebugTest() { return showDebugTest; }
     public boolean isEnteredPressed() {return enteredPressed;}
+    public boolean isShotKeyPressed() {return shotKeyPressed;}
+
     // SETTER METHODS
     public void setEnteredPressed(boolean enteredPressed) {this.enteredPressed = enteredPressed;}
 }

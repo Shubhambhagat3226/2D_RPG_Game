@@ -3,6 +3,7 @@ package com.game.entity;
 import com.game.GamePanel;
 import com.game.constants.*;
 import com.game.event_handler.KeyHandler;
+import com.game.object.project.OBJ_Fireball;
 import com.game.object.weapon.OBJ_Sword;
 import com.game.object.weapon.OBJ_Wooden_Shield;
 import com.game.sound.SoundUtility;
@@ -65,6 +66,7 @@ public class Player extends Entity {
         coin          = 0;
         currentWeapon = new OBJ_Sword(gp);
         currentShield = new OBJ_Wooden_Shield(gp);
+        projectile    = new OBJ_Fireball(gp);
         attack        = getAttack();  // TOTAL ATTACK CALCULATE BY STRENGTH AND WEAPON ATTACK-VALUE
         defence       = getDefense(); // TOTAL DEFENCE CALCULATE BY DEX AND WEAPON DEFENCE-VALUE
     }
@@ -208,6 +210,16 @@ public class Player extends Entity {
                 standCounter=0;
             }
 
+        }
+
+        if (gp.getKeyH().isShotKeyPressed() && !projectile.alive) {
+            // SET DEFAULT COORDINATION, DIRECTION AND USER
+            projectile.set(worldX, worldY, direction, true, this);
+
+            // ADD IT TO THE LIST
+            gp.getProjectileList().add(projectile);
+
+            gp.playSoundEffect(SoundUtility.BURNING);
         }
 
         //  THIS NEEDS TO BE OUTSIDE OF KEY IF STATEMENT

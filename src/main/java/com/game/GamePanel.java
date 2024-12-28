@@ -4,6 +4,7 @@ import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
 import com.game.entity.Entity;
 import com.game.entity.Player;
+import com.game.entity.Projectile;
 import com.game.event_handler.EventHandler;
 import com.game.event_handler.KeyHandler;
 import com.game.sound.Sound;
@@ -34,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
     private Entity[] objects;
     private Entity[] npc;
     private Entity[] monster;
+    ArrayList<Entity> projectileList;
     ArrayList<Entity> entities;
 
     // GAME STATE
@@ -74,6 +76,8 @@ public class GamePanel extends JPanel implements Runnable{
         monster = new Entity[20];
         // ALL ENTITIES
         entities = new ArrayList<>();
+        // FIREBALL ARRAY
+        projectileList = new ArrayList<>();
     }
 
     public void setupObject() {
@@ -139,6 +143,18 @@ public class GamePanel extends JPanel implements Runnable{
                         }
                     }
                 }
+                // FIREBALL
+                for (int i = 0; i < projectileList.size(); i++) {
+                    if (projectileList.get(i) != null) {
+                        if (projectileList.get(i).isAlive()) {
+                            projectileList.get(i).update();
+                        }
+                        else {
+                            projectileList.remove(i);
+                        }
+                    }
+                }
+
             }
             case PAUSE -> { }
         }
@@ -179,6 +195,13 @@ public class GamePanel extends JPanel implements Runnable{
             for (int i = 0; i < monster.length; i++) {
                 if (monster[i] != null) {
                     entities.add(monster[i]);
+                }
+
+            }
+            // ADD FIREBALL
+            for (int i = 0; i < projectileList.size(); i++) {
+                if (projectileList.get(i) != null) {
+                    entities.add(projectileList.get(i));
                 }
 
             }
@@ -255,6 +278,7 @@ public class GamePanel extends JPanel implements Runnable{
     public KeyHandler getKeyH() {return keyH;}
     public Entity[] getMonster() {return monster;}
     public AssetSetter getaSetter() {return aSetter;}
+    public ArrayList<Entity> getProjectileList() {return projectileList;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
