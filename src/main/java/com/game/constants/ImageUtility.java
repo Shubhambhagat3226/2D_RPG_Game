@@ -50,6 +50,8 @@ public class ImageUtility {
     public static final String FIREBALL_LEFT_2  = "/Projectile/fireball_left_2.png";
     public static final String FIREBALL_RIGHT_1 = "/Projectile/fireball_right_1.png";
     public static final String FIREBALL_RIGHT_2 = "/Projectile/fireball_right_2.png";
+    // ROCK
+    public static final String ROCK_DOWN_1  = "/Projectile/rock_down_1.png";
 
     // HEART
     public static final String HEART_BLANK = "/Object/heart_blank.png";

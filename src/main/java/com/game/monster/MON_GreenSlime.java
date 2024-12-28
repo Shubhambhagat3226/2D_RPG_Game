@@ -6,6 +6,7 @@ import com.game.constants.Direction;
 import com.game.constants.ImageUtility;
 import com.game.entity.Entity;
 import com.game.constants.ObjectName;
+import com.game.object.project.OBJ_ROCK;
 
 import java.awt.*;
 import java.util.Random;
@@ -23,6 +24,7 @@ public class MON_GreenSlime extends Entity {
         attack  = 4;
         defence = 0;
         exp     = 2;
+        projectile = new OBJ_ROCK(gp);
 
         solidArea           = new Rectangle(3, 18, 42, 30);
         solidArea_Default_X = solidArea.x;
@@ -61,6 +63,14 @@ public class MON_GreenSlime extends Entity {
             }
 
             actionCounter=0;
+
+        }
+
+        int i = new Random().nextInt(100);
+        if (i > 98 && !projectile.isAlive() && shotAvailableCounter == 30) {
+            projectile.set(worldX, worldY, direction, true, this);
+            gp.getProjectileList().add(projectile);
+            shotAvailableCounter = 0;
         }
     }
 

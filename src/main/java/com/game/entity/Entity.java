@@ -106,17 +106,8 @@ public class Entity {
         boolean contactPlayer = gp.getChecker().checkPlayer(this);
 
         if (this.type == Type.MONSTER && contactPlayer) {
-           if (!gp.getPlayer().invincible) {
-               // GIVE DAMAGE
-               gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
 
-               int damage  = attack - gp.getPlayer().defence;
-               if (damage < 0) {
-                   damage  = 0;
-               }
-               gp.getPlayer().life      -= damage;
-               gp.getPlayer().invincible = true;
-           }
+            damagePlayer(attack);
         }
         // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
         if (!collisionOn) {
@@ -146,6 +137,25 @@ public class Entity {
                 invincible        = false;
                 invincibleCounter = 0;
             }
+        }
+
+        // SHOT AVAILABLE
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
+        }
+    }
+
+    public void damagePlayer(int attack) {
+        if (!gp.getPlayer().invincible) {
+            // GIVE DAMAGE
+            gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
+
+            int damage  = attack - gp.getPlayer().defence;
+            if (damage < 0) {
+                damage  = 0;
+            }
+            gp.getPlayer().life      -= damage;
+            gp.getPlayer().invincible = true;
         }
     }
     // DRAW METHOD BY DEFAULT

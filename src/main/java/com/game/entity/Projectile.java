@@ -31,6 +31,11 @@ public class Projectile extends Entity{
             }
         } else {
 
+            boolean contactPlayer = gp.getChecker().checkPlayer(this);
+            if (!gp.getPlayer().invincible && contactPlayer) {
+                damagePlayer(attack);
+                alive = false;
+            }
         }
 
         switch (direction) {
