@@ -335,7 +335,7 @@ public class UI {
 
         // DRAW PLAYER'S ITEMS
         for (int i = 0; i < gp.getPlayer().getInventory().size(); i++) {
-            g2.drawImage(gp.getPlayer().getInventory().get(i).down_1, slotX, slotY, null);
+            g2.drawImage(gp.getPlayer().getInventory().get(i).getDown_1(), slotX, slotY, null);
             slotX += slotSize;
             if (i%5 == 4) {
                 slotX  = slotX_start;
@@ -353,6 +353,30 @@ public class UI {
         g2.setColor(Color.WHITE);
         g2.setStroke(new BasicStroke(3));
         g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight,10, 10);
+
+        // DESCRIPTION FRAME
+        int dFrameX      = frameX;
+        int dFrameY      = frameY + frameWidth;
+        int dFrameWidth  = frameWidth;
+        int dFrameHeight = CommonConstant.TILE_SIZE * 3;
+        drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+        // DESCRIPTION TEXT
+        int textX = dFrameX + 20;
+        int textY = dFrameY + CommonConstant.TILE_SIZE;
+        g2.setFont(g2.getFont().deriveFont(28f));
+
+        int itemIndex = getItemIndexOnSlot();
+
+        if (itemIndex < gp.getPlayer().getInventory().size()) {
+            for (String line : gp.getPlayer().getInventory().get(itemIndex).getDescription().split("\n")) {
+                g2.drawString(line, textX, textY);
+                textY += 32;
+            }
+        }
+
+    }
+    public int getItemIndexOnSlot() {
+        return (slotCol + (slotRow * 5));
     }
 
 

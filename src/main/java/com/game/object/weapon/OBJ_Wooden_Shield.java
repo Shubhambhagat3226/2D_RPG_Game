@@ -12,5 +12,6 @@ public class OBJ_Wooden_Shield extends SuperItem{
         name         = ObjectName.WOODEN_SHIELD;
         down_1       = getImage(ImageUtility.WOODEN_SHIELD);
         defenseValue = 1;
+        description = "[" + name.getName() + "]\nMade by wood.";
     }
 }

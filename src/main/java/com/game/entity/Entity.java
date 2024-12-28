@@ -59,6 +59,9 @@ public class Entity {
     protected SuperItem currentWeapon;
     protected SuperItem currentShield;
 
+    // DESCRIPTION
+    protected String description;
+
     public Entity(GamePanel gp) {
         this.gp    = gp;
         solidArea  = new Rectangle(0, 0, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
@@ -253,6 +256,7 @@ public class Entity {
     public SuperItem getCurrentWeapon() {return currentWeapon;}
     public SuperItem getCurrentShield() {return currentShield;}
     public BufferedImage getDown_1(){return down_1;}
+    public String getDescription() {return description;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}
