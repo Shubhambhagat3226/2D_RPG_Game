@@ -3,10 +3,8 @@ package com.game.entity;
 import com.game.GamePanel;
 import com.game.constants.*;
 import com.game.event_handler.KeyHandler;
-import com.game.object.OBJ_KEY;
 import com.game.object.weapon.OBJ_Sword;
 import com.game.object.weapon.OBJ_Wooden_Shield;
-import com.game.object.weapon.SuperItem;
 import com.game.sound.SoundUtility;
 
 import java.awt.*;

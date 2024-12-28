@@ -6,10 +6,8 @@ import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ObjectName;
 import com.game.constants.Type;
-import com.game.object.weapon.SuperItem;
 import com.game.sound.SoundUtility;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -48,6 +46,8 @@ public class Entity {
     protected ObjectName name;
     protected int maxLife;
     protected int life;
+    protected int maxMana;
+    protected int mana;
     protected int speed;
     protected int level;
     protected int strength;
@@ -59,6 +59,7 @@ public class Entity {
     protected int coin;
     protected SuperItem currentWeapon;
     protected SuperItem currentShield;
+    protected Projectile projectile;
 
     // DESCRIPTION
     protected String description;

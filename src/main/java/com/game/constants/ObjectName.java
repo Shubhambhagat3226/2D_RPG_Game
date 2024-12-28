@@ -11,6 +11,7 @@ public enum ObjectName {
     AXE("Woodcutter's Axe"),
     BLUE_SHIELD("Blue Shield"),
     POTION("Red Potion"),
+    FIREBALL("Fireball"),
     WOODEN_SHIELD("Wooden Shield");
 
     private ObjectName(final String name) {

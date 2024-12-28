@@ -41,6 +41,16 @@ public class ImageUtility {
     public static final String PLAYER_PICK_RIGHT_2 = "/Player/Attacking sprites/boy_pick_right_2.png";
 
 
+    // FIREBALL
+    public static final String FIREBALL_UP_1    = "/Projectile/fireball_up_1.png";
+    public static final String FIREBALL_UP_2    = "/Projectile/fireball_up_2.png";
+    public static final String FIREBALL_DOWN_1  = "/Projectile/fireball_down_1.png";
+    public static final String FIREBALL_DOWN_2  = "/Projectile/fireball_down_2.png";
+    public static final String FIREBALL_LEFT_1  = "/Projectile/fireball_left_1.png";
+    public static final String FIREBALL_LEFT_2  = "/Projectile/fireball_left_2.png";
+    public static final String FIREBALL_RIGHT_1 = "/Projectile/fireball_right_1.png";
+    public static final String FIREBALL_RIGHT_2 = "/Projectile/fireball_right_2.png";
+
     // HEART
     public static final String HEART_BLANK = "/Object/heart_blank.png";
     public static final String HEART_FULL  = "/Object/heart_full.png";

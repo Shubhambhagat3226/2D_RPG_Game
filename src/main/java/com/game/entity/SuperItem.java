@@ -1,7 +1,6 @@
-package com.game.object.weapon;
+package com.game.entity;
 
 import com.game.GamePanel;
-import com.game.entity.Entity;
 
 import java.awt.image.BufferedImage;
 

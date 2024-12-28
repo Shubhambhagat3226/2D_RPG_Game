@@ -4,8 +4,9 @@ import com.game.GamePanel;
 import com.game.constants.ImageUtility;
 import com.game.constants.ObjectName;
 import com.game.constants.Type;
+import com.game.entity.SuperItem;
 
-public class OBJ_Sword extends SuperItem{
+public class OBJ_Sword extends SuperItem {
     public OBJ_Sword(GamePanel gp) {
         super(gp);
 
