@@ -12,6 +12,7 @@ public class ImageUtility {
     public static final String PLAYER_RIGHT_2 = "/Player/Walking sprites/boy_right_2.png";
 
     // PLAYER ATTACK
+    // SWORD
     public static final String PLAYER_SWORD_UP_1    = "/Player/Attacking sprites/boy_attack_up_1.png";
     public static final String PLAYER_SWORD_UP_2    = "/Player/Attacking sprites/boy_attack_up_2.png";
     public static final String PLAYER_SWORD_DOWN_1  = "/Player/Attacking sprites/boy_attack_down_1.png";
@@ -20,6 +21,25 @@ public class ImageUtility {
     public static final String PLAYER_SWORD_LEFT_2  = "/Player/Attacking sprites/boy_attack_left_2.png";
     public static final String PLAYER_SWORD_RIGHT_1 = "/Player/Attacking sprites/boy_attack_right_1.png";
     public static final String PLAYER_SWORD_RIGHT_2 = "/Player/Attacking sprites/boy_attack_right_2.png";
+    // AXE
+    public static final String PLAYER_AXE_UP_1    = "/Player/Attacking sprites/boy_axe_up_1.png";
+    public static final String PLAYER_AXE_UP_2    = "/Player/Attacking sprites/boy_axe_up_2.png";
+    public static final String PLAYER_AXE_DOWN_1  = "/Player/Attacking sprites/boy_axe_down_1.png";
+    public static final String PLAYER_AXE_DOWN_2  = "/Player/Attacking sprites/boy_axe_down_2.png";
+    public static final String PLAYER_AXE_LEFT_1  = "/Player/Attacking sprites/boy_axe_left_1.png";
+    public static final String PLAYER_AXE_LEFT_2  = "/Player/Attacking sprites/boy_axe_left_2.png";
+    public static final String PLAYER_AXE_RIGHT_1 = "/Player/Attacking sprites/boy_axe_right_1.png";
+    public static final String PLAYER_AXE_RIGHT_2 = "/Player/Attacking sprites/boy_axe_right_2.png";
+    // PICK
+    public static final String PLAYER_PICK_UP_1    = "/Player/Attacking sprites/boy_pick_up_1.png";
+    public static final String PLAYER_PICK_UP_2    = "/Player/Attacking sprites/boy_pick_up_2.png";
+    public static final String PLAYER_PICK_DOWN_1  = "/Player/Attacking sprites/boy_pick_down_1.png";
+    public static final String PLAYER_PICK_DOWN_2  = "/Player/Attacking sprites/boy_pick_down_2.png";
+    public static final String PLAYER_PICK_LEFT_1  = "/Player/Attacking sprites/boy_pick_left_1.png";
+    public static final String PLAYER_PICK_LEFT_2  = "/Player/Attacking sprites/boy_pick_left_2.png";
+    public static final String PLAYER_PICK_RIGHT_1 = "/Player/Attacking sprites/boy_pick_right_1.png";
+    public static final String PLAYER_PICK_RIGHT_2 = "/Player/Attacking sprites/boy_pick_right_2.png";
+
 
     // HEART
     public static final String HEART_BLANK = "/Object/heart_blank.png";
