@@ -261,7 +261,7 @@ public class Player extends Entity {
             solidArea.height  = attackArea.height;
             // CHECK MONSTER COLLIDE WITH UPDATED WORLD-X,Y AND SOLID-AREA
             int monsterIndex  = gp.getChecker().checkEntity(this, gp.getMonster());
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
             // RESET THE VALUE
             worldX           = currentWorldX;
             worldY           =  currentWorldY;
@@ -320,7 +320,7 @@ public class Player extends Entity {
         }
     }
     // DAMAGE TO MONSTER
-    public void damageMonster(int i) {
+    public void damageMonster(int i, int attack) {
 
         if (i != 999 ) {
            if (!gp.getMonster()[i].invincible) {
