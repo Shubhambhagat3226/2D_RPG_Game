@@ -6,6 +6,7 @@ import com.game.event_handler.KeyHandler;
 import com.game.object.OBJ_KEY;
 import com.game.object.weapon.OBJ_Sword;
 import com.game.object.weapon.OBJ_Wooden_Shield;
+import com.game.object.weapon.SuperItem;
 import com.game.sound.SoundUtility;
 
 import java.awt.*;
@@ -340,6 +341,24 @@ public class Player extends Entity {
             gp.setGameState(GameState.DIALOGUE);
             gp.getUi().setCurrentDialogue("You are level " + level + " now\n" +
                     "You feel stronger!" );
+        }
+    }
+    public void selectItem() {
+        int itemIndex = gp.getUi().getItemIndexOnSlot();
+
+        if (itemIndex < inventory.size()) {
+            Entity selectedItem = inventory.get(itemIndex);
+            if (selectedItem.type == Type.SWORD || selectedItem.type == Type.AXE) {
+                currentWeapon = (SuperItem) selectedItem;
+                attack        = getAttack();
+            }
+            if (selectedItem.type == Type.SHIELD) {
+                currentShield = (SuperItem) selectedItem;
+                defence       = getDefense();
+            }
+            if (selectedItem.type == Type.CONSUMABLE) {
+
+            }
         }
     }
 

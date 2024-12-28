@@ -5,6 +5,7 @@ import com.game.UtilityTool;
 import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ObjectName;
+import com.game.constants.Type;
 import com.game.object.weapon.SuperItem;
 import com.game.sound.SoundUtility;
 
@@ -100,7 +101,7 @@ public class Entity {
         gp.getChecker().checkEntity(this, gp.getMonster());
         boolean contactPlayer = gp.getChecker().checkPlayer(this);
 
-        if (this.type == 2 && contactPlayer) {
+        if (this.type == Type.MONSTER && contactPlayer) {
            if (!gp.getPlayer().invincible) {
                // GIVE DAMAGE
                gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);

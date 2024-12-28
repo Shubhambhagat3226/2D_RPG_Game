@@ -148,6 +148,11 @@ public class KeyHandler implements KeyListener {
                 gp.playSoundEffect(SoundUtility.CURSOR);
             }
         }
+        // SELECT
+        if (KeyEvent.VK_ENTER == code ) {
+            gp.getPlayer().selectItem();
+        }
+
 
     }
     @Override
