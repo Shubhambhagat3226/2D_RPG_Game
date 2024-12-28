@@ -363,7 +363,7 @@ public class UI {
         // DESCRIPTION TEXT
         int textX = dFrameX + 20;
         int textY = dFrameY + CommonConstant.TILE_SIZE;
-        g2.setFont(g2.getFont().deriveFont(28f));
+        g2.setFont(maruMonica.deriveFont(28f));
 
         int itemIndex = getItemIndexOnSlot();
 

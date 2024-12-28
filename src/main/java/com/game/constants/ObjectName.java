@@ -8,6 +8,7 @@ public enum ObjectName {
     HEART("life"),
     GREEN_SLIME("Green Slime"),
     NORMAL_SWORD("Normal Sword"),
+    AXE("Woodcutter's Axe"),
     WOODEN_SHIELD("Wooden Shield");
 
     private ObjectName(final String name) {

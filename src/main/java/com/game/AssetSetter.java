@@ -5,6 +5,7 @@ import com.game.entity.Entity;
 import com.game.entity.NPC_OldMan;
 import com.game.monster.MON_GreenSlime;
 import com.game.object.*;
+import com.game.object.weapon.OBJ_Axe;
 
 public class AssetSetter {
     private final GamePanel gp;
@@ -21,6 +22,7 @@ public class AssetSetter {
         i++;
         obj[i]   = setEntity(new OBJ_KEY(gp), 26, 21);
         i++;
+        obj[i]   = setEntity(new OBJ_Axe(gp), 33, 21);
     }
 
     private Entity setEntity(Entity e, int x, int y) {

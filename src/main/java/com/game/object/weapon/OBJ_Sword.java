@@ -8,9 +8,11 @@ public class OBJ_Sword extends SuperItem{
     public OBJ_Sword(GamePanel gp) {
         super(gp);
 
-        name        = ObjectName.NORMAL_SWORD;
-        down_1      = getImage(ImageUtility.SWORD);
-        attackValue = 4;
-        description = "[" + name.getName() + "]\nAn old sword.";
+        name              = ObjectName.NORMAL_SWORD;
+        down_1            = getImage(ImageUtility.SWORD);
+        attackValue       = 4;
+        attackArea.width  = 36;
+        attackArea.height = 36;
+        description       = "[" + name.getName() + "]\nAn old sword.";
     }
 }

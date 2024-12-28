@@ -75,6 +75,7 @@ public class Player extends Entity {
         inventory.add(currentShield);
     }
     public int getAttack() {
+        attackArea    = currentWeapon.attackArea;
         return attack = strength * currentWeapon.getAttackValue();
     }
     public int getDefense() {

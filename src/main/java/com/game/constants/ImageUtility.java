@@ -83,6 +83,17 @@ public class ImageUtility {
     public static final String IRON_DOOR     = "/Object/door_iron.png";
     public static final String WOODEN_SHIELD = "/Object/shield_wood.png";
     public static final String SWORD         = "/Object/sword_normal.png";
+    public static final String AXE           = "/Object/axe.png";
+    public static final String BLUE_HEART    = "/Object/blueheart.png";
+    public static final String CHEST_OPENED  = "/Object/chest_opened.png";
+    public static final String BRONZE_COIN   = "/Object/coin_bronze.png";
+    public static final String LANTERN       = "/Object/lantern.png";
+    public static final String MANA_EMPTY    = "/Object/manacrystal_blank.png";
+    public static final String MANA_FULL     = "/Object/manacrystal_full.png";
+    public static final String PICK_AXE      = "/Object/pickaxe.png";
+    public static final String RED_POTION    = "/Object/potion_red.png";
+    public static final String BLUE_SHIELD   = "/Object/shield_blue.png";
+    public static final String TENT          = "/Object/tent.png";
 
     // MONSTER
     public static final String GREEN_SLIME_1       = "/Monster/greenslime_down_1.png";
