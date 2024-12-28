@@ -100,17 +100,32 @@ public class Player extends Entity {
     public void getPlayerAttackImage() {
         width         = CommonConstant.TILE_SIZE;
         height        = CommonConstant.TILE_SIZE * 2;
-        attackUp_1    = getImage(ImageUtility.PLAYER_SWORD_UP_1);
-        attackUp_2    = getImage(ImageUtility.PLAYER_SWORD_UP_2);
-        attackDown_1  = getImage(ImageUtility.PLAYER_SWORD_DOWN_1);
-        attackDown_2  = getImage(ImageUtility.PLAYER_SWORD_DOWN_2);
+        if (currentWeapon.type == Type.SWORD) {
+            attackUp_1 = getImage(ImageUtility.PLAYER_SWORD_UP_1);
+            attackUp_2 = getImage(ImageUtility.PLAYER_SWORD_UP_2);
+            attackDown_1 = getImage(ImageUtility.PLAYER_SWORD_DOWN_1);
+            attackDown_2 = getImage(ImageUtility.PLAYER_SWORD_DOWN_2);
 
-        width         = CommonConstant.TILE_SIZE * 2;
-        height        = CommonConstant.TILE_SIZE;
-        attackLeft_1  = getImage(ImageUtility.PLAYER_SWORD_LEFT_1);
-        attackLeft_2  = getImage(ImageUtility.PLAYER_SWORD_LEFT_2);
-        attackRight_1 = getImage(ImageUtility.PLAYER_SWORD_RIGHT_1);
-        attackRight_2 = getImage(ImageUtility.PLAYER_SWORD_RIGHT_2);
+            width = CommonConstant.TILE_SIZE * 2;
+            height = CommonConstant.TILE_SIZE;
+            attackLeft_1 = getImage(ImageUtility.PLAYER_SWORD_LEFT_1);
+            attackLeft_2 = getImage(ImageUtility.PLAYER_SWORD_LEFT_2);
+            attackRight_1 = getImage(ImageUtility.PLAYER_SWORD_RIGHT_1);
+            attackRight_2 = getImage(ImageUtility.PLAYER_SWORD_RIGHT_2);
+        }
+        if (currentWeapon.type == Type.AXE) {
+            attackUp_1 = getImage(ImageUtility.PLAYER_AXE_UP_1);
+            attackUp_2 = getImage(ImageUtility.PLAYER_AXE_UP_2);
+            attackDown_1 = getImage(ImageUtility.PLAYER_AXE_DOWN_1);
+            attackDown_2 = getImage(ImageUtility.PLAYER_AXE_DOWN_2);
+
+            width = CommonConstant.TILE_SIZE * 2;
+            height = CommonConstant.TILE_SIZE;
+            attackLeft_1 = getImage(ImageUtility.PLAYER_AXE_LEFT_1);
+            attackLeft_2 = getImage(ImageUtility.PLAYER_AXE_LEFT_2);
+            attackRight_1 = getImage(ImageUtility.PLAYER_AXE_RIGHT_1);
+            attackRight_2 = getImage(ImageUtility.PLAYER_AXE_RIGHT_2);
+        }
 
     }
 
@@ -351,6 +366,7 @@ public class Player extends Entity {
             if (selectedItem.type == Type.SWORD || selectedItem.type == Type.AXE) {
                 currentWeapon = (SuperItem) selectedItem;
                 attack        = getAttack();
+                getPlayerAttackImage();
             }
             if (selectedItem.type == Type.SHIELD) {
                 currentShield = (SuperItem) selectedItem;
