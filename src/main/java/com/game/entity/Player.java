@@ -212,7 +212,7 @@ public class Player extends Entity {
 
         }
 
-        if (gp.getKeyH().isShotKeyPressed() && !projectile.alive) {
+        if (gp.getKeyH().isShotKeyPressed() && !projectile.alive && shotAvailableCounter == 30) {
             // SET DEFAULT COORDINATION, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
 
@@ -220,6 +220,7 @@ public class Player extends Entity {
             gp.getProjectileList().add(projectile);
 
             gp.playSoundEffect(SoundUtility.BURNING);
+            shotAvailableCounter = 0;
         }
 
         //  THIS NEEDS TO BE OUTSIDE OF KEY IF STATEMENT
@@ -229,6 +230,10 @@ public class Player extends Entity {
                 invincible        = false;
                 invincibleCounter = 0;
             }
+        }
+        // SHOT AVAILABLE
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
         }
 
     }

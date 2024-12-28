@@ -40,6 +40,7 @@ public class Entity {
     protected int invincibleCounter = 0;
     protected int dyingCounter      = 0;
     protected int hpBarCounter      = 0;
+    protected int shotAvailableCounter = 0;
 
     // CHARACTER STATUS
     protected int type; // 0-player 1-npc 2-monster
