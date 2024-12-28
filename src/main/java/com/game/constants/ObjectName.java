@@ -10,6 +10,7 @@ public enum ObjectName {
     NORMAL_SWORD("Normal Sword"),
     AXE("Woodcutter's Axe"),
     BLUE_SHIELD("Blue Shield"),
+    POTION("Red Potion"),
     WOODEN_SHIELD("Wooden Shield");
 
     private ObjectName(final String name) {

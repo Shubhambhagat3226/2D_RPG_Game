@@ -26,6 +26,10 @@ public class AssetSetter {
         obj[i]   = setEntity(new OBJ_Axe(gp), 33, 21);
         i++;
         obj[i]   = setEntity(new OBJ_Blue_Shield(gp), 35, 21);
+        i++;
+        obj[i]   = setEntity(new OBJ_Red_Potion(gp), 22, 27);
+        i++;
+        obj[i]   = setEntity(new OBJ_Red_Potion(gp), 22, 29);
     }
 
     private Entity setEntity(Entity e, int x, int y) {

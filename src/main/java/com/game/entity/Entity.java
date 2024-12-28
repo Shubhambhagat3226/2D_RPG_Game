@@ -86,6 +86,7 @@ public class Entity {
         }
     }
 
+    public void use(Entity entity) {}
     // SET-ACTION DEFINE IN SUN-CLASS
     public void setAction() {}
     // DAMAGE REACTION
