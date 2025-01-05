@@ -6,6 +6,9 @@ import com.game.constants.Direction;
 import com.game.constants.ImageUtility;
 import com.game.entity.Entity;
 import com.game.constants.ObjectName;
+import com.game.object.OBJ_COIN;
+import com.game.object.OBJ_Heart;
+import com.game.object.OBJ_ManaCrystal;
 import com.game.object.project.OBJ_ROCK;
 
 import java.awt.*;
@@ -79,5 +82,16 @@ public class MON_GreenSlime extends Entity {
 
         actionCounter = 0;
         direction     = gp.getPlayer().getDirection();
+    }
+
+    @Override
+    public void checkDrop() {
+
+        int i = new Random().nextInt(100);
+
+        // SET DROP
+        if (i < 50) dropItem(new OBJ_COIN(gp));
+        else if (i < 75) dropItem(new OBJ_Heart(gp));
+        else dropItem(new OBJ_ManaCrystal(gp));
     }
 }

@@ -28,8 +28,12 @@ public class AssetSetter {
         obj[i]   = setEntity(new OBJ_Blue_Shield(gp), 35, 21);
         i++;
         obj[i]   = setEntity(new OBJ_Red_Potion(gp), 22, 27);
+//        i++;
+//        obj[i]   = setEntity(new OBJ_Red_Potion(gp), 22, 29);
         i++;
-        obj[i]   = setEntity(new OBJ_Red_Potion(gp), 22, 29);
+        obj[i]   = setEntity(new OBJ_ManaCrystal(gp), 22, 29);
+        i++;
+        obj[i]   = setEntity(new OBJ_Heart(gp), 22, 31);
     }
 
     private Entity setEntity(Entity e, int x, int y) {

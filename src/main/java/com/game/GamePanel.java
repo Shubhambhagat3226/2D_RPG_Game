@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable{
         // PLAYER SET-UP
         player = new Player(this, keyH);
         // OBJECT ELEMENT
-        objects = new Entity[10];
+        objects = new Entity[20];
         // NPC
         npc = new Entity[10];
         // MONSTER
@@ -139,6 +139,7 @@ public class GamePanel extends JPanel implements Runnable{
                             monster[i].update();
                         }
                         else {
+                            monster[i].checkDrop();
                             monster[i] = null;
                         }
                     }

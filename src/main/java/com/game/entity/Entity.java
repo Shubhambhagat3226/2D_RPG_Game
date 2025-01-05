@@ -88,12 +88,24 @@ public class Entity {
             case EAST  -> direction = Direction.WEST;
         }
     }
-
     public void use(Entity entity) {}
     // SET-ACTION DEFINE IN SUN-CLASS
     public void setAction() {}
     // DAMAGE REACTION
     public void damageReaction() {}
+    // DROP ITEM
+    public void checkDrop() {}
+    public void dropItem(Entity droppedItem) {
+
+        for (int i = 0; i < gp.getObjects().length; i++) {
+            if (gp.getObjects()[i] == null) {
+                gp.getObjects()[i] = droppedItem;
+                gp.getObjects()[i].worldX = worldX; // DEAD MONSTER's WORLD X
+                gp.getObjects()[i].worldY = worldY; // DEAD MONSTER's WORLD Y
+                break;
+            }
+        }
+    }
     // UPDATE METHOD DEFAULT FOR ENTITY
     public void update() {
         setAction();

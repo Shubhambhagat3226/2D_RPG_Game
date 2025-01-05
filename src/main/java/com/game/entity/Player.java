@@ -241,9 +241,11 @@ public class Player extends Entity {
             }
         }
         // SHOT AVAILABLE
-        if (shotAvailableCounter < 30) {
-            shotAvailableCounter++;
-        }
+        if (shotAvailableCounter < 30) { shotAvailableCounter++; }
+
+        // CORRECT VALUE
+        if (life > maxLife) { life = maxLife; }
+        if (mana > maxMana) { mana = maxMana; }
 
     }
     // ATTACKING
