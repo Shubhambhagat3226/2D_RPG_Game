@@ -214,9 +214,16 @@ public class Player extends Entity {
 
         }
 
-        if (gp.getKeyH().isShotKeyPressed() && !projectile.alive && shotAvailableCounter == 30) {
+        if (gp.getKeyH().isShotKeyPressed() &&
+                !projectile.alive &&
+                shotAvailableCounter == 30 &&
+                projectile.haveResource(this)) {
+
             // SET DEFAULT COORDINATION, DIRECTION AND USER
             projectile.set(worldX, worldY, direction, true, this);
+
+            // SUBTRACT COST (MANA, AMMO, ETC.)
+            projectile.subtractResource(this);
 
             // ADD IT TO THE LIST
             gp.getProjectileList().add(projectile);

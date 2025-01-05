@@ -88,6 +88,7 @@ public class EventHandler {
             gp.setGameState(gameState);
             gp.getUi().setCurrentDialogue("You drink the water.\nYour life has been recovered.");
             gp.getPlayer().setLife(gp.getPlayer().getMaxLife());
+            gp.getPlayer().setMana(gp.getPlayer().getMaxMana());
             gp.getaSetter().setMonster();
         }
     }

@@ -4,6 +4,7 @@ import com.game.GamePanel;
 import com.game.constants.CommonConstant;
 import com.game.constants.ImageUtility;
 import com.game.constants.ObjectName;
+import com.game.entity.Entity;
 import com.game.entity.Projectile;
 
 public class OBJ_Fireball extends Projectile {
@@ -14,7 +15,7 @@ public class OBJ_Fireball extends Projectile {
         speed   = 5;
         maxLife = 80;
         life    = maxLife;
-        attack  = 2;
+        attack  = 5;
         useCost = 1;
         alive   = false;
         loadImage();
@@ -31,5 +32,18 @@ public class OBJ_Fireball extends Projectile {
         left_2     = getImage(ImageUtility.FIREBALL_LEFT_2);
         right_1    = getImage(ImageUtility.FIREBALL_RIGHT_1);
         right_2    = getImage(ImageUtility.FIREBALL_RIGHT_2);
+    }
+
+    public boolean haveResource(Entity user) {
+
+        boolean haveResource = false;
+        if (user.getMana() >= useCost) {
+            haveResource = true;
+        }
+        return haveResource;
+    }
+
+    public void subtractResource(Entity user) {
+        user.setMana(user.getMana() - useCost);
     }
 }

@@ -290,4 +290,6 @@ public class Entity {
 
     public void setWorldX(int worldX) {this.worldX = worldX;}
     public void setWorldY(int worldY) {this.worldY = worldY;}
+
+    public void setMana(int mana) {this.mana = mana;}
 }

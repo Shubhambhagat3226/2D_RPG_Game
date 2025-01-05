@@ -141,7 +141,7 @@ public class UI {
         int i = 0;
 
         // DRAW MAX MANA
-        while (i < gp.getPlayer().getMaxMana()/2) {
+        while (i < gp.getPlayer().getMaxMana()) {
             g2.drawImage(manaBlank, x, y, null);
             i++;
             x +=35;
