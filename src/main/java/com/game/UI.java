@@ -12,7 +12,8 @@ public class UI {
 
     private final GamePanel gp;
     private Graphics2D g2;
-    private BufferedImage heartFull, heartHalf, heartBlank;
+    private final BufferedImage heartFull, heartHalf, heartBlank;
+    private final BufferedImage manaFull, manaBlank;
     private final Font maruMonica, ancientFont;
     private boolean messageOn;
 //    private String message = "";
@@ -34,6 +35,8 @@ public class UI {
         heartHalf   = UtilityTool.setImage(ImageUtility.HEART_HALF, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
         heartBlank  = UtilityTool.setImage(ImageUtility.HEART_BLANK, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
 
+        manaFull    = UtilityTool.setImage(ImageUtility.MANA_FULL, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+        manaBlank   = UtilityTool.setImage(ImageUtility.MANA_EMPTY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
     }
 
     // SET MESSAGE THAT WE HAVE TO SHOW
@@ -59,14 +62,17 @@ public class UI {
             }
             case PLAY -> {
                 drawPlayerLife();
+                drawPlayerMana();
                 drawMessage();
             }
             case PAUSE -> {
                 drawPlayerLife();
+                drawPlayerMana();
                 drawPauseScreen();
             }
             case DIALOGUE -> {
                 drawPlayerLife();
+                drawPlayerMana();
                 drawDialogueScreen();
             }
             case CHARACTER_STATUS -> {
@@ -126,6 +132,29 @@ public class UI {
             }
             i++;
             x += CommonConstant.TILE_SIZE;
+        }
+    }
+    // DRAW PLAYER MANA
+    private void drawPlayerMana() {
+        int x = (CommonConstant.TILE_SIZE/2) - 4;
+        int y = (int) (CommonConstant.TILE_SIZE*1.5);
+        int i = 0;
+
+        // DRAW MAX MANA
+        while (i < gp.getPlayer().getMaxMana()/2) {
+            g2.drawImage(manaBlank, x, y, null);
+            i++;
+            x +=35;
+        }
+        // RESET
+        x = (CommonConstant.TILE_SIZE/2) - 4;
+        y = (int) (CommonConstant.TILE_SIZE*1.5);
+        i = 0;
+        // DRAW CURRENT LIFE
+        while (i < gp.getPlayer().getMana()) {
+            g2.drawImage(manaFull, x,  y, null);
+            i++;
+            x += 35;
         }
     }
     //DRAW TITLE-SCREEN
@@ -242,11 +271,11 @@ public class UI {
         final int lineHeight = 35;
 
         // NAME
-        String[] attribute = {"Level", "Life", "Strength", "Dexterity", "Attack",
+        String[] attribute = {"Level", "Life", "Mana", "Strength", "Dexterity", "Attack",
                 "Defence", "Exp", "Next Level", "Coin", "Weapon", "Shield"};
         for (String s : attribute) {
             if (s.compareTo("Weapon") == 0) {
-                textY += 20;
+                textY += 10;
             } else if (s.compareTo("Shield") == 0) {
                 textY += 15;
             }
@@ -269,6 +298,11 @@ public class UI {
 
         textY += lineHeight;
         value = String.valueOf(gp.getPlayer().getLife() + "/" + gp.getPlayer().getMaxLife());
+        textX = getX_For_AlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+
+        textY += lineHeight;
+        value = String.valueOf(gp.getPlayer().getMana() + "/" + gp.getPlayer().getMaxMana());
         textX = getX_For_AlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
 
@@ -308,9 +342,9 @@ public class UI {
         g2.drawString(value, textX, textY);
 
         textY += lineHeight;
-        g2.drawImage(gp.getPlayer().getCurrentWeapon().getImage(), tailX - CommonConstant.TILE_SIZE, textY-14, null);
+        g2.drawImage(gp.getPlayer().getCurrentWeapon().getImage(), tailX - CommonConstant.TILE_SIZE, textY-24, null);
         textY += CommonConstant.TILE_SIZE;
-        g2.drawImage(gp.getPlayer().getCurrentShield().getImage(), tailX - CommonConstant.TILE_SIZE, textY-14, null);
+        g2.drawImage(gp.getPlayer().getCurrentShield().getImage(), tailX - CommonConstant.TILE_SIZE, textY-24, null);
 
     }
     private int getX_For_AlignToRightText(String text, int tailX) {

@@ -272,6 +272,8 @@ public class Entity {
     public SuperItem getCurrentShield() {return currentShield;}
     public BufferedImage getDown_1(){return down_1;}
     public String getDescription() {return description;}
+    public int getMana() {return mana;}
+    public int getMaxMana() {return maxMana;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}
