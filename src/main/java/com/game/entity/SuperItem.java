@@ -8,6 +8,7 @@ public class SuperItem extends Entity {
     // ITEMS ATTRIBUTE
     protected int attackValue;
     protected int defenseValue;
+    protected int value;
 
     public SuperItem(GamePanel gp) {
         super(gp);

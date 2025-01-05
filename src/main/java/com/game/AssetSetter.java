@@ -17,11 +17,11 @@ public class AssetSetter {
         Entity[] obj = gp.getObjects();
 
         int i = 0;
-        obj[i]   = setEntity(new OBJ_KEY(gp), 25, 19);
+        obj[i]   = setEntity(new OBJ_COIN(gp), 25, 19);
         i++;
-        obj[i]   = setEntity(new OBJ_KEY(gp), 21, 19);
+        obj[i]   = setEntity(new OBJ_COIN(gp), 21, 19);
         i++;
-        obj[i]   = setEntity(new OBJ_KEY(gp), 26, 21);
+        obj[i]   = setEntity(new OBJ_COIN(gp), 26, 21);
         i++;
         obj[i]   = setEntity(new OBJ_Axe(gp), 33, 21);
         i++;

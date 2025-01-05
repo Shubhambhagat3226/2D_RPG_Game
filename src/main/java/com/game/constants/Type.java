@@ -8,4 +8,5 @@ public class Type {
     public final static int AXE        = 4;
     public final static int SHIELD     = 5;
     public final static int CONSUMABLE = 6;
+    public final static int PICKUP_ONLY = 7;
 }

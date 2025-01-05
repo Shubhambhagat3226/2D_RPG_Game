@@ -292,19 +292,28 @@ public class Player extends Entity {
     // WHAT TO DO WHEN OBJECT COLLIED
     public void pickUpObject(int i) {
         if (i != 999) {
-            String text;
 
-            if (inventory.size() != maxInventorySize) {
-                inventory.add(gp.getObjects()[i]);
-                gp.playSoundEffect(SoundUtility.COIN);
-                text = "Got a " + gp.getObjects()[i].name.getName() + "!";
-
+            // PICKUP ONLY ITEM
+            if (gp.getObjects()[i].type == Type.PICKUP_ONLY) {
+                gp.getObjects()[i].use(this);
+                gp.getObjects()[i] = null;
             } else {
-                text = "Your inventory is full!";
-            }
-            gp.getUi().addMessage(text);
-            gp.getObjects()[i] = null;
 
+
+                // INVENTORY ITEMS
+                String text;
+
+                if (inventory.size() != maxInventorySize) {
+                    inventory.add(gp.getObjects()[i]);
+                    gp.playSoundEffect(SoundUtility.COIN);
+                    text = "Got a " + gp.getObjects()[i].name.getName() + "!";
+
+                } else {
+                    text = "Your inventory is full!";
+                }
+                gp.getUi().addMessage(text);
+                gp.getObjects()[i] = null;
+            }
         }
     }
     // INTERACTION WITH NPC
