@@ -13,7 +13,7 @@ public class OBJ_Sword extends SuperItem {
         type              = Type.SWORD;
         name              = ObjectName.NORMAL_SWORD;
         down_1            = getImage(ImageUtility.SWORD);
-        attackValue       = 4;
+        attackValue       = 1;
         attackArea.width  = 36;
         attackArea.height = 36;
         description       = "[" + name.getName() + "]\nAn old sword.";

@@ -4,6 +4,7 @@ import com.game.GamePanel;
 import com.game.constants.CommonConstant;
 import com.game.constants.ImageUtility;
 import com.game.constants.ObjectName;
+import com.game.entity.Entity;
 import com.game.entity.Projectile;
 
 public class OBJ_ROCK extends Projectile {
@@ -31,5 +32,18 @@ public class OBJ_ROCK extends Projectile {
         left_2     = getImage(ImageUtility.ROCK_DOWN_1);
         right_1    = getImage(ImageUtility.ROCK_DOWN_1);
         right_2    = getImage(ImageUtility.ROCK_DOWN_1);
+    }
+
+    public boolean haveResource(Entity user) {
+
+        boolean haveResource = false;
+        if (user.getMana() >= useCost) {
+            haveResource = true;
+        }
+        return haveResource;
+    }
+
+    public void subtractResource(Entity user) {
+        user.setMana(user.getMana() - useCost);
     }
 }
