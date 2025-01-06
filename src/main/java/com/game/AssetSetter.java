@@ -10,6 +10,8 @@ import com.game.object.weapon.OBJ_Blue_Shield;
 import com.game.tile_interactive.IT_DryTree;
 import com.game.tile_interactive.InteractiveTile;
 
+import java.awt.*;
+
 public class AssetSetter {
     private final GamePanel gp;
 
@@ -25,17 +27,10 @@ public class AssetSetter {
         i++;
         obj[i]   = setEntity(new OBJ_COIN(gp), 26, 21);
         i++;
-        obj[i]   = setEntity(new OBJ_Axe(gp), 33, 21);
+        obj[i]   = setEntity(new OBJ_Axe(gp), 20, 12);
         i++;
         obj[i]   = setEntity(new OBJ_Blue_Shield(gp), 35, 21);
         i++;
-        obj[i]   = setEntity(new OBJ_Red_Potion(gp), 22, 27);
-//        i++;
-//        obj[i]   = setEntity(new OBJ_Red_Potion(gp), 22, 29);
-        i++;
-        obj[i]   = setEntity(new OBJ_ManaCrystal(gp), 22, 29);
-        i++;
-        obj[i]   = setEntity(new OBJ_Heart(gp), 22, 31);
     }
 
     private Entity setEntity(Entity e, int x, int y) {
@@ -69,14 +64,21 @@ public class AssetSetter {
 
     public void setInteractiveTile() {
 
+        Point[] points = {new Point(27, 12), new Point(28, 12),new Point(29, 12),
+                new Point(30, 12),new Point(31, 12), new Point(32, 12),
+                new Point(33, 12), new Point(27, 16),new Point(18, 40),
+                new Point(17, 40),new Point(16, 40), new Point(15, 40),
+                new Point(14, 40), new Point(13, 40),new Point(13, 41),
+                new Point(12, 41),new Point(11, 41), new Point(10, 41),
+                new Point(10, 40), new Point(29, 40),new Point(30, 40),
+                new Point(36, 30),new Point(33, 7), new Point(30, 21),
+                new Point(31, 21), new Point(32, 21)};
+
         int i = 0;
-        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 27, 12); i++;
-        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 28, 12); i++;
-        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 29, 12); i++;
-        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 30, 12); i++;
-        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 31, 12); i++;
-        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 32, 12); i++;
-        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 33, 12); i++;
+        for (Point point : points) {
+            gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), point.x, point.y);
+            i++;
+        }
 
     }
 
