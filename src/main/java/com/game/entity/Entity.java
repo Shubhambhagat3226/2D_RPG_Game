@@ -265,6 +265,40 @@ public class Entity {
         return UtilityTool.setImage(imagePath, width, height);
     }
 
+
+    // PARTICLE
+    public Color getParticleColor() {
+        Color color = null;
+        return color;
+    }
+    public int getParticleSize() {
+        int size = 0; // 6PX
+        return size;
+    }
+    public int getParticleSpeed() {
+        int speed = 0;
+        return speed;
+    }
+    public int getParticleMaxLife() {
+        int maxLife = 0;
+        return maxLife;
+    }
+    public void generateParticle(Entity generator, Entity target) {
+        Color color = generator.getParticleColor();
+        int size    = generator.getParticleSize();
+        int speed   = generator.getParticleSpeed();
+        int maxLife = generator.getParticleMaxLife();
+
+        Particle p1 = new Particle(gp, generator, color, size, speed, maxLife, -2, -1);
+        Particle p2 = new Particle(gp, generator, color, size, speed, maxLife, 2, -1);
+        Particle p3 = new Particle(gp, generator, color, size, speed, maxLife, -2, 1);
+        Particle p4 = new Particle(gp, generator, color, size, speed, maxLife, 2, 1);
+        gp.getParticleList().add(p1);
+        gp.getParticleList().add(p2);
+        gp.getParticleList().add(p3);
+        gp.getParticleList().add(p4);
+    }
+
     // GETTER METHOD ONLY
     public int getWorldX() {  return worldX;  }
     public int getWorldY() {  return worldY;  }

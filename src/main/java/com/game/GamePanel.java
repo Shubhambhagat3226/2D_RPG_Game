@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
     private Entity[] monster;
     private InteractiveTile[] iTile;
     ArrayList<Entity> projectileList;
+    ArrayList<Entity> particleList;
     ArrayList<Entity> entities;
 
     // GAME STATE
@@ -81,6 +82,8 @@ public class GamePanel extends JPanel implements Runnable{
         entities = new ArrayList<>();
         // FIREBALL ARRAY
         projectileList = new ArrayList<>();
+        // PARTICLES LIST
+        particleList = new ArrayList<>();
     }
 
     public void setupObject() {
@@ -159,6 +162,17 @@ public class GamePanel extends JPanel implements Runnable{
                         }
                     }
                 }
+                // PARTICLE LIST
+                for (int i = 0; i < particleList.size(); i++) {
+                    if (particleList.get(i) != null) {
+                        if (particleList.get(i).isAlive()) {
+                            particleList.get(i).update();
+                        }
+                        else {
+                            particleList.remove(i);
+                        }
+                    }
+                }
                 // INTERACTIVE TREE
                 for (int i = 0; i < iTile.length; i++) {
                     if (iTile[i] != null) {
@@ -219,6 +233,13 @@ public class GamePanel extends JPanel implements Runnable{
             for (int i = 0; i < projectileList.size(); i++) {
                 if (projectileList.get(i) != null) {
                     entities.add(projectileList.get(i));
+                }
+
+            }
+            // PARTICLE
+            for (int i = 0; i < particleList.size(); i++) {
+                if (particleList.get(i) != null) {
+                    entities.add(particleList.get(i));
                 }
 
             }
@@ -297,6 +318,7 @@ public class GamePanel extends JPanel implements Runnable{
     public AssetSetter getaSetter() {return aSetter;}
     public ArrayList<Entity> getProjectileList() {return projectileList;}
     public InteractiveTile[] getiTile() {return iTile;}
+    public ArrayList<Entity> getParticleList() {return particleList;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
