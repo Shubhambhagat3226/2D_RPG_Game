@@ -286,6 +286,7 @@ public class Entity {
     public String getDescription() {return description;}
     public int getMana() {return mana;}
     public int getMaxMana() {return maxMana;}
+    public int getType() {return type;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}

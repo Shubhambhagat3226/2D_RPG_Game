@@ -488,7 +488,7 @@ public class Player extends Entity {
 
     // INTERACTIVE-TILE
     public void damageInteractiveTile(int i) {
-        if (i != 999 && gp.getiTile()[i].isDestructible()) {
+        if (i != 999 && gp.getiTile()[i].isDestructible() && gp.getiTile()[i].isCorrectItem(this)) {
 
             gp.getiTile()[i] = null;
         }

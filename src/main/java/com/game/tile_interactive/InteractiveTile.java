@@ -11,6 +11,10 @@ public class InteractiveTile extends Entity {
         super(gp);
     }
     public void update() {}
+    public boolean isCorrectItem(Entity entity) {
+        boolean isCorrectItem = false;
+        return isCorrectItem;
+    }
 
     // GETTER
     public boolean isDestructible() {return destructible;}
