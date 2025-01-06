@@ -97,7 +97,7 @@ public class KeyHandler implements KeyListener {
 
         // DEBUG
         if (code == KeyEvent.VK_R) {
-            gp.getTileM().loadMap("/maps/Map/worldV2.txt");
+            gp.getTileM().loadMap("/maps/Map/worldV3.txt");
         }
         if (KeyEvent.VK_T == code) {
             if (!showDebugTest) {

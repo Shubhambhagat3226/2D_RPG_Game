@@ -12,6 +12,7 @@ import com.game.tile_interactive.InteractiveTile;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +20,11 @@ import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable{
 
+    // FOR FULL SCREEN
+    int screenWidth2  = CommonConstant.SCREEN_WIDTH;
+    int screenHeight2 = CommonConstant.SCREEN_HEIGHT;
+    BufferedImage tempScreen;
+    Graphics2D g2;
     // SYSTEM
     private Thread gameThread;
     private final KeyHandler keyH;
@@ -92,6 +98,24 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setMonster();
         aSetter.setInteractiveTile();
         gameState = GameState.TITLE;
+
+        tempScreen = new BufferedImage(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        g2         = (Graphics2D) tempScreen.getGraphics();
+
+//        setFullScreen();
+    }
+
+    // FULL SCREEN
+    public void setFullScreen() {
+
+        // GET LOCAL SCREEN DEVICE
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gd      = ge.getDefaultScreenDevice();
+        gd.setFullScreenWindow(GameFrame.window);
+
+        // GET FULL SCREEN WIDTH AND HEIGHT
+        screenWidth2  = GameFrame.window.getWidth();
+        screenHeight2 = GameFrame.window.getHeight();
     }
 
     // DO FPS
@@ -119,7 +143,8 @@ public class GamePanel extends JPanel implements Runnable{
                 update();
 
                 // DRAW THE SCREEN WITH THE UPDATED INFORMATION
-                repaint();
+                drawToTempScreen(); //DRAW EVERYTHING TO BUFFERED-IMAGE
+                drawToScreen();     //DRAW BUFFERED-IMAGE TO SCREEN
 
                 delta--;
             }
@@ -186,11 +211,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-
+    public void drawToTempScreen() {
         // DEBUG
         long drawStart = 0;
         if (keyH.isShowDebugTest()) {
@@ -287,7 +308,11 @@ public class GamePanel extends JPanel implements Runnable{
             g2.drawString("Draw Time: " + passed, x, y);
         }
 
-        g2.dispose();
+    }
+    public void drawToScreen() {
+        Graphics g = getGraphics();
+        g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);
+        g.dispose();
     }
 
     public void playMusic(URL sound) {

@@ -354,7 +354,7 @@ public class UI {
     // DRAW INVENTORY
     public void drawInventory() {
         // FRAME
-        int frameX      = CommonConstant.TILE_SIZE * 9;
+        int frameX      = CommonConstant.TILE_SIZE * 12;
         int frameY      = CommonConstant.TILE_SIZE;
         int frameWidth  = CommonConstant.TILE_SIZE * 6;
         int frameHeight = CommonConstant.TILE_SIZE * 5;
