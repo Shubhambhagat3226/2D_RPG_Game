@@ -7,6 +7,8 @@ import com.game.monster.MON_GreenSlime;
 import com.game.object.*;
 import com.game.object.weapon.OBJ_Axe;
 import com.game.object.weapon.OBJ_Blue_Shield;
+import com.game.tile_interactive.IT_DryTree;
+import com.game.tile_interactive.InteractiveTile;
 
 public class AssetSetter {
     private final GamePanel gp;
@@ -65,5 +67,17 @@ public class AssetSetter {
 
     }
 
+    public void setInteractiveTile() {
+
+        int i = 0;
+        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 27, 12); i++;
+        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 28, 12); i++;
+        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 29, 12); i++;
+        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 30, 12); i++;
+        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 31, 12); i++;
+        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 32, 12); i++;
+        gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), 33, 12); i++;
+
+    }
 
 }

@@ -105,7 +105,14 @@ public class ImageUtility {
 
     public static final String SAND   = "/Tiles/Old version/sand.png";
     public static final String TREE   = "/Tiles/New version/tree.png";
-    public static final String  EARTH = "/Tiles/New version/earth.png";
+    public static final String EARTH  = "/Tiles/New version/earth.png";
+
+    // INTERACTIVE TILE
+    public static final String TRUNK           = "/Tiles_Interactive/trunk.png";
+    public static final String DRY_TREE        = "/Tiles_Interactive/drytree.png";
+    public static final String METAL_PLATE     = "/Tiles_Interactive/metalplate.png";
+    public static final String DESTROYED_WALL  = "/Tiles_Interactive/destructiblewall.png";
+
 
     // OBJECTS IMAGES
     public static final String KEY           = "/Object/key.png";

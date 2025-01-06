@@ -23,7 +23,7 @@ public class TileManager {
         map = new int[CommonConstant.MAX_WORLD_ROW][CommonConstant.MAX_WORLD_COL];
 
        loadTileImages();
-       loadMap("/maps/Map/worldV2.txt");
+       loadMap("/maps/Map/worldV3.txt");
     }
 
     // LOAD THE TILES
@@ -74,6 +74,7 @@ public class TileManager {
         setUp(39, ImageUtility.EARTH, false);
         setUp(40, ImageUtility.WALL, true);
         setUp(41, ImageUtility.TREE, true);
+        setUp(42, ImageUtility.TREE, true);
 
     }
     public void setUp(int index, String imagePath, boolean collision) {

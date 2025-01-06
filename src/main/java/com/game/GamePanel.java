@@ -4,11 +4,11 @@ import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
 import com.game.entity.Entity;
 import com.game.entity.Player;
-import com.game.entity.Projectile;
 import com.game.event_handler.EventHandler;
 import com.game.event_handler.KeyHandler;
 import com.game.sound.Sound;
 import com.game.tile.TileManager;
+import com.game.tile_interactive.InteractiveTile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
     private Entity[] objects;
     private Entity[] npc;
     private Entity[] monster;
+    private InteractiveTile[] iTile;
     ArrayList<Entity> projectileList;
     ArrayList<Entity> entities;
 
@@ -56,6 +57,8 @@ public class GamePanel extends JPanel implements Runnable{
         se = new Sound();
         // TILE-MANAGER SET
         tileM = new TileManager(this);
+        // INTERACTIVE SET
+        iTile = new InteractiveTile[50];
         // COLLISION-CHECKER OBJECT
         checker = new CollisionChecker(this);
         // ASSET-SETTER
@@ -84,6 +87,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();
+        aSetter.setInteractiveTile();
         gameState = GameState.TITLE;
     }
 
@@ -155,6 +159,12 @@ public class GamePanel extends JPanel implements Runnable{
                         }
                     }
                 }
+                // INTERACTIVE TREE
+                for (int i = 0; i < iTile.length; i++) {
+                    if (iTile[i] != null) {
+                        iTile[i].update();
+                    }
+                }
 
             }
             case PAUSE -> { }
@@ -182,6 +192,12 @@ public class GamePanel extends JPanel implements Runnable{
 
             // TILE
             tileM.draw(g2);
+
+            for (int i = 0; i < iTile.length; i++) {
+                if (iTile[i] != null) {
+                    iTile[i].draw(g2);
+                }
+            }
 
             // ADD ALL ENTITIES IN LIST
             // ADD PLAYER
@@ -280,6 +296,7 @@ public class GamePanel extends JPanel implements Runnable{
     public Entity[] getMonster() {return monster;}
     public AssetSetter getaSetter() {return aSetter;}
     public ArrayList<Entity> getProjectileList() {return projectileList;}
+    public InteractiveTile[] getiTile() {return iTile;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }

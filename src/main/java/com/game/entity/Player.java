@@ -174,6 +174,9 @@ public class Player extends Entity {
             int monsterIndex = gp.getChecker().checkEntity(this, gp.getMonster());
             contactMonster(monsterIndex);
 
+            // CHECK INTERACTIVE TILE COLLISION
+            int iTileIndex = gp.getChecker().checkEntity(this, gp.getiTile());
+
             // CHECK EVENT
             gp.getEventH().checkEvent();
 
@@ -278,6 +281,9 @@ public class Player extends Entity {
             // CHECK MONSTER COLLIDE WITH UPDATED WORLD-X,Y AND SOLID-AREA
             int monsterIndex  = gp.getChecker().checkEntity(this, gp.getMonster());
             damageMonster(monsterIndex, attack);
+            // INTERACTIVE TILE
+            int iTileIndex = gp.getChecker().checkEntity(this, gp.getiTile());
+            damageInteractiveTile(iTileIndex);
             // RESET THE VALUE
             worldX           = currentWorldX;
             worldY           =  currentWorldY;
@@ -480,6 +486,13 @@ public class Player extends Entity {
 //        g2.drawString("Invincible: " + invincibleCounter, 10, 400);
     }
 
+    // INTERACTIVE-TILE
+    public void damageInteractiveTile(int i) {
+        if (i != 999 && gp.getiTile()[i].isDestructible()) {
+
+            gp.getiTile()[i] = null;
+        }
+    }
     // GETTER METHODS
     public int getScreenX() {  return screenX;  }
     public int getScreenY() {  return screenY;  }
