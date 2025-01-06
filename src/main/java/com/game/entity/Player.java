@@ -488,9 +488,16 @@ public class Player extends Entity {
 
     // INTERACTIVE-TILE
     public void damageInteractiveTile(int i) {
-        if (i != 999 && gp.getiTile()[i].isDestructible() && gp.getiTile()[i].isCorrectItem(this)) {
+        if (i != 999 && gp.getiTile()[i].isDestructible() &&
+                gp.getiTile()[i].isCorrectItem(this) && !gp.getiTile()[i].invincible) {
 
-            gp.getiTile()[i] = null;
+            gp.getiTile()[i].playSE();
+            gp.getiTile()[i].life--;
+            gp.getiTile()[i].invincible = true;
+
+            if (gp.getiTile()[i].life <= 0) {
+                gp.getiTile()[i] = gp.getiTile()[i].getDestroyedForm();
+            }
         }
     }
     // GETTER METHODS

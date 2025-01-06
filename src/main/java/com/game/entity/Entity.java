@@ -115,6 +115,7 @@ public class Entity {
         gp.getChecker().checkObject(this, false);
         gp.getChecker().checkEntity(this, gp.getNpc());
         gp.getChecker().checkEntity(this, gp.getMonster());
+        gp.getChecker().checkEntity(this, gp.getiTile());
         boolean contactPlayer = gp.getChecker().checkPlayer(this);
 
         if (this.type == Type.MONSTER && contactPlayer) {
