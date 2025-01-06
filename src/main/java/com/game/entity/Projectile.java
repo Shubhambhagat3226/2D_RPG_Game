@@ -27,6 +27,7 @@ public class Projectile extends Entity{
             int monsterIndex = gp.getChecker().checkEntity(this, gp.getMonster());
             if (monsterIndex != 999) {
                 gp.getPlayer().damageMonster(monsterIndex, attack);
+                generateParticle(user.projectile, gp.getMonster()[monsterIndex]);
                 alive = false;
             }
         } else {
@@ -34,6 +35,7 @@ public class Projectile extends Entity{
             boolean contactPlayer = gp.getChecker().checkPlayer(this);
             if (!gp.getPlayer().invincible && contactPlayer) {
                 damagePlayer(attack);
+                generateParticle(user.projectile, gp.getPlayer());
                 alive = false;
             }
         }

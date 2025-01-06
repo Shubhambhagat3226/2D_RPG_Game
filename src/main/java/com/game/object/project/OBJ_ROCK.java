@@ -7,6 +7,8 @@ import com.game.constants.ObjectName;
 import com.game.entity.Entity;
 import com.game.entity.Projectile;
 
+import java.awt.*;
+
 public class OBJ_ROCK extends Projectile {
     public OBJ_ROCK(GamePanel gp) {
         super(gp);
@@ -45,5 +47,23 @@ public class OBJ_ROCK extends Projectile {
 
     public void subtractResource(Entity user) {
         user.setMana(user.getMana() - useCost);
+    }
+
+
+    public Color getParticleColor() {
+        Color color = new Color(64, 51, 40);
+        return color;
+    }
+    public int getParticleSize() {
+        int size = 10; // 6PX
+        return size;
+    }
+    public int getParticleSpeed() {
+        int speed = 1;
+        return speed;
+    }
+    public int getParticleMaxLife() {
+        int maxLife = 20;
+        return maxLife;
     }
 }
