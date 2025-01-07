@@ -176,6 +176,7 @@ public class KeyHandler implements KeyListener {
         int maxCommonNum = 0;
         switch (gp.getUi().getSubState()) {
             case 0 -> maxCommonNum = 5;
+            case 3 -> maxCommonNum = 1;
         }
         // UP MOVEMENT
         if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {

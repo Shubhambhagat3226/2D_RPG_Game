@@ -1,6 +1,7 @@
 package com.game;
 
 import com.game.constants.CommonConstant;
+import com.game.constants.GameState;
 import com.game.constants.ImageUtility;
 import com.game.entity.Entity;
 
@@ -439,6 +440,8 @@ public class UI {
         switch (subState) {
           case 0 -> options_top(frameX, frameY);
           case 1 -> options_fullScreenNotification(frameX, frameY);
+          case 2 -> options_control(frameX, frameY);
+          case 3 -> options_endGameConfirmation(frameX, frameY);
         }
 
         gp.getKeyH().setEnteredPressed(false);
@@ -482,18 +485,30 @@ public class UI {
         g2.drawString("Control", textX, textY);
         if (commandNum == 3) {
             g2.drawString(">", textX-25, textY);
+            if (gp.getKeyH().isEnteredPressed()) {
+                subState = 2;
+                commandNum = 0;
+            }
         }
         // END GAME
         textY += CommonConstant.TILE_SIZE;
         g2.drawString("End Game", textX, textY);
         if (commandNum == 4) {
             g2.drawString(">", textX - 25, textY);
+            if (gp.getKeyH().isEnteredPressed()) {
+                subState = 3;
+                commandNum = 0;
+            }
         }
         // BACK
         textY += CommonConstant.TILE_SIZE*2;
         g2.drawString("Back", textX, textY);
         if (commandNum == 5) {
             g2.drawString(">", textX-25, textY);
+            if (gp.getKeyH().isEnteredPressed()) {
+                gp.setGameState(GameState.PLAY);
+                commandNum = 0;
+            }
         }
 
 
@@ -537,6 +552,82 @@ public class UI {
             }
         }
 
+    }
+    private void options_control(int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // TITLE
+        String text = "Control";
+        textX       = getX_For_CenteredText(text);
+        textY       = frameY + CommonConstant.TILE_SIZE;
+        g2.drawString(text, textX, textY);
+
+        textX  = frameX + CommonConstant.TILE_SIZE;
+        textY += CommonConstant.TILE_SIZE;
+        g2.drawString("Move", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("Confirm/Attack", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("Shoot/Cast", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("Character Screen", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("Pause", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("Options", textX, textY); textY += CommonConstant.TILE_SIZE;
+
+        textX = frameX + CommonConstant.TILE_SIZE*6;
+        textY = frameY + CommonConstant.TILE_SIZE*2;
+        g2.drawString("W,A,S,D", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("ENTER", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("F", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("C", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("P", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("ESC", textX, textY); textY += CommonConstant.TILE_SIZE;
+
+        // BACK
+        textX  = frameX + CommonConstant.TILE_SIZE;
+        textY  = frameY + CommonConstant.TILE_SIZE*9;
+        g2.drawString("Back", textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX-25, textY);
+            if (gp.getKeyH().isEnteredPressed()) {
+                subState = 0;
+                commandNum = 3;
+            }
+        }
+
+    }
+    private void options_endGameConfirmation(int frameX, int frameY) {
+        int textX = frameX + CommonConstant.TILE_SIZE;
+        int textY = frameY + CommonConstant.TILE_SIZE*3;
+
+        currentDialogue = "Quit the game and \nreturn to the title screen?";
+        for (String line: currentDialogue.split("\n")) {
+            g2.drawString(line, textX, textY);
+            textY += 40;
+        }
+        // YES
+        String text = "Yes";
+        textX       = getX_For_CenteredText(text);
+        textY      += CommonConstant.TILE_SIZE*3;
+        g2.drawString(text, textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX-25, textY);
+            if (gp.getKeyH().isEnteredPressed()) {
+                subState = 0;
+                gp.setGameState(GameState.TITLE);
+            }
+        }
+        // NO
+        text = "No";
+        textX       = getX_For_CenteredText(text);
+        textY      += CommonConstant.TILE_SIZE;
+        System.out.println(commandNum);
+        g2.drawString(text, textX, textY);
+        if (commandNum == 1) {
+            g2.drawString(">", textX-25, textY);
+            if (gp.getKeyH().isEnteredPressed()) {
+                subState = 0;
+                commandNum = 4;
+            }
+        }
     }
 
     // GETTER METHODS
