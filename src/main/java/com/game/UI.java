@@ -25,6 +25,7 @@ public class UI {
     private int commandNum=0;
     private int slotCol = 0;
     private int slotRow = 0;
+    int subState;
 
     public UI(GamePanel gp) {
         this.gp     = gp;
@@ -79,6 +80,7 @@ public class UI {
                 drawCharacterScreen();
                 drawInventory();
             }
+            case OPTION -> drawOptionScreen();
         }
     }
     // DRAW MESSAGE
@@ -422,11 +424,122 @@ public class UI {
         return (slotCol + (slotRow * 5));
     }
 
+    // OPTION
+    public void drawOptionScreen() {
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(32F));
+
+        // SUB-WINDOW
+        int frameX      = CommonConstant.TILE_SIZE * 6;
+        int frameY      = CommonConstant.TILE_SIZE;
+        int frameWidth  = CommonConstant.TILE_SIZE * 8;
+        int frameHeight = CommonConstant.TILE_SIZE * 10;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        switch (subState) {
+          case 0 -> options_top(frameX, frameY);
+          case 1 -> options_fullScreenNotification(frameX, frameY);
+        }
+
+        gp.getKeyH().setEnteredPressed(false);
+
+    }
+    public void options_top(int frameX, int frameY) {
+        int textX;
+        int textY;
+
+        // TITLE
+        String text = "Options";
+        textX       = getX_For_CenteredText(text);
+        textY       = frameY + CommonConstant.TILE_SIZE;
+        g2.drawString(text, textX, textY);
+
+        // FULL SCREEN ON/OFF
+        textX = frameX + CommonConstant.TILE_SIZE;
+        textY += CommonConstant.TILE_SIZE * 2;
+        g2.drawString("Full Screen", textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX-25, textY);
+            if (gp.getKeyH().isEnteredPressed()) {
+                gp.fullScreenOn = !gp.fullScreenOn;
+                subState        = 1;
+            }
+        }
+        // Music
+        textY += CommonConstant.TILE_SIZE;
+        g2.drawString("Music", textX, textY);
+        if (commandNum == 1) {
+            g2.drawString(">", textX-25, textY);
+        }
+        // SE
+        textY += CommonConstant.TILE_SIZE;
+        g2.drawString("SE", textX, textY);
+        if (commandNum == 2) {
+            g2.drawString(">", textX-25, textY);
+        }
+        // CONTROL
+        textY += CommonConstant.TILE_SIZE;
+        g2.drawString("Control", textX, textY);
+        if (commandNum == 3) {
+            g2.drawString(">", textX-25, textY);
+        }
+        // END GAME
+        textY += CommonConstant.TILE_SIZE;
+        g2.drawString("End Game", textX, textY);
+        if (commandNum == 4) {
+            g2.drawString(">", textX - 25, textY);
+        }
+        // BACK
+        textY += CommonConstant.TILE_SIZE*2;
+        g2.drawString("Back", textX, textY);
+        if (commandNum == 5) {
+            g2.drawString(">", textX-25, textY);
+        }
+
+
+        // FULL SCREEN CHECK BOX
+        textX = frameX + CommonConstant.TILE_SIZE*5;
+        textY = frameY + CommonConstant.TILE_SIZE*2 + 24;
+        g2.setStroke(new BasicStroke(3));
+        g2.drawRect(textX, textY, 24, 24);
+        if (gp.fullScreenOn) {
+            g2.fillRect(textX, textY, 24, 24);
+        }
+        // MUSIC VOLUME
+        textY += CommonConstant.TILE_SIZE;
+        g2.drawRect(textX, textY, 120, 24);
+        // SE VOLUME
+        textY += CommonConstant.TILE_SIZE;
+        g2.drawRect(textX, textY, 120, 24);
+
+    }
+    public void options_fullScreenNotification(int frameX, int frameY) {
+        int textX = frameX + CommonConstant.TILE_SIZE;
+        int textY = frameY + CommonConstant.TILE_SIZE*3;
+
+        currentDialogue = "The change will take \neffect after restarting \nthe game.";
+        for (String line: currentDialogue.split("\n")) {
+            g2.drawString(line, textX, textY);
+            textY += 40;
+        }
+
+        // BACK
+        textY = frameY + CommonConstant.TILE_SIZE*9;
+        g2.drawString("Back", textX, textY);
+        if (commandNum == 0) {
+            g2.drawString(">", textX-25, textY);
+            if (gp.getKeyH().isEnteredPressed()) {
+                subState = 0;
+            }
+        }
+
+    }
 
     // GETTER METHODS
     public int getCommandNum() {return commandNum;}
     public int getSlotCol() {return slotCol;}
     public int getSlotRow() {return slotRow;}
+    public int getSubState() {return subState;}
 
     // SETTER METHODS
     public void setGameFinished(boolean gameFinished) {this.gameFinished = gameFinished;}

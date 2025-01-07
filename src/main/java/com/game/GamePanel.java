@@ -48,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     // GAME STATE
     private GameState gameState;
+    boolean fullScreenOn = false;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));

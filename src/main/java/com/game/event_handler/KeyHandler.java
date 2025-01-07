@@ -27,6 +27,7 @@ public class KeyHandler implements KeyListener {
             case PAUSE -> pauseState(code);
             case DIALOGUE -> dialogueState(code);
             case CHARACTER_STATUS -> characterState(code);
+            case OPTION -> optionState(code);
         }
 
     }
@@ -94,6 +95,10 @@ public class KeyHandler implements KeyListener {
         if (KeyEvent.VK_C == code) {
             gp.setGameState(GameState.CHARACTER_STATUS);
         }
+        // OPTION STATE
+        if (KeyEvent.VK_ESCAPE == code) {
+            gp.setGameState(GameState.OPTION);
+        }
 
         // DEBUG
         if (code == KeyEvent.VK_R) {
@@ -157,6 +162,36 @@ public class KeyHandler implements KeyListener {
             gp.getPlayer().selectItem();
         }
 
+
+    }
+    // OPTION-STATE
+    private void optionState(int code) {
+        if (code == KeyEvent.VK_ESCAPE) {
+            gp.setGameState(GameState.PLAY);
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            enteredPressed = true;
+        }
+        int maxCommonNum = 0;
+        switch (gp.getUi().getSubState()) {
+            case 0 -> maxCommonNum = 5;
+        }
+        // UP MOVEMENT
+        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
+            gp.getUi().setCommandNum(gp.getUi().getCommandNum()-1);
+            gp.playSoundEffect(SoundUtility.CURSOR);
+            if (gp.getUi().getCommandNum() < 0) {
+                gp.getUi().setCommandNum(maxCommonNum);
+            }
+        }
+        // DOWN MOVEMENT
+        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+            gp.getUi().setCommandNum(gp.getUi().getCommandNum()+1);
+            gp.playSoundEffect(SoundUtility.CURSOR);
+            if (gp.getUi().getCommandNum() > maxCommonNum) {
+                gp.getUi().setCommandNum(0);
+            }
+        }
 
     }
     @Override
