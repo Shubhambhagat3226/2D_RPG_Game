@@ -4,6 +4,7 @@ import com.game.GamePanel;
 import com.game.constants.GameState;
 import com.game.sound.SoundUtility;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -190,6 +191,32 @@ public class KeyHandler implements KeyListener {
             gp.playSoundEffect(SoundUtility.CURSOR);
             if (gp.getUi().getCommandNum() > maxCommonNum) {
                 gp.getUi().setCommandNum(0);
+            }
+        }
+        if (code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
+            if (gp.getUi().getSubState() == 0) {
+                if (gp.getUi().getCommandNum() == 1 && gp.getMusic().getVolumeScale() > 0) {
+                    gp.getMusic().setVolumeScale(gp.getMusic().getVolumeScale()-1);
+                    gp.getMusic().checkVolume();
+                    gp.playSoundEffect(SoundUtility.CURSOR);
+                }
+                if (gp.getUi().getCommandNum() == 2 && gp.getSe().getVolumeScale() > 0) {
+                    gp.getSe().setVolumeScale(gp.getSe().getVolumeScale()-1);
+                    gp.playSoundEffect(SoundUtility.CURSOR);
+                }
+            }
+        }
+        if (code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
+            if (gp.getUi().getSubState() == 0) {
+                if (gp.getUi().getCommandNum() == 1 && gp.getMusic().getVolumeScale() < 5) {
+                    gp.getMusic().setVolumeScale(gp.getMusic().getVolumeScale()+1);
+                    gp.getMusic().checkVolume();
+                    gp.playSoundEffect(SoundUtility.CURSOR);
+                }
+                if (gp.getUi().getCommandNum() == 2 && gp.getSe().getVolumeScale() < 5) {
+                    gp.getSe().setVolumeScale(gp.getSe().getVolumeScale()+1);
+                    gp.playSoundEffect(SoundUtility.CURSOR);
+                }
             }
         }
 

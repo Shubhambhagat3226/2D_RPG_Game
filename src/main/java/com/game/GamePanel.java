@@ -335,6 +335,7 @@ public class GamePanel extends JPanel implements Runnable{
     public TileManager getTileM() {  return tileM;  }
     public Entity[] getObjects() {  return objects;  }
     public Sound getMusic() {return music;}
+    public Sound getSe() {return se;}
     public UI getUi() {return ui;}
     public GameState getGameState() {return gameState;}
     public Entity[] getNpc() {return npc;}

@@ -507,10 +507,14 @@ public class UI {
         }
         // MUSIC VOLUME
         textY += CommonConstant.TILE_SIZE;
-        g2.drawRect(textX, textY, 120, 24);
+        g2.drawRect(textX, textY, 120, 24);  // 120/5 = 24
+        int volumeWidth = 24 * gp.getMusic().getVolumeScale();
+        g2.fillRect(textX, textY, volumeWidth, 24);
         // SE VOLUME
         textY += CommonConstant.TILE_SIZE;
-        g2.drawRect(textX, textY, 120, 24);
+        g2.drawRect(textX, textY, 120, 24);  // 120/5 = 24
+        volumeWidth = 24 * gp.getSe().getVolumeScale();
+        g2.fillRect(textX, textY, volumeWidth, 24);
 
     }
     public void options_fullScreenNotification(int frameX, int frameY) {
