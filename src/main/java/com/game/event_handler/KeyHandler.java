@@ -29,6 +29,7 @@ public class KeyHandler implements KeyListener {
             case DIALOGUE -> dialogueState(code);
             case CHARACTER_STATUS -> characterState(code);
             case OPTION -> optionState(code);
+            case GAME_OVER -> gameOverState(code);
         }
 
     }
@@ -245,6 +246,31 @@ public class KeyHandler implements KeyListener {
         // FIREBALL
         if (KeyEvent.VK_F == code) {
             shotKeyPressed = false;
+        }
+    }
+
+    // GAME OVER
+    private void gameOverState(int code) {
+        // UP MOVEMENT
+        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
+            gp.getUi().setCommandNum(gp.getUi().getCommandNum()-1);
+            gp.playSoundEffect(SoundUtility.CURSOR);
+            if (gp.getUi().getCommandNum() < 0) {
+                gp.getUi().setCommandNum(1);
+            }
+        }
+        // DOWN MOVEMENT
+        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+            gp.getUi().setCommandNum(gp.getUi().getCommandNum()+1);
+            gp.playSoundEffect(SoundUtility.CURSOR);
+            if (gp.getUi().getCommandNum() > 1) {
+                gp.getUi().setCommandNum(0);
+            }
+        }
+        // ENTER
+        if (code == KeyEvent.VK_ENTER) {
+            if (gp.getUi().getCommandNum() == 0) gp.setGameState(GameState.PLAY);
+            else if (gp.getUi().getCommandNum() == 1) gp.setGameState(GameState.TITLE);
         }
     }
 

@@ -82,6 +82,7 @@ public class UI {
                 drawInventory();
             }
             case OPTION -> drawOptionScreen();
+            case GAME_OVER -> drawGamwOverScreen();
         }
     }
     // DRAW MESSAGE
@@ -423,6 +424,47 @@ public class UI {
     }
     public int getItemIndexOnSlot() {
         return (slotCol + (slotRow * 5));
+    }
+
+    // GAME OVER
+    public void drawGamwOverScreen() {
+
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0,0, gp.screenWidth2, gp.screenHeight2);
+
+        int x;
+        int y;
+        String text;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
+
+        text = "Game Over";
+        // SHADOW
+        g2.setColor(Color.BLACK);
+        x = getX_For_CenteredText(text);
+        y = CommonConstant.TILE_SIZE*4;
+        g2.drawString(text, x, y);
+        // MAIN
+        g2.setColor(Color.WHITE);
+        g2.drawString(text, x-4, y-4);
+
+        // RETRY
+        g2.setFont(g2.getFont().deriveFont(50f));
+        text = "Retry";
+        x    = getX_For_CenteredText(text);
+        y   += CommonConstant.TILE_SIZE * 4;
+        g2.drawString(text, x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x-25, y);
+        }
+        // BACK TO THE TITLE
+        text = "Quit";
+        x    = getX_For_CenteredText(text);
+        y   += 55;
+        g2.drawString(text, x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x-25, y);
+        }
+
     }
 
     // OPTION

@@ -7,4 +7,6 @@ public enum GameState {
     TITLE,
     CHARACTER_STATUS,
     OPTION,
+    GAME_OVER,
+
 }
