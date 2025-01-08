@@ -180,7 +180,8 @@ public class GamePanel extends JPanel implements Runnable{
                 // PLAYER
                 player.update();
                 // NPC
-                for (Entity entity: npc[1]) {
+                for (int i = 0; i < npc[1].length; i++) {
+                    Entity entity = npc[currentMap][i];
                     if (entity != null) {
                         entity.update();
                     }

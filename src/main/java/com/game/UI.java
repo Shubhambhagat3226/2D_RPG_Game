@@ -3,7 +3,6 @@ package com.game;
 import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
 import com.game.constants.ImageUtility;
-import com.game.entity.Entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -26,7 +25,8 @@ public class UI {
     private int commandNum=0;
     private int slotCol = 0;
     private int slotRow = 0;
-    int subState;
+    int subState = 0;
+    int counter  = 0;
 
     public UI(GamePanel gp) {
         this.gp     = gp;
@@ -83,6 +83,7 @@ public class UI {
             }
             case OPTION -> drawOptionScreen();
             case GAME_OVER -> drawGamwOverScreen();
+            case TRANSITION -> drawTransition();
         }
     }
     // DRAW MESSAGE
@@ -670,6 +671,22 @@ public class UI {
                 subState = 0;
                 commandNum = 4;
             }
+        }
+    }
+
+    // TRANSITION
+    private void drawTransition() {
+        counter++;
+        g2.setColor(new Color(0,0,0,counter*5));
+        g2.fillRect(0,0,gp.screenWidth2, gp.screenHeight2);
+        if (counter == 50) {
+            counter = 0;
+            gp.setGameState(GameState.PLAY);
+            gp.setCurrentMap(gp.getEventH().getTempMap());
+            gp.getPlayer().setWorldX(CommonConstant.TILE_SIZE * gp.getEventH().getTempCol());
+            gp.getPlayer().setWorldY(CommonConstant.TILE_SIZE * gp.getEventH().getTempRow());
+
+
         }
     }
 

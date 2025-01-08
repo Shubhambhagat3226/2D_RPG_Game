@@ -9,6 +9,7 @@ import com.game.sound.SoundUtility;
 public class EventHandler {
     private final GamePanel gp;
     private EventRect[][][] eventRect;
+    int tempMap, tempCol, tempRow;
 
     public EventHandler(GamePanel gp) {
         this.gp   = gp;
@@ -20,7 +21,7 @@ public class EventHandler {
         while (map < CommonConstant.MAX_MAP &&
                 col < CommonConstant.MAX_WORLD_COL && row < CommonConstant.MAX_WORLD_ROW) {
 
-            eventRect[map][col][row]              = new EventRect(23, 23, 2, 2);
+            eventRect[map][col][row]              = new EventRect(CommonConstant.TILE_SIZE/2-1, CommonConstant.TILE_SIZE/2-1, 2, 2);
             eventRect[map][col][row].x           += CommonConstant.TILE_SIZE * col;
             eventRect[map][col][row].y           += CommonConstant.TILE_SIZE * row;
 //            eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
@@ -114,11 +115,17 @@ public class EventHandler {
         gp.getPlayer().setWorldY(CommonConstant.TILE_SIZE * 10);
     }
     public void teleport(int map, int col, int row) {
-        gp.setCurrentMap(map);
-        gp.getPlayer().setWorldX(CommonConstant.TILE_SIZE * col);
-        gp.getPlayer().setWorldY(CommonConstant.TILE_SIZE * row);
+        gp.setGameState(GameState.TRANSITION);
+        tempMap = map;
+        tempCol = col;
+        tempRow = row;
+
         eventRect[map][col][row].eventDone = true;
         gp.playSoundEffect(SoundUtility.STAIRS);
     }
 
+    // GETTER
+    public int getTempMap() {return tempMap;}
+    public int getTempCol() {return tempCol;}
+    public int getTempRow() {return tempRow;}
 }

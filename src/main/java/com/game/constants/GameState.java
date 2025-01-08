@@ -8,5 +8,6 @@ public enum GameState {
     CHARACTER_STATUS,
     OPTION,
     GAME_OVER,
+    TRANSITION,
 
 }
