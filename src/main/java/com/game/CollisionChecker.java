@@ -25,8 +25,8 @@ public class CollisionChecker {
         switch (entity.getDirection()) {
             case NORTH : {
                 entity_Top_Row = (entity_Top_WorldY - entity.getSpeed()) / CommonConstant.TILE_SIZE;
-                tile1 = gp.getTileM().getMap()[entity_Top_Row][entity_Left_Col];
-                tile2 = gp.getTileM().getMap()[entity_Top_Row][entity_Right_Col];
+                tile1 = gp.getTileM().getMap()[gp.currentMap][entity_Top_Row][entity_Left_Col];
+                tile2 = gp.getTileM().getMap()[gp.currentMap][entity_Top_Row][entity_Right_Col];
                 if (gp.getTileM().getTiles()[tile1].isCollision()
                         || gp.getTileM().getTiles()[tile2].isCollision()) {
                     entity.setCollisionOn(true);
@@ -35,8 +35,8 @@ public class CollisionChecker {
             }
             case SOUTH : {
                 entity_Bottom_Row = (entity_Bottom_WorldY + entity.getSpeed()) / CommonConstant.TILE_SIZE;
-                tile1 = gp.getTileM().getMap()[entity_Bottom_Row][entity_Left_Col];
-                tile2 = gp.getTileM().getMap()[entity_Bottom_Row][entity_Right_Col];
+                tile1 = gp.getTileM().getMap()[gp.currentMap][entity_Bottom_Row][entity_Left_Col];
+                tile2 = gp.getTileM().getMap()[gp.currentMap][entity_Bottom_Row][entity_Right_Col];
 
                 if (gp.getTileM().getTiles()[tile1].isCollision()
                         || gp.getTileM().getTiles()[tile2].isCollision()) {
@@ -46,8 +46,8 @@ public class CollisionChecker {
             }
             case WEST : {
                 entity_Left_Col = (entity_Left_WorldX - entity.getSpeed()) / CommonConstant.TILE_SIZE;
-                tile1 = gp.getTileM().getMap()[entity_Top_Row][entity_Left_Col];
-                tile2 = gp.getTileM().getMap()[entity_Bottom_Row][entity_Left_Col];
+                tile1 = gp.getTileM().getMap()[gp.currentMap][entity_Top_Row][entity_Left_Col];
+                tile2 = gp.getTileM().getMap()[gp.currentMap][entity_Bottom_Row][entity_Left_Col];
 
                 if (gp.getTileM().getTiles()[tile1].isCollision()
                         || gp.getTileM().getTiles()[tile2].isCollision()) {
@@ -57,8 +57,8 @@ public class CollisionChecker {
             }
             case EAST : {
                 entity_Right_Col = (entity_Right_WorldX + entity.getSpeed()) / CommonConstant.TILE_SIZE;
-                tile1 = gp.getTileM().getMap()[entity_Top_Row][entity_Right_Col];
-                tile2 = gp.getTileM().getMap()[entity_Bottom_Row][entity_Right_Col];
+                tile1 = gp.getTileM().getMap()[gp.currentMap][entity_Top_Row][entity_Right_Col];
+                tile2 = gp.getTileM().getMap()[gp.currentMap][entity_Bottom_Row][entity_Right_Col];
 
                 if (gp.getTileM().getTiles()[tile1].isCollision()
                         || gp.getTileM().getTiles()[tile2].isCollision()) {

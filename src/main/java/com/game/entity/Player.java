@@ -50,8 +50,11 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = CommonConstant.TILE_SIZE * 23;
-        worldY = CommonConstant.TILE_SIZE * 21;
+//        worldX = CommonConstant.TILE_SIZE * 23;
+//        worldY = CommonConstant.TILE_SIZE * 21;
+
+        worldX = CommonConstant.TILE_SIZE * 12;
+        worldY = CommonConstant.TILE_SIZE * 13;
         speed = 4;
         direction = Direction.SOUTH;
 

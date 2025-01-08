@@ -51,6 +51,8 @@ public class GamePanel extends JPanel implements Runnable{
     private GameState gameState;
     boolean fullScreenOn = false;
 
+    int currentMap = 1;
+
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
         this.setBackground(Color.BLACK);
@@ -364,6 +366,7 @@ public class GamePanel extends JPanel implements Runnable{
     public ArrayList<Entity> getProjectileList() {return projectileList;}
     public InteractiveTile[] getiTile() {return iTile;}
     public ArrayList<Entity> getParticleList() {return particleList;}
+    public int getCurrentMap() {return currentMap;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }

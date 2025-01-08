@@ -14,16 +14,17 @@ import java.io.InputStreamReader;
 public class TileManager {
     private final GamePanel gp;
     private final Tile[] tiles;
-    private final int[][] map;
+    private final int[][][] map;
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
 
         tiles = new Tile[50];
-        map = new int[CommonConstant.MAX_WORLD_ROW][CommonConstant.MAX_WORLD_COL];
+        map = new int[CommonConstant.MAX_MAP][CommonConstant.MAX_WORLD_ROW][CommonConstant.MAX_WORLD_COL];
 
        loadTileImages();
-       loadMap("/maps/Map/worldV3.txt");
+       loadMap("/maps/Map/worldV3.txt", 0);
+        loadMap("/maps/Map/interior01.txt", 1);
     }
 
     // LOAD THE TILES
@@ -74,7 +75,9 @@ public class TileManager {
         setUp(39, ImageUtility.EARTH, false);
         setUp(40, ImageUtility.WALL, true);
         setUp(41, ImageUtility.TREE, true);
-        setUp(42, ImageUtility.TREE, true);
+        setUp(42, ImageUtility.HUT, false);
+        setUp(43, ImageUtility.FLOOR, false);
+        setUp(44, ImageUtility.TABLE, true);
 
     }
     public void setUp(int index, String imagePath, boolean collision) {
@@ -93,7 +96,7 @@ public class TileManager {
 
         while (worldCol < CommonConstant.MAX_WORLD_COL && worldRow < CommonConstant.MAX_WORLD_ROW) {
 
-            int tileNum = map[worldRow][worldCol];
+            int tileNum = map[gp.getCurrentMap()][worldRow][worldCol];
 
             int worldX = worldCol * CommonConstant.TILE_SIZE;
             int worldY = worldRow * CommonConstant.TILE_SIZE;
@@ -118,7 +121,7 @@ public class TileManager {
     }
 
     // LOAD MAP
-    public void loadMap(String mapPath) {
+    public void loadMap(String mapPath, int mapNo) {
         try {
             InputStream is = getClass().getResourceAsStream(mapPath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -131,7 +134,7 @@ public class TileManager {
                 while (col < CommonConstant.MAX_WORLD_COL) {
                     String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
-                    map[row][col] = num;
+                    map[mapNo][row][col] = num;
                     col++;
                 }
                 if (col == CommonConstant.MAX_WORLD_COL) {
@@ -148,6 +151,6 @@ public class TileManager {
 
 
     // GETTER METHODS
-    public int[][] getMap() {  return map;  }
+    public int[][][] getMap() {  return map;  }
     public Tile[] getTiles() {  return tiles;  }
 }

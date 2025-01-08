@@ -15,6 +15,7 @@ public class CommonConstant {
     public static final int MAX_WORLD_ROW = 50;
     public static final int WORLD_WIDTH = MAX_WORLD_COL * TILE_SIZE; // 2400 PX
     public static final int WORLD_HEIGHT = MAX_WORLD_ROW * TILE_SIZE; // 2400 PX
+    public static final int MAX_MAP      = 10;
 
     final public static int FPS = 60;
 

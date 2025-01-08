@@ -104,7 +104,11 @@ public class KeyHandler implements KeyListener {
 
         // DEBUG
         if (code == KeyEvent.VK_R) {
-            gp.getTileM().loadMap("/maps/Map/worldV3.txt");
+            switch (gp.getCurrentMap()) {
+                case 0 -> gp.getTileM().loadMap("/maps/Map/worldV3.txt", 0);
+                case 1 -> gp.getTileM().loadMap("/maps/Map/interior01.txt", 1);
+            }
+
         }
         if (KeyEvent.VK_T == code) {
             if (!showDebugTest) {
