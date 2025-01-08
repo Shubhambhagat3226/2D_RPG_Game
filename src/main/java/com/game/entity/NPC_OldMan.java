@@ -5,6 +5,7 @@ import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.ImageUtility;
 
+import java.awt.*;
 import java.util.Random;
 
 public class NPC_OldMan extends Entity{
@@ -12,6 +13,10 @@ public class NPC_OldMan extends Entity{
         super(gp);
         direction = Direction.SOUTH;
         speed     = 1;
+
+        solidArea = new Rectangle(8, 16, 32, 32);
+        solidArea_Default_X = solidArea.x;
+        solidArea_Default_Y = solidArea.y;
 
         loadImage();
         setDialogue();

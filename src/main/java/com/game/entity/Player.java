@@ -21,8 +21,6 @@ public class Player extends Entity {
     private int standCounter = 0;
     public boolean attackCanceled;
 
-    private ArrayList<Entity> inventory = new ArrayList<>();
-    private final int maxInventorySize = 20;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -42,6 +40,8 @@ public class Player extends Entity {
         // ATTACK WIDTH AND HEIGHT
         attackArea.width  = 36;
         attackArea.height = 36;
+
+        inventory = new ArrayList<>();
 
         setDefaultValues();
         loadImage();
@@ -532,5 +532,4 @@ public class Player extends Entity {
     // GETTER METHODS
     public int getScreenX() {  return screenX;  }
     public int getScreenY() {  return screenY;  }
-    public ArrayList<Entity> getInventory() {return inventory;}
 }

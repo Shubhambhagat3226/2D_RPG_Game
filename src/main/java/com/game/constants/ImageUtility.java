@@ -60,6 +60,7 @@ public class ImageUtility {
 
 
     // NPC
+    // OLD-MAN
     public static final String OLD_MAN_UP_1    = "/NPC/oldman_up_1.png";
     public static final String OLD_MAN_UP_2    = "/NPC/oldman_up_2.png";
     public static final String OLD_MAN_DOWN_1  = "/NPC/oldman_down_1.png";
@@ -68,6 +69,12 @@ public class ImageUtility {
     public static final String OLD_MAN_LEFT_2  = "/NPC/oldman_left_2.png";
     public static final String OLD_MAN_RIGHT_1 = "/NPC/oldman_right_1.png";
     public static final String OLD_MAN_RIGHT_2 = "/NPC/oldman_right_2.png";
+    // MERCHANT
+    public static final String MERCHANT_DOWN_1  = "/NPC/merchant_down_1.png";
+    public static final String MERCHANT_DOWN_2  = "/NPC/merchant_down_2.png";
+    // ROCK
+    public static final String ROCK  = "/NPC/bigrock.png";
+
 
 
     // TILE IMAGES

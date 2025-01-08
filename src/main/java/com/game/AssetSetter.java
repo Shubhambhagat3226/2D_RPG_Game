@@ -2,6 +2,7 @@ package com.game;
 
 import com.game.constants.CommonConstant;
 import com.game.entity.Entity;
+import com.game.entity.NPC_Merchant;
 import com.game.entity.NPC_OldMan;
 import com.game.monster.MON_GreenSlime;
 import com.game.object.*;
@@ -43,7 +44,12 @@ public class AssetSetter {
     public void setNPC() {
         Entity[][] npc = gp.getNpc();
         int mapNum = 0;
-        npc[mapNum][0] = setEntity(new NPC_OldMan(gp), 21, 21);
+        int i = 0;
+        npc[mapNum][i] = setEntity(new NPC_OldMan(gp), 21, 21); i++;
+
+        mapNum = 1;
+        i = 0;
+        npc[mapNum][i] = setEntity(new NPC_Merchant(gp), 12, 7); i++;
 
     }
 

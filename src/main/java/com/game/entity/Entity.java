@@ -10,6 +10,7 @@ import com.game.sound.SoundUtility;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Entity {
     protected GamePanel gp;
@@ -65,6 +66,9 @@ public class Entity {
     // DESCRIPTION
     protected String description;
     protected int useCost;
+
+    protected ArrayList<Entity> inventory;
+    protected final int maxInventorySize = 20;
 
     public Entity(GamePanel gp) {
         this.gp    = gp;
@@ -134,7 +138,7 @@ public class Entity {
 
         // TO CHANGE FROM OTHER IMAGE
         spiritCounter++;
-        if (spiritCounter > 12) {
+        if (spiritCounter > 24) {
             if (spiritNum == 1) {
                 spiritNum = 2;
             } else {
@@ -322,6 +326,8 @@ public class Entity {
     public int getMana() {return mana;}
     public int getMaxMana() {return maxMana;}
     public int getType() {return type;}
+    public ArrayList<Entity> getInventory() {return inventory;}
+
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}
