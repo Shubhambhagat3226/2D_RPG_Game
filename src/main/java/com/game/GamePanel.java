@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable{
     private GameState gameState;
     boolean fullScreenOn = false;
 
-    int currentMap = 1;
+    int currentMap = 0;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
@@ -371,4 +371,5 @@ public class GamePanel extends JPanel implements Runnable{
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
     public void setGameState(GameState gameState) { this.gameState = gameState; }
+    public void setCurrentMap(int currentMap) {this.currentMap = currentMap;}
 }

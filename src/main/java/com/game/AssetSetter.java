@@ -64,22 +64,22 @@ public class AssetSetter {
     }
 
     public void setInteractiveTile() {
-
-        Point[] points = {new Point(27, 12), new Point(28, 12),new Point(29, 12),
-                new Point(30, 12),new Point(31, 12), new Point(32, 12),
-                new Point(33, 12), new Point(27, 16),new Point(18, 40),
-                new Point(17, 40),new Point(16, 40), new Point(15, 40),
-                new Point(14, 40), new Point(13, 40),new Point(13, 41),
-                new Point(12, 41),new Point(11, 41), new Point(10, 41),
-                new Point(10, 40), new Point(29, 40),new Point(30, 40),
-                new Point(36, 30),new Point(33, 7), new Point(30, 21),
-                new Point(31, 21), new Point(32, 21)};
-        int mapNum = 0;
-        int i = 0;
-        for (Point point : points) {
-            gp.getiTile()[mapNum][i] = (InteractiveTile) setEntity(new IT_DryTree(gp), point.x, point.y);
-            i++;
-        }
+//
+//        Point[] points = {new Point(27, 12), new Point(28, 12),new Point(29, 12),
+//                new Point(30, 12),new Point(31, 12), new Point(32, 12),
+//                new Point(33, 12), new Point(27, 16),new Point(18, 40),
+//                new Point(17, 40),new Point(16, 40), new Point(15, 40),
+//                new Point(14, 40), new Point(13, 40),new Point(13, 41),
+//                new Point(12, 41),new Point(11, 41), new Point(10, 41),
+//                new Point(10, 40), new Point(29, 40),new Point(30, 40),
+//                new Point(36, 30),new Point(33, 7), new Point(30, 21),
+//                new Point(31, 21), new Point(32, 21)};
+//        int mapNum = 0;
+//        int i = 0;
+//        for (Point point : points) {
+//            gp.getiTile()[mapNum][i] = (InteractiveTile) setEntity(new IT_DryTree(gp), point.x, point.y);
+//            i++;
+//        }
 
     }
 
