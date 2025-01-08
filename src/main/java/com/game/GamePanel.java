@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final Sound se;
     private final UI ui;
     private final EventHandler eventH;
+    Config config = new Config(this);
 
     // ENTITY AND OBJECTS
     private final Player player;
@@ -103,7 +104,9 @@ public class GamePanel extends JPanel implements Runnable{
         tempScreen = new BufferedImage(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         g2         = (Graphics2D) tempScreen.getGraphics();
 
-//        setFullScreen();
+        if (fullScreenOn) {
+            setFullScreen();
+        }
     }
 
     // FULL SCREEN

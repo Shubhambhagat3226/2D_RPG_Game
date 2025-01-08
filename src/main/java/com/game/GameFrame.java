@@ -10,11 +10,15 @@ public class GameFrame extends JFrame {
         super("2D Adventure");
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        setUndecorated(true);
 
         // ADD GAME_PANEL
         GamePanel gamePanel = new GamePanel();
         this.add(gamePanel);
+
+        gamePanel.config.loadConfig();
+        if (gamePanel.fullScreenOn) {
+        setUndecorated(true);
+        }
 
         pack();
         setLocationRelativeTo(null);
