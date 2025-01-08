@@ -18,18 +18,19 @@ public class AssetSetter {
     public AssetSetter(GamePanel gp) {  this.gp = gp;  }
 
     public void setObject() {
-        Entity[] obj = gp.getObjects();
+        Entity[][] obj = gp.getObjects();
 
+        int mapNum = 0;
         int i = 0;
-        obj[i]   = setEntity(new OBJ_COIN(gp), 25, 19);
+        obj[mapNum][i]   = setEntity(new OBJ_COIN(gp), 25, 19);
         i++;
-        obj[i]   = setEntity(new OBJ_COIN(gp), 21, 19);
+        obj[mapNum][i]   = setEntity(new OBJ_COIN(gp), 21, 19);
         i++;
-        obj[i]   = setEntity(new OBJ_COIN(gp), 26, 21);
+        obj[mapNum][i]   = setEntity(new OBJ_COIN(gp), 26, 21);
         i++;
-        obj[i]   = setEntity(new OBJ_Axe(gp), 20, 12);
+        obj[mapNum][i]   = setEntity(new OBJ_Axe(gp), 20, 12);
         i++;
-        obj[i]   = setEntity(new OBJ_Blue_Shield(gp), 35, 21);
+        obj[mapNum][i]   = setEntity(new OBJ_Blue_Shield(gp), 35, 21);
         i++;
     }
 
@@ -40,25 +41,25 @@ public class AssetSetter {
     }
 
     public void setNPC() {
-        Entity[] npc = gp.getNpc();
-
-        npc[0] = setEntity(new NPC_OldMan(gp), 21, 21);
+        Entity[][] npc = gp.getNpc();
+        int mapNum = 0;
+        npc[mapNum][0] = setEntity(new NPC_OldMan(gp), 21, 21);
 
     }
 
     public void setMonster() {
-        Entity[] monster = gp.getMonster();
-
+        Entity[][] monster = gp.getMonster();
+        int mapNum = 0;
         int i      = 0;
-        monster[i] = setEntity(new MON_GreenSlime(gp), 23, 36);
+        monster[mapNum][i] = setEntity(new MON_GreenSlime(gp), 23, 36);
         i++;
-        monster[i] = setEntity(new MON_GreenSlime(gp), 23, 37);
+        monster[mapNum][i] = setEntity(new MON_GreenSlime(gp), 23, 37);
         i++;
-        monster[i] = setEntity(new MON_GreenSlime(gp), 24, 37);
+        monster[mapNum][i] = setEntity(new MON_GreenSlime(gp), 24, 37);
         i++;
-        monster[i] = setEntity(new MON_GreenSlime(gp), 34, 42);
+        monster[mapNum][i] = setEntity(new MON_GreenSlime(gp), 34, 42);
         i++;
-        monster[i] = setEntity(new MON_GreenSlime(gp), 38, 42);
+        monster[mapNum][i] = setEntity(new MON_GreenSlime(gp), 38, 42);
 
     }
 
@@ -73,10 +74,10 @@ public class AssetSetter {
                 new Point(10, 40), new Point(29, 40),new Point(30, 40),
                 new Point(36, 30),new Point(33, 7), new Point(30, 21),
                 new Point(31, 21), new Point(32, 21)};
-
+        int mapNum = 0;
         int i = 0;
         for (Point point : points) {
-            gp.getiTile()[i] = (InteractiveTile) setEntity(new IT_DryTree(gp), point.x, point.y);
+            gp.getiTile()[mapNum][i] = (InteractiveTile) setEntity(new IT_DryTree(gp), point.x, point.y);
             i++;
         }
 

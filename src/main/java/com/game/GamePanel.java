@@ -39,10 +39,10 @@ public class GamePanel extends JPanel implements Runnable{
 
     // ENTITY AND OBJECTS
     private final Player player;
-    private Entity[] objects;
-    private Entity[] npc;
-    private Entity[] monster;
-    private InteractiveTile[] iTile;
+    private Entity[][] objects;
+    private Entity[][] npc;
+    private Entity[][] monster;
+    private InteractiveTile[][] iTile;
     ArrayList<Entity> projectileList;
     ArrayList<Entity> particleList;
     ArrayList<Entity> entities;
@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable{
         // TILE-MANAGER SET
         tileM = new TileManager(this);
         // INTERACTIVE SET
-        iTile = new InteractiveTile[50];
+        iTile = new InteractiveTile[CommonConstant.MAX_MAP][50];
         // COLLISION-CHECKER OBJECT
         checker = new CollisionChecker(this);
         // ASSET-SETTER
@@ -83,11 +83,11 @@ public class GamePanel extends JPanel implements Runnable{
         // PLAYER SET-UP
         player = new Player(this, keyH);
         // OBJECT ELEMENT
-        objects = new Entity[20];
+        objects = new Entity[CommonConstant.MAX_MAP][20];
         // NPC
-        npc = new Entity[10];
+        npc = new Entity[CommonConstant.MAX_MAP][10];
         // MONSTER
-        monster = new Entity[20];
+        monster = new Entity[CommonConstant.MAX_MAP][20];
         // ALL ENTITIES
         entities = new ArrayList<>();
         // FIREBALL ARRAY
@@ -180,20 +180,20 @@ public class GamePanel extends JPanel implements Runnable{
                 // PLAYER
                 player.update();
                 // NPC
-                for (Entity entity: npc) {
+                for (Entity entity: npc[1]) {
                     if (entity != null) {
                         entity.update();
                     }
                 }
                 // MONSTER
-                for (int i = 0; i < monster.length; i++) {
-                    if (monster[i] != null) {
-                        if (monster[i].isAlive()) {
-                            monster[i].update();
+                for (int i = 0; i < monster[1].length; i++) {
+                    if (monster[currentMap][i] != null) {
+                        if (monster[currentMap][i].isAlive()) {
+                            monster[currentMap][i].update();
                         }
                         else {
-                            monster[i].checkDrop();
-                            monster[i] = null;
+                            monster[currentMap][i].checkDrop();
+                            monster[currentMap][i] = null;
                         }
                     }
                 }
@@ -220,9 +220,9 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
                 // INTERACTIVE TREE
-                for (int i = 0; i < iTile.length; i++) {
-                    if (iTile[i] != null) {
-                        iTile[i].update();
+                for (int i = 0; i < iTile[1].length; i++) {
+                    if (iTile[currentMap][i] != null) {
+                        iTile[currentMap][i].update();
                     }
                 }
 
@@ -249,9 +249,9 @@ public class GamePanel extends JPanel implements Runnable{
             // TILE
             tileM.draw(g2);
 
-            for (int i = 0; i < iTile.length; i++) {
-                if (iTile[i] != null) {
-                    iTile[i].draw(g2);
+            for (int i = 0; i < iTile[1].length; i++) {
+                if (iTile[currentMap][i] != null) {
+                    iTile[currentMap][i].draw(g2);
                 }
             }
 
@@ -259,15 +259,15 @@ public class GamePanel extends JPanel implements Runnable{
             // ADD PLAYER
             entities.add(player);
             // ADD NPC
-            for (int i = 0; i < npc.length; i++) {
-                if (npc[i] != null) {
-                    entities.add(npc[i]);
+            for (int i = 0; i < npc[1].length; i++) {
+                if (npc[currentMap][i] != null) {
+                    entities.add(npc[currentMap][i]);
                 }
             }
             // ADD MONSTER
-            for (int i = 0; i < monster.length; i++) {
-                if (monster[i] != null) {
-                    entities.add(monster[i]);
+            for (int i = 0; i < monster[1].length; i++) {
+                if (monster[currentMap][i] != null) {
+                    entities.add(monster[currentMap][i]);
                 }
 
             }
@@ -287,9 +287,9 @@ public class GamePanel extends JPanel implements Runnable{
             }
 
             // ADD OBJECTS
-            for (int i = 0; i < objects.length; i++) {
-                if (objects[i] != null) {
-                    entities.add(objects[i]);
+            for (int i = 0; i < objects[1].length; i++) {
+                if (objects[currentMap][i] != null) {
+                    entities.add(objects[currentMap][i]);
                 }
             }
             // SORT
@@ -353,18 +353,18 @@ public class GamePanel extends JPanel implements Runnable{
     public Player getPlayer() { return player; }
     public CollisionChecker getChecker() { return checker; }
     public TileManager getTileM() {  return tileM;  }
-    public Entity[] getObjects() {  return objects;  }
+    public Entity[][] getObjects() {  return objects;  }
     public Sound getMusic() {return music;}
     public Sound getSe() {return se;}
     public UI getUi() {return ui;}
     public GameState getGameState() {return gameState;}
-    public Entity[] getNpc() {return npc;}
+    public Entity[][] getNpc() {return npc;}
     public EventHandler getEventH() {return eventH;}
     public KeyHandler getKeyH() {return keyH;}
-    public Entity[] getMonster() {return monster;}
+    public Entity[][] getMonster() {return monster;}
     public AssetSetter getaSetter() {return aSetter;}
     public ArrayList<Entity> getProjectileList() {return projectileList;}
-    public InteractiveTile[] getiTile() {return iTile;}
+    public InteractiveTile[][] getiTile() {return iTile;}
     public ArrayList<Entity> getParticleList() {return particleList;}
     public int getCurrentMap() {return currentMap;}
 

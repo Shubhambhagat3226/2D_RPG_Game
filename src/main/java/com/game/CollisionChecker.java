@@ -73,7 +73,9 @@ public class CollisionChecker {
     public int checkObject(Entity entity, boolean isPlayer) {
         int index = 999;
         int i=0;
-        for (Entity obj : gp.getObjects()) {
+        for (int j = 0; j < gp.getObjects()[1].length; j++) {
+
+            Entity obj = gp.getObjects()[gp.currentMap][j];
             if (obj != null) {
                 // GET ENTITY'S SOLID AREA POSITION
                 entity.getSolidArea().x += entity.getWorldX();
@@ -112,10 +114,12 @@ public class CollisionChecker {
     }
 
     // NPC AND MONSTER COLLISION
-    public int checkEntity(Entity entity, Entity[] targets) {
+    public int checkEntity(Entity entity, Entity[][] targets) {
         int index = 999;
         int i=0;
-        for (Entity target : targets) {
+        for (int j = 0; j < targets[1].length; j++) {
+
+            Entity target = targets[gp.currentMap][j];
             if (target != null) {
                 // GET ENTITY'S SOLID AREA POSITION
                 entity.getSolidArea().x += entity.getWorldX();

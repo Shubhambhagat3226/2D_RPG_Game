@@ -98,10 +98,10 @@ public class Entity {
     public void dropItem(Entity droppedItem) {
 
         for (int i = 0; i < gp.getObjects().length; i++) {
-            if (gp.getObjects()[i] == null) {
-                gp.getObjects()[i] = droppedItem;
-                gp.getObjects()[i].worldX = worldX; // DEAD MONSTER's WORLD X
-                gp.getObjects()[i].worldY = worldY; // DEAD MONSTER's WORLD Y
+            if (gp.getObjects()[gp.getCurrentMap()][i] == null) {
+                gp.getObjects()[gp.getCurrentMap()][i] = droppedItem;
+                gp.getObjects()[gp.getCurrentMap()][i].worldX = worldX; // DEAD MONSTER's WORLD X
+                gp.getObjects()[gp.getCurrentMap()][i].worldY = worldY; // DEAD MONSTER's WORLD Y
                 break;
             }
         }
