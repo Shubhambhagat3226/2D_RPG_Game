@@ -72,8 +72,20 @@ public class Player extends Entity {
         attack        = getAttack();  // TOTAL ATTACK CALCULATE BY STRENGTH AND WEAPON ATTACK-VALUE
         defence       = getDefense(); // TOTAL DEFENCE CALCULATE BY DEX AND WEAPON DEFENCE-VALUE
     }
+
+    public void setDefaultPosition() {
+        worldX = CommonConstant.TILE_SIZE * 23;
+        worldY = CommonConstant.TILE_SIZE * 21;
+        direction = Direction.SOUTH;
+    }
+    public void restoreLifeAndMana() {
+        life = maxLife;
+        mana = maxMana;
+        invincible = false;
+    }
     // SET ITEMS
     public void setItems() {
+        inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
     }
@@ -252,6 +264,9 @@ public class Player extends Entity {
 
         if (life <= 0) {
             gp.setGameState(GameState.GAME_OVER);
+            gp.getUi().setCommandNum(-1);
+            gp.stopMusic();
+            gp.playSoundEffect(SoundUtility.GAME_OVER);
         }
 
     }

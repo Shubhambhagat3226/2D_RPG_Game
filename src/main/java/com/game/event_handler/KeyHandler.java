@@ -265,12 +265,21 @@ public class KeyHandler implements KeyListener {
             gp.playSoundEffect(SoundUtility.CURSOR);
             if (gp.getUi().getCommandNum() > 1) {
                 gp.getUi().setCommandNum(0);
+
             }
         }
         // ENTER
         if (code == KeyEvent.VK_ENTER) {
-            if (gp.getUi().getCommandNum() == 0) gp.setGameState(GameState.PLAY);
-            else if (gp.getUi().getCommandNum() == 1) gp.setGameState(GameState.TITLE);
+            if (gp.getUi().getCommandNum() == 0) {
+                gp.setGameState(GameState.PLAY);
+                gp.retry();
+                gp.playMusic(SoundUtility.BLUE_BOY_ADVENTURE);
+            }
+            else if (gp.getUi().getCommandNum() == 1) {
+                gp.getUi().setCommandNum(0);
+                gp.setGameState(GameState.TITLE);
+                gp.reset();
+            }
         }
     }
 
