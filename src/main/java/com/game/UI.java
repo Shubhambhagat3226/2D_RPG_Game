@@ -433,7 +433,7 @@ public class UI {
         // SUB-WINDOW
         int frameX      = CommonConstant.TILE_SIZE * 6;
         int frameY      = CommonConstant.TILE_SIZE;
-        int frameWidth  = CommonConstant.TILE_SIZE * 8;
+        int frameWidth  = CommonConstant.TILE_SIZE * 9 - CommonConstant.TILE_SIZE/2;
         int frameHeight = CommonConstant.TILE_SIZE * 10;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
@@ -621,7 +621,6 @@ public class UI {
         text = "No";
         textX       = getX_For_CenteredText(text);
         textY      += CommonConstant.TILE_SIZE;
-        System.out.println(commandNum);
         g2.drawString(text, textX, textY);
         if (commandNum == 1) {
             g2.drawString(">", textX-25, textY);

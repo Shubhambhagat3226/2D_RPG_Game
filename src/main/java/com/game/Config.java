@@ -12,7 +12,7 @@ public class Config {
     public void saveConfig() {
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/config")));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(new File("config.txt")));
 
             // FULL SCREEN
             if (gp.fullScreenOn) bw.write("On");
@@ -34,7 +34,7 @@ public class Config {
     public void loadConfig() {
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(new File("/config")));
+            BufferedReader br = new BufferedReader(new FileReader(new File("config.txt")));
 
             String s = br.readLine();
             // FULL SCREEN
