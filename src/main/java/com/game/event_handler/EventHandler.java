@@ -4,6 +4,7 @@ import com.game.GamePanel;
 import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
 import com.game.constants.GameState;
+import com.game.entity.Entity;
 import com.game.sound.SoundUtility;
 
 public class EventHandler {
@@ -49,6 +50,7 @@ public class EventHandler {
 
         else if (hit(0, 10, 39, Direction.ANY)) teleport(1, 12, 13);
         else if (hit(1, 12, 13, Direction.ANY)) teleport(0, 10, 39);
+        else if (hit(1, 12, 9, Direction.ANY)) speak(gp.getNpc()[1][0]);
 
     }
     // CAN TOUCH
@@ -122,6 +124,15 @@ public class EventHandler {
 
         eventRect[map][col][row].eventDone = true;
         gp.playSoundEffect(SoundUtility.STAIRS);
+    }
+
+    public void speak(Entity entity) {
+
+        if (gp.getKeyH().isEnteredPressed()) {
+            gp.setGameState(GameState.DIALOGUE);
+            gp.getPlayer().attackCanceled = true;
+            entity.speak();
+        }
     }
 
     // GETTER

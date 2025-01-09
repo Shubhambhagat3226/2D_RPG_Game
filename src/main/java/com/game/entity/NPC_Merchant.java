@@ -3,6 +3,7 @@ package com.game.entity;
 import com.game.GamePanel;
 import com.game.constants.CommonConstant;
 import com.game.constants.Direction;
+import com.game.constants.GameState;
 import com.game.constants.ImageUtility;
 import com.game.object.OBJ_KEY;
 import com.game.object.OBJ_Red_Potion;
@@ -20,10 +21,6 @@ public class NPC_Merchant extends Entity{
         super(gp);
         direction = Direction.SOUTH;
         speed     = 1;
-
-        solidArea = new Rectangle(8, 16, 32, 32);
-        solidArea_Default_X = solidArea.x;
-        solidArea_Default_Y = solidArea.y;
 
         inventory = new ArrayList<>();
 
@@ -61,5 +58,7 @@ public class NPC_Merchant extends Entity{
     public void speak() {
         // DO THIS CHARACTER SPECIFIC STUFF
         super.speak();
+        gp.setGameState(GameState.TRADE);
+        gp.getUi().setNpc(this);
     }
 }

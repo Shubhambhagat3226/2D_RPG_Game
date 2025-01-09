@@ -30,6 +30,7 @@ public class KeyHandler implements KeyListener {
             case CHARACTER_STATUS -> characterState(code);
             case OPTION -> optionState(code);
             case GAME_OVER -> gameOverState(code);
+            case TRADE -> tradeState(code);
         }
 
     }
@@ -283,6 +284,29 @@ public class KeyHandler implements KeyListener {
                 gp.getUi().setCommandNum(0);
                 gp.setGameState(GameState.TITLE);
                 gp.reset();
+            }
+        }
+    }
+
+    // TRADE
+    private void tradeState(int code) {
+        if (code == KeyEvent.VK_ENTER) {
+            enteredPressed = true;
+        }
+        if (gp.getUi().getSubState() == 0) {
+            if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                gp.getUi().setCommandNum(gp.getUi().getCommandNum()-1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+                if (gp.getUi().getCommandNum() < 0) {
+                    gp.getUi().setCommandNum(2);
+                }
+            }
+            if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+                gp.getUi().setCommandNum(gp.getUi().getCommandNum()+1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+                if (gp.getUi().getCommandNum() > 1) {
+                    gp.getUi().setCommandNum(0);
+                }
             }
         }
     }

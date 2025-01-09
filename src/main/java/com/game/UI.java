@@ -3,6 +3,7 @@ package com.game;
 import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
 import com.game.constants.ImageUtility;
+import com.game.entity.Entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,6 +28,7 @@ public class UI {
     private int slotRow = 0;
     int subState = 0;
     int counter  = 0;
+    Entity npc;
 
     public UI(GamePanel gp) {
         this.gp     = gp;
@@ -82,8 +84,9 @@ public class UI {
                 drawInventory();
             }
             case OPTION -> drawOptionScreen();
-            case GAME_OVER -> drawGamwOverScreen();
+            case GAME_OVER -> drawGameOverScreen();
             case TRANSITION -> drawTransition();
+            case TRADE -> drawTradeScreen();
         }
     }
     // DRAW MESSAGE
@@ -231,9 +234,9 @@ public class UI {
     // DRAW DIALOGUE STATE
     public void drawDialogueScreen() {
         // WINDOW
-        int x      = CommonConstant.TILE_SIZE*2;
+        int x      = CommonConstant.TILE_SIZE*4;
         int y      = CommonConstant.TILE_SIZE/2;
-        int width  = CommonConstant.SCREEN_WIDTH - (CommonConstant.TILE_SIZE*4);
+        int width  = CommonConstant.SCREEN_WIDTH - (CommonConstant.TILE_SIZE*8);
         int height = CommonConstant.TILE_SIZE*4;
         drawSubWindow(x, y, width, height);
 
@@ -428,7 +431,7 @@ public class UI {
     }
 
     // GAME OVER
-    public void drawGamwOverScreen() {
+    public void drawGameOverScreen() {
 
         g2.setColor(new Color(0,0,0,150));
         g2.fillRect(0,0, gp.screenWidth2, gp.screenHeight2);
@@ -690,11 +693,53 @@ public class UI {
         }
     }
 
+    // TRADE
+    private void drawTradeScreen() {
+
+        switch (subState) {
+            case 0 -> trade_select();
+            case 1 -> trade_buy();
+            case 2 -> trade_sell();
+        }
+        gp.getKeyH().setEnteredPressed(false);
+    }
+    private void trade_select() {
+        drawDialogueScreen();
+
+        // DRAW WINDOW
+        int x      = CommonConstant.TILE_SIZE * 15;
+        int y      = CommonConstant.TILE_SIZE * 4;
+        int width  = CommonConstant.TILE_SIZE * 3;
+        int height = (int) (CommonConstant.TILE_SIZE * 3.8);
+        drawSubWindow(x, y, width, height);
+        // DRAW TEXTS
+        x += CommonConstant.TILE_SIZE;
+        y += CommonConstant.TILE_SIZE;
+        g2.drawString("Buy", x, y);
+        if (commandNum == 0) {
+            g2.drawString(">", x-24, y);
+        }
+        y += CommonConstant.TILE_SIZE;
+        g2.drawString("Sell", x, y);
+        if (commandNum == 1) {
+            g2.drawString(">", x-24, y);
+        }
+        y += CommonConstant.TILE_SIZE;
+        g2.drawString("Leave", x, y);
+        if (commandNum == 2) {
+            g2.drawString(">", x-24, y);
+        }
+
+    }
+    private void trade_buy() {}
+    private void trade_sell() {}
+
     // GETTER METHODS
     public int getCommandNum() {return commandNum;}
     public int getSlotCol() {return slotCol;}
     public int getSlotRow() {return slotRow;}
     public int getSubState() {return subState;}
+    public Entity getNpc() {return npc;}
 
     // SETTER METHODS
     public void setGameFinished(boolean gameFinished) {this.gameFinished = gameFinished;}
@@ -702,4 +747,5 @@ public class UI {
     public void setCommandNum(int commandNum) {this.commandNum = commandNum;}
     public void setSlotCol(int slotCol) {this.slotCol = slotCol;}
     public void setSlotRow(int slotRow) {this.slotRow = slotRow;}
+    public void setNpc(Entity npc) {this.npc = npc;}
 }

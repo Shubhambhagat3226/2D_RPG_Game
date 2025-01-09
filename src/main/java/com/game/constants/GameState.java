@@ -9,5 +9,6 @@ public enum GameState {
     OPTION,
     GAME_OVER,
     TRANSITION,
+    TRADE,
 
 }
