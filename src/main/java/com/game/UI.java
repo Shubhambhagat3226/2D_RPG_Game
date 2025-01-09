@@ -15,6 +15,7 @@ public class UI {
     private Graphics2D g2;
     private final BufferedImage heartFull, heartHalf, heartBlank;
     private final BufferedImage manaFull, manaBlank;
+    private final BufferedImage coin;
     private final Font maruMonica, ancientFont;
     private boolean messageOn;
 //    private String message = "";
@@ -43,6 +44,8 @@ public class UI {
 
         manaFull    = UtilityTool.setImage(ImageUtility.MANA_FULL, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
         manaBlank   = UtilityTool.setImage(ImageUtility.MANA_EMPTY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE);
+
+        coin = UtilityTool.setImage(ImageUtility.BRONZE_COIN, 32, 32);
     }
 
     // SET MESSAGE THAT WE HAVE TO SHOW
@@ -734,7 +737,7 @@ public class UI {
         // DRAW WINDOW
         int x      = CommonConstant.TILE_SIZE * 15;
         int y      = CommonConstant.TILE_SIZE * 4;
-        int width  = CommonConstant.TILE_SIZE * 3;
+        int width  = (int) (CommonConstant.TILE_SIZE * 3.14);
         int height = (int) (CommonConstant.TILE_SIZE * 3.8);
         drawSubWindow(x, y, width, height);
         // DRAW TEXTS
@@ -772,6 +775,60 @@ public class UI {
         drawInventory(gp.getPlayer(), false);
         // DRAW NPC INVENTORY
         drawInventory(npc, true);
+
+        // DRAW HINT WINDOW
+        int x      = CommonConstant.TILE_SIZE * 12;
+        int y      = CommonConstant.TILE_SIZE * 7;
+        int width  = CommonConstant.TILE_SIZE * 5;
+        int height = (int) (CommonConstant.TILE_SIZE * 1.7);
+        drawSubWindow(x, y, width, height);
+        g2.drawString("Your Coin: " + gp.getPlayer().getCoin(), x+24, (int) y + 50);
+
+        // DRAW PLAYER COIN WINDOW
+        x      = CommonConstant.TILE_SIZE * 12;
+        y      = CommonConstant.TILE_SIZE * 9;
+        width  = CommonConstant.TILE_SIZE * 5;
+        height = (int) (CommonConstant.TILE_SIZE * 1.7);
+        drawSubWindow(x, y, width, height);
+        g2.drawString("[ESC] Back", x+24, (int) y + 50);
+
+        // DRAW PRICE WINDOW
+        int itemIndex = getItemIndexOnSlot(npcSlotCol, npcSlotRow);
+        if (itemIndex < npc.getInventory().size()) {
+
+            x      = (int) (CommonConstant.TILE_SIZE * 5.764);
+            y      = (int) (CommonConstant.TILE_SIZE * 5.5);
+            width  = (int) (CommonConstant.TILE_SIZE * 2.5);
+            height = (int) (CommonConstant.TILE_SIZE);
+            drawSubWindow(x, y, width, height);
+            g2.drawImage(coin, x+10, y+8, null);
+
+            int price = npc.getInventory().get(itemIndex).getPrice();
+            String text = String.valueOf(price);
+            x = getX_For_AlignToRightText(text, CommonConstant.TILE_SIZE*8 - 10);
+            g2.drawString(text, x, y+34);
+
+            // BUY AN ITEM
+            if (gp.getKeyH().isEnteredPressed()) {
+                if (npc.getInventory().get(itemIndex).getPrice() > gp.getPlayer().getCoin()) {
+                    subState = 0;
+                    gp.setGameState(GameState.DIALOGUE);
+                    currentDialogue = "You need more coin to buy that!";
+                    drawDialogueScreen();
+                }
+                else if (gp.getPlayer().getInventory().size() == gp.getPlayer().getMaxInventorySize()) {
+                    subState = 0;
+                    gp.setGameState(GameState.DIALOGUE);
+                    currentDialogue = "You cannot carry any more!";
+                    drawDialogueScreen();
+                }
+                else {
+                    gp.getPlayer().setCoin(gp.getPlayer().getCoin() - npc.getInventory().get(itemIndex).getPrice());
+                    gp.getPlayer().getInventory().add(npc.getInventory().get(itemIndex));
+                }
+            }
+        }
+
     }
     private void trade_sell() {}
 

@@ -69,6 +69,7 @@ public class Entity {
 
     protected ArrayList<Entity> inventory;
     protected final int maxInventorySize = 20;
+    protected int price;
 
     public Entity(GamePanel gp) {
         this.gp    = gp;
@@ -327,7 +328,8 @@ public class Entity {
     public int getMaxMana() {return maxMana;}
     public int getType() {return type;}
     public ArrayList<Entity> getInventory() {return inventory;}
-
+    public int getPrice() {return price;}
+    public int getMaxInventorySize() {return maxInventorySize;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}

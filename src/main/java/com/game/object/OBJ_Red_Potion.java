@@ -18,6 +18,8 @@ public class OBJ_Red_Potion extends SuperItem {
         name              = ObjectName.POTION;
         down_1            = getImage(ImageUtility.RED_POTION);
         description       = "[" + name.getName() + "]\nHeals your life by " + value + ".";
+
+        price = 25;
     }
 
     public void use(Entity entity) {

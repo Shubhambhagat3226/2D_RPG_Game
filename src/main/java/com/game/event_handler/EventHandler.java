@@ -48,8 +48,8 @@ public class EventHandler {
 //        if (hit(0, 26, 16, Direction.EAST))  {teleport(GameState.DIALOGUE);}
         else if (hit(0, 23, 12, Direction.NORTH)) {healingPool( GameState.DIALOGUE);}
 
-        else if (hit(0, 10, 39, Direction.ANY)) teleport(1, 12, 13);
-        else if (hit(1, 12, 13, Direction.ANY)) teleport(0, 10, 39);
+        else if (hit(0, 10, 39, Direction.NORTH)) teleport(1, 12, 13);
+        else if (hit(1, 12, 13, Direction.SOUTH)) teleport(0, 10, 39);
         else if (hit(1, 12, 9, Direction.ANY)) speak(gp.getNpc()[1][0]);
 
     }

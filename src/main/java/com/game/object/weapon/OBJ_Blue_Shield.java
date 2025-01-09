@@ -16,5 +16,7 @@ public class OBJ_Blue_Shield extends SuperItem {
         down_1       = getImage(ImageUtility.BLUE_SHIELD);
         defenseValue = 2;
         description = "[" + name.getName() + "]\nA shiny blue shield.";
+
+        price = 250;
     }
 }

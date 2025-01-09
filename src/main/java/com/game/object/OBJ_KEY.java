@@ -11,5 +11,6 @@ public class OBJ_KEY extends Entity {
         name = ObjectName.KEY;
         down_1 = getImage(ImageUtility.KEY);
         description = "[" + name.getName() + "]\nIt opens a door.";
+        price = 100;
     }
 }

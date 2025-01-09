@@ -17,5 +17,7 @@ public class OBJ_Sword extends SuperItem {
         attackArea.width  = 36;
         attackArea.height = 36;
         description       = "[" + name.getName() + "]\nAn old sword.";
+
+        price = 20;
     }
 }

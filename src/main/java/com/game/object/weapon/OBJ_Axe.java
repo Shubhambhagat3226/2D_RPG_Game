@@ -17,5 +17,7 @@ public class OBJ_Axe extends SuperItem {
         attackArea.width  = 30;
         attackArea.height = 30;
         description       = "[" + name.getName() + "]\nA bit rusty but still can \ncut some tree.";
+
+        price = 75;
     }
 }
