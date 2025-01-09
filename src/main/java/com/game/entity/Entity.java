@@ -329,11 +329,11 @@ public class Entity {
             }
 
             // IF REACHES THE GOAL, STOP THE SEARCH
-            int nextCol = gp.getpFinder().pathList.get(0).getCol();
-            int nextRow = gp.getpFinder().pathList.get(0).getRow();
-            if (nextCol == goalCol && nextRow == goalRow) {
-                onPath = false;
-            }
+//            int nextCol = gp.getpFinder().pathList.get(0).getCol();
+//            int nextRow = gp.getpFinder().pathList.get(0).getRow();
+//            if (nextCol == goalCol && nextRow == goalRow) {
+//                onPath = false;
+//            }
         }
     }
 

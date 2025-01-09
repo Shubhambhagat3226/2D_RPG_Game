@@ -175,7 +175,6 @@ public class PathFinder {
         }
     }
     public void trackPath() {
-        System.out.println("path");
         Node current = goalNode;
         while (current != startNode) {
             pathList.add(0, current);
