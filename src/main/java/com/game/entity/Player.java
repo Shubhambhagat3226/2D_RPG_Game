@@ -426,7 +426,7 @@ public class Player extends Entity {
         }
     }
     public void selectItem() {
-        int itemIndex = gp.getUi().getItemIndexOnSlot();
+        int itemIndex = gp.getUi().getItemIndexOnSlot(gp.getUi().getPlayerSlotCol(), gp.getUi().getPlayerSlotRow());
 
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);

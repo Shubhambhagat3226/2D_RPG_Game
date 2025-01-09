@@ -24,8 +24,10 @@ public class UI {
     private boolean gameFinished;
     private String currentDialogue = "";
     private int commandNum=0;
-    private int slotCol = 0;
-    private int slotRow = 0;
+    private int playerSlotCol = 0;
+    private int playerSlotRow = 0;
+    private int npcSlotCol = 0;
+    private int npcSlotRow = 0;
     int subState = 0;
     int counter  = 0;
     Entity npc;
@@ -81,7 +83,7 @@ public class UI {
             }
             case CHARACTER_STATUS -> {
                 drawCharacterScreen();
-                drawInventory();
+                drawInventory(gp.getPlayer(), true);
             }
             case OPTION -> drawOptionScreen();
             case GAME_OVER -> drawGameOverScreen();
@@ -360,12 +362,33 @@ public class UI {
         return tailX - length;
     }
     // DRAW INVENTORY
-    public void drawInventory() {
+    public void drawInventory(Entity entity, boolean cursor) {
+
+        int frameX      = 0;
+        int frameY      = 0;
+        int frameWidth  = 0;
+        int frameHeight = 0;
+        int slotCol     = 0;
+        int slotRow     = 0;
+
         // FRAME
-        int frameX      = CommonConstant.TILE_SIZE * 12;
-        int frameY      = CommonConstant.TILE_SIZE;
-        int frameWidth  = CommonConstant.TILE_SIZE * 6;
-        int frameHeight = CommonConstant.TILE_SIZE * 5;
+        if (entity == gp.getPlayer()) {
+            frameX = CommonConstant.TILE_SIZE * 12;
+            frameY = CommonConstant.TILE_SIZE;
+            frameWidth = CommonConstant.TILE_SIZE * 6;
+            frameHeight = CommonConstant.TILE_SIZE * 5;
+            slotCol = playerSlotCol;
+            slotRow = playerSlotRow;
+
+        } else {
+            frameX = CommonConstant.TILE_SIZE * 2;
+            frameY = CommonConstant.TILE_SIZE;
+            frameWidth = CommonConstant.TILE_SIZE * 6;
+            frameHeight = CommonConstant.TILE_SIZE * 5;
+            slotCol = npcSlotCol;
+            slotRow = npcSlotRow;
+        }
+
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         // SLOT
@@ -376,16 +399,16 @@ public class UI {
         int slotSize          = CommonConstant.TILE_SIZE + 3;
 
         // DRAW PLAYER'S ITEMS
-        for (int i = 0; i < gp.getPlayer().getInventory().size(); i++) {
+        for (int i = 0; i < entity.getInventory().size(); i++) {
 
             // EQUIP CURSOR
-            if (gp.getPlayer().getInventory().get(i) == gp.getPlayer().getCurrentWeapon() ||
-                    gp.getPlayer().getInventory().get(i) == gp.getPlayer().getCurrentShield()) {
+            if (entity.getInventory().get(i) == entity.getCurrentWeapon() ||
+                    entity.getInventory().get(i) == entity.getCurrentShield()) {
                 g2.setColor(new Color(240, 190, 90));
                 g2.fillRoundRect(slotX, slotY, CommonConstant.TILE_SIZE, CommonConstant.TILE_SIZE, 10, 10);
             }
 
-            g2.drawImage(gp.getPlayer().getInventory().get(i).getDown_1(), slotX, slotY, null);
+            g2.drawImage(entity.getInventory().get(i).getDown_1(), slotX, slotY, null);
             slotX += slotSize;
             if (i%5 == 4) {
                 slotX  = slotX_start;
@@ -395,38 +418,40 @@ public class UI {
 
 
         // CURSOR
-        int cursorX      = slotX_start + (slotSize * slotCol);
-        int cursorY      = slotY_start + (slotSize * slotRow);
-        int cursorWidth  = CommonConstant.TILE_SIZE;
-        int cursorHeight = CommonConstant.TILE_SIZE;
-        // DRAW CURSOR
-        g2.setColor(Color.WHITE);
-        g2.setStroke(new BasicStroke(3));
-        g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight,10, 10);
+        if (cursor) {
+            int cursorX = slotX_start + (slotSize * slotCol);
+            int cursorY = slotY_start + (slotSize * slotRow);
+            int cursorWidth = CommonConstant.TILE_SIZE;
+            int cursorHeight = CommonConstant.TILE_SIZE;
+            // DRAW CURSOR
+            g2.setColor(Color.WHITE);
+            g2.setStroke(new BasicStroke(3));
+            g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 
-        // DESCRIPTION FRAME
-        int dFrameX      = frameX;
-        int dFrameY      = frameY + frameWidth;
-        int dFrameWidth  = frameWidth;
-        int dFrameHeight = CommonConstant.TILE_SIZE * 3;
+            // DESCRIPTION FRAME
+            int dFrameX = frameX;
+            int dFrameY = frameY + frameWidth;
+            int dFrameWidth = frameWidth;
+            int dFrameHeight = CommonConstant.TILE_SIZE * 3;
 
-        // DESCRIPTION TEXT
-        int textX = dFrameX + 20;
-        int textY = dFrameY + CommonConstant.TILE_SIZE;
-        g2.setFont(maruMonica.deriveFont(28f));
+            // DESCRIPTION TEXT
+            int textX = dFrameX + 20;
+            int textY = dFrameY + CommonConstant.TILE_SIZE;
+            g2.setFont(maruMonica.deriveFont(28f));
 
-        int itemIndex = getItemIndexOnSlot();
+            int itemIndex = getItemIndexOnSlot(slotCol, slotRow);
 
-        if (itemIndex < gp.getPlayer().getInventory().size()) {
-            drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
-            for (String line : gp.getPlayer().getInventory().get(itemIndex).getDescription().split("\n")) {
-                g2.drawString(line, textX, textY);
-                textY += 32;
+            if (itemIndex < entity.getInventory().size()) {
+                drawSubWindow(dFrameX, dFrameY, dFrameWidth, dFrameHeight);
+                for (String line : entity.getInventory().get(itemIndex).getDescription().split("\n")) {
+                    g2.drawString(line, textX, textY);
+                    textY += 32;
+                }
             }
         }
 
     }
-    public int getItemIndexOnSlot() {
+    public int getItemIndexOnSlot(int slotCol, int slotRow) {
         return (slotCol + (slotRow * 5));
     }
 
@@ -718,34 +743,55 @@ public class UI {
         g2.drawString("Buy", x, y);
         if (commandNum == 0) {
             g2.drawString(">", x-24, y);
+            if (gp.getKeyH().isEnteredPressed()) {
+                subState = 1;
+            }
         }
         y += CommonConstant.TILE_SIZE;
         g2.drawString("Sell", x, y);
         if (commandNum == 1) {
             g2.drawString(">", x-24, y);
+            if (gp.getKeyH().isEnteredPressed()) {
+                subState = 2;
+            }
         }
         y += CommonConstant.TILE_SIZE;
         g2.drawString("Leave", x, y);
         if (commandNum == 2) {
             g2.drawString(">", x-24, y);
+            if (gp.getKeyH().isEnteredPressed()) {
+                commandNum = 0;
+                gp.setGameState(GameState.DIALOGUE);
+                currentDialogue = "Come again, hehe!";
+            }
         }
 
     }
-    private void trade_buy() {}
+    private void trade_buy() {
+        // DRAW PLAYER INVENTORY
+        drawInventory(gp.getPlayer(), false);
+        // DRAW NPC INVENTORY
+        drawInventory(npc, true);
+    }
     private void trade_sell() {}
 
     // GETTER METHODS
     public int getCommandNum() {return commandNum;}
-    public int getSlotCol() {return slotCol;}
-    public int getSlotRow() {return slotRow;}
+    public int getPlayerSlotCol() {return playerSlotCol;}
+    public int getPlayerSlotRow() {return playerSlotRow;}
     public int getSubState() {return subState;}
     public Entity getNpc() {return npc;}
+    public int getNpcSlotCol() {return npcSlotCol;}
+    public int getNpcSlotRow() {return npcSlotRow;}
 
     // SETTER METHODS
     public void setGameFinished(boolean gameFinished) {this.gameFinished = gameFinished;}
     public void setCurrentDialogue(String currentDialogue) {this.currentDialogue = currentDialogue;}
     public void setCommandNum(int commandNum) {this.commandNum = commandNum;}
-    public void setSlotCol(int slotCol) {this.slotCol = slotCol;}
-    public void setSlotRow(int slotRow) {this.slotRow = slotRow;}
+    public void setPlayerSlotCol(int playerSlotCol) {this.playerSlotCol = playerSlotCol;}
+    public void setPlayerSlotRow(int playerSlotRow) {this.playerSlotRow = playerSlotRow;}
     public void setNpc(Entity npc) {this.npc = npc;}
+    public void setNpcSlotCol(int npcSlotCol) {this.npcSlotCol = npcSlotCol;}
+    public void setNpcSlotRow(int npcSlotRow) {this.npcSlotRow = npcSlotRow;}
+    public void setSubState(int subState) {this.subState = subState;}
 }

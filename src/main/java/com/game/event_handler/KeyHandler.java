@@ -4,7 +4,6 @@ import com.game.GamePanel;
 import com.game.constants.GameState;
 import com.game.sound.SoundUtility;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -136,38 +135,11 @@ public class KeyHandler implements KeyListener {
         if (KeyEvent.VK_C == code) {
             gp.setGameState(GameState.PLAY);
         }
-        // UP SIDE
-        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
-            if (gp.getUi().getSlotRow() != 0) {
-                gp.getUi().setSlotRow(gp.getUi().getSlotRow() - 1);
-                gp.playSoundEffect(SoundUtility.CURSOR);
-            }
-        }
-        // DOWN SIDE
-        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
-            if (gp.getUi().getSlotRow() < 3) {
-                gp.getUi().setSlotRow(gp.getUi().getSlotRow() + 1);
-                gp.playSoundEffect(SoundUtility.CURSOR);
-            }
-        }
-        // LEFT SIDE
-        if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
-            if (gp.getUi().getSlotCol() != 0) {
-                gp.getUi().setSlotCol(gp.getUi().getSlotCol() - 1);
-                gp.playSoundEffect(SoundUtility.CURSOR);
-            }
-        }
-        // RIGHT SIDE
-        if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
-            if (gp.getUi().getSlotCol() < 4) {
-                gp.getUi().setSlotCol(gp.getUi().getSlotCol() + 1);
-                gp.playSoundEffect(SoundUtility.CURSOR);
-            }
-        }
         // SELECT
         if (KeyEvent.VK_ENTER == code ) {
             gp.getPlayer().selectItem();
         }
+        playerInventory(code);
 
 
     }
@@ -309,8 +281,74 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
+        if (gp.getUi().getSubState() == 1) {
+            npcInventory(code);
+            if (code == KeyEvent.VK_ESCAPE) {
+                gp.getUi().setSubState(0);
+            }
+        }
     }
 
+    private void playerInventory(int code) {
+        // UP SIDE
+        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
+            if (gp.getUi().getPlayerSlotRow() != 0) {
+                gp.getUi().setPlayerSlotRow(gp.getUi().getPlayerSlotRow() - 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
+        }
+        // DOWN SIDE
+        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+            if (gp.getUi().getPlayerSlotRow() < 3) {
+                gp.getUi().setPlayerSlotRow(gp.getUi().getPlayerSlotRow() + 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
+        }
+        // LEFT SIDE
+        if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
+            if (gp.getUi().getPlayerSlotCol() != 0) {
+                gp.getUi().setPlayerSlotCol(gp.getUi().getPlayerSlotCol() - 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
+        }
+        // RIGHT SIDE
+        if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
+            if (gp.getUi().getPlayerSlotCol() < 4) {
+                gp.getUi().setPlayerSlotCol(gp.getUi().getPlayerSlotCol() + 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
+        }
+    }
+    private void npcInventory(int code) {
+        // UP SIDE
+        if (KeyEvent.VK_W == code || KeyEvent.VK_UP == code) {
+            if (gp.getUi().getNpcSlotRow() != 0) {
+                gp.getUi().setNpcSlotRow(gp.getUi().getNpcSlotRow() - 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
+        }
+        // DOWN SIDE
+        if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
+            if (gp.getUi().getNpcSlotRow() < 3) {
+                gp.getUi().setNpcSlotRow(gp.getUi().getNpcSlotRow() + 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
+        }
+        // LEFT SIDE
+        if (KeyEvent.VK_A == code || KeyEvent.VK_LEFT == code) {
+            if (gp.getUi().getNpcSlotCol() != 0) {
+                gp.getUi().setNpcSlotCol(gp.getUi().getNpcSlotCol() - 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
+        }
+        // RIGHT SIDE
+        if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
+            if (gp.getUi().getNpcSlotCol() < 4) {
+                gp.getUi().setNpcSlotCol(gp.getUi().getNpcSlotCol() + 1);
+                gp.playSoundEffect(SoundUtility.CURSOR);
+            }
+        }
+    }
     @Override
     public void keyTyped(KeyEvent e) {}
 
