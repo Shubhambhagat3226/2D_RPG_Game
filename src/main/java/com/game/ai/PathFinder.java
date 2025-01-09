@@ -1,6 +1,5 @@
 package com.game.ai;
 
-import com.game.CollisionChecker;
 import com.game.GamePanel;
 import com.game.constants.CommonConstant;
 
@@ -17,6 +16,7 @@ public class PathFinder {
 
     public PathFinder(GamePanel gp) {
         this.gp = gp;
+        instantiateNode();
     }
     public void instantiateNode() {
         nodes = new Node[CommonConstant.MAX_WORLD_COL][CommonConstant.MAX_WORLD_ROW];
@@ -51,6 +51,7 @@ public class PathFinder {
         openList.clear();
         pathList.clear();
         goalReached = false;
+        step        = 0;
     }
     public void setNode(int startCol, int startRow, int goalCol, int goalRow) {
         resetNodes();
@@ -61,13 +62,12 @@ public class PathFinder {
         goalNode    = nodes[goalCol][goalRow];
         openList.add(currentNode);
 
-
         int col = 0, row = 0;
         while (col < CommonConstant.MAX_WORLD_COL && row < CommonConstant.MAX_WORLD_ROW) {
 
             // SET SOLID NODE
             // CHECK TILES
-            int tileNum = gp.getTileM().getMap()[gp.getCurrentMap()][col][row];
+            int tileNum = gp.getTileM().getMap()[gp.getCurrentMap()][row][col];
             if (gp.getTileM().getTiles()[tileNum].isCollision()) {
                 nodes[col][row].solid = true;
             }
@@ -106,7 +106,8 @@ public class PathFinder {
 
     }
     public boolean search() {
-        while (!goalReached && step < 500) {
+
+        while (!goalReached && step < 1000) {
             int col = currentNode.col;
             int row = currentNode.row;
 
@@ -174,6 +175,7 @@ public class PathFinder {
         }
     }
     public void trackPath() {
+        System.out.println("path");
         Node current = goalNode;
         while (current != startNode) {
             pathList.add(0, current);

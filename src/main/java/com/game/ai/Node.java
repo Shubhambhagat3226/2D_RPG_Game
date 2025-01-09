@@ -12,4 +12,8 @@ public class Node {
         this.col = col;
         this.row = row;
     }
+
+    // GETTER
+    public int getCol() {return col;}
+    public int getRow() {return row;}
 }

@@ -34,6 +34,7 @@ public class Entity {
     protected boolean alive;
     protected boolean dying;
     protected boolean hpBarOn;
+    protected boolean onPath = false;
 
     // COUNTER
     protected int spiritCounter     = 0;
@@ -111,10 +112,9 @@ public class Entity {
             }
         }
     }
-    // UPDATE METHOD DEFAULT FOR ENTITY
-    public void update() {
-        setAction();
 
+    // CHECK ALL COLLISION
+    public void checkCollision() {
         collisionOn = false;
         gp.getChecker().checkTile(this);
         gp.getChecker().checkObject(this, false);
@@ -127,6 +127,11 @@ public class Entity {
 
             damagePlayer(attack);
         }
+    }
+    // UPDATE METHOD DEFAULT FOR ENTITY
+    public void update() {
+        setAction();
+        checkCollision();
         // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
         if (!collisionOn) {
             switch (direction) {
@@ -270,6 +275,67 @@ public class Entity {
         return UtilityTool.setImage(imagePath, width, height);
     }
 
+    public void searchPath(int goalCol, int goalRow) {
+        int startCol = (worldX + solidArea.x)/CommonConstant.TILE_SIZE;
+        int startRow = (worldY + solidArea.y)/CommonConstant.TILE_SIZE;
+        gp.getpFinder().setNode(startCol, startRow, goalCol, goalRow);
+
+        if (gp.getpFinder().search()) {
+            // NEXT WORLD-X AND Y
+            int nextX = gp.getpFinder().pathList.get(0).getCol() * CommonConstant.TILE_SIZE;
+            int nextY = gp.getpFinder().pathList.get(0).getRow() * CommonConstant.TILE_SIZE;
+            // ENTITY'S SOLID AREA POSITION
+            int enLeftX   = worldX + solidArea.x;
+            int enRightX  = enLeftX + solidArea.width;
+            int enTopY    = worldY + solidArea.y;
+            int enBottomY = enTopY + solidArea.height;
+
+            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + CommonConstant.TILE_SIZE) {
+                direction = Direction.NORTH;
+            } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + CommonConstant.TILE_SIZE) {
+                direction = Direction.SOUTH;
+            } else if (enTopY >= nextY && enBottomY < nextY + CommonConstant.TILE_SIZE) {
+                if (enLeftX > nextX) {
+                    direction = Direction.WEST;
+                }
+                if (enLeftX < nextX) {
+                    direction = Direction.EAST;
+
+                }
+            } else if (enTopY > nextY && enLeftX > nextX) {
+                direction = Direction.NORTH;
+                checkCollision();
+                if (collisionOn) {
+                    direction = Direction.WEST;
+                }
+            } else if (enTopY > nextY && enLeftX < nextX) {
+                direction = Direction.NORTH;
+                checkCollision();
+                if (collisionOn) {
+                    direction = Direction.EAST;
+                }
+            } else if (enTopY < nextY && enLeftX > nextX) {
+                direction = Direction.SOUTH;
+                checkCollision();
+                if (collisionOn) {
+                    direction = Direction.WEST;
+                }
+            } else if (enTopY < nextY && enLeftX < nextX) {
+                direction = Direction.SOUTH;
+                checkCollision();
+                if (collisionOn) {
+                    direction = Direction.EAST;
+                }
+            }
+
+            // IF REACHES THE GOAL, STOP THE SEARCH
+            int nextCol = gp.getpFinder().pathList.get(0).getCol();
+            int nextRow = gp.getpFinder().pathList.get(0).getRow();
+            if (nextCol == goalCol && nextRow == goalRow) {
+                onPath = false;
+            }
+        }
+    }
 
     // PARTICLE
     public Color getParticleColor() {

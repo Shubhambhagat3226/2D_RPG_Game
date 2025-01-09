@@ -1,5 +1,6 @@
 package com.game;
 
+import com.game.ai.PathFinder;
 import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
 import com.game.entity.Entity;
@@ -36,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final UI ui;
     private final EventHandler eventH;
     Config config = new Config(this);
+    PathFinder pFinder = new PathFinder(this);
 
     // ENTITY AND OBJECTS
     private final Player player;
@@ -51,7 +53,7 @@ public class GamePanel extends JPanel implements Runnable{
     private GameState gameState;
     boolean fullScreenOn = false;
 
-    int currentMap = 1;
+    int currentMap = 0;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT));
@@ -368,6 +370,7 @@ public class GamePanel extends JPanel implements Runnable{
     public InteractiveTile[][] getiTile() {return iTile;}
     public ArrayList<Entity> getParticleList() {return particleList;}
     public int getCurrentMap() {return currentMap;}
+    public PathFinder getpFinder() {return pFinder;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }

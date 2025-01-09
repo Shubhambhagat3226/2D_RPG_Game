@@ -44,23 +44,32 @@ public class NPC_OldMan extends Entity{
 
     @Override
     public void setAction() {
-        actionCounter++;
 
-        if (actionCounter == CommonConstant.FPS*3) {
-            Random random = new Random();
-            int i = random.nextInt(100); // pick up a number from 1 to 100
+        if (onPath) {
+            int goalCol = 12;
+            int goalRow = 9;
 
-            if (i < 25) {
-                direction = Direction.NORTH;
-            } else if (i < 50) {
-                direction = Direction.SOUTH;
-            } else if (i < 75) {
-                direction = Direction.WEST;
-            } else {
-                direction = Direction.EAST;
+            searchPath(goalCol, goalRow);
+        }
+        else {
+
+            actionCounter++;
+            if (actionCounter == CommonConstant.FPS * 3) {
+                Random random = new Random();
+                int i = random.nextInt(100); // pick up a number from 1 to 100
+
+                if (i < 25) {
+                    direction = Direction.NORTH;
+                } else if (i < 50) {
+                    direction = Direction.SOUTH;
+                } else if (i < 75) {
+                    direction = Direction.WEST;
+                } else {
+                    direction = Direction.EAST;
+                }
+
+                actionCounter = 0;
             }
-
-            actionCounter=0;
         }
     }
 
@@ -68,5 +77,7 @@ public class NPC_OldMan extends Entity{
     public void speak() {
         // DO THIS CHARACTER SPECIFIC STUFF
         super.speak();
+
+        onPath = true;
     }
 }
