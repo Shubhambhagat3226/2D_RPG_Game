@@ -287,6 +287,12 @@ public class KeyHandler implements KeyListener {
                 gp.getUi().setSubState(0);
             }
         }
+        if (gp.getUi().getSubState() == 2) {
+            playerInventory(code);
+            if (code == KeyEvent.VK_ESCAPE) {
+                gp.getUi().setSubState(0);
+            }
+        }
     }
 
     private void playerInventory(int code) {

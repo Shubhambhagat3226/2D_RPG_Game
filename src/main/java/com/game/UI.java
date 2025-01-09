@@ -80,8 +80,8 @@ public class UI {
                 drawPauseScreen();
             }
             case DIALOGUE -> {
-                drawPlayerLife();
-                drawPlayerMana();
+//                drawPlayerLife();
+//                drawPlayerMana();
                 drawDialogueScreen();
             }
             case CHARACTER_STATUS -> {
@@ -830,7 +830,61 @@ public class UI {
         }
 
     }
-    private void trade_sell() {}
+    private void trade_sell() {
+
+        // DRAW PLAYER INVENTORY
+        drawInventory(gp.getPlayer(), true);
+        // DRAW HINT WINDOW
+        int x      = CommonConstant.TILE_SIZE * 2;
+        int y      = CommonConstant.TILE_SIZE * 7;
+        int width  = CommonConstant.TILE_SIZE * 5;
+        int height = (int) (CommonConstant.TILE_SIZE * 1.7);
+        drawSubWindow(x, y, width, height);
+        g2.drawString("Your Coin: " + gp.getPlayer().getCoin(), x+24, (int) y + 50);
+
+        // DRAW PLAYER COIN WINDOW
+        x      = CommonConstant.TILE_SIZE * 2;
+        y      = CommonConstant.TILE_SIZE * 9;
+        width  = CommonConstant.TILE_SIZE * 5;
+        height = (int) (CommonConstant.TILE_SIZE * 1.7);
+        drawSubWindow(x, y, width, height);
+        g2.drawString("[ESC] Back", x+24, (int) y + 50);
+
+        // DRAW PRICE WINDOW
+        int itemIndex = getItemIndexOnSlot(playerSlotCol, playerSlotRow);
+        if (itemIndex < gp.getPlayer().getInventory().size()) {
+
+            x      = (int) (CommonConstant.TILE_SIZE * 15.764);
+            y      = (int) (CommonConstant.TILE_SIZE * 5.5);
+            width  = (int) (CommonConstant.TILE_SIZE * 2.5);
+            height = (int) (CommonConstant.TILE_SIZE);
+            drawSubWindow(x, y, width, height);
+            g2.drawImage(coin, x+10, y+8, null);
+
+            int price = gp.getPlayer().getInventory().get(itemIndex).getPrice()/2;
+            String text = String.valueOf(price);
+            x = getX_For_AlignToRightText(text, CommonConstant.TILE_SIZE*18 - 10);
+            g2.drawString(text, x, y+34);
+
+            // SELL AN ITEM
+            if (gp.getKeyH().isEnteredPressed()) {
+
+                if (gp.getPlayer().getInventory().get(itemIndex) == gp.getPlayer().getCurrentWeapon() ||
+                        gp.getPlayer().getInventory().get(itemIndex) == gp.getPlayer().getCurrentShield()) {
+
+                    commandNum = 0;
+                    subState   = 0;
+                    gp.setGameState(GameState.DIALOGUE);
+                    currentDialogue = "You cannot sell an equipped item!";
+                }
+                else {
+                    gp.getPlayer().getInventory().remove(itemIndex);
+                    gp.getPlayer().setCoin(gp.getPlayer().getCoin() + price);
+                }
+            }
+        }
+
+    }
 
     // GETTER METHODS
     public int getCommandNum() {return commandNum;}
