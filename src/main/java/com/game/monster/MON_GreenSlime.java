@@ -77,9 +77,16 @@ public class MON_GreenSlime extends Entity {
             searchPath(goalCol, goalRow);
 
             int i = new Random().nextInt(200);
-            if (i > 198 && !projectile.isAlive() && shotAvailableCounter == 30) {
+            if (i > 196 && !projectile.isAlive() && shotAvailableCounter == 30) {
                 projectile.set(worldX, worldY, direction, true, this);
-                gp.getProjectileList().add(projectile);
+//                gp.getProjectile().add(projectile);
+                // CHECK VACANCY
+                for (int j = 0; j < gp.getProjectile()[1].length; j++) {
+                    if (gp.getProjectile()[gp.getCurrentMap()][j] == null) {
+                        gp.getProjectile()[gp.getCurrentMap()][j] = projectile;
+                        break;
+                    }
+                }
                 shotAvailableCounter = 0;
             }
         }

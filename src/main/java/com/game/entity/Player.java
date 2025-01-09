@@ -247,7 +247,14 @@ public class Player extends Entity {
             projectile.subtractResource(this);
 
             // ADD IT TO THE LIST
-            gp.getProjectileList().add(projectile);
+//            gp.getProjectile().add(projectile);
+            // CHECK VACANCY
+            for (int i = 0; i < gp.getProjectile()[1].length; i++) {
+                if (gp.getProjectile()[gp.getCurrentMap()][i] == null) {
+                    gp.getProjectile()[gp.getCurrentMap()][i] = projectile;
+                    break;
+                }
+            }
 
             gp.playSoundEffect(SoundUtility.BURNING);
             shotAvailableCounter = 0;
@@ -309,6 +316,9 @@ public class Player extends Entity {
             // INTERACTIVE TILE
             int iTileIndex = gp.getChecker().checkEntity(this, gp.getiTile());
             damageInteractiveTile(iTileIndex);
+
+            int projectileIndex = gp.getChecker().checkEntity(this, gp.getProjectile());
+            damageProjectTile(projectileIndex);
             // RESET THE VALUE
             worldX           = currentWorldX;
             worldY           =  currentWorldY;
@@ -405,6 +415,13 @@ public class Player extends Entity {
                    gp.getMonster()[gp.getCurrentMap()][i].dying = true;
                }
            }
+        }
+    }
+    public void damageProjectTile(int i) {
+        if (i != 999) {
+            Entity projectile = gp.getProjectile()[gp.getCurrentMap()][i];
+            projectile.alive = false;
+            generateParticle(projectile, projectile);
         }
     }
     public void checkLevelUp() {
