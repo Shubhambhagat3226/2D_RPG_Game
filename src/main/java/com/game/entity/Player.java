@@ -58,7 +58,8 @@ public class Player extends Entity {
             worldX = CommonConstant.TILE_SIZE * 12;
             worldY = CommonConstant.TILE_SIZE * 13;
         }
-        speed = 4;
+        defaultSpeed = 4;
+        speed = defaultSpeed;
         direction = Direction.SOUTH;
 
         // PLAYER STATUS
@@ -370,6 +371,12 @@ public class Player extends Entity {
         }
 
     }
+    // KNOCK
+    public void knockBack(Entity entity) {
+        entity.direction = direction;
+        entity.speed    += 10;
+        entity.knockBack = true;
+    }
     // CONTACT MONSTER
     public void contactMonster(int i) {
         if (i != 999) {
@@ -392,6 +399,8 @@ public class Player extends Entity {
            if (!gp.getMonster()[gp.getCurrentMap()][i].invincible) {
 
                gp.playSoundEffect(SoundUtility.HIT_MONSTER);
+
+               knockBack(gp.getMonster()[gp.getCurrentMap()][i]);
 
                int damage  = attack - gp.getMonster()[gp.getCurrentMap()][i].defence;
                if (damage <= 0) {

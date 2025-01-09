@@ -35,6 +35,7 @@ public class Entity {
     protected boolean dying;
     protected boolean hpBarOn;
     protected boolean onPath = false;
+    protected boolean knockBack = false;
 
     // COUNTER
     protected int spiritCounter     = 0;
@@ -43,10 +44,12 @@ public class Entity {
     protected int dyingCounter      = 0;
     protected int hpBarCounter      = 0;
     protected int shotAvailableCounter = 0;
+    protected int knockBackCounter = 0;
 
     // CHARACTER STATUS
     protected int type; // 0-player 1-npc 2-monster
     protected ObjectName name;
+    protected int defaultSpeed;
     protected int maxLife;
     protected int life;
     protected int maxMana;
@@ -130,16 +133,37 @@ public class Entity {
     }
     // UPDATE METHOD DEFAULT FOR ENTITY
     public void update() {
-        setAction();
-        checkCollision();
-        // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
-        if (!collisionOn) {
-            switch (direction) {
-                case NORTH -> worldY -= speed;
-                case SOUTH -> worldY += speed;
-                case WEST  -> worldX -= speed;
-                case EAST  -> worldX += speed;
+
+        if (knockBack) {
+            checkCollision();
+            if (collisionOn || knockBackCounter == 6) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
             }
+            else {
+                switch (gp.getPlayer().direction) {
+                    case NORTH -> worldY -= speed;
+                    case SOUTH -> worldY += speed;
+                    case WEST  -> worldX -= speed;
+                    case EAST  -> worldX += speed;
+                }
+            }
+            knockBackCounter++;
+        }
+        else {
+            setAction();
+            checkCollision();
+            // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
+            if (!collisionOn) {
+                switch (direction) {
+                    case NORTH -> worldY -= speed;
+                    case SOUTH -> worldY += speed;
+                    case WEST  -> worldX -= speed;
+                    case EAST  -> worldX += speed;
+                }
+            }
+
         }
 
         // TO CHANGE FROM OTHER IMAGE

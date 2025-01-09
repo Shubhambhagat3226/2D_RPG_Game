@@ -1,11 +1,8 @@
 package com.game.monster;
 
 import com.game.GamePanel;
-import com.game.constants.CommonConstant;
-import com.game.constants.Direction;
-import com.game.constants.ImageUtility;
+import com.game.constants.*;
 import com.game.entity.Entity;
-import com.game.constants.ObjectName;
 import com.game.object.OBJ_COIN;
 import com.game.object.OBJ_Heart;
 import com.game.object.OBJ_ManaCrystal;
@@ -20,10 +17,11 @@ public class MON_GreenSlime extends Entity {
         super(gp);
 
         name    = ObjectName.GREEN_SLIME;
-        speed   = 1;
+        defaultSpeed = 1;
+        speed   = defaultSpeed;
         maxLife = 5;
         life    = maxLife;
-        type    = 2;
+        type    = Type.MONSTER;
         attack  = 4;
         defence = 0;
         exp     = 2;
