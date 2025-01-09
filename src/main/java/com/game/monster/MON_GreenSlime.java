@@ -48,40 +48,71 @@ public class MON_GreenSlime extends Entity {
     }
 
     @Override
-    public void setAction() {
-        actionCounter++;
+    public void update() {
+        super.update();
 
-        if (actionCounter == CommonConstant.FPS*3) {
-            Random random = new Random();
-            int i = random.nextInt(100); // pick up a number from 1 to 100
+        int xDistance = Math.abs(worldX - gp.getPlayer().getWorldX());
+        int yDistance = Math.abs(worldY - gp.getPlayer().getWorldY());
+        int tileDistance = (xDistance + yDistance)/ CommonConstant.TILE_SIZE;
 
-            if (i < 25) {
-                direction = Direction.NORTH;
-            } else if (i < 50) {
-                direction = Direction.SOUTH;
-            } else if (i < 75) {
-                direction = Direction.WEST;
-            } else {
-                direction = Direction.EAST;
+        if (!onPath  && tileDistance < 5) {
+            int i = new Random().nextInt(100);
+            if (i > 50) {
+                onPath = true;
             }
+        }
+        if (onPath && tileDistance > 10) {
+            onPath = false;
+        }
+    }
 
-            actionCounter=0;
+    @Override
+    public void setAction() {
 
+        if (onPath) {
+
+            int goalCol = (gp.getPlayer().getWorldX() + gp.getPlayer().getSolidArea().x)/CommonConstant.TILE_SIZE;
+            int goalRow = (gp.getPlayer().getWorldY() + gp.getPlayer().getSolidArea().y)/CommonConstant.TILE_SIZE;
+
+            searchPath(goalCol, goalRow);
+
+            int i = new Random().nextInt(200);
+            if (i > 198 && !projectile.isAlive() && shotAvailableCounter == 30) {
+                projectile.set(worldX, worldY, direction, true, this);
+                gp.getProjectileList().add(projectile);
+                shotAvailableCounter = 0;
+            }
+        }
+        else {
+            actionCounter++;
+
+            if (actionCounter == CommonConstant.FPS * 3) {
+                Random random = new Random();
+                int i = random.nextInt(100); // pick up a number from 1 to 100
+
+                if (i < 25) {
+                    direction = Direction.NORTH;
+                } else if (i < 50) {
+                    direction = Direction.SOUTH;
+                } else if (i < 75) {
+                    direction = Direction.WEST;
+                } else {
+                    direction = Direction.EAST;
+                }
+
+                actionCounter = 0;
+
+            }
         }
 
-        int i = new Random().nextInt(100);
-        if (i > 98 && !projectile.isAlive() && shotAvailableCounter == 30) {
-            projectile.set(worldX, worldY, direction, true, this);
-            gp.getProjectileList().add(projectile);
-            shotAvailableCounter = 0;
-        }
     }
 
     @Override
     public void damageReaction() {
 
         actionCounter = 0;
-        direction     = gp.getPlayer().getDirection();
+//        direction     = gp.getPlayer().getDirection();
+        onPath = true;
     }
 
     @Override
