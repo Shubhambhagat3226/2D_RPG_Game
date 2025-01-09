@@ -313,7 +313,7 @@ public class Player extends Entity {
             solidArea.height  = attackArea.height;
             // CHECK MONSTER COLLIDE WITH UPDATED WORLD-X,Y AND SOLID-AREA
             int monsterIndex  = gp.getChecker().checkEntity(this, gp.getMonster());
-            damageMonster(monsterIndex, attack);
+            damageMonster(monsterIndex, attack, currentWeapon.knowBackPower);
             // INTERACTIVE TILE
             int iTileIndex = gp.getChecker().checkEntity(this, gp.getiTile());
             damageInteractiveTile(iTileIndex);
@@ -372,9 +372,9 @@ public class Player extends Entity {
 
     }
     // KNOCK
-    public void knockBack(Entity entity) {
+    public void knockBack(Entity entity, int knockBackPower) {
         entity.direction = direction;
-        entity.speed    += 10;
+        entity.speed    += knockBackPower;
         entity.knockBack = true;
     }
     // CONTACT MONSTER
@@ -393,14 +393,16 @@ public class Player extends Entity {
         }
     }
     // DAMAGE TO MONSTER
-    public void damageMonster(int i, int attack) {
+    public void damageMonster(int i, int attack, int knockBackPower) {
 
         if (i != 999 ) {
            if (!gp.getMonster()[gp.getCurrentMap()][i].invincible) {
 
                gp.playSoundEffect(SoundUtility.HIT_MONSTER);
 
-               knockBack(gp.getMonster()[gp.getCurrentMap()][i]);
+               if (knockBackPower > 0) {
+                   knockBack(gp.getMonster()[gp.getCurrentMap()][i], knockBackPower);
+               }
 
                int damage  = attack - gp.getMonster()[gp.getCurrentMap()][i].defence;
                if (damage <= 0) {

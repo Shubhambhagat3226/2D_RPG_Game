@@ -74,6 +74,7 @@ public class Entity {
     protected ArrayList<Entity> inventory;
     protected final int maxInventorySize = 20;
     protected int price;
+    protected int knowBackPower = 0;
 
     public Entity(GamePanel gp) {
         this.gp    = gp;

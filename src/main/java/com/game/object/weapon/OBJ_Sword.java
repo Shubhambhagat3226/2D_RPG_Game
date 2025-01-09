@@ -19,5 +19,6 @@ public class OBJ_Sword extends SuperItem {
         description       = "[" + name.getName() + "]\nAn old sword.";
 
         price = 20;
+        knowBackPower = 2;
     }
 }
