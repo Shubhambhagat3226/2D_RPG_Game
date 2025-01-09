@@ -22,7 +22,7 @@ public class EventHandler {
         while (map < CommonConstant.MAX_MAP &&
                 col < CommonConstant.MAX_WORLD_COL && row < CommonConstant.MAX_WORLD_ROW) {
 
-            eventRect[map][col][row]              = new EventRect(CommonConstant.TILE_SIZE/2-1, CommonConstant.TILE_SIZE/2-1, 2, 2);
+            eventRect[map][col][row]              = new EventRect(CommonConstant.TILE_SIZE/2-2, CommonConstant.TILE_SIZE/2-2, 4, 4);
             eventRect[map][col][row].x           += CommonConstant.TILE_SIZE * col;
             eventRect[map][col][row].y           += CommonConstant.TILE_SIZE * row;
 //            eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;

@@ -304,7 +304,7 @@ public class KeyHandler implements KeyListener {
             if (KeyEvent.VK_S == code || KeyEvent.VK_DOWN == code) {
                 gp.getUi().setCommandNum(gp.getUi().getCommandNum()+1);
                 gp.playSoundEffect(SoundUtility.CURSOR);
-                if (gp.getUi().getCommandNum() > 1) {
+                if (gp.getUi().getCommandNum() > 2) {
                     gp.getUi().setCommandNum(0);
                 }
             }
