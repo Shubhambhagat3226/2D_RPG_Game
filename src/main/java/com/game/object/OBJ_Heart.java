@@ -18,10 +18,11 @@ public class OBJ_Heart extends SuperItem {
         down_1 = getImage(ImageUtility.HEART_FULL);
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
 
         gp.playSoundEffect(SoundUtility.COIN);
         gp.getUi().addMessage("Life +" + value);
         entity.setLife(entity.getLife() + value);
+        return true;
     }
 }

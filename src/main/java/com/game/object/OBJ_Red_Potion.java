@@ -22,7 +22,7 @@ public class OBJ_Red_Potion extends SuperItem {
         price = 25;
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gp.setGameState(GameState.DIALOGUE);
         gp.getUi().setCurrentDialogue("You drink the " + name.getName() + "!\n" +
                 "Your life has been recovered by " + value + ".");
@@ -30,5 +30,7 @@ public class OBJ_Red_Potion extends SuperItem {
         if (entity.getLife() > entity.getMaxLife()) {
             entity.setLife(entity.getMaxLife());
         }
+
+        return true;
     }
 }

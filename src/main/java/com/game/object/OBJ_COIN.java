@@ -19,10 +19,11 @@ public class OBJ_COIN extends SuperItem {
         down_1 = getImage(ImageUtility.BRONZE_COIN);
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
 
         gp.playSoundEffect(SoundUtility.COIN);
         gp.getUi().addMessage("Coin +" + value);
         entity.setCoin(entity.getCoin() + value);
+        return true;
     }
 }

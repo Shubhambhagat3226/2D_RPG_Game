@@ -98,7 +98,7 @@ public class Entity {
             case EAST  -> direction = Direction.WEST;
         }
     }
-    public void use(Entity entity) {}
+    public boolean use(Entity entity) {return false;}
     // SET-ACTION DEFINE IN SUN-CLASS
     public void setAction() {}
     // DAMAGE REACTION
