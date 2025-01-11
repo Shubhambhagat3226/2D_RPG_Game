@@ -117,6 +117,33 @@ public class Entity {
         }
     }
 
+    public void interact() {}
+    public int getDetected(Entity user, Entity[][] target, ObjectName targetName) {
+        int index = 999;
+
+        // CHECK SURROUNDING OBJECT
+        int nextWorldX = user.getLeftX();
+        int nextWorldY = user.getTopY();
+        switch (user.direction) {
+            case NORTH -> nextWorldY = user.getTopY()-1;
+            case SOUTH -> nextWorldY = user.getBottomY()+1;
+            case WEST  -> nextWorldX = user.getLeftX()-1;
+            case EAST  -> nextWorldX = user.getRightX()+1;
+        }
+        int col = nextWorldX/CommonConstant.TILE_SIZE;
+        int row = nextWorldY/CommonConstant.TILE_SIZE;
+        for (int i = 0; i < target[1].length; i++) {
+            Entity t = target[gp.getCurrentMap()][i];
+            if (t != null) {
+                if (t.getCol() == col && t.getRow() == row && t.name == targetName) {
+                    index = i;
+                    break;
+                }
+            }
+        }
+
+        return index;
+    }
     // CHECK ALL COLLISION
     public void checkCollision() {
         collisionOn = false;
@@ -394,6 +421,14 @@ public class Entity {
         gp.getParticleList().add(p3);
         gp.getParticleList().add(p4);
     }
+
+    // COMMON
+    public int getLeftX() {return worldX + solidArea.x;}
+    public int getRightX() {return worldX + solidArea.x + solidArea.width;}
+    public int getTopY() {return worldY + solidArea.y;}
+    public int getBottomY() {return worldY + solidArea.y + solidArea.height;}
+    public int getCol() {return (worldX + solidArea.x)/CommonConstant.TILE_SIZE;}
+    public int getRow() {return (worldY + solidArea.y)/CommonConstant.TILE_SIZE;}
 
     // GETTER METHOD ONLY
     public int getWorldX() {  return worldX;  }

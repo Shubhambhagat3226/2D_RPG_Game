@@ -9,4 +9,5 @@ public class Type {
     public final static int SHIELD     = 5;
     public final static int CONSUMABLE = 6;
     public final static int PICKUP_ONLY = 7;
+    public final static int OBSTACLE    = 8;
 }

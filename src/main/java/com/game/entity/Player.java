@@ -341,7 +341,15 @@ public class Player extends Entity {
             if (gp.getObjects()[gp.getCurrentMap()][i].type == Type.PICKUP_ONLY) {
                 gp.getObjects()[gp.getCurrentMap()][i].use(this);
                 gp.getObjects()[gp.getCurrentMap()][i] = null;
-            } else {
+
+            }
+            // OBSTACLE
+            else if (gp.getObjects()[gp.getCurrentMap()][i].type == Type.OBSTACLE) {
+                if (keyH.isEnteredPressed()) {
+                    attackCanceled = true;
+                    gp.getObjects()[gp.getCurrentMap()][i].interact();
+                }
+            }  else {
 
 
                 // INVENTORY ITEMS

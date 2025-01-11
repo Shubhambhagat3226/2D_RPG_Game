@@ -23,15 +23,13 @@ public class AssetSetter {
 
         int mapNum = 0;
         int i = 0;
-        obj[mapNum][i]   = setEntity(new OBJ_COIN(gp), 25, 19);
-        i++;
-        obj[mapNum][i]   = setEntity(new OBJ_COIN(gp), 21, 19);
-        i++;
-        obj[mapNum][i]   = setEntity(new OBJ_COIN(gp), 26, 21);
-        i++;
         obj[mapNum][i]   = setEntity(new OBJ_Axe(gp), 20, 12);
         i++;
-        obj[mapNum][i]   = setEntity(new OBJ_Blue_Shield(gp), 35, 21);
+        obj[mapNum][i]   = setEntity(new OBJ_DOOR(gp), 14, 28);
+        i++;
+        obj[mapNum][i]   = setEntity(new OBJ_DOOR(gp), 12, 12);
+        i++;
+        obj[mapNum][i]   = setEntity(new OBJ_KEY(gp), 20, 10);
         i++;
     }
 
