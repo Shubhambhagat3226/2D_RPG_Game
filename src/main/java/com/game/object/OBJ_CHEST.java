@@ -1,16 +1,59 @@
 package com.game.object;
 
 import com.game.GamePanel;
+import com.game.constants.GameState;
 import com.game.constants.ImageUtility;
 import com.game.constants.ObjectName;
+import com.game.constants.Type;
 import com.game.entity.Entity;
+import com.game.sound.SoundUtility;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class OBJ_CHEST extends Entity {
-    public OBJ_CHEST(GamePanel gp) {
-        super(gp);
 
+    Entity loot;
+    BufferedImage openImage, closeImage;
+    boolean opened;
+
+    public OBJ_CHEST(GamePanel gp, Entity loot) {
+        super(gp);
+        this.loot = loot;
+
+        type = Type.OBSTACLE;
         name = ObjectName.CHEST;
-        down_1 = getImage(ImageUtility.CHEST);
+        closeImage  = getImage(ImageUtility.CHEST);
+        openImage   = getImage(ImageUtility.CHEST_OPENED);
+        down_1      = closeImage;
         collisionOn = true;
+
+        solidArea           = new Rectangle(4, 16, 40, 32);
+        solidArea_Default_X = solidArea.x;
+        solidArea_Default_Y = solidArea.y;
+    }
+
+    @Override
+    public void interact() {
+        gp.setGameState(GameState.DIALOGUE);
+        if (!opened) {
+            gp.playSoundEffect(SoundUtility.DOOR_OPEN);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("You open the chest and find a " + loot.getName().getName() + "!");
+            if (gp.getPlayer().getInventory().size() == gp.getPlayer().getMaxInventorySize()) {
+                sb.append("\n...But you cannot carry any more!");
+
+            } else {
+                sb.append("\nYou obtain the " + loot.getName().getName() + "!");
+                gp.getPlayer().getInventory().add(loot);
+                down_1 = openImage;
+                opened = true;
+            }
+            gp.getUi().setCurrentDialogue(sb.toString());
+
+        } else {
+            gp.getUi().setCurrentDialogue("It's empty");
+        }
     }
 }
