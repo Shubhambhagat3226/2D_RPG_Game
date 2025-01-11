@@ -73,7 +73,7 @@ public class Player extends Entity {
         dexterity     = 1;   // MORE DEX, MORE DEFENCE
         exp           = 0;
         nextLevelExp  = 5;
-        coin          = 0;
+        coin          = 5000;
         currentWeapon = new OBJ_Sword(gp);
         currentShield = new OBJ_Wooden_Shield(gp);
         projectile    = new OBJ_Fireball(gp);
@@ -477,7 +477,11 @@ public class Player extends Entity {
             }
             if (selectedItem.type == Type.CONSUMABLE) {
                if (selectedItem.use(this)) {
-                   inventory.remove(itemIndex);
+                   if (selectedItem.amount > 1) {
+                       selectedItem.amount--;
+                   } else {
+                       inventory.remove(itemIndex);
+                   }
                }
             }
 

@@ -413,7 +413,7 @@ public class UI {
 
             g2.drawImage(entity.getInventory().get(i).getDown_1(), slotX, slotY, null);
             // DISPLAY AMOUNT
-            if (entity.getInventory().get(i).getAmount() > 1) {
+            if (entity == gp.getPlayer() && entity.getInventory().get(i).getAmount() > 1) {
                 g2.setFont(g2.getFont().deriveFont(32f));
                 int amountX, amountY;
 
@@ -832,16 +832,25 @@ public class UI {
                     currentDialogue = "You need more coin to buy that!";
                     drawDialogueScreen();
                 }
-                else if (gp.getPlayer().getInventory().size() == gp.getPlayer().getMaxInventorySize()) {
-                    subState = 0;
-                    gp.setGameState(GameState.DIALOGUE);
-                    currentDialogue = "You cannot carry any more!";
-                    drawDialogueScreen();
-                }
                 else {
-                    gp.getPlayer().setCoin(gp.getPlayer().getCoin() - npc.getInventory().get(itemIndex).getPrice());
-                    gp.getPlayer().getInventory().add(npc.getInventory().get(itemIndex));
+                    if (gp.getPlayer().canObtainItem(npc.getInventory().get(itemIndex))) {
+                        gp.getPlayer().setCoin(gp.getPlayer().getCoin() - npc.getInventory().get(itemIndex).getPrice());
+                    } else {
+                        subState = 0;
+                        gp.setGameState(GameState.DIALOGUE);
+                        currentDialogue = "You cannot carry any more!";
+                    }
                 }
+//                else if (gp.getPlayer().getInventory().size() == gp.getPlayer().getMaxInventorySize()) {
+//                    subState = 0;
+//                    gp.setGameState(GameState.DIALOGUE);
+//                    currentDialogue = "You cannot carry any more!";
+//                    drawDialogueScreen();
+//                }
+//                else {
+//                    gp.getPlayer().setCoin(gp.getPlayer().getCoin() - npc.getInventory().get(itemIndex).getPrice());
+//                    gp.getPlayer().getInventory().add(npc.getInventory().get(itemIndex));
+//                }
             }
         }
 
@@ -894,7 +903,12 @@ public class UI {
                     currentDialogue = "You cannot sell an equipped item!";
                 }
                 else {
-                    gp.getPlayer().getInventory().remove(itemIndex);
+                    if (gp.getPlayer().getInventory().get(itemIndex).getAmount() > 1) {
+                        gp.getPlayer().getInventory().get(itemIndex).setAmount(gp.getPlayer().getInventory().get(itemIndex).getAmount() - 1);
+                    } else {
+                        gp.getPlayer().getInventory().remove(itemIndex);
+                    }
+
                     gp.getPlayer().setCoin(gp.getPlayer().getCoin() + price);
                 }
             }

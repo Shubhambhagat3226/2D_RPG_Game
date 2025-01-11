@@ -517,4 +517,6 @@ public class Entity {
 
     public void setMana(int mana) {this.mana = mana;}
     public void setCoin(int coin) {this.coin = coin;}
+
+    public void setAmount(int amount) {this.amount = amount;}
 }
