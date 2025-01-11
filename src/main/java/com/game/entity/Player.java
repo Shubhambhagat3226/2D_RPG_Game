@@ -3,6 +3,7 @@ package com.game.entity;
 import com.game.GamePanel;
 import com.game.constants.*;
 import com.game.event_handler.KeyHandler;
+import com.game.object.OBJ_KEY;
 import com.game.object.project.OBJ_Fireball;
 import com.game.object.weapon.OBJ_Sword;
 import com.game.object.weapon.OBJ_Wooden_Shield;
@@ -355,8 +356,7 @@ public class Player extends Entity {
                 // INVENTORY ITEMS
                 String text;
 
-                if (inventory.size() != maxInventorySize) {
-                    inventory.add(gp.getObjects()[gp.getCurrentMap()][i]);
+                if (canObtainItem(gp.getObjects()[gp.getCurrentMap()][i])) {
                     gp.playSoundEffect(SoundUtility.COIN);
                     text = "Got a " + gp.getObjects()[gp.getCurrentMap()][i].name.getName() + "!";
 

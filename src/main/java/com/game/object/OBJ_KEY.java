@@ -17,6 +17,7 @@ public class OBJ_KEY extends Entity {
         down_1 = getImage(ImageUtility.KEY);
         description = "[" + name.getName() + "]\nIt opens a door.";
         price = 100;
+        stackable = true;
     }
     public boolean use(Entity entity) {
         gp.setGameState(GameState.DIALOGUE);

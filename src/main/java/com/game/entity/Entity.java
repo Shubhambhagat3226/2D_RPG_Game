@@ -75,6 +75,8 @@ public class Entity {
     protected final int maxInventorySize = 20;
     protected int price;
     protected int knowBackPower = 0;
+    protected boolean stackable = false;
+    protected int amount = 1;
 
     public Entity(GamePanel gp) {
         this.gp    = gp;
@@ -389,6 +391,45 @@ public class Entity {
         }
     }
 
+    public int searchItemInInventory(ObjectName itemName) {
+        int itemIndex = 999;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).name == itemName) {
+                itemIndex = i;
+                break;
+            }
+        }
+
+        return itemIndex;
+    }
+    public boolean canObtainItem(Entity item) {
+        boolean canObtain = false;
+
+        // CHECK IF STACKABLE
+        if (item.stackable) {
+            int index = searchItemInInventory(item.name);
+            if (index != 999) {
+                inventory.get(index).amount++;
+                canObtain = true;
+
+            }
+            else { // NEW ITEM SO NEED TO CHECK VACANCY
+                if (inventory.size() != maxInventorySize) {
+                    inventory.add(item);
+                    canObtain = true;
+                }
+            }
+        }
+        else {
+            if (inventory.size() != maxInventorySize) {
+                inventory.add(item);
+                canObtain = true;
+            }
+        }
+        return canObtain;
+
+    }
+
     // PARTICLE
     public Color getParticleColor() {
         Color color = null;
@@ -456,6 +497,7 @@ public class Entity {
     public ArrayList<Entity> getInventory() {return inventory;}
     public int getPrice() {return price;}
     public int getMaxInventorySize() {return maxInventorySize;}
+    public int getAmount() {return amount;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}

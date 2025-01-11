@@ -20,6 +20,7 @@ public class OBJ_Red_Potion extends SuperItem {
         description       = "[" + name.getName() + "]\nHeals your life by " + value + ".";
 
         price = 25;
+        stackable = true;
     }
 
     public boolean use(Entity entity) {

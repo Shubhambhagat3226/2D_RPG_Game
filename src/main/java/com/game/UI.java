@@ -412,6 +412,22 @@ public class UI {
             }
 
             g2.drawImage(entity.getInventory().get(i).getDown_1(), slotX, slotY, null);
+            // DISPLAY AMOUNT
+            if (entity.getInventory().get(i).getAmount() > 1) {
+                g2.setFont(g2.getFont().deriveFont(32f));
+                int amountX, amountY;
+
+                String s = "" + entity.getInventory().get(i).getAmount();
+                amountX  = getX_For_AlignToRightText(s, slotX + 44);
+                amountY  = slotY + CommonConstant.TILE_SIZE;
+                // SHADOW
+                g2.setColor(new Color(60, 60, 60));
+                g2.drawString(s, amountX, amountY);
+                // NUMBER
+                g2.setColor(Color.WHITE);
+                g2.drawString(s, amountX-3, amountY-3);
+
+            }
             slotX += slotSize;
             if (i%5 == 4) {
                 slotX  = slotX_start;
