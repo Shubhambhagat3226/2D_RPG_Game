@@ -6,11 +6,9 @@ import com.game.constants.Direction;
 import com.game.constants.GameState;
 import com.game.constants.ImageUtility;
 import com.game.object.OBJ_KEY;
+import com.game.object.OBJ_Lantern;
 import com.game.object.OBJ_Red_Potion;
-import com.game.object.weapon.OBJ_Axe;
-import com.game.object.weapon.OBJ_Blue_Shield;
-import com.game.object.weapon.OBJ_Sword;
-import com.game.object.weapon.OBJ_Wooden_Shield;
+import com.game.object.weapon.*;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -53,6 +51,8 @@ public class NPC_Merchant extends Entity{
         inventory.add(new OBJ_Axe(gp));
         inventory.add(new OBJ_Wooden_Shield(gp));
         inventory.add(new OBJ_Blue_Shield(gp));
+        inventory.add(new OBJ_Tent(gp));
+        inventory.add(new OBJ_Lantern(gp));
     }
 
     @Override

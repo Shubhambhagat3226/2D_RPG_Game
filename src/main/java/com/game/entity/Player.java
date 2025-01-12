@@ -119,6 +119,16 @@ public class Player extends Entity {
         right_1    = getImage(ImageUtility.PLAYER_RIGHT_1);
         right_2    = getImage(ImageUtility.PLAYER_RIGHT_2);
     }
+    public void getSleepingImage(BufferedImage image) {
+
+        up_1       = image;
+        up_2       = image;
+        down_1     = image;
+        down_2     = image;
+        left_1     = image;
+        left_2     = image;
+        right_2    = image;
+    }
     // LOAD PLAYER ATTACK IMAGE
     public void getPlayerAttackImage() {
         width         = CommonConstant.TILE_SIZE;

@@ -742,8 +742,8 @@ public class UI {
         counter++;
         if (counter < 120) {
             gp.manager.getLighting().filterAlpha += 0.01f;
-            if (gp.manager.getLighting().filterAlpha > 1) {
-                gp.manager.getLighting().filterAlpha = 1f;
+            if (gp.manager.getLighting().filterAlpha > 0.9f) {
+                gp.manager.getLighting().filterAlpha = 0.9f;
             }
         } else {
             gp.manager.getLighting().filterAlpha -= 0.01f;
@@ -751,7 +751,9 @@ public class UI {
                 gp.manager.getLighting().filterAlpha = 0f;
                 counter = 0;
                 gp.manager.getLighting().dayState = gp.manager.getLighting().day;
+                gp.manager.getLighting().setDayCounter(0);
                 gp.setGameState(GameState.PLAY);
+                gp.getPlayer().loadImage();
             }
         }
     }

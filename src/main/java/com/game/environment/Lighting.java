@@ -115,29 +115,29 @@ public class Lighting {
         switch (dayState) {
             case day -> {
                 dayCounter++;
-                if (dayCounter > 600) {
+                if (dayCounter > 10800) { // 3min
                     dayState   = dusk;
                     dayCounter = 0;
                 }
             }
             case dusk -> {
-                filterAlpha += 0.001f;
-                if (filterAlpha > 1f) {
+                filterAlpha += 0.0002f;
+                if (filterAlpha > 0.96f) {
 
-                    filterAlpha = 1f;
+                    filterAlpha = 0.96f;
                     dayState    = night;
                 }
             }
             case night -> {
                 dayCounter++;
-                if (dayCounter > 600) {
+                if (dayCounter > 3600) { // 1min
 
                     dayState   = dawn;
                     dayCounter = 0;
                 }
             }
             case dawn -> {
-                filterAlpha -= 0.001f;
+                filterAlpha -= 0.0005f;
                 if (filterAlpha < 0f) {
 
                     filterAlpha = 0f;
@@ -164,6 +164,9 @@ public class Lighting {
         g2.setFont(g2.getFont().deriveFont(50f));
         g2.drawString(situation, 800, 500);
     }
+
+    // SETTER
+    public void setDayCounter(int dayCounter) {this.dayCounter = dayCounter;}
 }
 
 

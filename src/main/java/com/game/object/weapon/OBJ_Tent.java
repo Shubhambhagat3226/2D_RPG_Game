@@ -29,6 +29,7 @@ public class OBJ_Tent extends Entity {
         gp.playSoundEffect(SoundUtility.SLEEP);
         gp.getPlayer().setLife(gp.getPlayer().getMaxLife());
         gp.getPlayer().setMana(gp.getPlayer().getMaxMana());
+        gp.getPlayer().getSleepingImage(down_1);
         return true;
     }
 }
