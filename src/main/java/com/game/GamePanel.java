@@ -5,6 +5,7 @@ import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
 import com.game.entity.Entity;
 import com.game.entity.Player;
+import com.game.environment.EnvironmentManager;
 import com.game.event_handler.EventHandler;
 import com.game.event_handler.KeyHandler;
 import com.game.sound.Sound;
@@ -38,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final EventHandler eventH;
     Config config = new Config(this);
     PathFinder pFinder = new PathFinder(this);
+    EnvironmentManager manager = new EnvironmentManager(this);
 
     // ENTITY AND OBJECTS
     private final Player player;
@@ -103,6 +105,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setMonster();
         aSetter.setInteractiveTile();
         gameState = GameState.TITLE;
+        manager.setup();
 
         tempScreen = new BufferedImage(CommonConstant.SCREEN_WIDTH, CommonConstant.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         g2         = (Graphics2D) tempScreen.getGraphics();
@@ -308,6 +311,8 @@ public class GamePanel extends JPanel implements Runnable{
             // EMPTY THE LIST
             entities.clear();
 
+            // ENVIRONMENT
+            manager.draw(g2);
             // DRAW UI
             ui.draw(g2);
 
@@ -371,6 +376,8 @@ public class GamePanel extends JPanel implements Runnable{
     public ArrayList<Entity> getParticleList() {return particleList;}
     public int getCurrentMap() {return currentMap;}
     public PathFinder getpFinder() {return pFinder;}
+    public int getScreenWidth2() {return screenWidth2;}
+    public int getScreenHeight2() {return screenHeight2;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
