@@ -21,4 +21,8 @@ public class EnvironmentManager {
     public void draw(Graphics2D g2) {
         lighting.draw(g2);
     }
+
+
+    // GETTER
+    public Lighting getLighting() {return lighting;}
 }

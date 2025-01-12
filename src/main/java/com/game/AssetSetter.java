@@ -8,6 +8,7 @@ import com.game.monster.MON_GreenSlime;
 import com.game.object.*;
 import com.game.object.weapon.OBJ_Axe;
 import com.game.object.weapon.OBJ_Blue_Shield;
+import com.game.object.weapon.OBJ_Tent;
 import com.game.tile_interactive.IT_DryTree;
 import com.game.tile_interactive.InteractiveTile;
 
@@ -32,7 +33,7 @@ public class AssetSetter {
 //        obj[mapNum][i]   = setEntity(new OBJ_CHEST(gp, new OBJ_KEY(gp)), 20, 10);
 //        i++;
         obj[mapNum][i]   = setEntity(new OBJ_Lantern(gp), 18, 20); i++;
-        obj[mapNum][i]   = setEntity(new OBJ_KEY(gp), 20, 8); i++;
+        obj[mapNum][i]   = setEntity(new OBJ_Tent(gp), 19, 20); i++;
         obj[mapNum][i]   = setEntity(new OBJ_KEY(gp), 20, 10); i++;
     }
 

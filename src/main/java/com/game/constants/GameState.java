@@ -10,5 +10,6 @@ public enum GameState {
     GAME_OVER,
     TRANSITION,
     TRADE,
+    SLEEP,
 
 }

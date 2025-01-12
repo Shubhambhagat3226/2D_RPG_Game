@@ -92,6 +92,7 @@ public class UI {
             case GAME_OVER -> drawGameOverScreen();
             case TRANSITION -> drawTransition();
             case TRADE -> drawTradeScreen();
+            case SLEEP -> drawSleepScreen();
         }
     }
     // DRAW MESSAGE
@@ -735,6 +736,23 @@ public class UI {
             gp.getPlayer().setWorldY(CommonConstant.TILE_SIZE * gp.getEventH().getTempRow());
 
 
+        }
+    }
+    private void drawSleepScreen() {
+        counter++;
+        if (counter < 120) {
+            gp.manager.getLighting().filterAlpha += 0.01f;
+            if (gp.manager.getLighting().filterAlpha > 1) {
+                gp.manager.getLighting().filterAlpha = 1f;
+            }
+        } else {
+            gp.manager.getLighting().filterAlpha -= 0.01f;
+            if (gp.manager.getLighting().filterAlpha < 0) {
+                gp.manager.getLighting().filterAlpha = 0f;
+                counter = 0;
+                gp.manager.getLighting().dayState = gp.manager.getLighting().day;
+                gp.setGameState(GameState.PLAY);
+            }
         }
     }
 
