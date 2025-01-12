@@ -66,6 +66,7 @@ public class Entity {
     protected SuperItem currentWeapon;
     protected SuperItem currentShield;
     protected Projectile projectile;
+    protected Entity currentLight;
 
     // DESCRIPTION
     protected String description;
@@ -77,6 +78,7 @@ public class Entity {
     protected int knowBackPower = 0;
     protected boolean stackable = false;
     protected int amount = 1;
+    public int lightRadius;
 
     public Entity(GamePanel gp) {
         this.gp    = gp;
@@ -498,6 +500,7 @@ public class Entity {
     public int getPrice() {return price;}
     public int getMaxInventorySize() {return maxInventorySize;}
     public int getAmount() {return amount;}
+    public Entity getCurrentLight() {return currentLight;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}

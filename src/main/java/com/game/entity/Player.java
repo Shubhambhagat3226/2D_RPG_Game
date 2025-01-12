@@ -22,6 +22,7 @@ public class Player extends Entity {
     private int standCounter = 0;
     public boolean attackCanceled;
 
+    public boolean lightUpdated = false;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -73,7 +74,7 @@ public class Player extends Entity {
         dexterity     = 1;   // MORE DEX, MORE DEFENCE
         exp           = 0;
         nextLevelExp  = 5;
-        coin          = 5000;
+        coin          = 0;
         currentWeapon = new OBJ_Sword(gp);
         currentShield = new OBJ_Wooden_Shield(gp);
         projectile    = new OBJ_Fireball(gp);
@@ -474,6 +475,15 @@ public class Player extends Entity {
             if (selectedItem.type == Type.SHIELD) {
                 currentShield = (SuperItem) selectedItem;
                 defence       = getDefense();
+            }
+            if (selectedItem.type == Type.LIGHT) {
+                if (currentLight == selectedItem) {
+                    currentLight = null;
+
+                } else {
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
             }
             if (selectedItem.type == Type.CONSUMABLE) {
                if (selectedItem.use(this)) {

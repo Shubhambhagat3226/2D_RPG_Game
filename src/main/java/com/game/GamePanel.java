@@ -230,6 +230,7 @@ public class GamePanel extends JPanel implements Runnable{
                         iTile[currentMap][i].update();
                     }
                 }
+                manager.update();
 
             }
             case PAUSE -> { }

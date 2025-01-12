@@ -10,4 +10,5 @@ public class Type {
     public final static int CONSUMABLE = 6;
     public final static int PICKUP_ONLY = 7;
     public final static int OBSTACLE    = 8;
+    public final static int LIGHT       = 9;
 }
