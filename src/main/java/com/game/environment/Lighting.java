@@ -41,8 +41,48 @@ public class Lighting {
         // SUBTRACT THE LIGHT CIRCLE FORM THE SCREEN RECTANGLE
         screenArea.subtract(lightArea);
 
-        // SET A COLOR (BLACK) TO DRAW THE RECTANGLE
-        g2.setColor(new Color(0, 0, 0, 0.95f));
+
+        // CREATE A GRADATION EFFECT WITHIN THE LIGHT CIRCLE
+        int variant      = 12;
+        Color[] color    = new Color[variant];
+        float[] fraction = new float[variant];
+
+        int i = 0;
+        color[i] = new Color(0,0,0, 0.1f); i++;
+        color[i] = new Color(0,0,0, 0.42f); i++;
+        color[i] = new Color(0,0,0, 0.52f); i++;
+        color[i] = new Color(0,0,0, 0.62f); i++;
+        color[i] = new Color(0,0,0, 0.69f); i++;
+        color[i] = new Color(0,0,0, 0.76f); i++;
+        color[i] = new Color(0,0,0, 0.82f); i++;
+        color[i] = new Color(0,0,0, 0.87f); i++;
+        color[i] = new Color(0,0,0, 0.91f); i++;
+        color[i] = new Color(0,0,0, 0.94f); i++;
+        color[i] = new Color(0,0,0, 0.96f); i++;
+        color[i] = new Color(0,0,0, 0.98f); i++;
+
+        i = 0;
+        fraction[i] = 0f; i++;
+        fraction[i] = 0.4f; i++;
+        fraction[i] = 0.5f; i++;
+        fraction[i] = 0.6f; i++;
+        fraction[i] = 0.65f; i++;
+        fraction[i] = 0.7f; i++;
+        fraction[i] = 0.75f; i++;
+        fraction[i] = 0.8f; i++;
+        fraction[i] = 0.85f; i++;
+        fraction[i] = 0.9f; i++;
+        fraction[i] = 0.95f; i++;
+        fraction[i] = 1f; i++;
+
+        // CREATE A GRADATION PAINT SETTING FOR THE LIGHT CIRCLE
+        RadialGradientPaint gPaint = new RadialGradientPaint(centerX, centerY, (circleSize/2), fraction, color);
+        // SET GRADIENT DATA ON G2
+        g2.setPaint(gPaint);
+
+        // DRAW THE LIGHT CIRCLE
+        g2.fill(lightArea);
+
 
         // DRAW THE SCREEN RECTANGLE WITHOUT THE LIGHT CIRCLE AREA
         g2.fill(screenArea);
