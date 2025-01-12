@@ -10,6 +10,15 @@ public class Lighting {
 
     GamePanel gp;
     BufferedImage darknessFilter;
+    int dayCounter;
+    float filterAlpha = 0f;
+
+    // DAY STATE
+    final int day   = 0;
+    final int dusk  = 1;
+    final int night = 2;
+    final int dawn  = 3;
+    int dayState    = day;
 
     public Lighting(GamePanel gp) {
         this.gp = gp;
@@ -24,7 +33,7 @@ public class Lighting {
 
 
         if (gp.getPlayer().getCurrentLight() == null) {
-            g2.setColor(new Color(0,0,0,0.98f));
+            g2.setColor(new Color(0,0,0.1f,0.98f));
         } else {
             // GET THE CENTER X AND Y OF THE LIGHT CIRCLE
             int centerX = gp.getPlayer().getScreenX() + (CommonConstant.TILE_SIZE / 2);
@@ -36,29 +45,29 @@ public class Lighting {
             float[] fraction = new float[variant];
 
             int i = 0;
-            color[i] = new Color(0, 0, 0, 0.1f);
+            color[i] = new Color(0, 0, 0.1f, 0.1f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.42f);
+            color[i] = new Color(0, 0, 0.1f, 0.42f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.52f);
+            color[i] = new Color(0, 0, 0.1f, 0.52f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.62f);
+            color[i] = new Color(0, 0, 0.1f, 0.62f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.69f);
+            color[i] = new Color(0, 0, 0.1f, 0.69f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.76f);
+            color[i] = new Color(0, 0, 0.1f, 0.76f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.82f);
+            color[i] = new Color(0, 0, 0.1f, 0.82f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.87f);
+            color[i] = new Color(0, 0, 0.1f, 0.87f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.91f);
+            color[i] = new Color(0, 0, 0.1f, 0.91f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.94f);
+            color[i] = new Color(0, 0, 0.1f, 0.94f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.96f);
+            color[i] = new Color(0, 0, 0.1f, 0.96f);
             i++;
-            color[i] = new Color(0, 0, 0, 0.98f);
+            color[i] = new Color(0, 0, 0.1f, 0.98f);
             i++;
 
             i = 0;
@@ -102,9 +111,58 @@ public class Lighting {
             setLightSource();
             gp.getPlayer().lightUpdated = false;
         }
+        // CHECK THE STATE OF THE DAY
+        switch (dayState) {
+            case day -> {
+                dayCounter++;
+                if (dayCounter > 600) {
+                    dayState   = dusk;
+                    dayCounter = 0;
+                }
+            }
+            case dusk -> {
+                filterAlpha += 0.001f;
+                if (filterAlpha > 1f) {
+
+                    filterAlpha = 1f;
+                    dayState    = night;
+                }
+            }
+            case night -> {
+                dayCounter++;
+                if (dayCounter > 600) {
+
+                    dayState   = dawn;
+                    dayCounter = 0;
+                }
+            }
+            case dawn -> {
+                filterAlpha -= 0.001f;
+                if (filterAlpha < 0f) {
+
+                    filterAlpha = 0f;
+                    dayState    = day;
+                }
+            }
+        }
     }
     public void draw(Graphics2D g2) {
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
         g2.drawImage(darknessFilter, 0, 0, null);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+        // DEBUG
+        String situation = switch (dayState) {
+            case day   -> "Day";
+            case dusk  -> "Dask";
+            case night -> "Night";
+            case dawn  -> "Dawn";
+            default    -> "";
+        };
+
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(50f));
+        g2.drawString(situation, 800, 500);
     }
 }
 
