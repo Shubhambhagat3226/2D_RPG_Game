@@ -21,26 +21,9 @@ public class Lighting {
         darknessFilter = new BufferedImage(gp.getScreenWidth2(), gp.getScreenHeight2(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = (Graphics2D) darknessFilter.getGraphics();
 
-        // CREATE A SCREEN-SIZE RECTANGLE AREA
-        Area screenArea = new Area(new Rectangle2D.Double(0, 0, gp.getScreenWidth2(), gp.getScreenHeight2()));
-
         // GET THE CENTER X AND Y OF THE LIGHT CIRCLE
         int centerX = gp.getPlayer().getScreenX() + (CommonConstant.TILE_SIZE/2);
         int centerY = gp.getPlayer().getScreenY() + (CommonConstant.TILE_SIZE/2);
-
-        // GET THE TOP LEFT X AND Y IF THE LIGHT CIRCLE
-        double x = centerX - (circleSize/2);
-        double y = centerY - (circleSize/2);
-
-        // CREATE A LIGHT CIRCLE SHAPE
-        Shape circleShape = new Ellipse2D.Double(x, y, circleSize, circleSize);
-
-        // CREATE A LIGHT CIRCLE AREA
-        Area lightArea = new Area(circleShape);
-
-        // SUBTRACT THE LIGHT CIRCLE FORM THE SCREEN RECTANGLE
-        screenArea.subtract(lightArea);
-
 
         // CREATE A GRADATION EFFECT WITHIN THE LIGHT CIRCLE
         int variant      = 12;
@@ -80,13 +63,7 @@ public class Lighting {
         // SET GRADIENT DATA ON G2
         g2.setPaint(gPaint);
 
-        // DRAW THE LIGHT CIRCLE
-        g2.fill(lightArea);
-
-
-        // DRAW THE SCREEN RECTANGLE WITHOUT THE LIGHT CIRCLE AREA
-        g2.fill(screenArea);
-
+        g2.fillRect(0, 0, gp.getScreenWidth2(), gp.getScreenHeight2());
         g2.dispose();
 
 
