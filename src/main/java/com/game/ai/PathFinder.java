@@ -67,7 +67,7 @@ public class PathFinder {
 
             // SET SOLID NODE
             // CHECK TILES
-            int tileNum = gp.getTileM().getMap()[gp.getCurrentMap()][row][col];
+            int tileNum = gp.getTileM().getMapTileNum()[gp.getCurrentMap()][row][col];
             if (gp.getTileM().getTiles()[tileNum].isCollision()) {
                 nodes[col][row].solid = true;
             }
