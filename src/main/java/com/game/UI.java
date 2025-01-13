@@ -520,7 +520,7 @@ public class UI {
     // OPTION
     public void drawOptionScreen() {
         g2.setColor(Color.WHITE);
-        g2.setFont(g2.getFont().deriveFont(32F));
+        g2.setFont(g2.getFont().deriveFont(30F));
 
         // SUB-WINDOW
         int frameX      = CommonConstant.TILE_SIZE * 6;
@@ -657,23 +657,26 @@ public class UI {
         textY       = frameY + CommonConstant.TILE_SIZE;
         g2.drawString(text, textX, textY);
 
+        int gap = CommonConstant.TILE_SIZE - 9;
         textX  = frameX + CommonConstant.TILE_SIZE;
-        textY += CommonConstant.TILE_SIZE;
-        g2.drawString("Move", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("Confirm/Attack", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("Shoot/Cast", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("Character Screen", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("Pause", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("Options", textX, textY); textY += CommonConstant.TILE_SIZE;
+        textY += CommonConstant.TILE_SIZE + 10;
+        g2.drawString("Move", textX, textY); textY += gap;
+        g2.drawString("Confirm/Attack", textX, textY); textY += gap;
+        g2.drawString("Shoot/Cast", textX, textY); textY += gap;
+        g2.drawString("Character Screen", textX, textY); textY += gap;
+        g2.drawString("Pause", textX, textY); textY += gap;
+        g2.drawString("Map & Mini-Map", textX, textY); textY += gap;
+        g2.drawString("Options", textX, textY); textY += gap;
 
         textX = frameX + CommonConstant.TILE_SIZE*6;
         textY = frameY + CommonConstant.TILE_SIZE*2;
-        g2.drawString("W,A,S,D", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("ENTER", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("F", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("C", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("P", textX, textY); textY += CommonConstant.TILE_SIZE;
-        g2.drawString("ESC", textX, textY); textY += CommonConstant.TILE_SIZE;
+        g2.drawString("W,A,S,D", textX, textY); textY += gap;
+        g2.drawString("ENTER", textX, textY); textY += gap;
+        g2.drawString("F", textX, textY); textY += gap;
+        g2.drawString("C", textX, textY); textY += gap;
+        g2.drawString("P", textX, textY); textY += gap;
+        g2.drawString("M & X", textX, textY); textY += gap;
+        g2.drawString("ESC", textX, textY); textY += gap;
 
         // BACK
         textX  = frameX + CommonConstant.TILE_SIZE;

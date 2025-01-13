@@ -42,6 +42,7 @@ public class Map extends TileManager{
                 }
 
             }
+            g2.dispose();
         }
 
     }
