@@ -16,7 +16,7 @@ public class TileManager {
     private final GamePanel gp;
     private final Tile[] tiles;
     private int[][][] mapTileNum;
-    public boolean drawPath = true;
+    public boolean drawPath = false;
     ArrayList<String> fileNames       = new ArrayList<>();
     ArrayList<String> collisionStatus = new ArrayList<>();
 
