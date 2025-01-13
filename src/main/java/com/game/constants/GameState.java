@@ -11,5 +11,6 @@ public enum GameState {
     TRANSITION,
     TRADE,
     SLEEP,
+    MINI_MAP,
 
 }

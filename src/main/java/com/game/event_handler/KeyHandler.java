@@ -30,6 +30,7 @@ public class KeyHandler implements KeyListener {
             case OPTION -> optionState(code);
             case GAME_OVER -> gameOverState(code);
             case TRADE -> tradeState(code);
+            case MINI_MAP -> miniMapState(code);
         }
 
     }
@@ -100,6 +101,10 @@ public class KeyHandler implements KeyListener {
         // OPTION STATE
         if (KeyEvent.VK_ESCAPE == code) {
             gp.setGameState(GameState.OPTION);
+        }
+        // MINI-MAP STATE
+        if (KeyEvent.VK_M == code) {
+            gp.setGameState(GameState.MINI_MAP);
         }
 
         // DEBUG
@@ -197,6 +202,15 @@ public class KeyHandler implements KeyListener {
                     gp.playSoundEffect(SoundUtility.CURSOR);
                 }
             }
+        }
+
+    }
+
+    private void miniMapState(int code) {
+
+        if (KeyEvent.VK_M == code) {
+            gp.setGameState(GameState.PLAY);
+
         }
 
     }

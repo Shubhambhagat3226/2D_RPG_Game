@@ -9,6 +9,7 @@ import com.game.environment.EnvironmentManager;
 import com.game.event_handler.EventHandler;
 import com.game.event_handler.KeyHandler;
 import com.game.sound.Sound;
+import com.game.tile.Map;
 import com.game.tile.TileManager;
 import com.game.tile_interactive.InteractiveTile;
 
@@ -37,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final Sound se;
     private final UI ui;
     private final EventHandler eventH;
+    Map map = new Map(this);
     Config config = new Config(this);
     PathFinder pFinder = new PathFinder(this);
     EnvironmentManager manager = new EnvironmentManager(this);
@@ -248,6 +250,10 @@ public class GamePanel extends JPanel implements Runnable{
         // TITLE
         if (gameState == GameState.TITLE) {
             ui.draw(g2);
+        }
+        // MAP SCREEN
+        else if (gameState == GameState.MINI_MAP) {
+            map.drawFullMapScreen(g2);
         }
         // OTHER
         else {
