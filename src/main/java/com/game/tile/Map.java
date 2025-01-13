@@ -54,9 +54,42 @@ public class Map extends TileManager{
         // DRAW MAP
         int width  = 500;
         int height = 500;
-        int x      = gp.getScreenWidth2()/2 - width/2;
-        int y      = gp.getScreenHeight2()/2 - height/2;
+        int x      = CommonConstant.SCREEN_WIDTH/2 - width/2;
+        int y      = CommonConstant.SCREEN_HEIGHT/2 - height/2;
         g2.drawImage(worldMap[gp.getCurrentMap()], x, y, width, height, null);
 
+        // DRAW PLAYER
+        double scale    = (double) (CommonConstant.TILE_SIZE * CommonConstant.MAX_WORLD_COL) / width;
+        int playerX     = (int) (x +gp.getPlayer().getWorldX()/scale);
+        int playerY     = (int) (y +gp.getPlayer().getWorldY()/scale);
+        int playerSize  = (int) (CommonConstant.TILE_SIZE/scale);
+        g2.drawImage(gp.getPlayer().getDown_1(), playerX, playerY, playerSize, playerSize, null);
+
+        // HINT
+        g2.setFont(gp.getUi().getMaruMonica().deriveFont(32f));
+        g2.setColor(Color.WHITE);
+        g2.drawString("Press M to close", 750, 550);
+
+    }
+    public void drawMiniMap(Graphics2D g2) {
+
+        if (miniMapOn) {
+
+            // DRAW MAP
+            int width  = 210;
+            int height = 210;
+            int x      = CommonConstant.SCREEN_WIDTH - width - 50;
+            int y      = 50;
+
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+            g2.drawImage(worldMap[gp.getCurrentMap()], x, y, width, height, null);
+            // DRAW PLAYER
+            double scale    = (double) (CommonConstant.TILE_SIZE * CommonConstant.MAX_WORLD_COL) / width;
+            int playerX     = (int) (x +gp.getPlayer().getWorldX()/scale);
+            int playerY     = (int) (y +gp.getPlayer().getWorldY()/scale);
+            int playerSize  = (int) (CommonConstant.TILE_SIZE/3.6);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            g2.drawImage(gp.getPlayer().getDown_1(), playerX-6, playerY-6, playerSize, playerSize, null);
+        }
     }
 }

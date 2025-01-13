@@ -945,6 +945,7 @@ public class UI {
     public Entity getNpc() {return npc;}
     public int getNpcSlotCol() {return npcSlotCol;}
     public int getNpcSlotRow() {return npcSlotRow;}
+    public Font getMaruMonica() {return maruMonica;}
 
     // SETTER METHODS
     public void setGameFinished(boolean gameFinished) {this.gameFinished = gameFinished;}

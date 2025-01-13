@@ -102,9 +102,13 @@ public class KeyHandler implements KeyListener {
         if (KeyEvent.VK_ESCAPE == code) {
             gp.setGameState(GameState.OPTION);
         }
-        // MINI-MAP STATE
+        // MAP STATE
         if (KeyEvent.VK_M == code) {
             gp.setGameState(GameState.MINI_MAP);
+        }
+        // MINI-MAP STATE
+        if (KeyEvent.VK_X == code) {
+            gp.getMap().miniMapOn = !gp.getMap().miniMapOn;
         }
 
         // DEBUG

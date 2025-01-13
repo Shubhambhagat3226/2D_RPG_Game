@@ -320,6 +320,9 @@ public class GamePanel extends JPanel implements Runnable{
 
             // ENVIRONMENT
             manager.draw(g2);
+
+            // MINI-MAP
+            map.drawMiniMap(g2);
             // DRAW UI
             ui.draw(g2);
 
@@ -385,6 +388,7 @@ public class GamePanel extends JPanel implements Runnable{
     public PathFinder getpFinder() {return pFinder;}
     public int getScreenWidth2() {return screenWidth2;}
     public int getScreenHeight2() {return screenHeight2;}
+    public Map getMap() {return map;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
