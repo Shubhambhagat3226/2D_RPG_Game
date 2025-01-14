@@ -5,6 +5,7 @@ import com.game.entity.Entity;
 import com.game.entity.NPC_Merchant;
 import com.game.entity.NPC_OldMan;
 import com.game.monster.MON_GreenSlime;
+import com.game.monster.MON_Orc;
 import com.game.object.*;
 import com.game.object.weapon.OBJ_Axe;
 import com.game.object.weapon.OBJ_Blue_Shield;
@@ -68,6 +69,8 @@ public class AssetSetter {
         monster[mapNum][i] = setEntity(new MON_GreenSlime(gp), 34, 42);
         i++;
         monster[mapNum][i] = setEntity(new MON_GreenSlime(gp), 38, 42);
+        i++;
+        monster[mapNum][i] = setEntity(new MON_Orc(gp), 12, 33);
 
     }
 

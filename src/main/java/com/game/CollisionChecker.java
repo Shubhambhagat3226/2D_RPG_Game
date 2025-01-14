@@ -1,6 +1,7 @@
 package com.game;
 
 import com.game.constants.CommonConstant;
+import com.game.constants.Direction;
 import com.game.entity.Entity;
 
 public class CollisionChecker {
@@ -21,8 +22,14 @@ public class CollisionChecker {
         int entity_Top_Row = entity_Top_WorldY / CommonConstant.TILE_SIZE;
         int entity_Bottom_Row = entity_Bottom_WorldY / CommonConstant.TILE_SIZE;
 
+        // USE A TEMPORAL DIRECTION WHEN IT'S BEING KNOCK-BACKED
+        Direction direction = entity.getDirection();
+        if (entity.isKnockBack()) {
+            direction = entity.knockBackDirection;
+        }
+
         int tile1, tile2;
-        switch (entity.getDirection()) {
+        switch (direction) {
             case NORTH : {
                 entity_Top_Row = (entity_Top_WorldY - entity.getSpeed()) / CommonConstant.TILE_SIZE;
                 tile1 = gp.getTileM().getMapTileNum()[gp.currentMap][entity_Top_Row][entity_Left_Col];
@@ -117,6 +124,13 @@ public class CollisionChecker {
     public int checkEntity(Entity entity, Entity[][] targets) {
         int index = 999;
         int i=0;
+
+        // USE A TEMPORAL DIRECTION WHEN IT'S BEING KNOCK-BACKED
+        Direction direction = entity.getDirection();
+        if (entity.isKnockBack()) {
+            direction = entity.knockBackDirection;
+        }
+
         for (int j = 0; j < targets[1].length; j++) {
 
             Entity target = targets[gp.currentMap][j];
@@ -128,7 +142,7 @@ public class CollisionChecker {
                 target.getSolidArea().x += target.getWorldX();
                 target.getSolidArea().y += target.getWorldY();
 
-                switch (entity.getDirection()) {
+                switch (direction) {
                     case NORTH -> entity.getSolidArea().y -= entity.getSpeed();
                     case SOUTH -> entity.getSolidArea().y += entity.getSpeed();
                     case WEST -> entity.getSolidArea().x -= entity.getSpeed();

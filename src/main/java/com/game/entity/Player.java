@@ -3,7 +3,6 @@ package com.game.entity;
 import com.game.GamePanel;
 import com.game.constants.*;
 import com.game.event_handler.KeyHandler;
-import com.game.object.OBJ_KEY;
 import com.game.object.project.OBJ_Fireball;
 import com.game.object.weapon.OBJ_Sword;
 import com.game.object.weapon.OBJ_Wooden_Shield;
@@ -325,7 +324,7 @@ public class Player extends Entity {
             solidArea.height  = attackArea.height;
             // CHECK MONSTER COLLIDE WITH UPDATED WORLD-X,Y AND SOLID-AREA
             int monsterIndex  = gp.getChecker().checkEntity(this, gp.getMonster());
-            damageMonster(monsterIndex, attack, currentWeapon.knowBackPower);
+            damageMonster(monsterIndex, this, attack, currentWeapon.knowBackPower);
             // INTERACTIVE TILE
             int iTileIndex = gp.getChecker().checkEntity(this, gp.getiTile());
             damageInteractiveTile(iTileIndex);
@@ -390,12 +389,6 @@ public class Player extends Entity {
         }
 
     }
-    // KNOCK
-    public void knockBack(Entity entity, int knockBackPower) {
-        entity.direction = direction;
-        entity.speed    += knockBackPower;
-        entity.knockBack = true;
-    }
     // CONTACT MONSTER
     public void contactMonster(int i) {
         if (i != 999) {
@@ -412,7 +405,7 @@ public class Player extends Entity {
         }
     }
     // DAMAGE TO MONSTER
-    public void damageMonster(int i, int attack, int knockBackPower) {
+    public void damageMonster(int i, Entity attacker, int attack, int knockBackPower) {
 
         if (i != 999 ) {
            if (!gp.getMonster()[gp.getCurrentMap()][i].invincible) {
@@ -420,7 +413,7 @@ public class Player extends Entity {
                gp.playSoundEffect(SoundUtility.HIT_MONSTER);
 
                if (knockBackPower > 0) {
-                   knockBack(gp.getMonster()[gp.getCurrentMap()][i], knockBackPower);
+                   setKnockBack(gp.getMonster()[gp.getCurrentMap()][i], attacker, knockBackPower);
                }
 
                int damage  = attack - gp.getMonster()[gp.getCurrentMap()][i].defence;
@@ -440,7 +433,7 @@ public class Player extends Entity {
                        gp.getUi().addMessage("Exp + " + gp.getMonster()[gp.getCurrentMap()][i].exp);
                        exp += gp.getMonster()[gp.getCurrentMap()][i].exp;
                        checkLevelUp();
-//                       gp.getMonster()[i].alive = false;
+//                       gp.getMonster()[gp.getCurrentMap()][i].alive = false;
                    }
                    gp.getMonster()[gp.getCurrentMap()][i].dying = true;
                }

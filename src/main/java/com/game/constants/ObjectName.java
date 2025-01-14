@@ -15,6 +15,7 @@ public enum ObjectName {
     COIN("Coin"),
     LANTERN("Lantern"),
     TENT("Tent"),
+    ORC("Orc"),
     WOODEN_SHIELD("Wooden Shield");
 
     private ObjectName(final String name) {

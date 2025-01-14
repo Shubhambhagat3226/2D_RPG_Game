@@ -154,7 +154,7 @@ public class ImageUtility {
     public static final String BAT_1       = "/Monster/bat_down_1.png";
     public static final String BAT_2       = "/Monster/bat_down_2.png";
 
-    public static final String ORC_UP_1    = "/Monster/orc_down_1.png";
+    public static final String ORC_UP_1    = "/Monster/orc_up_1.png";
     public static final String ORC_UP_2    = "/Monster/orc_up_2.png";
     public static final String ORC_DOWN_1  = "/Monster/orc_down_1.png";
     public static final String ORC_DOWN_2  = "/Monster/orc_down_2.png";
@@ -173,7 +173,7 @@ public class ImageUtility {
     public static final String ORC_ATTACK_RIGHT_2 = "/Monster/orc_attack_right_2.png";
 
 
-    public static final String SKELETON_UP_1    = "/Monster/skeletonlord_down_1.png";
+    public static final String SKELETON_UP_1    = "/Monster/skeletonlord_up_1.png";
     public static final String SKELETON_UP_2    = "/Monster/skeletonlord_up_2.png";
     public static final String SKELETON_DOWN_1  = "/Monster/skeletonlord_down_1.png";
     public static final String SKELETON_DOWN_2  = "/Monster/skeletonlord_down_2.png";

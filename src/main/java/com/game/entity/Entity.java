@@ -22,6 +22,7 @@ public class Entity {
     protected Rectangle attackArea;
     protected int solidArea_Default_X, solidArea_Default_Y;
     protected String[] dialogue;
+    public Entity attacker;
 
     // STATE
     protected int worldX, worldY;
@@ -37,6 +38,7 @@ public class Entity {
     protected boolean hpBarOn;
     protected boolean onPath = false;
     protected boolean knockBack = false;
+    public Direction knockBackDirection;
 
     // COUNTER
     protected int spiritCounter     = 0;
@@ -175,7 +177,7 @@ public class Entity {
                 speed = defaultSpeed;
             }
             else {
-                switch (gp.getPlayer().direction) {
+                switch (knockBackDirection) {
                     case NORTH -> worldY -= speed;
                     case SOUTH -> worldY += speed;
                     case WEST  -> worldX -= speed;
@@ -466,6 +468,14 @@ public class Entity {
         gp.getParticleList().add(p4);
     }
 
+    // KNOCK
+    public void setKnockBack(Entity target, Entity attacker, int knockBackPower) {
+
+        this.attacker = attacker;
+        target.knockBackDirection = attacker.direction;
+        target.speed    += knockBackPower;
+        target.knockBack = true;
+    }
     // COMMON
     public int getLeftX() {return worldX + solidArea.x;}
     public int getRightX() {return worldX + solidArea.x + solidArea.width;}
@@ -570,6 +580,7 @@ public class Entity {
     public int getMaxInventorySize() {return maxInventorySize;}
     public int getAmount() {return amount;}
     public Entity getCurrentLight() {return currentLight;}
+    public boolean isKnockBack() {return knockBack;}
 
     // SETTER AND GETTER
     public Rectangle getSolidArea() {return solidArea;}
