@@ -151,4 +151,53 @@ public class ImageUtility {
     public static final String RED_SLIME_1       = "/Monster/redslime_down_1.png";
     public static final String RED_SLIME_2       = "/Monster/redslime_down_2.png";
 
+    public static final String BAT_1       = "/Monster/bat_down_1.png";
+    public static final String BAT_2       = "/Monster/bat_down_2.png";
+
+    public static final String ORC_UP_1    = "/Monster/orc_down_1.png";
+    public static final String ORC_UP_2    = "/Monster/orc_up_2.png";
+    public static final String ORC_DOWN_1  = "/Monster/orc_down_1.png";
+    public static final String ORC_DOWN_2  = "/Monster/orc_down_2.png";
+    public static final String ORC_LEFT_1  = "/Monster/orc_left_1.png";
+    public static final String ORC_LEFT_2  = "/Monster/orc_left_2.png";
+    public static final String ORC_RIGHT_1 = "/Monster/orc_right_1.png";
+    public static final String ORC_RIGHT_2 = "/Monster/orc_right_2.png";
+
+    public static final String ORC_ATTACK_UP_1    = "/Monster/orc_attack_up_1.png";
+    public static final String ORC_ATTACK_UP_2    = "/Monster/orc_attack_up_2.png";
+    public static final String ORC_ATTACK_DOWN_1  = "/Monster/orc_attack_down_1.png";
+    public static final String ORC_ATTACK_DOWN_2  = "/Monster/orc_attack_down_2.png";
+    public static final String ORC_ATTACK_LEFT_1  = "/Monster/orc_attack_left_1.png";
+    public static final String ORC_ATTACK_LEFT_2  = "/Monster/orc_attack_left_2.png";
+    public static final String ORC_ATTACK_RIGHT_1 = "/Monster/orc_attack_right_1.png";
+    public static final String ORC_ATTACK_RIGHT_2 = "/Monster/orc_attack_right_2.png";
+
+
+    public static final String SKELETON_UP_1    = "/Monster/skeletonlord_down_1.png";
+    public static final String SKELETON_UP_2    = "/Monster/skeletonlord_up_2.png";
+    public static final String SKELETON_DOWN_1  = "/Monster/skeletonlord_down_1.png";
+    public static final String SKELETON_DOWN_2  = "/Monster/skeletonlord_down_2.png";
+    public static final String SKELETON_LEFT_1  = "/Monster/skeletonlord_left_1.png";
+    public static final String SKELETON_LEFT_2  = "/Monster/skeletonlord_left_2.png";
+    public static final String SKELETON_RIGHT_1 = "/Monster/skeletonlord_right_1.png";
+    public static final String SKELETON_RIGHT_2 = "/Monster/skeletonlord_right_2.png";
+
+    public static final String SKELETON_ATTACK_UP_1    = "/Monster/skeletonlord_attack_up_1.png";
+    public static final String SKELETON_ATTACK_UP_2    = "/Monster/skeletonlord_attack_up_2.png";
+    public static final String SKELETON_ATTACK_DOWN_1  = "/Monster/skeletonlord_attack_down_1.png";
+    public static final String SKELETON_ATTACK_DOWN_2  = "/Monster/skeletonlord_attack_down_2.png";
+    public static final String SKELETON_ATTACK_LEFT_1  = "/Monster/skeletonlord_attack_left_1.png";
+    public static final String SKELETON_ATTACK_LEFT_2  = "/Monster/skeletonlord_attack_left_2.png";
+    public static final String SKELETON_ATTACK_RIGHT_1 = "/Monster/skeletonlord_attack_right_1.png";
+    public static final String SKELETON_ATTACK_RIGHT_2 = "/Monster/skeletonlord_attack_right_2.png";
+
+    public static final String SKELETON2_ATTACK_UP_1    = "/Monster/skeletonlord_phase2_attack_up_1.png";
+    public static final String SKELETON2_ATTACK_UP_2    = "/Monster/skeletonlord_phase2_attack_up_2.png";
+    public static final String SKELETON2_ATTACK_DOWN_1  = "/Monster/skeletonlord_phase2_attack_down_1.png";
+    public static final String SKELETON2_ATTACK_DOWN_2  = "/Monster/skeletonlord_phase2_attack_down_2.png";
+    public static final String SKELETON2_ATTACK_LEFT_1  = "/Monster/skeletonlord_phase2_attack_left_1.png";
+    public static final String SKELETON2_ATTACK_LEFT_2  = "/Monster/skeletonlord_phase2_attack_left_2.png";
+    public static final String SKELETON2_ATTACK_RIGHT_1 = "/Monster/skeletonlord_phase2_attack_right_1.png";
+    public static final String SKELETON2_ATTACK_RIGHT_2 = "/Monster/skeletonlord_phase2_attack_right_2.png";
+
 }
