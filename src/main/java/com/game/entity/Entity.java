@@ -11,6 +11,7 @@ import com.game.sound.SoundUtility;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Entity {
     protected GamePanel gp;
@@ -472,6 +473,74 @@ public class Entity {
     public int getBottomY() {return worldY + solidArea.y + solidArea.height;}
     public int getCol() {return (worldX + solidArea.x)/CommonConstant.TILE_SIZE;}
     public int getRow() {return (worldY + solidArea.y)/CommonConstant.TILE_SIZE;}
+
+    public int getXDistance(Entity target) {
+        return Math.abs(worldX - target.getWorldX());
+    }
+    public int getYDistance(Entity target) {
+        return Math.abs(worldY - target.getWorldY());
+    }
+    public int getTileDistance(Entity target) {
+        return (getXDistance(target) + getYDistance(target)) / CommonConstant.TILE_SIZE;
+    }
+    public int getGoalCol(Entity target) {
+        return (target.getWorldX() + target.getSolidArea().x) / CommonConstant.TILE_SIZE;
+    }
+    public int getGoalRow(Entity target) {
+        return (target.getWorldY() + target.getSolidArea().y) / CommonConstant.TILE_SIZE;
+    }
+
+    public void checkStartChasingOrNot(Entity target, int distance, int rate) {
+
+        if (getTileDistance(target) < distance) {
+            int i = new Random().nextInt(rate);
+            if (i == 0) {
+                onPath = true;
+            }
+        }
+    }
+    public void checkStopChasingOrNot(Entity target, int distance, int rate) {
+
+        if (getTileDistance(target) > distance) {
+            int i = new Random().nextInt(rate);
+            if (i == 0) {
+                onPath = false;
+            }
+        }
+    }
+    public void checkShotOrNot(int rate, int shotInterval) {
+        int i = new Random().nextInt(rate);
+
+        if (i == 0 && !projectile.isAlive() && shotAvailableCounter == shotInterval) {
+            projectile.set(worldX, worldY, direction, true, this);
+            // CHECK VACANCY
+            for (int j = 0; j < gp.getProjectile()[1].length; j++) {
+                if (gp.getProjectile()[gp.getCurrentMap()][j] == null) {
+                    gp.getProjectile()[gp.getCurrentMap()][j] = projectile;
+                    break;
+                }
+            }
+            shotAvailableCounter = 0;
+        }
+    }
+    public void getRandomDirection() {
+
+        actionCounter++;
+
+        if (actionCounter == CommonConstant.FPS * 3) {
+            Random random = new Random();
+            int i = random.nextInt(100); // pick up a number from 1 to 100
+
+            if (i < 25) {direction = Direction.NORTH;}
+            else if (i < 50) {direction = Direction.SOUTH;}
+            else if (i < 75) {direction = Direction.WEST;}
+            else {direction = Direction.EAST;}
+
+            actionCounter = 0;
+
+        }
+    }
+
 
     // GETTER METHOD ONLY
     public int getWorldX() {  return worldX;  }

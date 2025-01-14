@@ -46,68 +46,26 @@ public class MON_GreenSlime extends Entity {
     }
 
     @Override
-    public void update() {
-        super.update();
-
-        int xDistance = Math.abs(worldX - gp.getPlayer().getWorldX());
-        int yDistance = Math.abs(worldY - gp.getPlayer().getWorldY());
-        int tileDistance = (xDistance + yDistance)/ CommonConstant.TILE_SIZE;
-
-        if (!onPath  && tileDistance < 5) {
-            int i = new Random().nextInt(100);
-            if (i > 50) {
-                onPath = true;
-            }
-        }
-        if (onPath && tileDistance > 10) {
-            onPath = false;
-        }
-    }
-
-    @Override
     public void setAction() {
 
         if (onPath) {
 
-            int goalCol = (gp.getPlayer().getWorldX() + gp.getPlayer().getSolidArea().x)/CommonConstant.TILE_SIZE;
-            int goalRow = (gp.getPlayer().getWorldY() + gp.getPlayer().getSolidArea().y)/CommonConstant.TILE_SIZE;
+            // CHECK IF IT STOP CHASING
+            checkStopChasingOrNot(gp.getPlayer(), 10, 100);
 
-            searchPath(goalCol, goalRow);
+            // SEARCH THE DIRECTION TO GO
+            searchPath(getGoalCol(gp.getPlayer()), getGoalRow(gp.getPlayer()));
 
-            int i = new Random().nextInt(200);
-            if (i > 196 && !projectile.isAlive() && shotAvailableCounter == 30) {
-                projectile.set(worldX, worldY, direction, true, this);
-//                gp.getProjectile().add(projectile);
-                // CHECK VACANCY
-                for (int j = 0; j < gp.getProjectile()[1].length; j++) {
-                    if (gp.getProjectile()[gp.getCurrentMap()][j] == null) {
-                        gp.getProjectile()[gp.getCurrentMap()][j] = projectile;
-                        break;
-                    }
-                }
-                shotAvailableCounter = 0;
-            }
-        }
-        else {
-            actionCounter++;
+            // CHECK IF IT SHOOTS A PROJECT TILE
+           checkShotOrNot(200, 30);
 
-            if (actionCounter == CommonConstant.FPS * 3) {
-                Random random = new Random();
-                int i = random.nextInt(100); // pick up a number from 1 to 100
+        } else {
+            // CHECK IF IT START CHASING
+            checkStartChasingOrNot(gp.getPlayer(), 5, 100);
 
-                if (i < 25) {
-                    direction = Direction.NORTH;
-                } else if (i < 50) {
-                    direction = Direction.SOUTH;
-                } else if (i < 75) {
-                    direction = Direction.WEST;
-                } else {
-                    direction = Direction.EAST;
-                }
+            // GET RANDOM DIRECTION
+            getRandomDirection();
 
-                actionCounter = 0;
-
-            }
         }
 
     }
