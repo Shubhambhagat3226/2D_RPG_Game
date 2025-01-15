@@ -112,7 +112,26 @@ public class Player extends Entity {
     public int getDefense() {
         return defence = dexterity * currentShield.getDefenseValue();
     }
-
+    public int getCurrentWeaponSlot() {
+        int currentSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentWeapon) {
+                currentSlot = i;
+                break;
+            }
+        }
+        return currentSlot;
+    }
+    public int getCurrentShieldSlot() {
+        int currentSlot = 1;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentShield) {
+                currentSlot = i;
+                break;
+            }
+        }
+        return currentSlot;
+    }
     // LOAD PLAYERS IMAGES
     public void loadImage() {
         width      = CommonConstant.TILE_SIZE;

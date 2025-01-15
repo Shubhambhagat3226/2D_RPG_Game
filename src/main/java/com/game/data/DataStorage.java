@@ -1,6 +1,9 @@
 package com.game.data;
 
+import com.game.entity.Entity;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class DataStorage implements Serializable {
 
@@ -15,4 +18,10 @@ public class DataStorage implements Serializable {
     int exp;
     int nextLevelExp;
     int coin;
+
+    ArrayList<String> itemName = new ArrayList<>();
+    ArrayList<Integer> itemAmounts = new ArrayList<>();
+
+    int currentWeaponSlot;
+    int currentShieldSlot;
 }

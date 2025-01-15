@@ -783,4 +783,7 @@ public class Entity {
     public void setExp(int exp) {this.exp = exp;}
     public void setNextLevelExp(int nextLevelExp) {this.nextLevelExp = nextLevelExp;}
 
+    public void setCurrentWeapon(SuperItem currentWeapon) {this.currentWeapon = currentWeapon;}
+    public void setCurrentShield(SuperItem currentShield) {this.currentShield = currentShield;}
+
 }
