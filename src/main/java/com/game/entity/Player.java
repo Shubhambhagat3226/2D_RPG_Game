@@ -295,54 +295,6 @@ public class Player extends Entity {
         }
 
     }
-    // ATTACKING
-    public void attacking() {
-        standCounter = 0;
-        spiritCounter++;
-
-        if (spiritCounter <= 5) {
-            spiritNum     = 1;
-
-        } else if (spiritCounter <= 14) {
-            spiritNum     = 2;
-
-            // SAVE CURRENT WORLD-X,Y AND SOLID-AREA
-            int currentWorldX   = worldX;
-            int currentWorldY   = worldY;
-            int solidAreaWidth  = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-
-            // ADJUST PLAYER'S WORLD-X,Y FOR THE ATTACK-AREA
-            switch (direction) {
-                case NORTH -> worldY -= attackArea.height;
-                case SOUTH -> worldY += attackArea.height;
-                case WEST  -> worldX -= attackArea.width;
-                case EAST  -> worldX += attackArea.width;
-            }
-            // ATTACK SOLID AREA
-            solidArea.width   = attackArea.width;
-            solidArea.height  = attackArea.height;
-            // CHECK MONSTER COLLIDE WITH UPDATED WORLD-X,Y AND SOLID-AREA
-            int monsterIndex  = gp.getChecker().checkEntity(this, gp.getMonster());
-            damageMonster(monsterIndex, this, attack, currentWeapon.knowBackPower);
-            // INTERACTIVE TILE
-            int iTileIndex = gp.getChecker().checkEntity(this, gp.getiTile());
-            damageInteractiveTile(iTileIndex);
-
-            int projectileIndex = gp.getChecker().checkEntity(this, gp.getProjectile());
-            damageProjectTile(projectileIndex);
-            // RESET THE VALUE
-            worldX           = currentWorldX;
-            worldY           =  currentWorldY;
-            solidArea.width  = solidAreaWidth;
-            solidArea.height =  solidAreaHeight;
-
-        } else {
-            spiritNum     = 1;
-            spiritCounter = 0;
-            attacking     = false;
-        }
-    }
 
     // WHAT TO DO WHEN OBJECT COLLIED
     public void pickUpObject(int i) {

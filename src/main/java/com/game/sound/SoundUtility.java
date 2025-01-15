@@ -10,7 +10,8 @@ public class SoundUtility {
     public static final URL  UNLOCK             = setSound("/Sound/unlock.wav");
     public static final URL  HIT_MONSTER        = setSound("/Sound/hitmonster.wav");
     public static final URL  DAMAGE_RECEIVE     = setSound("/Sound/receivedamage.wav");
-    public static final URL  SWING              = setSound("/Sound/parry.wav");
+    public static final URL  PARRY              = setSound("/Sound/parry.wav");
+    public static final URL  SWING              = setSound("/Sound/swing.wav");
     public static final URL  LEVEL_UP           = setSound("/Sound/levelup.wav");
     public static final URL  BLOCKED            = setSound("/Sound/blocked.wav");
     public static final URL  BURNING            = setSound("/Sound/burning.wav");

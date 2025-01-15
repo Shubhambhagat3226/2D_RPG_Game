@@ -83,6 +83,10 @@ public class MON_Orc extends Entity {
 
         }
 
+        if (!attacking) {
+            checkAttackOrNot(30, CommonConstant.TILE_SIZE*4, CommonConstant.TILE_SIZE);
+        }
+
     }
 
     @Override

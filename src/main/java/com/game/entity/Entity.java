@@ -185,8 +185,11 @@ public class Entity {
                 }
             }
             knockBackCounter++;
-        }
-        else {
+
+        } else if (attacking) {
+            attacking();
+
+        } else {
             setAction();
             checkCollision();
             // IF COLLISION IS FALSE, THEN PLAYER CAN MOVE
@@ -199,18 +202,18 @@ public class Entity {
                 }
             }
 
+            // TO CHANGE FROM OTHER IMAGE
+            spiritCounter++;
+            if (spiritCounter > 24) {
+                if (spiritNum == 1) {
+                    spiritNum = 2;
+                } else {
+                    spiritNum = 1;
+                }
+                spiritCounter = 0;
+            }
         }
 
-        // TO CHANGE FROM OTHER IMAGE
-        spiritCounter++;
-        if (spiritCounter > 24) {
-            if (spiritNum == 1) {
-                spiritNum = 2;
-            } else {
-                spiritNum = 1;
-            }
-            spiritCounter = 0;
-        }
 
         //  THIS NEEDS TO BE OUTSIDE OF KEY IF STATEMENT
         if (invincible) {
@@ -240,6 +243,64 @@ public class Entity {
             gp.getPlayer().invincible = true;
         }
     }
+    // ATTACKING
+    public void attacking() {
+//        standCounter = 0;
+        spiritCounter++;
+
+        if (spiritCounter <= 5) {
+            spiritNum     = 1;
+
+        } else if (spiritCounter <= 14) {
+            spiritNum     = 2;
+
+            // SAVE CURRENT WORLD-X,Y AND SOLID-AREA
+            int currentWorldX   = worldX;
+            int currentWorldY   = worldY;
+            int solidAreaWidth  = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            // ADJUST PLAYER'S WORLD-X,Y FOR THE ATTACK-AREA
+            switch (direction) {
+                case NORTH -> worldY -= attackArea.height;
+                case SOUTH -> worldY += attackArea.height;
+                case WEST  -> worldX -= attackArea.width;
+                case EAST  -> worldX += attackArea.width;
+            }
+            // ATTACK SOLID AREA
+            solidArea.width   = attackArea.width;
+            solidArea.height  = attackArea.height;
+
+            if (type == Type.MONSTER) {
+                if (gp.getChecker().checkPlayer(this)) {
+                    damagePlayer(attack);
+                }
+
+            } else if (type == Type.PLAYER) {
+
+                // CHECK MONSTER COLLIDE WITH UPDATED WORLD-X,Y AND SOLID-AREA
+                int monsterIndex  = gp.getChecker().checkEntity(this, gp.getMonster());
+                gp.getPlayer().damageMonster(monsterIndex, this, attack, currentWeapon.knowBackPower);
+                // INTERACTIVE TILE
+                int iTileIndex = gp.getChecker().checkEntity(this, gp.getiTile());
+                gp.getPlayer().damageInteractiveTile(iTileIndex);
+
+                int projectileIndex = gp.getChecker().checkEntity(this, gp.getProjectile());
+                gp.getPlayer().damageProjectTile(projectileIndex);
+            }
+            // RESET THE VALUE
+            worldX           = currentWorldX;
+            worldY           =  currentWorldY;
+            solidArea.width  = solidAreaWidth;
+            solidArea.height =  solidAreaHeight;
+
+        } else {
+            spiritNum     = 1;
+            spiritCounter = 0;
+            attacking     = false;
+        }
+    }
+
     // DRAW METHOD BY DEFAULT
     public void draw(Graphics2D g2) {
         int screenX = worldX - gp.getPlayer().getWorldX() + gp.getPlayer().getScreenX();
@@ -250,25 +311,50 @@ public class Entity {
                 worldY + CommonConstant.TILE_SIZE > gp.getPlayer().getWorldY() - gp.getPlayer().getScreenY() &&
                 worldY - CommonConstant.TILE_SIZE < gp.getPlayer().getWorldY() + gp.getPlayer().getScreenY() ) {
 
+            int tempScreenX = screenX;
+            int tempScreenY = screenY;
+
             BufferedImage image  = switch (direction) {
                 case NORTH -> {
-                    if (spiritNum == 1) yield  up_1;
-                    else if (spiritNum == 2) yield  up_2;
+                    if (!attacking) {
+                        if (spiritNum == 1) yield up_1;
+                        else if (spiritNum == 2) yield up_2;
+                    } else {
+                        tempScreenY -= CommonConstant.TILE_SIZE;
+                        if (spiritNum == 1) yield attackUp_1;
+                        else if (spiritNum == 2) yield attackUp_2;
+                    }
                     yield null; // or some default value
                 }
                 case SOUTH -> {
-                    if (spiritNum == 1) yield  down_1;
-                    else if (spiritNum == 2) yield  down_2;
+                    if (!attacking) {
+                        if (spiritNum == 1) yield down_1;
+                        else if (spiritNum == 2) yield down_2;
+                    } else {
+                        if (spiritNum == 1) yield attackDown_1;
+                        else if (spiritNum == 2) yield attackDown_2;
+                    }
                     yield null; // or some default value
                 }
                 case WEST -> {
-                    if (spiritNum == 1) yield  left_1;
-                    else if (spiritNum == 2) yield  left_2;
+                    if (!attacking) {
+                        if (spiritNum == 1) yield left_1;
+                        else if (spiritNum == 2) yield left_2;
+                    } else {
+                        tempScreenX -= CommonConstant.TILE_SIZE;
+                        if (spiritNum == 1) yield attackLeft_1;
+                        else if (spiritNum == 2) yield attackLeft_2;
+                    }
                     yield null; // or some default value
                 }
                 case EAST -> {
-                    if (spiritNum == 1) yield  right_1;
-                    else if (spiritNum == 2) yield  right_2;
+                    if (!attacking) {
+                        if (spiritNum == 1) yield right_1;
+                        else if (spiritNum == 2) yield right_2;
+                    } else {
+                        if (spiritNum == 1) yield attackRight_1;
+                        else if (spiritNum == 2) yield attackRight_2;
+                    }
                     yield null; // or some default value
                 }
                 default -> null;
@@ -302,7 +388,7 @@ public class Entity {
                 dyingAnimation(g2);
             }
 
-            g2.drawImage(image, screenX, screenY, null);
+            g2.drawImage(image, tempScreenX, tempScreenY, null);
 
             changeAlpha(g2, 1);
         }
@@ -548,6 +634,46 @@ public class Entity {
 
             actionCounter = 0;
 
+        }
+    }
+    public void checkAttackOrNot(int rate, int straight, int horizontal) {
+        boolean targetInRange = false;
+        int xDis = getXDistance(gp.getPlayer());
+        int yDis = getYDistance(gp.getPlayer());
+
+        switch (direction) {
+            case NORTH -> {
+                if (gp.getPlayer().worldY < worldY &&  yDis < straight && xDis < horizontal) {
+                    targetInRange = true;
+                }
+            }
+            case SOUTH -> {
+                if (gp.getPlayer().worldY > worldY &&  yDis < straight && xDis < horizontal) {
+                    targetInRange = true;
+                }
+            }
+            case WEST -> {
+                if (gp.getPlayer().worldX < worldX &&  xDis < straight && yDis < horizontal) {
+                    targetInRange = true;
+                }
+            }
+            case EAST -> {
+                if (gp.getPlayer().worldX > worldX &&  xDis < straight && yDis < horizontal) {
+                    targetInRange = true;
+                }
+            }
+        }
+
+        if (targetInRange) {
+            // CHECK IF IT INITIALIZE AN ATTACK
+            int i = new Random().nextInt(rate);
+            if (i==0) {
+                attacking = true;
+                spiritNum = 1;
+                spiritCounter = 0;
+                shotAvailableCounter = 0;
+
+            }
         }
     }
 
