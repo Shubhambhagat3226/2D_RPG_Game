@@ -484,8 +484,8 @@ public class Entity {
 
     public int searchItemInInventory(ObjectName itemName) {
         int itemIndex = 999;
-        for (int i = 0; i < inventory.size(); i++) {
-            if (inventory.get(i).name == itemName) {
+        for (int i = 0; i < gp.getPlayer().inventory.size(); i++) {
+            if (gp.getPlayer().inventory.get(i).name == itemName) {
                 itemIndex = i;
                 break;
             }
@@ -500,13 +500,13 @@ public class Entity {
         if (item.stackable) {
             int index = searchItemInInventory(item.name);
             if (index != 999) {
-                inventory.get(index).amount++;
+                gp.getPlayer().inventory.get(index).amount++;
                 canObtain = true;
 
             }
             else { // NEW ITEM SO NEED TO CHECK VACANCY
-                if (inventory.size() != maxInventorySize) {
-                    inventory.add(item);
+                if (gp.getPlayer().inventory.size() != gp.getPlayer().maxInventorySize) {
+                    gp.getPlayer().inventory.add(item);
                     canObtain = true;
                 }
             }

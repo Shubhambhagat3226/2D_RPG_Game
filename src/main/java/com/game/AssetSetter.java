@@ -14,6 +14,7 @@ import com.game.tile_interactive.IT_DryTree;
 import com.game.tile_interactive.InteractiveTile;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class AssetSetter {
     private final GamePanel gp;
@@ -25,14 +26,14 @@ public class AssetSetter {
 
         int mapNum = 0;
         int i = 0;
-        obj[mapNum][i]   = setEntity(new OBJ_Axe(gp), 20, 12);
+        obj[mapNum][i]   = setEntity(new OBJ_Axe(gp), 33, 7);
         i++;
         obj[mapNum][i]   = setEntity(new OBJ_DOOR(gp), 14, 28);
         i++;
         obj[mapNum][i]   = setEntity(new OBJ_DOOR(gp), 12, 12);
         i++;
-//        obj[mapNum][i]   = setEntity(new OBJ_CHEST(gp, new OBJ_KEY(gp)), 20, 10);
-//        i++;
+        obj[mapNum][i]   = setEntity(new OBJ_CHEST(gp, new OBJ_KEY(gp)), 20, 11);
+        i++;
         obj[mapNum][i]   = setEntity(new OBJ_Lantern(gp), 18, 20); i++;
         obj[mapNum][i]   = setEntity(new OBJ_Tent(gp), 19, 20); i++;
         obj[mapNum][i]   = setEntity(new OBJ_KEY(gp), 20, 10); i++;
@@ -75,23 +76,54 @@ public class AssetSetter {
     }
 
     public void setInteractiveTile() {
-//
-//        Point[] points = {new Point(27, 12), new Point(28, 12),new Point(29, 12),
-//                new Point(30, 12),new Point(31, 12), new Point(32, 12),
-//                new Point(33, 12), new Point(27, 16),new Point(18, 40),
-//                new Point(17, 40),new Point(16, 40), new Point(15, 40),
-//                new Point(14, 40), new Point(13, 40),new Point(13, 41),
-//                new Point(12, 41),new Point(11, 41), new Point(10, 41),
-//                new Point(10, 40), new Point(29, 40),new Point(30, 40),
-//                new Point(36, 30),new Point(33, 7), new Point(30, 21),
-//                new Point(31, 21), new Point(32, 21)};
-//        int mapNum = 0;
-//        int i = 0;
-//        for (Point point : points) {
-//            gp.getiTile()[mapNum][i] = (InteractiveTile) setEntity(new IT_DryTree(gp), point.x, point.y);
-//            i++;
-//        }
+        int map = 0;
+        setDryTree(map, 27, 12);
+        setDryTree(map, 28, 12);
+        setDryTree(map, 29, 12);
+        setDryTree(map, 30, 12);
+        setDryTree(map, 31, 12);
+        setDryTree(map, 31, 12);
+        setDryTree(map, 32, 12);
+        setDryTree(map, 33, 12);
 
+        setDryTree(map, 27, 16);
+
+        setDryTree(map, 25, 27);
+        setDryTree(map, 26, 27);
+        setDryTree(map, 27, 27);
+        setDryTree(map, 27, 28);
+        setDryTree(map, 27, 29);
+        setDryTree(map, 27, 30);
+        setDryTree(map, 27, 31);
+        setDryTree(map, 28, 31);
+        setDryTree(map, 29, 31);
+        setDryTree(map, 30, 31);
+
+        setDryTree(map, 18, 40);
+        setDryTree(map, 17, 40);
+        setDryTree(map, 16, 40);
+        setDryTree(map, 15, 40);
+        setDryTree(map, 14, 40);
+        setDryTree(map, 13, 40);
+        setDryTree(map, 13, 41);
+        setDryTree(map, 12, 41);
+        setDryTree(map, 11, 41);
+        setDryTree(map, 10, 41);
+
+
+    }
+
+    private Point getXY(int x, int y) {
+        return new Point(x, y);
+    }
+
+    private void setDryTree(int map, int x, int y) {
+        for (int i = 0; i < gp.getiTile()[map].length; i++) {
+            if (gp.getiTile()[map][i] == null) {
+                gp.getiTile()[map][i] = (InteractiveTile) setEntity(new IT_DryTree(gp), x, y);
+                break;
+            }
+        }
     }
 
 }
