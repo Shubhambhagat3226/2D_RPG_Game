@@ -775,4 +775,12 @@ public class Entity {
     public void setCoin(int coin) {this.coin = coin;}
 
     public void setAmount(int amount) {this.amount = amount;}
+
+    public void setLevel(int level) {this.level = level;}
+    public void setMaxMana(int maxMana) {this.maxMana = maxMana;}
+    public void setStrength(int strength) {this.strength = strength;}
+    public void setDexterity(int dexterity) {this.dexterity = dexterity;}
+    public void setExp(int exp) {this.exp = exp;}
+    public void setNextLevelExp(int nextLevelExp) {this.nextLevelExp = nextLevelExp;}
+
 }

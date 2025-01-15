@@ -107,6 +107,7 @@ public class EventHandler {
             gp.getPlayer().setLife(gp.getPlayer().getMaxLife());
             gp.getPlayer().setMana(gp.getPlayer().getMaxMana());
             gp.getaSetter().setMonster();
+            gp.getSaveLoad().save();
         }
     }
     // TELEPORT OCCUR

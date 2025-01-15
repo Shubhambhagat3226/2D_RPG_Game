@@ -3,6 +3,7 @@ package com.game;
 import com.game.ai.PathFinder;
 import com.game.constants.CommonConstant;
 import com.game.constants.GameState;
+import com.game.data.SaveLoad;
 import com.game.entity.Entity;
 import com.game.entity.Player;
 import com.game.environment.EnvironmentManager;
@@ -40,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable{
     private final EventHandler eventH;
     Map map = new Map(this);
     Config config = new Config(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     PathFinder pFinder = new PathFinder(this);
     EnvironmentManager manager = new EnvironmentManager(this);
 
@@ -399,6 +401,7 @@ public class GamePanel extends JPanel implements Runnable{
     public int getScreenWidth2() {return screenWidth2;}
     public int getScreenHeight2() {return screenHeight2;}
     public Map getMap() {return map;}
+    public SaveLoad getSaveLoad() {return saveLoad;}
 
     // SETTER METHODS
     public void setGameThread(Thread gameThread) {  this.gameThread = gameThread;  }
