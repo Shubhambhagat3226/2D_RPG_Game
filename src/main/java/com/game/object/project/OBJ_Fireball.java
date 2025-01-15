@@ -19,7 +19,7 @@ public class OBJ_Fireball extends Projectile {
         life    = maxLife;
         attack  = 5;
         useCost = 1;
-        knowBackPower = 0;
+        knockBackPower = 0;
         alive   = false;
         loadImage();
     }

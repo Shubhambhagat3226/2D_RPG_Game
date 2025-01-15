@@ -25,6 +25,7 @@ public class MON_Orc extends Entity {
         attack = 8;
         defence = 2;
         exp = 10;
+        knockBackPower = 5;
 
         solidArea = new Rectangle(4, 4, 40, 44);
         solidArea_Default_X = solidArea.x;

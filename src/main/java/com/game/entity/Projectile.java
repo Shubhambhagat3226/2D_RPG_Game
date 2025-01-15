@@ -2,7 +2,6 @@ package com.game.entity;
 
 import com.game.GamePanel;
 import com.game.constants.Direction;
-import com.game.constants.Type;
 
 public class Projectile extends Entity{
     protected Entity user;
@@ -26,7 +25,7 @@ public class Projectile extends Entity{
 
             int monsterIndex = gp.getChecker().checkEntity(this, gp.getMonster());
             if (monsterIndex != 999) {
-                gp.getPlayer().damageMonster(monsterIndex, this, attack, knowBackPower);
+                gp.getPlayer().damageMonster(monsterIndex, this, attack, knockBackPower);
                 generateParticle(user.projectile, gp.getMonster()[gp.getCurrentMap()][monsterIndex]);
                 alive = false;
             }
@@ -35,7 +34,7 @@ public class Projectile extends Entity{
             boolean contactPlayer = gp.getChecker().checkPlayer(this);
             if (!gp.getPlayer().invincible && contactPlayer) {
                 damagePlayer(attack);
-                generateParticle(user.projectile, gp.getPlayer());
+                generateParticle(user.projectile, user.projectile);
                 alive = false;
             }
         }

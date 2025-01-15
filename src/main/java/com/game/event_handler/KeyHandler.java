@@ -9,7 +9,8 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     private final GamePanel gp;
-    private boolean upPressed, downPressed , leftPressed, rightPressed, enteredPressed, shotKeyPressed;
+    private boolean upPressed, downPressed , leftPressed, rightPressed, enteredPressed,
+            shotKeyPressed, spaceKeyPressed;
     // DEBUG
     private boolean showDebugTest;
 
@@ -93,6 +94,10 @@ public class KeyHandler implements KeyListener {
         // SHOT FIREBALL
         if (KeyEvent.VK_F == code) {
             shotKeyPressed = true;
+        }
+        // GUARD FROM ATTACK
+        if (KeyEvent.VK_SPACE == code) {
+            spaceKeyPressed = true;
         }
         // TALK WITH NPC
         if (KeyEvent.VK_C == code) {
@@ -238,9 +243,17 @@ public class KeyHandler implements KeyListener {
         if (KeyEvent.VK_D == code || KeyEvent.VK_RIGHT == code) {
             rightPressed = false;
         }
+        // TALK WITH NPC/ attack
+        if (KeyEvent.VK_ENTER == code) {
+            enteredPressed = false;
+        }
         // FIREBALL
         if (KeyEvent.VK_F == code) {
             shotKeyPressed = false;
+        }
+        // GUARD
+        if (KeyEvent.VK_SPACE == code) {
+            spaceKeyPressed = false;
         }
     }
 
@@ -384,6 +397,7 @@ public class KeyHandler implements KeyListener {
     public boolean isShowDebugTest() { return showDebugTest; }
     public boolean isEnteredPressed() {return enteredPressed;}
     public boolean isShotKeyPressed() {return shotKeyPressed;}
+    public boolean isSpaceKeyPressed() {return spaceKeyPressed;}
 
     // SETTER METHODS
     public void setEnteredPressed(boolean enteredPressed) {this.enteredPressed = enteredPressed;}

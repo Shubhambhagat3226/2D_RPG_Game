@@ -18,6 +18,7 @@ public class Entity {
     protected BufferedImage up_1, up_2, down_1, down_2, left_1, left_2, right_1, right_2;
     protected BufferedImage attackUp_1, attackUp_2, attackDown_1, attackDown_2,
             attackLeft_1, attackLeft_2, attackRight_1, attackRight_2;
+    protected BufferedImage guardUp, guardDown, guardLeft, guardRight;
     protected Rectangle solidArea;
     protected Rectangle attackArea;
     protected int solidArea_Default_X, solidArea_Default_Y;
@@ -39,6 +40,8 @@ public class Entity {
     protected boolean onPath = false;
     protected boolean knockBack = false;
     public Direction knockBackDirection;
+    public boolean guarding = false;
+    public boolean transparent = false;
 
     // COUNTER
     protected int spiritCounter     = 0;
@@ -78,7 +81,7 @@ public class Entity {
     protected ArrayList<Entity> inventory;
     protected final int maxInventorySize = 20;
     protected int price;
-    protected int knowBackPower = 0;
+    protected int knockBackPower = 0;
     protected boolean stackable = false;
     protected int amount = 1;
     public int lightRadius;
@@ -232,13 +235,26 @@ public class Entity {
 
     public void damagePlayer(int attack) {
         if (!gp.getPlayer().invincible) {
-            // GIVE DAMAGE
-            gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
-
             int damage  = attack - gp.getPlayer().defence;
-            if (damage < 0) {
-                damage  = 0;
+
+            // GET OPPOSITE DIRECTION OF ATTACKER
+            Direction canGuardDirection = getOppositeDirection(direction);
+
+            if (gp.getPlayer().guarding && gp.getPlayer().direction == canGuardDirection) {
+                damage /= 3;
+                gp.playSoundEffect(SoundUtility.BLOCKED);
+
+            } else {
+                gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
+                if (damage < 1) {
+                    damage  = 1;
+                }
             }
+            if (damage != 0) {
+                gp.getPlayer().transparent = true;
+                setKnockBack(gp.getPlayer(), this, knockBackPower);
+            }
+
             gp.getPlayer().life      -= damage;
             gp.getPlayer().invincible = true;
         }
@@ -280,7 +296,7 @@ public class Entity {
 
                 // CHECK MONSTER COLLIDE WITH UPDATED WORLD-X,Y AND SOLID-AREA
                 int monsterIndex  = gp.getChecker().checkEntity(this, gp.getMonster());
-                gp.getPlayer().damageMonster(monsterIndex, this, attack, currentWeapon.knowBackPower);
+                gp.getPlayer().damageMonster(monsterIndex, this, attack, currentWeapon.knockBackPower);
                 // INTERACTIVE TILE
                 int iTileIndex = gp.getChecker().checkEntity(this, gp.getiTile());
                 gp.getPlayer().damageInteractiveTile(iTileIndex);
@@ -675,6 +691,16 @@ public class Entity {
 
             }
         }
+    }
+
+    public Direction getOppositeDirection(Direction direction) {
+        return switch (direction) {
+            case NORTH -> Direction.SOUTH;
+            case SOUTH -> Direction.NORTH;
+            case WEST  -> Direction.EAST;
+            case EAST  -> Direction.WEST;
+            case ANY   -> Direction.ANY;
+        };
     }
 
 

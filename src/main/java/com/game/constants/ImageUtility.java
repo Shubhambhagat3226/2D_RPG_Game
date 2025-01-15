@@ -39,7 +39,11 @@ public class ImageUtility {
     public static final String PLAYER_PICK_LEFT_2  = "/Player/Attacking sprites/boy_pick_left_2.png";
     public static final String PLAYER_PICK_RIGHT_1 = "/Player/Attacking sprites/boy_pick_right_1.png";
     public static final String PLAYER_PICK_RIGHT_2 = "/Player/Attacking sprites/boy_pick_right_2.png";
-
+    // GUARD
+    public static final String PLAYER_GUARD_UP     = "/Player/Guarding sprites/boy_guard_up.png";
+    public static final String PLAYER_GUARD_DOWN   = "/Player/Guarding sprites/boy_guard_down.png";
+    public static final String PLAYER_GUARD_LEFT   = "/Player/Guarding sprites/boy_guard_left.png";
+    public static final String PLAYER_GUARD_RIGHT  = "/Player/Guarding sprites/boy_guard_right.png";
 
     // FIREBALL
     public static final String FIREBALL_UP_1    = "/Projectile/fireball_up_1.png";

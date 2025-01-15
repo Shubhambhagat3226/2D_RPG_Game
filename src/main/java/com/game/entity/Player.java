@@ -46,7 +46,8 @@ public class Player extends Entity {
 
         setDefaultValues();
         loadImage();
-        getPlayerAttackImage();
+        getGuardImage();
+        getAttackImage();
         setItems();
     }
 
@@ -90,6 +91,7 @@ public class Player extends Entity {
         life = maxLife;
         mana = maxMana;
         invincible = false;
+        transparent = false;
     }
     // SET ITEMS
     public void setItems() {
@@ -129,7 +131,7 @@ public class Player extends Entity {
         right_2    = image;
     }
     // LOAD PLAYER ATTACK IMAGE
-    public void getPlayerAttackImage() {
+    public void getAttackImage() {
         width         = CommonConstant.TILE_SIZE;
         height        = CommonConstant.TILE_SIZE * 2;
         if (currentWeapon.type == Type.SWORD) {
@@ -160,6 +162,13 @@ public class Player extends Entity {
         }
 
     }
+    // GUARD IMAGE
+    public void getGuardImage() {
+        guardUp = getImage(ImageUtility.PLAYER_GUARD_UP);
+        guardDown = getImage(ImageUtility.PLAYER_GUARD_DOWN);
+        guardLeft = getImage(ImageUtility.PLAYER_GUARD_LEFT);
+        guardRight = getImage(ImageUtility.PLAYER_GUARD_RIGHT);
+    }
 
     // UPDATE ALL SETTING FOR PLAYER LIKE --
     // DIRECTION
@@ -167,11 +176,43 @@ public class Player extends Entity {
     // OBJECT COLLISION HAPPEN
     // IMAGES UPDATION
     public void update() {
-        if (attacking) {
+        if (knockBack) {
+
+            // CHECK TILE COLLISION
+            collisionOn = false;
+            gp.getChecker().checkTile(this);
+            // CHECK OBJECT COLLISION
+            gp.getChecker().checkObject(this, true);
+            // CHECK NPC COLLISION
+            gp.getChecker().checkEntity(this, gp.getNpc());
+            // CHECK MONSTER COLLISION
+            gp.getChecker().checkEntity(this, gp.getMonster());
+            // CHECK INTERACTIVE TILE COLLISION
+            gp.getChecker().checkEntity(this, gp.getiTile());
+
+            if (collisionOn || knockBackCounter == 6) {
+                knockBackCounter = 0;
+                knockBack = false;
+                speed = defaultSpeed;
+            }
+            else {
+                switch (knockBackDirection) {
+                    case NORTH -> worldY -= speed;
+                    case SOUTH -> worldY += speed;
+                    case WEST  -> worldX -= speed;
+                    case EAST  -> worldX += speed;
+                }
+            }
+            knockBackCounter++;
+
+        }
+        else if (attacking) {
             attacking();
         }
-
-        if (keyH.isUpPressed() || keyH.isDownPressed()
+        else if (keyH.isSpaceKeyPressed()) {
+            guarding = true;
+        }
+        else if (keyH.isUpPressed() || keyH.isDownPressed()
                 || keyH.isLeftPressed() || keyH.isRightPressed()
                 || keyH.isEnteredPressed()) {
 
@@ -227,6 +268,7 @@ public class Player extends Entity {
             }
             attackCanceled = false;
             keyH.setEnteredPressed(false);
+            guarding = false;
             // TO CHANGE FROM OTHER IMAGE
             spiritCounter++;
             if (spiritCounter > 10) {
@@ -244,7 +286,7 @@ public class Player extends Entity {
                 spiritNum = 1;
                 standCounter=0;
             }
-
+            guarding = false;
         }
 
         if (gp.getKeyH().isShotKeyPressed() &&
@@ -277,6 +319,7 @@ public class Player extends Entity {
             invincibleCounter++;
             if (invincibleCounter > CommonConstant.FPS) {
                 invincible        = false;
+                transparent       = false;
                 invincibleCounter = 0;
             }
         }
@@ -348,11 +391,12 @@ public class Player extends Entity {
                 gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);
 
                 int damage  = gp.getMonster()[gp.getCurrentMap()][i].attack - defence;
-                if (damage < 0) {
-                    damage  = 0;
+                if (damage < 1) {
+                    damage  = 1;
                 }
                 this.life -= damage;
                 invincible = true;
+                transparent = true;
             }
         }
     }
@@ -425,7 +469,7 @@ public class Player extends Entity {
             if (selectedItem.type == Type.SWORD || selectedItem.type == Type.AXE) {
                 currentWeapon = (SuperItem) selectedItem;
                 attack        = getAttack();
-                getPlayerAttackImage();
+                getAttackImage();
             }
             if (selectedItem.type == Type.SHIELD) {
                 currentShield = (SuperItem) selectedItem;
@@ -460,10 +504,14 @@ public class Player extends Entity {
 
         BufferedImage image  = switch (direction) {
             case NORTH -> {
+                if (guarding) {
+                    yield guardUp;
+                }
                 if (!attacking) {
                     if (spiritNum == 1) yield up_1;
                     else if (spiritNum == 2) yield up_2;
-                } else {
+                }
+                if (attacking){
                     tempScreenY -= CommonConstant.TILE_SIZE;
                     if (spiritNum == 1) yield attackUp_1;
                     else if (spiritNum == 2) yield attackUp_2;
@@ -471,20 +519,28 @@ public class Player extends Entity {
                 yield null; // or some default value
             }
             case SOUTH -> {
+                if (guarding) {
+                    yield guardDown;
+                }
                 if (!attacking) {
                     if (spiritNum == 1) yield down_1;
                     else if (spiritNum == 2) yield down_2;
-                } else {
+                }
+                if (attacking) {
                     if (spiritNum == 1) yield attackDown_1;
                     else if (spiritNum == 2) yield attackDown_2;
                 }
                 yield null; // or some default value
             }
             case WEST -> {
+                if (guarding) {
+                    yield guardLeft;
+                }
                 if (!attacking) {
                     if (spiritNum == 1) yield left_1;
                     else if (spiritNum == 2) yield left_2;
-                } else {
+                }
+                if (attacking) {
                     tempScreenX -= CommonConstant.TILE_SIZE;
                     if (spiritNum == 1) yield attackLeft_1;
                     else if (spiritNum == 2) yield attackLeft_2;
@@ -492,10 +548,14 @@ public class Player extends Entity {
                 yield null; // or some default value
             }
             case EAST -> {
+                if (guarding) {
+                    yield guardRight;
+                }
                 if (!attacking) {
                     if (spiritNum == 1) yield right_1;
                     else if (spiritNum == 2) yield right_2;
-                } else {
+                }
+                if (attacking) {
                     if (spiritNum == 1) yield attackRight_1;
                     else if (spiritNum == 2) yield attackRight_2;
                 }
@@ -504,7 +564,7 @@ public class Player extends Entity {
             default -> null;
         };
         // FLINCH THE PLAYER AT INVINCIBLE
-        if (invincible) {
+        if (transparent) {
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
         }
 

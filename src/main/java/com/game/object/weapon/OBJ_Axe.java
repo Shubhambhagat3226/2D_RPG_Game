@@ -19,6 +19,6 @@ public class OBJ_Axe extends SuperItem {
         description       = "[" + name.getName() + "]\nA bit rusty but still can \ncut some tree.";
 
         price = 75;
-        knowBackPower = 10;
+        knockBackPower = 10;
     }
 }
