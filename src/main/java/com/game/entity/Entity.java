@@ -42,6 +42,7 @@ public class Entity {
     public Direction knockBackDirection;
     public boolean guarding = false;
     public boolean transparent = false;
+    public boolean offBalance = false;
 
     // COUNTER
     protected int spiritCounter     = 0;
@@ -51,6 +52,8 @@ public class Entity {
     protected int hpBarCounter      = 0;
     protected int shotAvailableCounter = 0;
     protected int knockBackCounter = 0;
+    public int guardCounter = 0;
+    public int offBalanceCounter = 0;
 
     // CHARACTER STATUS
     protected int type; // 0-player 1-npc 2-monster
@@ -226,10 +229,17 @@ public class Entity {
                 invincibleCounter = 0;
             }
         }
-
         // SHOT AVAILABLE
         if (shotAvailableCounter < 30) {
             shotAvailableCounter++;
+        }
+
+        if (offBalance) {
+            offBalanceCounter++;
+            if (offBalanceCounter > 60) {
+                offBalance = false;
+                offBalanceCounter = 0;
+            }
         }
     }
 
@@ -241,8 +251,19 @@ public class Entity {
             Direction canGuardDirection = getOppositeDirection(direction);
 
             if (gp.getPlayer().guarding && gp.getPlayer().direction == canGuardDirection) {
-                damage /= 3;
-                gp.playSoundEffect(SoundUtility.BLOCKED);
+                // PARRY
+                if (gp.getPlayer().guardCounter < 10) {
+                    damage = 0;
+                    gp.playSoundEffect(SoundUtility.PARRY);
+                    setKnockBack(this, gp.getPlayer(), knockBackPower);
+                    offBalance = true;
+                    spiritCounter = -60;
+                }
+                else {
+
+                    damage /= 3;
+                    gp.playSoundEffect(SoundUtility.BLOCKED);
+                }
 
             } else {
                 gp.playSoundEffect(SoundUtility.DAMAGE_RECEIVE);

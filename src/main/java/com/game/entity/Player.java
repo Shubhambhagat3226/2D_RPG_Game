@@ -211,6 +211,7 @@ public class Player extends Entity {
         }
         else if (keyH.isSpaceKeyPressed()) {
             guarding = true;
+            guardCounter++;
         }
         else if (keyH.isUpPressed() || keyH.isDownPressed()
                 || keyH.isLeftPressed() || keyH.isRightPressed()
@@ -269,6 +270,7 @@ public class Player extends Entity {
             attackCanceled = false;
             keyH.setEnteredPressed(false);
             guarding = false;
+            guardCounter=0;
             // TO CHANGE FROM OTHER IMAGE
             spiritCounter++;
             if (spiritCounter > 10) {
@@ -287,6 +289,7 @@ public class Player extends Entity {
                 standCounter=0;
             }
             guarding = false;
+            guardCounter=0;
         }
 
         if (gp.getKeyH().isShotKeyPressed() &&
@@ -410,6 +413,10 @@ public class Player extends Entity {
 
                if (knockBackPower > 0) {
                    setKnockBack(gp.getMonster()[gp.getCurrentMap()][i], attacker, knockBackPower);
+               }
+
+               if (gp.getMonster()[gp.getCurrentMap()][i].offBalance) {
+                   attack *= 3;
                }
 
                int damage  = attack - gp.getMonster()[gp.getCurrentMap()][i].defence;

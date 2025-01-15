@@ -32,7 +32,7 @@ public class AssetSetter {
         i++;
         obj[mapNum][i]   = setEntity(new OBJ_DOOR(gp), 12, 12);
         i++;
-        obj[mapNum][i]   = setEntity(new OBJ_CHEST(gp, new OBJ_KEY(gp)), 20, 11);
+        obj[mapNum][i]   = setEntity(new OBJ_CHEST(gp, new OBJ_KEY(gp)), 30, 29);
         i++;
         obj[mapNum][i]   = setEntity(new OBJ_Lantern(gp), 18, 20); i++;
         obj[mapNum][i]   = setEntity(new OBJ_Tent(gp), 19, 20); i++;
