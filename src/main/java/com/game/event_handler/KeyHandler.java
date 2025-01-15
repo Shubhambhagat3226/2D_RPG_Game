@@ -280,13 +280,13 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ENTER) {
             if (gp.getUi().getCommandNum() == 0) {
                 gp.setGameState(GameState.PLAY);
-                gp.retry();
+                gp.resetGame(false);
                 gp.playMusic(SoundUtility.BLUE_BOY_ADVENTURE);
             }
             else if (gp.getUi().getCommandNum() == 1) {
                 gp.getUi().setCommandNum(0);
                 gp.setGameState(GameState.TITLE);
-                gp.reset();
+                gp.resetGame(true);
             }
         }
     }

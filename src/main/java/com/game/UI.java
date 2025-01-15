@@ -710,6 +710,7 @@ public class UI {
             if (gp.getKeyH().isEnteredPressed()) {
                 subState = 0;
                 gp.setGameState(GameState.TITLE);
+                gp.resetGame(true);
             }
         }
         // NO

@@ -45,10 +45,6 @@ public class Player extends Entity {
         inventory = new ArrayList<>();
 
         setDefaultValues();
-        loadImage();
-        getGuardImage();
-        getAttackImage();
-        setItems();
     }
 
     public void setDefaultValues() {
@@ -78,8 +74,15 @@ public class Player extends Entity {
         currentWeapon = new OBJ_Sword(gp);
         currentShield = new OBJ_Wooden_Shield(gp);
         projectile    = new OBJ_Fireball(gp);
+        currentLight  = null;
         attack        = getAttack();  // TOTAL ATTACK CALCULATE BY STRENGTH AND WEAPON ATTACK-VALUE
         defence       = getDefense(); // TOTAL DEFENCE CALCULATE BY DEX AND WEAPON DEFENCE-VALUE
+
+
+        loadImage();
+        getGuardImage();
+        getAttackImage();
+        setItems();
     }
 
     public void setDefaultPosition() {
@@ -87,11 +90,14 @@ public class Player extends Entity {
         worldY = CommonConstant.TILE_SIZE * 21;
         direction = Direction.SOUTH;
     }
-    public void restoreLifeAndMana() {
+    public void restoreStatus() {
         life = maxLife;
         mana = maxMana;
         invincible = false;
         transparent = false;
+        attacking = false;
+        knockBack = false;
+        lightUpdated = true;
     }
     // SET ITEMS
     public void setItems() {

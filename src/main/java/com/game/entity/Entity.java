@@ -138,10 +138,10 @@ public class Entity {
         int nextWorldX = user.getLeftX();
         int nextWorldY = user.getTopY();
         switch (user.direction) {
-            case NORTH -> nextWorldY = user.getTopY()-1;
-            case SOUTH -> nextWorldY = user.getBottomY()+1;
-            case WEST  -> nextWorldX = user.getLeftX()-1;
-            case EAST  -> nextWorldX = user.getRightX()+1;
+            case NORTH -> nextWorldY = user.getTopY() - gp.getPlayer().speed;
+            case SOUTH -> nextWorldY = user.getBottomY() + gp.getPlayer().speed;
+            case WEST  -> nextWorldX = user.getLeftX() - gp.getPlayer().speed;
+            case EAST  -> nextWorldX = user.getRightX() + gp.getPlayer().speed;
         }
         int col = nextWorldX/CommonConstant.TILE_SIZE;
         int row = nextWorldY/CommonConstant.TILE_SIZE;
