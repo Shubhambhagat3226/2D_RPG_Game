@@ -159,6 +159,9 @@ public class GamePanel extends JPanel implements Runnable{
         long lastTime = System.nanoTime();
         long currentTime;
 
+
+        int frames = 0;
+        long timer = System.nanoTime();
         while (gameThread != null) {
 
             currentTime = System.nanoTime();
@@ -174,6 +177,14 @@ public class GamePanel extends JPanel implements Runnable{
                 drawToScreen();     //DRAW BUFFERED-IMAGE TO SCREEN
 
                 delta--;
+                frames++;
+            }
+
+            // DEBUG
+            if (System.nanoTime() - timer >= 1000000000) {
+                System.out.println("FPS: " + frames);
+                timer += 1000000000;
+                frames = 0;
             }
 
         }
