@@ -1,6 +1,7 @@
 package com.game.data;
 
 import com.game.GamePanel;
+import com.game.constants.ObjectName;
 import com.game.entity.Entity;
 import com.game.entity.SuperItem;
 import com.game.object.*;
@@ -32,8 +33,21 @@ public class SaveLoad {
             case "Tent" -> obj = new OBJ_Tent(gp);
             case "door" -> obj = new OBJ_DOOR(gp);
             case "Red Potion" -> obj = new OBJ_Red_Potion(gp);
-            case "chest" -> obj = new OBJ_CHEST(gp, new OBJ_KEY(gp));
+            case "chest" -> obj = new OBJ_CHEST(gp);
         }
+//        switch (ObjectName.valueOf(itemName)) {
+//            case KEY -> obj = new OBJ_KEY(gp);
+//            case AXE -> obj = new OBJ_Axe(gp);
+//            case BOOTS -> obj = new OBJ_BOOTS(gp);
+//            case LANTERN -> obj = new OBJ_Lantern(gp);
+//            case NORMAL_SWORD -> obj = new OBJ_Sword(gp);
+//            case WOODEN_SHIELD -> obj = new OBJ_Wooden_Shield(gp);
+//            case BLUE_SHIELD -> obj = new OBJ_Blue_Shield(gp);
+//            case TENT -> obj = new OBJ_Tent(gp);
+//            case DOOR -> obj = new OBJ_DOOR(gp);
+//            case POTION -> obj = new OBJ_Red_Potion(gp);
+//            case CHEST -> obj = new OBJ_CHEST(gp);
+//        }
 
         return obj;
 
@@ -44,6 +58,7 @@ public class SaveLoad {
 
             DataStorage ds = new DataStorage();
 
+            // PLAYER STATS
             ds.level = gp.getPlayer().getLevel();
             ds.maxLife = gp.getPlayer().getMaxLife();
             ds.life = gp.getPlayer().getLife();

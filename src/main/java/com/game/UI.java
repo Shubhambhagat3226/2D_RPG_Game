@@ -709,6 +709,7 @@ public class UI {
             g2.drawString(">", textX-25, textY);
             if (gp.getKeyH().isEnteredPressed()) {
                 subState = 0;
+                gp.stopMusic();
                 gp.setGameState(GameState.TITLE);
                 gp.resetGame(true);
             }

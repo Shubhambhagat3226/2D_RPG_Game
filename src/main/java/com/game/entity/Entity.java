@@ -43,6 +43,8 @@ public class Entity {
     public boolean guarding = false;
     public boolean transparent = false;
     public boolean offBalance = false;
+    public Entity loot;
+    public boolean opened = false;
 
     // COUNTER
     protected int spiritCounter     = 0;
@@ -112,6 +114,7 @@ public class Entity {
         }
     }
     public boolean use(Entity entity) {return false;}
+    public void setLoot(Entity loot) {}
     // SET-ACTION DEFINE IN SUN-CLASS
     public void setAction() {}
     // DAMAGE REACTION

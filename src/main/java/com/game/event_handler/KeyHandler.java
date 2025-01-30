@@ -61,6 +61,7 @@ public class KeyHandler implements KeyListener {
                 gp.getSaveLoad().load();
                 gp.setGameState(GameState.PLAY);
                 gp.playMusic(SoundUtility.BLUE_BOY_ADVENTURE);
+                gp.getUi().setCommandNum(0);
 
             }
             else if (gp.getUi().getCommandNum() == 2) {

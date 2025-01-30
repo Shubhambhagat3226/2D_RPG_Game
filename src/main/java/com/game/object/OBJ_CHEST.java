@@ -13,13 +13,10 @@ import java.awt.image.BufferedImage;
 
 public class OBJ_CHEST extends Entity {
 
-    Entity loot;
     BufferedImage openImage, closeImage;
-    boolean opened;
 
-    public OBJ_CHEST(GamePanel gp, Entity loot) {
+    public OBJ_CHEST(GamePanel gp) {
         super(gp);
-        this.loot = loot;
 
         type = Type.OBSTACLE;
         name = ObjectName.CHEST;
@@ -31,6 +28,9 @@ public class OBJ_CHEST extends Entity {
         solidArea           = new Rectangle(4, 16, 40, 32);
         solidArea_Default_X = solidArea.x;
         solidArea_Default_Y = solidArea.y;
+    }
+    public void setLoot(Entity loot) {
+        this.loot = loot;
     }
 
     @Override
